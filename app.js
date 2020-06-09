@@ -2,9 +2,10 @@ import * as THREE from './three.module.js';
 import { OrbitControls } from './OrbitControls.js';
 
 let camera, scene, renderer, controls;
-let geometry, material, mesh, light;
+let geometryFloor, materialFloor, floorMesh, light;
 let canvas = document.querySelector('#gameCanvas');
 
+let playerMesh, playerGeo, playerMat;
 
 
 
@@ -17,20 +18,32 @@ const init = () => {
     /* set({x:-2.68,y:0.666,z:2.84}); */
     scene = new THREE.Scene();
 
+
+    
+
     light = new THREE.DirectionalLight(0xffe57c, 1);
     // light = new THREE.AmbientLight(0xffffff,1);
     scene.add(light);
 
-    geometry = new THREE.BoxGeometry(112, 1, 4);
-    material = new THREE.MeshPhongMaterial({
+    // floor
+    geometryFloor = new THREE.BoxGeometry(55, 1, 4);
+    materialFloor = new THREE.MeshPhongMaterial({
         color: 0x656565,
         specular: 0x000000,
         shininess: 100/* ,
         envMaps:refraction */
     });
+    floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
+    scene.add(floorMesh);
 
-    mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+    // player
+    playerGeo = new THREE.CubeGeometry(1,1,1);
+    playerMat = new THREE.MeshBasicMaterial({color:0x000000})
+    playerMesh = new THREE.Mesh(playerGeo,playerMat);
+    playerMesh.position.set(5,1,0);
+    scene.add(playerMesh);
+
+   
 
     renderer = new THREE.WebGLRenderer({
         antialias: true,
