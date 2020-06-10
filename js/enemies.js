@@ -2,10 +2,11 @@ import * as THREE from '../three.module.js';
 import { scene } from './app.js';
 export let enemies = [];
 
+export let intervalToMove = null;
 // to spawn enemies
 export const enemySpawner = () => {
 
-    console.log('enemy spawner')
+    //console.log('enemy spawner')
 
     // enemy mesh
     let enemyG = new THREE.CubeGeometry(1, 1, 1);
@@ -18,7 +19,7 @@ export const enemySpawner = () => {
     scene.add(enemy);
 
     // to move
-    setInterval(() => {
+    intervalToMove = setInterval(() => {
         enemy.position.x += .1;
     }, Math.floor((Math.random() * .5) + 1));
 

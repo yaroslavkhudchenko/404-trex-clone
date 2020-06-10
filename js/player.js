@@ -1,9 +1,10 @@
 import * as THREE from '../three.module.js';
 import { scene } from './app.js';
-export let playerMesh, playerGeo, playerMat;
+export let playerMesh, playerGeo, playerMat, pBox;
 export const playerDefaultPosition = {
     x: 2, y: 1, z: 0
 };
+
 export const player = () => {
     
     // player
@@ -12,7 +13,6 @@ export const player = () => {
     playerMesh = new THREE.Mesh(playerGeo, playerMat);
     playerMesh.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
     scene.add(playerMesh);
-
-
-
+    pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+    pBox.setFromObject(playerMesh);
 }

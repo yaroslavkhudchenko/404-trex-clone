@@ -4,8 +4,8 @@
 import * as THREE from '../three.module.js';
 import { OrbitControls } from '../OrbitControls.js';
 
-import { player, playerMesh, playerDefaultPosition } from './player.js';
-import { enemySpawner, enemies } from './enemies.js';
+import { player, playerMesh, playerDefaultPosition, pBox } from './player.js';
+import { enemySpawner, enemies, intervalToMove } from './enemies.js';
 
 export let camera, scene, renderer, controls;
 export let geometryFloor, materialFloor, floorMesh, light;
@@ -51,7 +51,7 @@ const init = () => {
     player();
 
     // spawn enemies every (between 3 and .5 seconds)
-    setInterval(() => enemySpawner(), Math.floor((Math.random() * 700) + 500));
+    setInterval(() => enemySpawner(), Math.floor((Math.random() * 2000) + 800));
 
 
     renderer = new THREE.WebGLRenderer({
@@ -102,22 +102,31 @@ const keyUpHandler = (e) => {
     }
 }
 
-   
+let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+
 // main animate function
 const animate = () => {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
 
+
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
     enemies.map((e, index) => {
         e.position.x > 25 ? 
-            scene.remove(e) && enemies.pop()
+            scene.remove(e) && enemies.pop() // remove from both scene and array s
                 : false;
-                
+        eBox.setFromObject(e);
+        if (eBox.intersectsBox(pBox)) {
+            console.log('shit is happening!!!!!!!!!!!!!!!!!')
+            for (var i = 1; i < 12; i++)
+                window.clearInterval(i);
+
+        }
     });
-/*     enemies.filter(e => e.position.x < 25);
- */    console.log(enemies)
+
+   
+   
 }
 
 init();
