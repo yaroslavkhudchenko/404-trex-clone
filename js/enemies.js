@@ -22,6 +22,6 @@ export const enemySpawner = () => {
         enemy.position.x += .1;
     }, Math.floor((Math.random() * .5) + 1));
 
-    enemies.push(enemy); // push to global array to control if reach the pointer
+    enemies.unshift(enemy); // unshift to global array to control if reach the pointer
 
 }

@@ -112,11 +112,12 @@ const animate = () => {
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
     enemies.map((e, index) => {
         e.position.x > 25 ? 
-            scene.remove(e)
+            scene.remove(e) && enemies.pop()
                 : false;
                 
     });
-
+/*     enemies.filter(e => e.position.x < 25);
+ */    console.log(enemies)
 }
 
 init();
