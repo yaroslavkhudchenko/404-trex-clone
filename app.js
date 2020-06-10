@@ -7,6 +7,7 @@ let canvas = document.querySelector('#gameCanvas');
 
 let playerMesh, playerGeo, playerMat;
 
+let enemies = [];
 
 
 const init = () => {
@@ -25,7 +26,7 @@ camera.position.y = 2; */
 
 
     // axis helper
-    let axesHelper = new THREE.AxesHelper(5);
+    let axesHelper = new THREE.AxesHelper(9);
     scene.add(axesHelper);
 
     light = new THREE.DirectionalLight(0xffe57c, 1);
@@ -68,7 +69,7 @@ camera.position.y = 2; */
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
     let pointerMat = new THREE.MeshBasicMaterial({ color: 0x0000f0 })
     let pointer = new THREE.Mesh(pointerGeo, pointerMat);
-    pointer.position.set(15, 1, 0);
+    pointer.position.set(25, 1, 0);
     scene.add(pointer);
 
 
@@ -80,9 +81,25 @@ const enemySpawner = () => {
     let enemyG = new THREE.CubeGeometry(1, 1, 1);
     let enemyMat = new THREE.MeshBasicMaterial({ color: 0x00f000 })
     let enemy = new THREE.Mesh(enemyG, enemyMat);
-    enemy.position.set(Math.floor((Math.random() * -20) + -15), Math.floor((Math.random() * 2) + 1), 0);
+    enemy.position.set(Math.floor((Math.random() * -25) + -25), Math.floor((Math.random() * 3) + 1), 0);
+    enemy.name = 'enemy';
     scene.add(enemy);
-    
+
+    setInterval(() => {
+        enemy.position.x += .1;
+    }, Math.floor((Math.random() * .5) + 1));
+
+    enemies.push(enemy);
+    console.log(enemies);
+    /* if(enemies.length > 2) {
+        console.log('more')
+        scene.remove(enemies[0])
+        scene.remove(enemies[1])
+    }
+ */
+
+   
+
 }
 
 
@@ -93,6 +110,12 @@ const animate = () => {
     controls.update();
     renderer.render(scene, camera);
     // console.log(camera.position);
+    enemies.map((e) => {
+        e.position.x > 25 ? 
+            scene.remove(e) :
+                false 
+    
+    });
 }
 
 init();
