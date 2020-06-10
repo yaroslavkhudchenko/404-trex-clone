@@ -33,7 +33,7 @@ camera.position.y = 2; */
     scene.add(light);
 
     // floor
-    geometryFloor = new THREE.BoxGeometry(55, 1, 4);
+    geometryFloor = new THREE.BoxGeometry(111, 0, 7);
     materialFloor = new THREE.MeshPhongMaterial({
         color: 0x656565,
         specular: 0x000000,
@@ -65,15 +65,11 @@ camera.position.y = 2; */
     controls.update();
 
 
-    console.log('1111enemyspawner')
-    let enemyG1 = new THREE.CubeGeometry(1, 1, 1);
-    let enemyMat1 = new THREE.MeshBasicMaterial({ color: 0x0000f0 })
-    let enem1y = new THREE.Mesh(enemyG1, enemyMat1);
-    enem1y.position.set(10, 1, 0);
-    scene.add(enem1y);
-
-
-
+    let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
+    let pointerMat = new THREE.MeshBasicMaterial({ color: 0x0000f0 })
+    let pointer = new THREE.Mesh(pointerGeo, pointerMat);
+    pointer.position.set(15, 1, 0);
+    scene.add(pointer);
 
 
 
