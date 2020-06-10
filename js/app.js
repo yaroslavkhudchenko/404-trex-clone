@@ -1,16 +1,18 @@
-import * as THREE from './three.module.js';
-import { OrbitControls } from './OrbitControls.js';
 
-let camera, scene, renderer, controls;
-let geometryFloor, materialFloor, floorMesh, light;
-let canvas = document.querySelector('#gameCanvas');
 
-let playerMesh, playerGeo, playerMat;
+
+import * as THREE from '../three.module.js';
+import { OrbitControls } from '../OrbitControls.js';
+
+import { player, playerMesh, playerDefaultPosition } from './player.js';
+
+export let camera, scene, renderer, controls;
+export let geometryFloor, materialFloor, floorMesh, light;
+export let canvas = document.querySelector('#gameCanvas');
+
 
 let enemies = [];
-let playerDefaultPosition = {
-    x:2, y:1, z:0
-};
+
 
 const init = () => {
 
@@ -47,12 +49,7 @@ const init = () => {
     floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
     scene.add(floorMesh);
 
-    // player
-    playerGeo = new THREE.CubeGeometry(1,2,1);
-    playerMat = new THREE.MeshBasicMaterial({color:0x000000})
-    playerMesh = new THREE.Mesh(playerGeo,playerMat);
-    playerMesh.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
-    scene.add(playerMesh);
+    player();
 
 
     // spawn enemies every (between 3 and .5 seconds)
