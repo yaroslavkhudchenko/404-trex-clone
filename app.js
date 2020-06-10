@@ -8,7 +8,9 @@ let canvas = document.querySelector('#gameCanvas');
 let playerMesh, playerGeo, playerMat;
 
 let enemies = [];
-
+let playerDefaultPosition = {
+    x:2, y:2, z:0
+};
 
 const init = () => {
 
@@ -45,10 +47,10 @@ camera.position.y = 2; */
     scene.add(floorMesh);
 
     // player
-    playerGeo = new THREE.CubeGeometry(1,5,1);
+    playerGeo = new THREE.CubeGeometry(1,3,1);
     playerMat = new THREE.MeshBasicMaterial({color:0x000000})
     playerMesh = new THREE.Mesh(playerGeo,playerMat);
-    playerMesh.position.set(2,1,0);
+    playerMesh.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
     scene.add(playerMesh);
 
     setInterval(() => enemySpawner(), Math.floor((Math.random() * 3000) + 500));
@@ -106,11 +108,20 @@ const enemySpawner = () => {
 const keyPressedHandler = (e) => {
     switch (e.code) {
         case "KeyS":
-            console.log('S')
+            console.log('S');
+            playerMesh.scale.y = .5;
+            playerMesh.position.y = 1;
             break;
         case "Space":
-            console.log('space')
+            console.log('space');
+            playerMesh.position.y = 4;
             break;
+    }
+}
+const keyUpHandler = (e) => {
+    if(e.code === "KeyS" || e.code === "Space") {
+        playerMesh.position.y = playerDefaultPosition.y;
+        playerMesh.scale.y = 1;
     }
 }
 
@@ -133,3 +144,4 @@ init();
 animate();
 
 document.addEventListener('keypress', keyPressedHandler);
+document.addEventListener('keyup', keyUpHandler);
