@@ -9,16 +9,13 @@ let playerMesh, playerGeo, playerMat;
 
 let enemies = [];
 let playerDefaultPosition = {
-    x:2, y:2, z:0
+    x:2, y:1, z:0
 };
 
 const init = () => {
 
     
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
-    //camera.position.set(5.962310066149917, 5.396010288886008, -9.42343565435011);
-/* camera.position.z = -3;
-camera.position.y = 2; */
     camera.position.set(
         5.189239552338781,
         3.7861393344249135,
@@ -47,7 +44,7 @@ camera.position.y = 2; */
     scene.add(floorMesh);
 
     // player
-    playerGeo = new THREE.CubeGeometry(1,3,1);
+    playerGeo = new THREE.CubeGeometry(1,2,1);
     playerMat = new THREE.MeshBasicMaterial({color:0x000000})
     playerMesh = new THREE.Mesh(playerGeo,playerMat);
     playerMesh.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
@@ -83,7 +80,7 @@ const enemySpawner = () => {
     let enemyG = new THREE.CubeGeometry(1, 1, 1);
     let enemyMat = new THREE.MeshBasicMaterial({ color: 0x00f000 })
     let enemy = new THREE.Mesh(enemyG, enemyMat);
-    enemy.position.set(Math.floor((Math.random() * -25) + -25), Math.floor((Math.random() * 3) + 1), 0);
+    enemy.position.set(Math.floor((Math.random() * -25) + -25), Math.floor((Math.random() * 2) + 1), 0);
     enemy.name = 'enemy';
     scene.add(enemy);
 
@@ -114,12 +111,15 @@ const keyPressedHandler = (e) => {
             break;
         case "Space":
             console.log('space');
-            playerMesh.position.y = 4;
+            playerMesh.position.y = 3;
+            setTimeout(() => {
+                playerMesh.position.y = playerDefaultPosition.y;
+            }, 200);
             break;
     }
 }
 const keyUpHandler = (e) => {
-    if(e.code === "KeyS" || e.code === "Space") {
+    if(e.code === "KeyS") {
         playerMesh.position.y = playerDefaultPosition.y;
         playerMesh.scale.y = 1;
     }
