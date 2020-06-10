@@ -14,9 +14,13 @@ const init = () => {
     
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
     //camera.position.set(5.962310066149917, 5.396010288886008, -9.42343565435011);
-camera.position.z = -3;
-camera.position.y = 2;
-    /* set({x:-2.68,y:0.666,z:2.84}); */
+/* camera.position.z = -3;
+camera.position.y = 2; */
+    camera.position.set(
+        5.189239552338781,
+        3.7861393344249135,
+        -9.815769086484597
+    );
     scene = new THREE.Scene();
 
 
@@ -60,6 +64,19 @@ camera.position.y = 2;
     controls = new OrbitControls(camera, canvas);
     controls.update();
 
+
+    console.log('1111enemyspawner')
+    let enemyG1 = new THREE.CubeGeometry(1, 1, 1);
+    let enemyMat1 = new THREE.MeshBasicMaterial({ color: 0x0000f0 })
+    let enem1y = new THREE.Mesh(enemyG1, enemyMat1);
+    enem1y.position.set(10, 1, 0);
+    scene.add(enem1y);
+
+
+
+
+
+
 }
 
 const enemySpawner = () => {
@@ -73,6 +90,7 @@ const enemySpawner = () => {
 }
 
 
+   
 
 const animate = () => {
     requestAnimationFrame(animate);
