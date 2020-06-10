@@ -46,7 +46,8 @@ camera.position.y = 2;
     playerMesh.position.set(2,1,0);
     scene.add(playerMesh);
 
-   
+    setInterval(() => enemySpawner(), Math.floor((Math.random() * 3000) + 500));
+
 
     renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -60,6 +61,19 @@ camera.position.y = 2;
     controls.update();
 
 }
+
+const enemySpawner = () => {
+    console.log('enemyspawner')
+    let enemyG = new THREE.CubeGeometry(1, 1, 1);
+    let enemyMat = new THREE.MeshBasicMaterial({ color: 0x00f000 })
+    let enemy = new THREE.Mesh(enemyG, enemyMat);
+    enemy.position.set(Math.floor((Math.random() * -20) + -15), Math.floor((Math.random() * 2) + 1), 0);
+    scene.add(enemy);
+    
+}
+
+
+
 const animate = () => {
     requestAnimationFrame(animate);
     controls.update();
