@@ -1,5 +1,6 @@
 import * as THREE from '../three.module.js';
-import { scene, enemies } from './app.js';
+import { scene } from './app.js';
+export let enemies = [];
 
 // to spawn enemies
 export const enemySpawner = () => {

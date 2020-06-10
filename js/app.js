@@ -5,18 +5,14 @@ import * as THREE from '../three.module.js';
 import { OrbitControls } from '../OrbitControls.js';
 
 import { player, playerMesh, playerDefaultPosition } from './player.js';
-import { enemySpawner } from './enemies.js';
+import { enemySpawner, enemies } from './enemies.js';
 
 export let camera, scene, renderer, controls;
 export let geometryFloor, materialFloor, floorMesh, light;
 export let canvas = document.querySelector('#gameCanvas');
 
 
-export let enemies = [];
-
-
 const init = () => {
-
     
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
 
@@ -50,11 +46,12 @@ const init = () => {
     floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
     scene.add(floorMesh);
 
+
+    // call player function
     player();
 
-
     // spawn enemies every (between 3 and .5 seconds)
-    setInterval(() => enemySpawner(), Math.floor((Math.random() * 3000) + 500));
+    setInterval(() => enemySpawner(), Math.floor((Math.random() * 700) + 500));
 
 
     renderer = new THREE.WebGLRenderer({
@@ -113,12 +110,13 @@ const animate = () => {
     renderer.render(scene, camera);
 
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
-    enemies.map((e) => {
+    enemies.map((e, index) => {
         e.position.x > 25 ? 
-            scene.remove(e) :
-                false 
-    
+            scene.remove(e)
+                : false;
+                
     });
+
 }
 
 init();
