@@ -45,7 +45,7 @@ camera.position.y = 2; */
     scene.add(floorMesh);
 
     // player
-    playerGeo = new THREE.CubeGeometry(1,1,1);
+    playerGeo = new THREE.CubeGeometry(1,5,1);
     playerMat = new THREE.MeshBasicMaterial({color:0x000000})
     playerMesh = new THREE.Mesh(playerGeo,playerMat);
     playerMesh.position.set(2,1,0);
@@ -90,7 +90,7 @@ const enemySpawner = () => {
     }, Math.floor((Math.random() * .5) + 1));
 
     enemies.push(enemy);
-    console.log(enemies);
+    //console.log(enemies);
     /* if(enemies.length > 2) {
         console.log('more')
         scene.remove(enemies[0])
@@ -102,6 +102,17 @@ const enemySpawner = () => {
 
 }
 
+
+const keyPressedHandler = (e) => {
+    switch (e.code) {
+        case "KeyS":
+            console.log('S')
+            break;
+        case "Space":
+            console.log('space')
+            break;
+    }
+}
 
    
 
@@ -120,3 +131,5 @@ const animate = () => {
 
 init();
 animate();
+
+document.addEventListener('keypress', keyPressedHandler);
