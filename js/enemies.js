@@ -3,6 +3,7 @@ import { scene } from './app.js';
 export let enemies = [];
 
 export let intervalToMove = null;
+
 // to spawn enemies
 export const enemySpawner = () => {
 
@@ -14,7 +15,7 @@ export const enemySpawner = () => {
     let enemy = new THREE.Mesh(enemyG, enemyMat);
 
     // set position
-    enemy.position.set(Math.floor((Math.random() * -25) + -25), Math.floor((Math.random() * 2) + 1), 0);
+    enemy.position.set(Math.floor((Math.random() * -25) + -25), Math.floor((Math.random() * 2) + 1.4), 0);
     enemy.name = 'enemy';
     scene.add(enemy);
 

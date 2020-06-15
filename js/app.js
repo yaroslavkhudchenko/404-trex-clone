@@ -4,7 +4,7 @@
 import * as THREE from '../three.module.js';
 import { OrbitControls } from '../OrbitControls.js';
 
-import { player, playerMesh, playerDefaultPosition, pBox } from './player.js';
+import { player, playerMesh, playerDefaultPosition } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
 
 export let camera, scene, renderer, controls;
@@ -116,10 +116,14 @@ const animate = () => {
         e.position.x > 25 ? 
             scene.remove(e) && enemies.pop() // remove from both scene and array s
                 : false;
+
+        let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+        pBox.setFromObject(playerMesh);
         eBox.setFromObject(e);
         if (eBox.intersectsBox(pBox)) {
+            e.scale.set(3,3,3);
             console.log('shit is happening!!!!!!!!!!!!!!!!!')
-            for (var i = 1; i < 12; i++)
+            for (var i = 1; i < 222; i++)
                 window.clearInterval(i);
 
         }
