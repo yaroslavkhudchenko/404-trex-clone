@@ -16,7 +16,6 @@ export let collissionDetected = false;
 let scoreValueDisplay = document.querySelector('#scoreValue');
 export let scoreValue = 0;
 let clock = new THREE.Clock();
-let timerDisplay = document.querySelector('#timer');
 const init = () => {
     
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score') ? localStorage.getItem('score') : 0
@@ -85,28 +84,21 @@ const init = () => {
     let pointer = new THREE.Mesh(pointerGeo, pointerMat);
     pointer.position.set(25, 1, 0);
     scene.add(pointer);
-    timer();
-}
-
+/*     timer();
+ */}
+/* 
 // timer
 const timer = () => {
     let t = 0;
     setInterval(() => {
         t++;
-        timerDisplay.innerHTML = t;
-    
-    
-    
-        
-
-
 
     }, 1000);
 
 
 
 }
-
+ */
 // handle keypress/ up function to interact with the player obj
 const keyPressedHandler = (e) => {
     switch (e.code) {
