@@ -41,7 +41,9 @@ const init = () => {
     // light(like sun)
     light = new THREE.DirectionalLight(0xffe57c, 1);
     scene.add(light);
-    scene.add(ambient)
+
+    scene.fog = new THREE.Fog(0xcce0ff, 500, 10000);
+
     // floor
     geometryFloor = new THREE.BoxGeometry(111, 0, 7);
     materialFloor = new THREE.MeshPhongMaterial({
@@ -94,9 +96,7 @@ const timer = () => {
         timerDisplay.innerHTML = t;
     
     
-        // update the score
-        scoreValueDisplay.innerHTML = scoreValue;
-        scoreValue += 10;
+    
         
 
 
@@ -117,7 +117,7 @@ const keyPressedHandler = (e) => {
             playerModel.scale.set(.025,.025,.025);
             playerHitboxMesh.position.y = 1;
 
-            playerModel.position.y = 1;;
+            playerModel.position.y = 0.5;
             break;
         case "Space":
             console.log('space');
@@ -125,7 +125,7 @@ const keyPressedHandler = (e) => {
             playerModel.position.y = 3;
             setTimeout(() => {
                 playerHitboxMesh.position.y = playerDefaultPosition.y;
-                playerModel.position.y = playerDefaultPosition.y;
+                playerModel.position.y = 0.5;
             }, 250);
             break;
     }
@@ -134,7 +134,7 @@ const keyUpHandler = (e) => {
     if(e.code === "KeyS") {
         setTimeout(() => {
             playerHitboxMesh.position.y = playerDefaultPosition.y;
-            playerModel.position.y = playerDefaultPosition.y;
+            playerModel.position.y = 0.5;
 
             playerHitboxMesh.scale.y = 1;
             playerModel.scale.set(.050, .050, .050);
@@ -158,7 +158,9 @@ const animate = () => {
     controls.update();
     renderer.render(scene, camera);
     
-
+    // update the score
+    scoreValueDisplay.innerHTML = Math.round(scoreValue);
+    scoreValue += .3;
 
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
     enemies.map((e, index) => {
