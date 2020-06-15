@@ -13,6 +13,8 @@ export let canvas = document.querySelector('#gameCanvas');
 
 export let collissionDetected = false;
 
+let scoreValueDisplay = document.querySelector('#scoreValue');
+let scoreValue = 0;
 const init = () => {
     
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
@@ -111,7 +113,10 @@ const animate = () => {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
-
+    
+    // update the score
+    scoreValueDisplay.innerHTML = scoreValue;
+    scoreValue += 1;
 
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
     enemies.map((e, index) => {
@@ -123,8 +128,8 @@ const animate = () => {
         pBox.setFromObject(playerMesh);
         eBox.setFromObject(e);
         if (eBox.intersectsBox(pBox)) {
-            collissionDetected = true;
             e.scale.set(3,3,3);
+            collissionDetected = true;
             console.log('shit is happening!!!!!!!!!!!!!!!!!')
             for (var i = 1; i < 222; i++)
                 window.clearInterval(i);

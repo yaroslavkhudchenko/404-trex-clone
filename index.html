@@ -9,10 +9,32 @@
             margin: 0;
             position: fixed;
         }
+        #display {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            font-size: 30px;
+            display: flex;
+            justify-content: space-between;
+            width: 180px;
+            flex-direction: column;
+        }
+        #score {
+            display: flex;
+        }
     </style>
 </head>
 <body>
     <canvas id='gameCanvas'></canvas>
+    <div id='display'>
+        <div id='timer'>
+            00:00
+        </div>
+        <div id='score'>
+            <div id='scoreTitle'>Score:</div>
+            <div id='scoreValue'>2042</div>
+        </div>
+    </div>
     <script type="module" src="js/app.js"></script>
 </body>
 </html>
