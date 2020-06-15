@@ -84,51 +84,44 @@ const init = () => {
     let pointer = new THREE.Mesh(pointerGeo, pointerMat);
     pointer.position.set(25, 1, 0);
     scene.add(pointer);
-/*     timer();
- */}
-/* 
-// timer
-const timer = () => {
-    let t = 0;
-    setInterval(() => {
-        t++;
-
-    }, 1000);
-
-
 
 }
- */
+
 // handle keypress/ up function to interact with the player obj
 const keyPressedHandler = (e) => {
     switch (e.code) {
         case "KeyS":
-            console.log('S');
-            playerHitboxMesh.scale.y = .5;
 
+            // model
             playerModel.scale.set(.025,.025,.025);
+            playerModel.position.y = 0.5;
+            
+            // hit box
+            playerHitboxMesh.scale.y = .5;
             playerHitboxMesh.position.y = 1;
 
-            playerModel.position.y = 0.5;
             break;
         case "Space":
-            console.log('space');
             playerHitboxMesh.position.y = 3;
             playerModel.position.y = 3;
+            
+            // reset position y not to fly
             setTimeout(() => {
                 playerHitboxMesh.position.y = playerDefaultPosition.y;
                 playerModel.position.y = 0.5;
             }, 250);
+            
             break;
     }
 }
 const keyUpHandler = (e) => {
     if(e.code === "KeyS") {
+
         setTimeout(() => {
             playerHitboxMesh.position.y = playerDefaultPosition.y;
-            playerModel.position.y = 0.5;
-
             playerHitboxMesh.scale.y = 1;
+
+            playerModel.position.y = 0.5;
             playerModel.scale.set(.050, .050, .050);
 
         }, 100);
