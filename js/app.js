@@ -19,7 +19,7 @@ let clock = new THREE.Clock();
 
 const init = () => {
     
-    document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
+    document.querySelector('#bestValue').innerHTML = localStorage.getItem('score') ? localStorage.getItem('score') : 0
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
 
     // set camera position(look from right side)
@@ -108,20 +108,21 @@ const keyPressedHandler = (e) => {
             setTimeout(() => {
                 playerHitboxMesh.position.y = playerDefaultPosition.y;
                 playerModel.position.y = playerDefaultPosition.y;
-            }, 300);
+            }, 250);
             break;
     }
 }
 const keyUpHandler = (e) => {
     if(e.code === "KeyS") {
-        playerHitboxMesh.position.y = playerDefaultPosition.y;
-        playerModel.position.y = playerDefaultPosition.y;
+        setTimeout(() => {
+            playerHitboxMesh.position.y = playerDefaultPosition.y;
+            playerModel.position.y = playerDefaultPosition.y;
 
-        playerHitboxMesh.scale.y = 1;
-/*         playerModel.scale.y = .05;
- */
-        playerModel.scale.set(.050, .050, .050);
+            playerHitboxMesh.scale.y = 1;
+            playerModel.scale.set(.050, .050, .050);
 
+        }, 100);
+        
     }
 }
 
@@ -161,7 +162,7 @@ const animate = () => {
             let score = localStorage.getItem('score');
 
             // if there is a value and that value is less than current
-            if(score && score*1 < scoreValue) {
+            if(score*1 < scoreValue) {
                 localStorage.setItem('score', scoreValue);
             }
             
