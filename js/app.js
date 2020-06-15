@@ -14,9 +14,9 @@ export let canvas = document.querySelector('#gameCanvas');
 export let collissionDetected = false;
 
 let scoreValueDisplay = document.querySelector('#scoreValue');
-let scoreValue = 0;
+export let scoreValue = 0;
 let clock = new THREE.Clock();
-
+let timerDisplay = document.querySelector('#timer');
 const init = () => {
     
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score') ? localStorage.getItem('score') : 0
@@ -83,11 +83,29 @@ const init = () => {
     let pointer = new THREE.Mesh(pointerGeo, pointerMat);
     pointer.position.set(25, 1, 0);
     scene.add(pointer);
+    timer();
+}
+
+// timer
+const timer = () => {
+    let t = 0;
+    setInterval(() => {
+        t++;
+        timerDisplay.innerHTML = t;
+    
+    
+        // update the score
+        scoreValueDisplay.innerHTML = scoreValue;
+        scoreValue += 10;
+        
+
+
+
+    }, 1000);
 
 
 
 }
-
 
 // handle keypress/ up function to interact with the player obj
 const keyPressedHandler = (e) => {
@@ -140,9 +158,7 @@ const animate = () => {
     controls.update();
     renderer.render(scene, camera);
     
-    // update the score
-    scoreValueDisplay.innerHTML = scoreValue;
-    scoreValue += 1;
+
 
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
     enemies.map((e, index) => {

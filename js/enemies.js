@@ -1,5 +1,5 @@
 import * as THREE from '../three.module.js';
-import { scene } from './app.js';
+import { scene, scoreValue } from './app.js';
 export let enemies = [];
 
 export let intervalToMove = null;
@@ -21,7 +21,7 @@ export const enemySpawner = () => {
 
     // to move
     intervalToMove = setInterval(() => {
-        enemy.position.x += .1;
+        enemy.position.x += .1 + (scoreValue/10000);
     }, Math.floor((Math.random() * .5) + 1));
 
     enemies.unshift(enemy); // unshift to global array to control if reach the pointer
