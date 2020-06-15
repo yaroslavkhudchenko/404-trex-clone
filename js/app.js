@@ -3,9 +3,8 @@
 
 import * as THREE from '../three.module.js';
 import { OrbitControls } from '../OrbitControls.js';
-import { FBXLoader } from '../FBXLoader.js';
 
-import { player, playerMesh, playerDefaultPosition } from './player.js';
+import { player, playerHitboxMesh, playerDefaultPosition, mixer } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
 
 export let camera, scene, renderer, controls;
@@ -17,7 +16,6 @@ export let collissionDetected = false;
 let scoreValueDisplay = document.querySelector('#scoreValue');
 let scoreValue = 0;
 let clock = new THREE.Clock();
-let mixer;
 
 const init = () => {
     
@@ -62,31 +60,7 @@ const init = () => {
     setInterval(() => enemySpawner(), Math.floor((Math.random() * 2000) + 800));
 
 
-    let fbxLoader = new FBXLoader();
-    fbxLoader.load('models/racoon.fbx', function (object) {
-
-        mixer = new THREE.AnimationMixer(object);
-
-        let action = mixer.clipAction(object.animations[0]);
-        action.play();
-
-        
-        object.traverse(function (child) {
-
-            if (child.isMesh) {
-
-                child.castShadow = true;
-                child.receiveShadow = true;
-
-            }
-
-        });
-        object.position.set(playerDefaultPosition.x, playerDefaultPosition.y-.5, playerDefaultPosition.z);
-        object.scale.set(.05, .05, .05);
-        object.rotation.set(1.5,0,1.5)
-        scene.add(object);
-
-    });
+  
 
 
 
@@ -120,22 +94,22 @@ const keyPressedHandler = (e) => {
     switch (e.code) {
         case "KeyS":
             console.log('S');
-            playerMesh.scale.y = .5;
-            playerMesh.position.y = 1;
+            playerHitboxMesh.scale.y = .5;
+            playerHitboxMesh.position.y = 1;
             break;
         case "Space":
             console.log('space');
-            playerMesh.position.y = 3;
+            playerHitboxMesh.position.y = 3;
             setTimeout(() => {
-                playerMesh.position.y = playerDefaultPosition.y;
+                playerHitboxMesh.position.y = playerDefaultPosition.y;
             }, 200);
             break;
     }
 }
 const keyUpHandler = (e) => {
     if(e.code === "KeyS") {
-        playerMesh.position.y = playerDefaultPosition.y;
-        playerMesh.scale.y = 1;
+        playerHitboxMesh.position.y = playerDefaultPosition.y;
+        playerHitboxMesh.scale.y = 1;
     }
 }
 
@@ -164,7 +138,7 @@ const animate = () => {
                 : false;
 
         let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-        pBox.setFromObject(playerMesh);
+        pBox.setFromObject(playerHitboxMesh);
         eBox.setFromObject(e);
         if (eBox.intersectsBox(pBox)) {
             e.scale.set(3,3,3);

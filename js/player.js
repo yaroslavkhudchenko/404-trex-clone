@@ -1,17 +1,48 @@
 import * as THREE from '../three.module.js';
+import { FBXLoader } from '../FBXLoader.js';
+
 import { scene } from './app.js';
-export let playerMesh, playerGeo, playerMat;
+
+export let playerHitboxMesh, playerHitboxGeo, playerHitboxMat;
 export const playerDefaultPosition = {
     x: 2, y: 1, z: 0
 };
-
+export let mixer;
 export const player = () => {
     
     // player
-    playerGeo = new THREE.CubeGeometry(2, 1.7, 1);
-    playerMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.1, transparent:true })
-    playerMesh = new THREE.Mesh(playerGeo, playerMat);
-    playerMesh.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
-    scene.add(playerMesh);
+
+    let fbxLoader = new FBXLoader();
+    fbxLoader.load('models/racoon.fbx', function (object) {
+
+        mixer = new THREE.AnimationMixer(object);
+
+        let action = mixer.clipAction(object.animations[0]);
+        action.play();
+
+
+        object.traverse(function (child) {
+
+            if (child.isMesh) {
+
+                child.castShadow = true;
+                child.receiveShadow = true;
+
+            }
+
+        });
+        object.position.set(playerDefaultPosition.x, playerDefaultPosition.y - .5, playerDefaultPosition.z);
+        object.scale.set(.05, .05, .05);
+        object.rotation.set(1.5, 0, 1.5)
+        scene.add(object);
+
+    });
+
+    // player hitbox
+    playerHitboxGeo = new THREE.CubeGeometry(2, 1.5, 1);
+    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.1, transparent:true })
+    playerHitboxMesh = new THREE.Mesh(playerHitboxGeo, playerHitboxMat);
+    playerHitboxMesh.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
+    scene.add(playerHitboxMesh);
     
 }
