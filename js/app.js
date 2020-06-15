@@ -4,7 +4,7 @@
 import * as THREE from '../three.module.js';
 import { OrbitControls } from '../OrbitControls.js';
 
-import { player, playerHitboxMesh, playerDefaultPosition, mixer } from './player.js';
+import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
 
 export let camera, scene, renderer, controls;
@@ -95,21 +95,33 @@ const keyPressedHandler = (e) => {
         case "KeyS":
             console.log('S');
             playerHitboxMesh.scale.y = .5;
+
+            playerModel.scale.set(.025,.025,.025);
             playerHitboxMesh.position.y = 1;
+
+            playerModel.position.y = 1;;
             break;
         case "Space":
             console.log('space');
             playerHitboxMesh.position.y = 3;
+            playerModel.position.y = 3;
             setTimeout(() => {
                 playerHitboxMesh.position.y = playerDefaultPosition.y;
-            }, 200);
+                playerModel.position.y = playerDefaultPosition.y;
+            }, 300);
             break;
     }
 }
 const keyUpHandler = (e) => {
     if(e.code === "KeyS") {
         playerHitboxMesh.position.y = playerDefaultPosition.y;
+        playerModel.position.y = playerDefaultPosition.y;
+
         playerHitboxMesh.scale.y = 1;
+/*         playerModel.scale.y = .05;
+ */
+        playerModel.scale.set(.050, .050, .050);
+
     }
 }
 
@@ -146,7 +158,13 @@ const animate = () => {
 
             collissionDetected = true;
             
-            localStorage.setItem('score', scoreValue);
+            let score = localStorage.getItem('score');
+
+            // if there is a value and that value is less than current
+            if(score && score*1 < scoreValue) {
+                localStorage.setItem('score', scoreValue);
+            }
+            
 
 
             console.log('shit is happening!!!!!!!!!!!!!!!!!')

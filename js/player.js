@@ -8,6 +8,8 @@ export const playerDefaultPosition = {
     x: 2, y: 1, z: 0
 };
 export let mixer;
+
+export let playerModel;
 export const player = () => {
     
     // player
@@ -31,9 +33,10 @@ export const player = () => {
             }
 
         });
-        object.position.set(playerDefaultPosition.x, playerDefaultPosition.y - .5, playerDefaultPosition.z);
+        object.position.set(playerDefaultPosition.x, 0.5, playerDefaultPosition.z);
         object.scale.set(.05, .05, .05);
-        object.rotation.set(1.5, 0, 1.5)
+        object.rotation.set(1.5, 0, 1.5);
+        playerModel = object;
         scene.add(object);
 
     });
