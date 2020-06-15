@@ -11,6 +11,7 @@ export let camera, scene, renderer, controls;
 export let geometryFloor, materialFloor, floorMesh, light;
 export let canvas = document.querySelector('#gameCanvas');
 
+export let collissionDetected = false;
 
 const init = () => {
     
@@ -106,6 +107,7 @@ let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
 // main animate function
 const animate = () => {
+    if (collissionDetected)return;
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
@@ -121,6 +123,7 @@ const animate = () => {
         pBox.setFromObject(playerMesh);
         eBox.setFromObject(e);
         if (eBox.intersectsBox(pBox)) {
+            collissionDetected = true;
             e.scale.set(3,3,3);
             console.log('shit is happening!!!!!!!!!!!!!!!!!')
             for (var i = 1; i < 222; i++)
