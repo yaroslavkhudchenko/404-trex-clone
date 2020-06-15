@@ -17,6 +17,7 @@ let scoreValueDisplay = document.querySelector('#scoreValue');
 let scoreValue = 0;
 const init = () => {
     
+    document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
 
     // set camera position(look from right side)
@@ -129,7 +130,13 @@ const animate = () => {
         eBox.setFromObject(e);
         if (eBox.intersectsBox(pBox)) {
             e.scale.set(3,3,3);
+
+
             collissionDetected = true;
+            
+            localStorage.setItem('score', scoreValue);
+
+
             console.log('shit is happening!!!!!!!!!!!!!!!!!')
             for (var i = 1; i < 222; i++)
                 window.clearInterval(i);
