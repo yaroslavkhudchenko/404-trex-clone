@@ -16,6 +16,8 @@ export let collissionDetected = false;
 
 let scoreValueDisplay = document.querySelector('#scoreValue');
 let scoreValue = 0;
+let clock = new THREE.Clock();
+let mixer;
 
 const init = () => {
     
@@ -63,7 +65,7 @@ const init = () => {
     let fbxLoader = new FBXLoader();
     fbxLoader.load('models/racoon.fbx', function (object) {
 
-        let mixer = new THREE.AnimationMixer(object);
+        mixer = new THREE.AnimationMixer(object);
 
         let action = mixer.clipAction(object.animations[0]);
         action.play();
@@ -143,6 +145,11 @@ let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 const animate = () => {
     if (collissionDetected)return;
     requestAnimationFrame(animate);
+
+    let delta = clock.getDelta();
+
+    if (mixer) mixer.update(delta);
+
     controls.update();
     renderer.render(scene, camera);
     
