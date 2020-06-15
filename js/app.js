@@ -81,9 +81,9 @@ const init = () => {
             }
 
         });
-        object.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
-        object.scale.set(.03, .03, .03);
-        object.rotation.y = 11;
+        object.position.set(playerDefaultPosition.x, playerDefaultPosition.y-.5, playerDefaultPosition.z);
+        object.scale.set(.05, .05, .05);
+        object.rotation.set(1.5,0,1.5)
         scene.add(object);
 
     });

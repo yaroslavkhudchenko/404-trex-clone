@@ -8,7 +8,7 @@ export const playerDefaultPosition = {
 export const player = () => {
     
     // player
-    playerGeo = new THREE.CubeGeometry(1, 1.7, 1);
+    playerGeo = new THREE.CubeGeometry(2, 1.7, 1);
     playerMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.1, transparent:true })
     playerMesh = new THREE.Mesh(playerGeo, playerMat);
     playerMesh.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
