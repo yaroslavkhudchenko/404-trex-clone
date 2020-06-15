@@ -3,6 +3,7 @@
 
 import * as THREE from '../three.module.js';
 import { OrbitControls } from '../OrbitControls.js';
+import { FBXLoader } from '../FBXLoader.js';
 
 import { player, playerMesh, playerDefaultPosition } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
@@ -15,6 +16,7 @@ export let collissionDetected = false;
 
 let scoreValueDisplay = document.querySelector('#scoreValue');
 let scoreValue = 0;
+
 const init = () => {
     
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
@@ -56,6 +58,35 @@ const init = () => {
 
     // spawn enemies every (between 3 and .5 seconds)
     setInterval(() => enemySpawner(), Math.floor((Math.random() * 2000) + 800));
+
+
+    let fbxLoader = new FBXLoader();
+    fbxLoader.load('models/racoon.fbx', function (object) {
+
+        let mixer = new THREE.AnimationMixer(object);
+
+        let action = mixer.clipAction(object.animations[0]);
+        action.play();
+
+        
+        object.traverse(function (child) {
+
+            if (child.isMesh) {
+
+                child.castShadow = true;
+                child.receiveShadow = true;
+
+            }
+
+        });
+        object.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
+        object.scale.set(.03, .03, .03);
+        object.rotation.y = 11;
+        scene.add(object);
+
+    });
+
+
 
 
     renderer = new THREE.WebGLRenderer({
