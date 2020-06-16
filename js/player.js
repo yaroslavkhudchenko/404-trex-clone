@@ -53,7 +53,7 @@ export const player = () => {
             if (child.isMesh) {
                 // child.material = material;
                 child.castShadow = true;
-                child.receiveShadow = true;
+                child.receiveShadow = false;
 
             }
 

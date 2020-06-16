@@ -15,8 +15,10 @@ export const enemySpawner = () => {
     let enemy = new THREE.Mesh(enemyG, enemyMat);
 
     // set position
-    enemy.position.set(Math.floor((Math.random() * -25) + -25), Math.floor((Math.random() * 1.5) + 1.4), 0);
+    enemy.position.set(Math.floor((Math.random() * -25) + -25), Math.floor((Math.random() * 3) + 3.4), 0);
     enemy.name = 'enemy';
+    enemy.castShadow = true; //default is false
+    enemy.receiveShadow = false;
     scene.add(enemy);
 
     // to move

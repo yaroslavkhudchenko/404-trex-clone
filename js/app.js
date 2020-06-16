@@ -49,9 +49,26 @@ const init = () => {
     let ambient = new THREE.AmbientLight(0xffffff, 1);
     // light(like sun)
     light = new THREE.DirectionalLight(0xffe57c, 1);
+    light.position.y = 22;   
+    light.castShadow = true;
+
+    light.shadow.mapSize.width = 2024;
+    light.shadow.mapSize.height = 2024;
+    //light.shadowDarkness = 0.2;
+    let d = 300;
+
+    light.shadow.camera.left = - d;
+    light.shadow.camera.right = d;
+    light.shadow.camera.top = d;
+    light.shadow.camera.bottom = - d;
+
+    light.shadow.camera.far = 333;
+
+    let helper = new THREE.DirectionalLightHelper(light, 11);
     scene.add(light);
 
-    scene.fog = new THREE.Fog(0xcce0ff, 500, 10000);
+    scene.add(helper);
+    //   scene.fog = new THREE.Fog(0xffffff, 20, 50);
 
     // floor
     geometryFloor = new THREE.BoxGeometry(250, 0, 11);
@@ -61,6 +78,7 @@ const init = () => {
         shininess: 100
     });
     floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
+    floorMesh.receiveShadow = true;
     scene.add(floorMesh);
     // exported environment variales
     Environment();
@@ -82,6 +100,8 @@ const init = () => {
         canvas: canvas
     });
     renderer.setClearColor(0xfff000); // to have light background color
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // create the controls(for testing)
