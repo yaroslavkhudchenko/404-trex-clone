@@ -175,7 +175,7 @@ const animate = () => {
     renderer.render(scene, camera);
     
     // update the score
-    scoreValueDisplay.innerHTML = Math.round(scoreValue);
+    scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
 
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
@@ -197,12 +197,12 @@ const animate = () => {
 
             // if there is a value and that value is less than current
             if(score*1 < scoreValue) {
-                localStorage.setItem('score', scoreValue);
+                localStorage.setItem('score', scoreValue.toFixed(0));
             }
             
 
 
-            console.log('shit is happening!!!!!!!!!!!!!!!!!')
+            console.log('collision has happened')
             for (var i = 1; i < 222; i++)
                 window.clearInterval(i);
 

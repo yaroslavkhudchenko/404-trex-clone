@@ -7,19 +7,19 @@ const farFloors = [
         size: (250, 0, 11),
         position:{
             x:0,
-            y:0,
+            y:2,
             z:50
         },
         color: 0x00ffff,
         objects: 'cactus.fbx',
         nbObjects: 5,
         positions: [
-            { x: 1, y: 0, z: 50 },
-            { x: 2, y: 0, z: 50 },
-            { x: 3, y: 0, z: 50 },
-            { x: 4, y: 0, z: 50 },
-            { x: 5, y: 0, z: 50 },
-            { x: 6, y: 0, z: 50 },
+            { x: -1, y: 2, z: 41 },
+            { x: -7, y: 2, z: 53 },
+            { x: -16, y: 2, z: 55 },
+            { x: -23, y: 2, z: 61 },
+            { x: -33, y: 2, z: 58 },
+            { x: -52, y: 2, z: 48 },
         ]
     },
     {
@@ -33,12 +33,12 @@ const farFloors = [
         objects: 'cactus.fbx',
         nbObjects: 6,
         positions: [
-            { x: 1, y: 0, z: 25 },
-            { x: 2, y: 0, z: 25 },
-            { x: 3, y: 0, z: 25 },
-            { x: 4, y: 0, z: 25 },
-            { x: 5, y: 0, z: 25 },
-            { x: 6, y: 0, z: 25 },
+            { x: -1, y: 0, z: 15 },
+            { x: -6, y: 0, z: 25 },
+            { x: -13, y: 0, z: 35 },
+            { x: -22, y: 0, z: 30 },
+            { x: -28, y: 0, z: 20 },
+            { x: -46, y: 0, z: 21 },
         ]
     }
 ]
