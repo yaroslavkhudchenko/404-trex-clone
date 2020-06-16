@@ -98,7 +98,7 @@ const keyPressedHandler = (e) => {
         case "KeyS":
 
             // model
-            playerModel.scale.set(.025,.025,.025);
+            playerModel.scale.set(.05,.05,.05);
             playerModel.position.y = 0.5;
             
             // hit box
@@ -127,7 +127,7 @@ const keyUpHandler = (e) => {
             playerHitboxMesh.scale.y = 1;
 
             playerModel.position.y = 0.5;
-            playerModel.scale.set(.050, .050, .050);
+            playerModel.scale.set(.1, .1, .1);
 
         }, 100);
         
@@ -161,7 +161,7 @@ const animate = () => {
         let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
         pBox.setFromObject(playerHitboxMesh);
         eBox.setFromObject(e);
-        /* if (eBox.intersectsBox(pBox)) {
+        if (eBox.intersectsBox(pBox)) {
             e.scale.set(3,3,3);
 
 
@@ -180,7 +180,7 @@ const animate = () => {
             for (var i = 1; i < 222; i++)
                 window.clearInterval(i);
 
-        } */
+        } 
     });
 
     console.log(camera.position)
