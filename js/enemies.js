@@ -3,7 +3,7 @@ import { scene, scoreValue } from './app.js';
 export let enemies = [];
 
 export let intervalToMove = null;
-let randomSelector = [4,.3];
+let randomSelector = [3,.5];
 // to spawn enemies
 export const enemySpawner = () => {
 

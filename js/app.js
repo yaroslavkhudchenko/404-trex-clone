@@ -129,18 +129,18 @@ const keyPressedHandler = (e) => {
             
             // hit box
             playerHitboxMesh.scale.y = .5;
-            playerHitboxMesh.position.y = 1;
+            playerHitboxMesh.position.y = .75;
 
             break;
         case "Space":
-            playerHitboxMesh.position.y = 3;
+            playerHitboxMesh.position.y = 4.5;
             playerModel.position.y = 3;
             
             // reset position y not to fly
             setTimeout(() => {
-                playerHitboxMesh.position.y = playerDefaultPosition.y;
+                playerHitboxMesh.position.y = 1.5;
                 playerModel.position.y = 0.5;
-            }, 250);
+            }, 350);
             
             break;
     }
@@ -150,7 +150,7 @@ const keyUpHandler = (e) => {
 
         setTimeout(() => {
             playerHitboxMesh.position.y = playerDefaultPosition.y;
-            playerHitboxMesh.scale.y = 1;
+            playerHitboxMesh.scale.y = 1.5;
 
             playerModel.position.y = 0.5;
             playerModel.scale.set(.1, .1, .1);
@@ -187,7 +187,7 @@ const animate = () => {
         let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
         pBox.setFromObject(playerHitboxMesh);
         eBox.setFromObject(e);
-        /* if (eBox.intersectsBox(pBox)) {
+        if (eBox.intersectsBox(pBox)) {
             e.scale.set(3,3,3);
 
 
@@ -206,7 +206,7 @@ const animate = () => {
             for (var i = 1; i < 222; i++)
                 window.clearInterval(i);
 
-        } */
+        }
     });
     // console.log(camera.position)
    

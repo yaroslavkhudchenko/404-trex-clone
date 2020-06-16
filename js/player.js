@@ -67,10 +67,10 @@ export const player = () => {
     });
 
     // player hitbox
-    playerHitboxGeo = new THREE.CubeGeometry(2, 1.5, 1);
-    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.1, transparent:true })
+    playerHitboxGeo = new THREE.CubeGeometry(4, 3, 1);
+    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.7, transparent:true })
     playerHitboxMesh = new THREE.Mesh(playerHitboxGeo, playerHitboxMat);
-    playerHitboxMesh.position.set(playerDefaultPosition.x, playerDefaultPosition.y, playerDefaultPosition.z);
+    playerHitboxMesh.position.set(playerDefaultPosition.x, 1.5, playerDefaultPosition.z);
     scene.add(playerHitboxMesh);
     
 }
