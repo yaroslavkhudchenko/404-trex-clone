@@ -3,7 +3,7 @@ import { scene, scoreValue } from './app.js';
 export let enemies = [];
 
 export let intervalToMove = null;
-
+let randomSelector = [4,.3];
 // to spawn enemies
 export const enemySpawner = () => {
 
@@ -14,8 +14,9 @@ export const enemySpawner = () => {
     let enemyMat = new THREE.MeshBasicMaterial({ color: 0x00f000 })
     let enemy = new THREE.Mesh(enemyG, enemyMat);
 
+    
     // set position
-    enemy.position.set(Math.floor((Math.random() * -25) + -25), Math.floor((Math.random() * 3) + 3.4), 0);
+    enemy.position.set(Math.floor((Math.random() * -25) + -25), randomSelector[Math.floor(Math.random() * Math.floor(2))], 0);
     enemy.name = 'enemy';
     enemy.castShadow = true; //default is false
     enemy.receiveShadow = false;
