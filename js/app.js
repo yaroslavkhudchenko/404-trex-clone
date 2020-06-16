@@ -22,11 +22,16 @@ const init = () => {
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
 
     // set camera position(look from right side)
-    camera.position.set(
+    /* camera.position.set(
         5.189239552338781,
         3.7861393344249135,
         -9.815769086484597
-    );
+    ); */
+    camera.position.set(
+        9.109020040736429,
+        9.228727368539435,
+        -12.021719725504486
+    )
     
     // create scene
     scene = new THREE.Scene();
@@ -156,7 +161,7 @@ const animate = () => {
         let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
         pBox.setFromObject(playerHitboxMesh);
         eBox.setFromObject(e);
-        if (eBox.intersectsBox(pBox)) {
+        /* if (eBox.intersectsBox(pBox)) {
             e.scale.set(3,3,3);
 
 
@@ -175,10 +180,10 @@ const animate = () => {
             for (var i = 1; i < 222; i++)
                 window.clearInterval(i);
 
-        }
+        } */
     });
 
-   
+    console.log(camera.position)
    
 }
 
