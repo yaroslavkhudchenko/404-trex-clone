@@ -10,7 +10,7 @@ export const enemySpawner = () => {
     //console.log('enemy spawner')
 
     // enemy mesh
-    let enemyG = new THREE.CubeGeometry(1, 1, 1);
+    let enemyG = new THREE.CubeGeometry(2, 2, 2);
     let enemyMat = new THREE.MeshBasicMaterial({ color: 0x00f000 })
     let enemy = new THREE.Mesh(enemyG, enemyMat);
 
