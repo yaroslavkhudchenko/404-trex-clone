@@ -27,10 +27,15 @@ const init = () => {
         3.7861393344249135,
         -9.815769086484597
     ); */
-    camera.position.set(
+    /* camera.position.set(
         14.406517555575554,
         11.08936238471828,
         -11.864707579777436
+    ); */
+    camera.position.set(
+        9.756752570767734,
+        12.042143843536,
+        -15.201498053045437
     )
     
     // create scene
@@ -57,7 +62,6 @@ const init = () => {
     });
     floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
     scene.add(floorMesh);
-
     // exported environment variales
     Environment();
 
@@ -184,7 +188,7 @@ const animate = () => {
 
         } */
     });
-
+    // console.log(camera.position)
    
 }
 
