@@ -49,7 +49,7 @@ const init = () => {
     scene.fog = new THREE.Fog(0xcce0ff, 500, 10000);
 
     // floor
-    geometryFloor = new THREE.BoxGeometry(111, 0, 11);
+    geometryFloor = new THREE.BoxGeometry(250, 0, 11);
     materialFloor = new THREE.MeshPhongMaterial({
         color: 0x656565,
         specular: 0x000000,
