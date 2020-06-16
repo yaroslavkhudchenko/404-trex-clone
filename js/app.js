@@ -6,7 +6,7 @@ import { OrbitControls } from '../OrbitControls.js';
 
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
-
+import { Environment } from './environment.js';
 export let camera, scene, renderer, controls;
 export let geometryFloor, materialFloor, floorMesh, light;
 export let canvas = document.querySelector('#gameCanvas');
@@ -58,6 +58,8 @@ const init = () => {
     floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
     scene.add(floorMesh);
 
+    // exported environment variales
+    Environment();
 
     // call player function
     player();
@@ -183,7 +185,6 @@ const animate = () => {
         } */
     });
 
-    console.log(camera.position)
    
 }
 
