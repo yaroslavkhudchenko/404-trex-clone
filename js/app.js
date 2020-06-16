@@ -46,7 +46,7 @@ const init = () => {
     scene.add(axesHelper);
     
     // ambient light for scene
-    let ambient = new THREE.AmbientLight(0xffffff, 1);
+    let ambient = new THREE.AmbientLight(0xFF4500, 1);
     // light(like sun)
     light = new THREE.DirectionalLight(0xffe57c, 1);
     light.position.y = 22;   
