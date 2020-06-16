@@ -1,5 +1,6 @@
 import * as THREE from '../three.module.js';
 import { scene } from './app.js';
+import { FBXLoader } from '../FBXLoader.js';
 
 const farFloors = [
     {
@@ -9,7 +10,17 @@ const farFloors = [
             y:0,
             z:50
         },
-        color: 0x00ffff
+        color: 0x00ffff,
+        objects: 'cactus.fbx',
+        nbObjects: 5,
+        positions: [
+            { x: 1, y: 0, z: 50 },
+            { x: 2, y: 0, z: 50 },
+            { x: 3, y: 0, z: 50 },
+            { x: 4, y: 0, z: 50 },
+            { x: 5, y: 0, z: 50 },
+            { x: 6, y: 0, z: 50 },
+        ]
     },
     {
         size: (250, 0, 11),
@@ -18,7 +29,17 @@ const farFloors = [
             y:0,
             z:25
         },
-        color: 0xffffff
+        color: 0xffffff,
+        objects: 'cactus.fbx',
+        nbObjects: 6,
+        positions: [
+            { x: 1, y: 0, z: 25 },
+            { x: 2, y: 0, z: 25 },
+            { x: 3, y: 0, z: 25 },
+            { x: 4, y: 0, z: 25 },
+            { x: 5, y: 0, z: 25 },
+            { x: 6, y: 0, z: 25 },
+        ]
     }
 ]
 
@@ -39,7 +60,27 @@ export const Environment = () => {
             farFloors[i].position.y,
             farFloors[i].position.z
         );
-        console.log(floorMesh.position)
+        for(let j=0;j<farFloors[i].nbObjects; j++) {
+            new FBXLoader().load('models/cactus.fbx', (object) => {
+
+
+                object.traverse(function (child) {
+
+                    if (child.isMesh) {
+                        // child.material = material;
+                        child.castShadow = true;
+                        child.receiveShadow = false;
+
+                    }
+
+                });
+                object.position.set(farFloors[i].positions[j].x, farFloors[i].positions[j].y, farFloors[i].positions[j].z);
+                object.scale.set(.0051, .0051, .0051);
+/*                 object.rotation.set(1.5, 0, 1.5);
+ */                scene.add(object);
+
+            });
+        }
     }
 
     
