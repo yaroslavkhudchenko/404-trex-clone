@@ -28,9 +28,9 @@ const init = () => {
         -9.815769086484597
     ); */
     camera.position.set(
-        9.109020040736429,
-        9.228727368539435,
-        -12.021719725504486
+        14.406517555575554,
+        11.08936238471828,
+        -11.864707579777436
     )
     
     // create scene
@@ -161,7 +161,7 @@ const animate = () => {
         let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
         pBox.setFromObject(playerHitboxMesh);
         eBox.setFromObject(e);
-        if (eBox.intersectsBox(pBox)) {
+        /* if (eBox.intersectsBox(pBox)) {
             e.scale.set(3,3,3);
 
 
@@ -180,7 +180,7 @@ const animate = () => {
             for (var i = 1; i < 222; i++)
                 window.clearInterval(i);
 
-        } 
+        } */
     });
 
     console.log(camera.position)
