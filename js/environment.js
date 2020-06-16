@@ -58,6 +58,7 @@ export const Environment = () => {
             shininess: 100
         });
         let floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
+        floorMesh.receiveShadow = true;
         scene.add(floorMesh);
         floorMesh.position.set(
             farFloors[i].position.x,
@@ -80,6 +81,8 @@ export const Environment = () => {
                 });
                 object.position.set(farFloors[i].positions[j].x, farFloors[i].positions[j].y, farFloors[i].positions[j].z);
                 object.scale.set(.0051, .0051, .0051);
+                object.castShadow = true; //default is false
+                object.receiveShadow = false;
 /*                 object.rotation.set(1.5, 0, 1.5);
  */                scene.add(object);
 

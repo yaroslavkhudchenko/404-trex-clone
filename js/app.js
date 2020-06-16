@@ -50,6 +50,8 @@ const init = () => {
     // light(like sun)
     light = new THREE.DirectionalLight(0xffe57c, 1);
     light.position.y = 22;   
+    light.position.z = -22;
+    light.position.x = -22;
     light.castShadow = true;
 
     light.shadow.mapSize.width = 2024;
