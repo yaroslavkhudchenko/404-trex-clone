@@ -26,25 +26,21 @@ document.body.appendChild(stats.dom);
 const init = () => {
     
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score') ? localStorage.getItem('score') : 0
-    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 100);
+    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
 
     // set camera position(look from right side)
-    /* camera.position.set(
-        5.189239552338781,
-        3.7861393344249135,
-        -9.815769086484597
-    ); */
-    /* camera.position.set(
-        14.406517555575554,
-        11.08936238471828,
-        -11.864707579777436
-    ); */
+  /*  // good 
     camera.position.set(
         9.756752570767734,
         12.042143843536,
         -15.201498053045437
+    ) */
+    // for test
+    camera.position.set(
+        104.39700826836328,
+        31.320617580658773,
+        26.077036852025113
     )
-    
     // create scene
     scene = new THREE.Scene();
 
@@ -52,17 +48,19 @@ const init = () => {
     let axesHelper = new THREE.AxesHelper(9);
     scene.add(axesHelper);
     
-    // ambient light for scene
-    let ambient = new THREE.AmbientLight(0xFF4500, 1);
     // light(like sun)
-    light = new THREE.DirectionalLight(0xffe57c, 1);
-    light.position.y = 22;   
+    light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.y = 33;   
     light.position.z = -22;
-    light.position.x = -22;
+    light.position.x = -45;
+
+    light.target.position.set(-20, -20, 22);
+
+
     light.castShadow = true;
 
-    light.shadow.mapSize.width = 2024;
-    light.shadow.mapSize.height = 2024;
+    light.shadow.mapSize.width = 6666;
+    light.shadow.mapSize.height = 6666;
     //light.shadowDarkness = 0.2;
     let d = 300;
 
@@ -71,8 +69,9 @@ const init = () => {
     light.shadow.camera.top = d;
     light.shadow.camera.bottom = - d;
 
-    light.shadow.camera.far = 333;
-
+    light.shadow.camera.far = 100;
+    light.shadowCameraVisible = true;
+    light.shadowCameraNear = 50;
     let helper = new THREE.DirectionalLightHelper(light, 11);
     scene.add(light);
 
@@ -109,7 +108,7 @@ const init = () => {
         antialias: true,
         canvas: canvas
     });
-    renderer.setClearColor(0xfff000); // to have light background color
+    renderer.setClearColor(0xE6CBB2); // to have light background color
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -125,6 +124,17 @@ const init = () => {
     let pointer = new THREE.Mesh(pointerGeo, pointerMat);
     pointer.position.set(25, 1, 0);
     scene.add(pointer);
+    window.addEventListener('resize', onWindowResize, false);
+
+}
+
+
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
 }
 
@@ -258,6 +268,7 @@ const animate = () => {
     stats.end();
     requestAnimationFrame(animate);
 
+    // console.log(camera.position)
 }
 
 init();
