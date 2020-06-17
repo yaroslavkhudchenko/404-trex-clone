@@ -1,6 +1,8 @@
-import * as THREE from '../three.module.js';
+import * as THREE from './libs/three.module.js';
 import { scene } from './app.js';
-import { FBXLoader } from '../FBXLoader.js';
+import { FBXLoader } from './libs/FBXLoader.js';
+export let cactuses1 = [];
+export let cactuses2 = [];
 
 const farFloors = [
     {
@@ -12,16 +14,16 @@ const farFloors = [
         },
         color: 0x00ffff,
         objects: 'cactus.fbx',
-        nbObjects: 8,
-        positions: [
-            { x: 18, y: 2, z: 41 },
-            { x: 14, y: 2, z: 53 },
-            { x: 5, y: 2, z: 41 },
-            { x: -16, y: 2, z: 55 },
-            { x: -33, y: 2, z: 58 },
-            { x: -52, y: 2, z: 48 },
-            { x: -63, y: 2, z: 41 },
-            { x: -72, y: 2, z: 62 },
+/*         nbObjects: 8,
+ */        positions: [
+            { x: -100, y: 2, z: 41 },
+            { x: -100, y: 2, z: 53 },
+            { x: -100, y: 2, z: 41 },
+            { x: -100, y: 2, z: 55 },
+            { x: -100, y: 2, z: 58 },
+            { x: -100, y: 2, z: 48 },
+            { x: -100, y: 2, z: 41 },
+            { x: -100, y: 2, z: 62 },
         ]
     },
     {
@@ -33,16 +35,16 @@ const farFloors = [
         },
         color: 0xffffff,
         objects: 'cactus.fbx',
-        nbObjects: 8,
-        positions: [
-            { x:16, y: 0, z: 16 },
-            { x: 12, y: 0, z: 22 },
-            { x: 3, y: 0, z: 15 },
-            { x: -6, y: 0, z: 25 },
-            { x: -13, y: 0, z: 16 },
-            { x: -22, y: 0, z: 33 },
-            { x: -46, y: 0, z: 24 },
-            { x: -66, y: 0, z: 22 },
+/*         nbObjects: 8,
+ */        positions: [
+            { x: -100, y: 0, z: 16 },
+            { x: -100, y: 0, z: 22 },
+            { x: -100, y: 0, z: 15 },
+            { x: -100, y: 0, z: 25 },
+            { x: -100, y: 0, z: 16 },
+            { x: -100, y: 0, z: 33 },
+            { x: -100, y: 0, z: 24 },
+            { x: -100, y: 0, z: 22 },
         ]
     }
 ]
@@ -59,7 +61,7 @@ export const Environment = () => {
         });
         let floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
         floorMesh.receiveShadow = true;
-        scene.add(floorMesh);
+        scene.add(floorMesh); // add second and third floor to the scene
         floorMesh.position.set(
             farFloors[i].position.x,
             farFloors[i].position.y,

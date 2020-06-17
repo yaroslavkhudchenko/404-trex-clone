@@ -1,8 +1,8 @@
 
 
 
-import * as THREE from '../three.module.js';
-import { OrbitControls } from '../OrbitControls.js';
+import * as THREE from './libs/three.module.js';
+import { OrbitControls } from './libs/OrbitControls.js';
 
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
@@ -82,7 +82,8 @@ const init = () => {
     floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
     floorMesh.receiveShadow = true;
     scene.add(floorMesh);
-    // exported environment variales
+
+    // imported environment variales
     Environment();
 
     // call player function

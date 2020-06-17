@@ -1,5 +1,5 @@
-import * as THREE from '../three.module.js';
-import { FBXLoader } from '../FBXLoader.js';
+import * as THREE from './libs/three.module.js';
+import { FBXLoader } from './libs/FBXLoader.js';
 
 import { scene } from './app.js';
 
