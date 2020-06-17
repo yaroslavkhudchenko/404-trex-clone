@@ -16,6 +16,13 @@ export let collissionDetected = false;
 let scoreValueDisplay = document.querySelector('#scoreValue');
 export let scoreValue = 0;
 let clock = new THREE.Clock();
+
+import Stats from 'stats.js';
+var stats = new Stats();
+stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild(stats.dom);
+
+
 const init = () => {
     
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score') ? localStorage.getItem('score') : 0
@@ -165,11 +172,19 @@ const keyUpHandler = (e) => {
 
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
+
+
+
+
+
+
 // main animate function
 const animate = () => {
-    if (collissionDetected)return;
-    requestAnimationFrame(animate);
 
+    stats.begin();
+    if (collissionDetected) return; 
+    
+    
     let delta = clock.getDelta();
 
     if (mixer) mixer.update(delta);
@@ -238,6 +253,11 @@ const animate = () => {
             e = undefined; //clear any reference for it to be able to garbage collected 
         }
     })
+
+
+    stats.end();
+    requestAnimationFrame(animate);
+
 }
 
 init();

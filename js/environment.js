@@ -138,7 +138,7 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
     // to move
     /* cactusesIntervalToMove =  */
     setInterval(() => {
-        good.position.x += (floorNB === 1 ? .109 : .1) + (Math.floor(Math.random() * .008) + .004);
+        good.position.x += (floorNB === 1 ? .009 : .001) + (Math.floor(Math.random() * .008) + .004);
     }, Math.floor((Math.random() * .5) + 1));
 
     floorNB === 1 ? 
