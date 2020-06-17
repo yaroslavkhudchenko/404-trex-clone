@@ -184,11 +184,11 @@ const keyPressedHandler = (e) => {
 
             // model
             playerModel.scale.set(.05,.05,.05);
-            playerModel.position.y = 0.5;
+            playerModel.position.y = 1.5;
             
             // hit box
             playerHitboxMesh.scale.y = .5;
-            playerHitboxMesh.position.y = .75;
+            playerHitboxMesh.position.y = 2;
 
             break;
         case "Space":
@@ -197,8 +197,8 @@ const keyPressedHandler = (e) => {
             
             // reset position y not to fly
             setTimeout(() => {
-                playerHitboxMesh.position.y = 1.5;
-                playerModel.position.y = 0.5;
+                playerHitboxMesh.position.y = 2.5;
+                playerModel.position.y = 1.5;
             }, 350);
             
             break;
@@ -208,10 +208,10 @@ const keyUpHandler = (e) => {
     if(e.code === "KeyS") {
 
         setTimeout(() => {
-            playerHitboxMesh.position.y = playerDefaultPosition.y;
-            playerHitboxMesh.scale.y = 1.5;
+            playerHitboxMesh.position.y = 2.5;
+            playerHitboxMesh.scale.y = 1;
 
-            playerModel.position.y = 0.5;
+            playerModel.position.y = 1.5;
             playerModel.scale.set(.1, .1, .1);
 
         }, 100);

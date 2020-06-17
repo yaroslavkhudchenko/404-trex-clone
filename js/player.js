@@ -58,7 +58,7 @@ export const player = () => {
             }
 
         });
-        object.position.set(playerDefaultPosition.x, 0.5, playerDefaultPosition.z);
+        object.position.set(playerDefaultPosition.x, 1.5, playerDefaultPosition.z);
         object.scale.set(.1, .1, .1);
         object.rotation.set(1.5, 0, 1.5);
         playerModel = object;
@@ -68,9 +68,9 @@ export const player = () => {
 
     // player hitbox
     playerHitboxGeo = new THREE.CubeGeometry(4, 3, 1);
-    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:0, transparent:true })
+    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.8, transparent:true })
     playerHitboxMesh = new THREE.Mesh(playerHitboxGeo, playerHitboxMat);
-    playerHitboxMesh.position.set(playerDefaultPosition.x, 1.5, playerDefaultPosition.z);
+    playerHitboxMesh.position.set(playerDefaultPosition.x, 2.5, playerDefaultPosition.z);
     scene.add(playerHitboxMesh);
     
 }

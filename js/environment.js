@@ -140,10 +140,14 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
             
     scene.add(good);
 
+    if(floorNB === 0 || floorNB === 1)return;
+
+
     // to move
     /* cactusesIntervalToMove =  */
     setInterval(() => {
-        good.position.x += (floorNB === 1 ? .009 : .001) + (Math.floor(Math.random() * .008) + .004);
+
+        good.position.x += (floorNB === 1  ? .009 : .001) + (Math.floor(Math.random() * .008) + .004);
     }, Math.floor((Math.random() * .5) + 1));
 
     floorNB === 1 ? 
