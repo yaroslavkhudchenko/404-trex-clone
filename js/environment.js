@@ -97,7 +97,7 @@ export const Environment = () => {
         
         cactusRespawner(0, 8);
         cactusRespawner(0, 14); 
-        cactusRespawner(1, 1);
+        cactusRespawner(1, 1 );
         cactusRespawner(1, 33);
 
     });
@@ -125,8 +125,8 @@ export const Environment = () => {
 }
 export const cactusRespawner = (floorNB, initialCac=false ) => {
     let good = cactusObject.clone();
-        console.log(floorNB)
-        console.log(farFloors[floorNB])
+        // console.log(floorNB)
+        // console.log(farFloors[floorNB])
         good.position.set(
             initialCac ? initialCac  : -100,
             farFloors[floorNB].positions[0].y, 
@@ -138,7 +138,11 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
     // to move
     /* cactusesIntervalToMove =  */
     setInterval(() => {
-        good.position.x += (floorNB === 1 ? .009 : .001) + (Math.floor(Math.random() * .008) + .004);
+        good.position.x += (floorNB === 1 ? .109 : .1) + (Math.floor(Math.random() * .008) + .004);
     }, Math.floor((Math.random() * .5) + 1));
+
+    floorNB === 1 ? 
+        cactuses1.unshift(good): // unshift to global array to control if reach the pointer
+            cactuses2.unshift(good)
 
 }

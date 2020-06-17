@@ -6,7 +6,7 @@ import { OrbitControls } from './libs/OrbitControls.js';
 
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
-import { Environment } from './environment.js';
+import { Environment, cactuses1, cactuses2 } from './environment.js';
 export let camera, scene, renderer, controls;
 export let geometryFloor, materialFloor, floorMesh, light;
 export let canvas = document.querySelector('#gameCanvas');
@@ -181,8 +181,11 @@ const animate = () => {
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
 
+
+    
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
     enemies.map((e, index) => {
+        // console.log(e)
         e.position.x > 25 ? 
             scene.remove(e) && enemies.pop() // remove from both scene and array s
                 : false;
@@ -212,7 +215,29 @@ const animate = () => {
         }
     });
     // console.log(camera.position)
-   
+    cactuses1.map((e, index) => {
+        if (e.position.x > 25) {
+            
+            scene.remove(e);
+            cactuses1.pop();
+           
+            e = undefined; //clear any reference for it to be able to garbage collected 
+        }
+    })
+    // console.log(cactuses2)
+    cactuses2.map((e, index) => {
+        
+
+        if(e.position.x > 25) {
+          /*   console.log('cactuses 2 more')
+            console.log(cactuses2.length)
+            console.log(scene.children) */
+            scene.remove(e);
+            cactuses2.pop();
+            
+            e = undefined; //clear any reference for it to be able to garbage collected 
+        }
+    })
 }
 
 init();
