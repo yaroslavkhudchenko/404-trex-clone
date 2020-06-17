@@ -56,7 +56,7 @@ const init = () => {
     // axis helper(to see axis visully)
     let axesHelper = new THREE.AxesHelper(9);
     scene.add(axesHelper);
-    let ALight = new THREE.AmbientLight(0x404040, 2.4);
+    let ALight = new THREE.AmbientLight(0xedc9af, 1.5);
     scene.add(ALight);
     // light(like sun)
     /* light = new THREE.DirectionalLight(0xffffff, 1);
@@ -87,7 +87,7 @@ const init = () => {
 
     scene.add(helper); */
 
-    let DLight = new THREE.DirectionalLight(0xffffff, .5);
+    let DLight = new THREE.DirectionalLight(0xedc9af , .5);
     let DLightTargetObject = new THREE.Object3D();
     DLight.position.set(-50, 30, -30);
     DLight.target = DLightTargetObject;

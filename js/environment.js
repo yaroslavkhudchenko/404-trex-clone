@@ -30,7 +30,7 @@ const farFloors = [
     {
         position:{
             x:-57,
-            y:2,
+            y:3,
             z:40
         },
         color: 0xc2b280 ,
@@ -46,7 +46,7 @@ const farFloors = [
     {
         position:{
             x:-57,
-            y:.3,
+            y:2,
             z:25
         },
         color: 0xc2b280 ,
@@ -111,7 +111,7 @@ export const Environment = () => {
 
     for(let i=0; i<farFloors.length;i++) {
         // floor
-        let geometryFloor = new THREE.BoxGeometry(150, 0,  i===1 ? 9 : 20);
+        let geometryFloor = new THREE.BoxGeometry(150, i === 1 ? 4 :0,  i===1 ? 9 : 20);
         let materialFloor = new THREE.MeshPhongMaterial({
             color: farFloors[i].color,
             specular: 0x000000,
@@ -149,7 +149,9 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
     /* cactusesIntervalToMove =  */
     setInterval(() => {
 
-        good.position.x += (floorNB === 1  ? .009 : .001) + (Math.floor(Math.random() * .008) + .004);
+        good.position.x += (floorNB === 1  ? 
+                                    .04 
+                                        : .02) + (Math.floor(Math.random() * .008) + .004);
     }, Math.floor((Math.random() * .5) + 1));
 
     floorNB === 1 ? 
