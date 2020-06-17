@@ -191,7 +191,7 @@ const animate = () => {
         pBox.setFromObject(playerHitboxMesh);
         eBox.setFromObject(e);
         if (eBox.intersectsBox(pBox)) {
-            e.scale.set(3,3,3);
+           /*  e.scale.set(3,3,3);
 
 
             collissionDetected = true;
@@ -207,7 +207,7 @@ const animate = () => {
 
             console.log('collision has happened')
             for (var i = 1; i < 222; i++)
-                window.clearInterval(i);
+                window.clearInterval(i); */
 
         }
     });

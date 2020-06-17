@@ -78,8 +78,28 @@ export const Environment = () => {
         cactusObject = object;
         console.log(cactusObject)
         
-        // spawn cactuses every (between 3 and 1 seconds)
-        setInterval(() => cactusRespawner(Math.floor(Math.random()*2) + 0), Math.floor((Math.random() * 2000) + 800));
+        // spawn cactuses every (between 2 and 1.5 seconds)
+        setInterval(() => cactusRespawner(Math.floor(Math.random()*2) + 0), Math.floor((Math.random() * 2000) + 1500));
+
+        // default cactuses 
+
+        cactusRespawner(0, -60);
+        cactusRespawner(0, -40);
+ 
+
+        cactusRespawner(0, -20);
+        cactusRespawner(0, -30);
+
+        cactusRespawner(1, -55);
+        cactusRespawner(1, -45);
+        cactusRespawner(1, -15);
+        cactusRespawner(1, -25);
+        
+        cactusRespawner(0, 8);
+        cactusRespawner(0, 14); 
+        cactusRespawner(1, 1);
+        cactusRespawner(1, 33);
+
     });
 
 
@@ -103,12 +123,12 @@ export const Environment = () => {
         
     }
 }
-export const cactusRespawner = (floorNB) => {
+export const cactusRespawner = (floorNB, initialCac=false ) => {
     let good = cactusObject.clone();
         console.log(floorNB)
         console.log(farFloors[floorNB])
         good.position.set(
-            -100,
+            initialCac ? initialCac  : -100,
             farFloors[floorNB].positions[0].y, 
             farFloors[floorNB].positions[Math.floor((Math.random() * 6) + 1)].z
         );
@@ -118,7 +138,7 @@ export const cactusRespawner = (floorNB) => {
     // to move
     /* cactusesIntervalToMove =  */
     setInterval(() => {
-        good.position.x += .0091 + (Math.floor(Math.random() * .02) + .01);
+        good.position.x += (floorNB === 1 ? .009 : .001) + (Math.floor(Math.random() * .008) + .004);
     }, Math.floor((Math.random() * .5) + 1));
 
 }
