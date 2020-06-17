@@ -37,10 +37,19 @@ const init = () => {
     ) */
     // for test
     camera.position.set(
-        104.39700826836328,
-        31.320617580658773,
-        26.077036852025113
+        19.235740974134533,
+        6.813910998169175,
+        -7.180299017202208
     )
+/* 
+    camera.position.x = 22.609984741761778;
+    camera.position.y = 3.428590611619372;
+    camera.position.z = 7.37041093612718;
+
+    camera.rotation.x = -0.2521795322818087;
+    camera.rotation.y = 0.5626175577081858;
+    camera.rotation.z = 0.1365832725087437; */
+
     // create scene
     scene = new THREE.Scene();
 
@@ -88,6 +97,7 @@ const init = () => {
     floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
     floorMesh.receiveShadow = true;
     scene.add(floorMesh);
+    floorMesh.position.x = -100;
 
     // imported environment variales
     Environment();

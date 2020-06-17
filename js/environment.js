@@ -14,7 +14,7 @@ const farFloors = [
     {
 /*         size: (250, 0, 11),
  */     position:{
-            x:0,
+            x:-100,
             y:2,
             z:50
         },
@@ -35,7 +35,7 @@ const farFloors = [
     {
 /*         size: (250, 0, 11),
  */     position:{
-            x:0,
+            x:-100,
             y:0,
             z:25
         },
@@ -86,15 +86,15 @@ export const Environment = () => {
         cactusRespawner(0, -60);
         cactusRespawner(0, -40);
  
-
+/* 
         cactusRespawner(0, -20);
-        cactusRespawner(0, -30);
+        cactusRespawner(0, -30); */
 
         cactusRespawner(1, -55);
         cactusRespawner(1, -45);
-        cactusRespawner(1, -15);
+        /* cactusRespawner(1, -15);
         cactusRespawner(1, -25);
-        
+        */ 
         cactusRespawner(0, 8);
         cactusRespawner(0, 14); 
         cactusRespawner(1, 1 );
