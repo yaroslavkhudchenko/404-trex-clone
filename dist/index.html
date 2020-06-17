@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Three js runner</title><style>@font-face {
+            font-family: 'pixel';
+            src: url('PressStart2P-vaV7.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+        } 
+        * {
+            font-family: 'pixel';
+        }
+        body {
+            margin: 0;
+            position: fixed;
+        }
+        #display {
+            position: fixed;
+            top: 35px;
+            right: 20px;
+            font-size: 30px;
+            display: flex;
+            justify-content: space-between;
+            /* flex-direction: column; */
+            width: 450px;
+            height: 120px;
+        }
+        #score {
+            display: flex;
+            min-width: 200px;
+        }
+        #bestResult {
+            display: flex;
+        }</style></head><body><canvas id="gameCanvas"></canvas><div id="display"><div id="bestResult"><div id="bestTitle">Hi:</div><div id="bestValue">00000</div></div><div id="score"><div id="scoreValue">00000</div></div></div><script type="module" src="js/app.js"></script><script src="bundle.main.js"></script></body></html>

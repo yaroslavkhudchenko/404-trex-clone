@@ -22,5 +22,11 @@ module.exports = {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 9000
-    }
+    },
+    plugins: [
+        new HtmlWebPackPlugin({
+            filename: 'index.html',
+            template: 'index.html'
+        })
+    ]
 };
