@@ -70,7 +70,7 @@ const init = () => {
     scene.add(light);
 
     scene.add(helper);
-    //   scene.fog = new THREE.Fog(0xffffff, 20, 50);
+    // scene.fog = new THREE.Fog(0xffffff, 20, 50);
 
     // floor
     geometryFloor = new THREE.BoxGeometry(250, 0, 11);
