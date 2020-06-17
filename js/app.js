@@ -37,9 +37,9 @@ const init = () => {
     ) */
     // for test
     camera.position.set(
-        12.76085323344375,
-        10.904972033805223,
-        -12.360211352637547
+        16.541557178529693,
+        10.661301140199619,
+        -6.8735841518706104
     )
 /* 
     camera.position.x = 22.609984741761778;
@@ -96,12 +96,13 @@ const init = () => {
     DLight.castShadow = true ;
     DLight.shadow.radius = 1;
 
-    /*
-     @TODO
-     Shadows lower than 2K triggers twitches/flickers on moving objects.
-     Better fix this later;
-     Maybe with CSM shadows?
-     */
+    scene.fog = new THREE.Fog(0xE7B251, 1, 175);
+
+    scene.fog.color.setRGB(.91, .70, .32);
+
+
+    scene.background = new THREE.Color(0xE7B251);
+
     DLight.shadow.mapSize.width = 1024 * 3;
     DLight.shadow.mapSize.height = 1024 * 3;
 
@@ -113,13 +114,9 @@ const init = () => {
     scene.add(DLight);
     scene.add(DLightTargetObject);
 
-
-    // scene.fog = new THREE.Fog(0xffffff, 20, 50);
-
-    // floor
     geometryFloor = new THREE.BoxGeometry(150, 0, 11);
     materialFloor = new THREE.MeshPhongMaterial({
-        color: 0x656565,
+        color: 0xE7B251,
         specular: 0x000000,
         shininess: 100
     });
@@ -149,12 +146,13 @@ const init = () => {
     });
     renderer.setClearColor(0xE6CBB2); // to have light background color
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.VSMShadowMap ;
     renderer.setSize(window.innerWidth, window.innerHeight);
-
+    renderer.toneMapping = THREE.Uncharted2ToneMapping
     // create the controls(for testing)
     controls = new OrbitControls(camera, canvas);
-    controls.update();
+    //controls.update();
+    controls = false;
 
 
     // pointer to see where enemies eliminates
@@ -238,7 +236,7 @@ const animate = () => {
 
     if (mixer) mixer.update(delta);
 
-    controls.update();
+    // controls.update();
     renderer.render(scene, camera);
     
     // update the score
