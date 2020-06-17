@@ -1,4 +1,12 @@
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
+
 module.exports = {
+    entry: './js/app.js',
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        filename: 'bundle.main.js'
+    },
     module: {
         rules: [
             {
@@ -9,5 +17,10 @@ module.exports = {
                 }
             }
         ]
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 9000
     }
 };
