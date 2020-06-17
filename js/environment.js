@@ -1,13 +1,19 @@
 import * as THREE from './libs/three.module.js';
-import { scene } from './app.js';
+import { scene, floorMesh } from './app.js';
 import { FBXLoader } from './libs/FBXLoader.js';
 export let cactuses1 = [];
 export let cactuses2 = [];
+export let cactusesIntervalToMove = null;
+
+
+
+let cactusObject = null;
+
 
 const farFloors = [
     {
-        size: (250, 0, 11),
-        position:{
+/*         size: (250, 0, 11),
+ */     position:{
             x:0,
             y:2,
             z:50
@@ -27,8 +33,8 @@ const farFloors = [
         ]
     },
     {
-        size: (250, 0, 11),
-        position:{
+/*         size: (250, 0, 11),
+ */     position:{
             x:0,
             y:0,
             z:25
@@ -47,9 +53,35 @@ const farFloors = [
             { x: -100, y: 0, z: 22 },
         ]
     }
+
+   
 ]
 
 export const Environment = () => {
+    // load cactus fbx (ONCE!!!)
+    new FBXLoader().load('models/cactus.fbx', (object) => {
+
+
+        object.traverse(function (child) {
+
+            if (child.isMesh) {
+                // child.material = material;
+                child.castShadow = true;
+                child.receiveShadow = false;
+
+            }
+
+        });
+        object.scale.set(.0051, .0051, .0051);
+        object.castShadow = true; //default is false
+        object.receiveShadow = false;
+        cactusObject = object;
+        console.log(cactusObject)
+        cactusRespawner(0)
+
+    });
+
+
 
     for(let i=0; i<farFloors.length;i++) {
         // floor
@@ -67,33 +99,24 @@ export const Environment = () => {
             farFloors[i].position.y,
             farFloors[i].position.z
         );
-        for(let j=0;j<farFloors[i].nbObjects; j++) {
-            new FBXLoader().load('models/cactus.fbx', (object) => {
-
-
-                object.traverse(function (child) {
-
-                    if (child.isMesh) {
-                        // child.material = material;
-                        child.castShadow = true;
-                        child.receiveShadow = false;
-
-                    }
-
-                });
-                object.position.set(farFloors[i].positions[j].x, farFloors[i].positions[j].y, farFloors[i].positions[j].z);
-                object.scale.set(.0051, .0051, .0051);
-                object.castShadow = true; //default is false
-                object.receiveShadow = false;
-/*                 object.rotation.set(1.5, 0, 1.5);
- */                scene.add(object);
-
-            });
-        }
+        
     }
+}
+export const cactusRespawner = (floorNB) => {
+        console.log(floorNB)
+        console.log(farFloors[floorNB])
+        cactusObject.position.set(
+            -100,
+            2, 
+            farFloors[floorNB].positions[Math.floor((Math.random() * 6) + 1)].z
+        );
+            
+    scene.add(cactusObject);
 
-    
-    
-
+    // to move
+    /* cactusesIntervalToMove =  */
+    setInterval(() => {
+        cactusObject.position.x += .01 + (Math.floor(Math.random() * .05) + .01);
+    }, Math.floor((Math.random() * .5) + 1));
 
 }
