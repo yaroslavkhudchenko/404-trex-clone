@@ -12,48 +12,53 @@ let cactusObject = null;
 
 const farFloors = [
     {
-/*         size: (250, 0, 11),
- */     position:{
-            x:-100,
-            y:2,
-            z:50
+        position: {
+            x: -57,
+            y: 0,
+            z: -10
         },
-        color: 0x00ffff,
+        color:0xc2b280
+    },
+    {
+        position: {
+            x: -57,
+            y: 0,
+            z: 10
+        },
+        color: 0x00ffff
+    },
+    {
+        position:{
+            x:-57,
+            y:2,
+            z:40
+        },
+        color: 0xc2b280 ,
         objects: 'cactus.fbx',
-/*         nbObjects: 8,
- */        positions: [
+        positions: [
+            { x: -100, y: 2, z: 31 },
+            { x: -100, y: 2, z: 35 },
             { x: -100, y: 2, z: 41 },
-            { x: -100, y: 2, z: 53 },
-            { x: -100, y: 2, z: 41 },
-            { x: -100, y: 2, z: 55 },
-            { x: -100, y: 2, z: 58 },
-            { x: -100, y: 2, z: 48 },
-            { x: -100, y: 2, z: 41 },
-            { x: -100, y: 2, z: 62 },
+            { x: -100, y: 2, z: 44 },
+            { x: -100, y: 2, z: 38 }
         ]
     },
     {
-/*         size: (250, 0, 11),
- */     position:{
-            x:-100,
-            y:0,
+        position:{
+            x:-57,
+            y:.3,
             z:25
         },
-        color: 0xffffff,
+        color: 0xc2b280 ,
         objects: 'cactus.fbx',
-/*         nbObjects: 8,
- */        positions: [
-            { x: -100, y: 0, z: 16 },
-            { x: -100, y: 0, z: 22 },
-            { x: -100, y: 0, z: 15 },
-            { x: -100, y: 0, z: 25 },
-            { x: -100, y: 0, z: 16 },
-            { x: -100, y: 0, z: 33 },
-            { x: -100, y: 0, z: 24 },
-            { x: -100, y: 0, z: 22 },
+        positions: [
+            { x: -100, y: .3, z: 13 },
+            { x: -100, y: .3, z: 17 },
+            { x: -100, y: .3, z: 22 },
+            { x: -100, y: .3, z: 25 },
+            { x: -100, y: .3, z: 22 }
         ]
     }
-
    
 ]
 
@@ -79,26 +84,26 @@ export const Environment = () => {
         console.log(cactusObject)
         
         // spawn cactuses every (between 2 and 1.5 seconds)
-        setInterval(() => cactusRespawner(Math.floor(Math.random()*2) + 0), Math.floor((Math.random() * 2000) + 1500));
+        setInterval(() => cactusRespawner(Math.floor(Math.random()*3) + 2), Math.floor((Math.random() * 2500) + 2000));
 
         // default cactuses 
 
-        cactusRespawner(0, -60);
-        cactusRespawner(0, -40);
+        cactusRespawner(2, -60);
+        cactusRespawner(2, -40);
  
 /* 
         cactusRespawner(0, -20);
         cactusRespawner(0, -30); */
 
-        cactusRespawner(1, -55);
-        cactusRespawner(1, -45);
+       /*  cactusRespawner(2, -55);
+        cactusRespawner(2, -45); */
         /* cactusRespawner(1, -15);
         cactusRespawner(1, -25);
         */ 
-        cactusRespawner(0, 8);
-        cactusRespawner(0, 14); 
-        cactusRespawner(1, 1 );
-        cactusRespawner(1, 33);
+        /* cactusRespawner(1, 8);
+        cactusRespawner(1, 14);  */
+        cactusRespawner(3, 1 );
+        cactusRespawner(3, 33);
 
     });
 
@@ -106,7 +111,7 @@ export const Environment = () => {
 
     for(let i=0; i<farFloors.length;i++) {
         // floor
-        let geometryFloor = new THREE.BoxGeometry(250, 0, 22);
+        let geometryFloor = new THREE.BoxGeometry(150, 0,  i===1 ? 9 : 20);
         let materialFloor = new THREE.MeshPhongMaterial({
             color: farFloors[i].color,
             specular: 0x000000,
@@ -130,7 +135,7 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
         good.position.set(
             initialCac ? initialCac  : -100,
             farFloors[floorNB].positions[0].y, 
-            farFloors[floorNB].positions[Math.floor((Math.random() * 6) + 1)].z
+            farFloors[floorNB].positions[Math.floor((Math.random() * 4) + 1)].z
         );
             
     scene.add(good);

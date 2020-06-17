@@ -37,9 +37,9 @@ const init = () => {
     ) */
     // for test
     camera.position.set(
-        19.235740974134533,
-        6.813910998169175,
-        -7.180299017202208
+        12.76085323344375,
+        10.904972033805223,
+        -12.360211352637547
     )
 /* 
     camera.position.x = 22.609984741761778;
@@ -56,9 +56,10 @@ const init = () => {
     // axis helper(to see axis visully)
     let axesHelper = new THREE.AxesHelper(9);
     scene.add(axesHelper);
-    
+    let ALight = new THREE.AmbientLight(0x404040, 2.4);
+    scene.add(ALight);
     // light(like sun)
-    light = new THREE.DirectionalLight(0xffffff, 1);
+    /* light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.y = 33;   
     light.position.z = -22;
     light.position.x = -45;
@@ -84,11 +85,39 @@ const init = () => {
     let helper = new THREE.DirectionalLightHelper(light, 11);
     scene.add(light);
 
-    scene.add(helper);
+    scene.add(helper); */
+
+    let DLight = new THREE.DirectionalLight(0xffffff, .5);
+    let DLightTargetObject = new THREE.Object3D();
+    DLight.position.set(-50, 30, -30);
+    DLight.target = DLightTargetObject;
+    DLightTargetObject.position.set(65, 9, 50);
+
+    DLight.castShadow = true ;
+    DLight.shadow.radius = 1;
+
+    /*
+     @TODO
+     Shadows lower than 2K triggers twitches/flickers on moving objects.
+     Better fix this later;
+     Maybe with CSM shadows?
+     */
+    DLight.shadow.mapSize.width = 1024 * 3;
+    DLight.shadow.mapSize.height = 1024 * 3;
+
+    DLight.shadow.camera.scale.y = 10;
+    DLight.shadow.camera.scale.x = 20;
+    DLight.shadow.camera.near = 0;
+    DLight.shadow.camera.far = 200;
+
+    scene.add(DLight);
+    scene.add(DLightTargetObject);
+
+
     // scene.fog = new THREE.Fog(0xffffff, 20, 50);
 
     // floor
-    geometryFloor = new THREE.BoxGeometry(250, 0, 11);
+    geometryFloor = new THREE.BoxGeometry(150, 0, 11);
     materialFloor = new THREE.MeshPhongMaterial({
         color: 0x656565,
         specular: 0x000000,
@@ -97,16 +126,16 @@ const init = () => {
     floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
     floorMesh.receiveShadow = true;
     scene.add(floorMesh);
-    floorMesh.position.x = -100;
-
+    floorMesh.position.x = -57;
+    floorMesh.position.y = 1;
     // imported environment variales
     Environment();
 
     // call player function
     player();
 
-    // spawn enemies every (between 3 and .5 seconds)
-    setInterval(() => enemySpawner(), Math.floor((Math.random() * 2000) + 800));
+    // spawn enemies every (between 2.5 and 2 seconds)
+    setInterval(() => enemySpawner(), Math.floor((Math.random() * 2300) + 1100));
 
 
   
@@ -278,7 +307,7 @@ const animate = () => {
     stats.end();
     requestAnimationFrame(animate);
 
-    // console.log(camera.position)
+    //console.log(camera.position)
 }
 
 init();

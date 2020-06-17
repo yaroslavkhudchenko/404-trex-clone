@@ -16,7 +16,7 @@ export const enemySpawner = () => {
 
     
     // set position
-    enemy.position.set(Math.floor((Math.random() * -25) + -25), randomSelector[Math.floor(Math.random() * Math.floor(2))], 0);
+    enemy.position.set(-70, scoreValue > 400 ? randomSelector[Math.floor(Math.random() * Math.floor(2))] : 0, 0);
     enemy.name = 'enemy';
     enemy.castShadow = true; //default is false
     enemy.receiveShadow = false;
