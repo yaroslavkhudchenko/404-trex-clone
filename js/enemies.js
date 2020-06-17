@@ -3,7 +3,7 @@ import { scene, scoreValue } from './app.js';
 export let enemies = [];
 
 export let intervalToMove = null;
-let randomSelector = [3,.5];
+let randomSelector = [4.5, 1.5];
 // to spawn enemies
 export const enemySpawner = () => {
 
@@ -16,7 +16,7 @@ export const enemySpawner = () => {
 
     
     // set position
-    enemy.position.set(-70, scoreValue > 400 ? randomSelector[Math.floor(Math.random() * Math.floor(2))] : 0, 0);
+    enemy.position.set(-70, scoreValue > 400 ? randomSelector[Math.floor(Math.random() * Math.floor(2))] : 1.5, 0);
     enemy.name = 'enemy';
     enemy.castShadow = true; //default is false
     enemy.receiveShadow = false;
