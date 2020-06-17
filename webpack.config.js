@@ -16,7 +16,13 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
-            }
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                    use: [
+                        'file-loader',
+                    ],
+            },
         ]
     },
     devServer: {
@@ -31,7 +37,8 @@ module.exports = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'models', to: 'models' }
+                { from: 'models', to: 'models' },
+                { from: 'fonts', to: './'}
             ],
         }),
     ]
