@@ -99,8 +99,8 @@ const init = () => {
     // call player function
     player();
 
-    // spawn enemies every (between 2.5 and 2 seconds)
-    setInterval(() => enemySpawner(), Math.floor((Math.random() * 2300) + 1100));
+    // spawn enemies every (between 2.5 and 2 seconMath.randds)
+    setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
 
 
 
@@ -246,8 +246,9 @@ const animate = () => {
     // console.log(camera.position)
     cactuses1.map((e, index) => {
         if (e.position.x > 25) {
-            
-            e.position.x = -90;//Math.floor(Math.random()*-110)*-100;
+            //console.log(Math.random() * (-90 - -95) + -95);
+            e.position.x = Math.random() * (-90 - -95) + -95;
+            e.rotation.y += Math.random() * (30 - 15) + 30;
             // scene.remove(e);
             //cactuses1.pop();
            
@@ -259,7 +260,8 @@ const animate = () => {
         
 
         if(e.position.x > 25) {
-             e.position.x = -90;//Math.floor(Math.random() * -110) * -100;
+             e.position.x = Math.random() * (-90 - -95) + -95;
+             e.rotation.y += Math.random() * (30 - 15) + 30;
            // scene.remove(e);
             //cactuses2.pop();
             

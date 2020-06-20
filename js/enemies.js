@@ -28,8 +28,8 @@ export const enemySpawner = () => {
 
     // to move
     intervalToMove = setInterval(() => {
-        enemy.position.x += .1 + (scoreValue/10000);
-    }, Math.floor((Math.random() * .5) + 1));
+      enemy.position.x += 0.1 + scoreValue / 10000;
+    }, Math.floor(Math.random() * (1 - .5) + 1));
 
     enemies.unshift(enemy); // unshift to global array to control if reach the pointer
 

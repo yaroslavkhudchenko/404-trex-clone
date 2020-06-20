@@ -182,11 +182,10 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
     // to move
     /* cactusesIntervalToMove =  */
     setInterval(() => {
-
-        good.position.x += (floorNB === 1  ? 
-                                    .06 
-                                        : .04) + (Math.floor(Math.random() * .008) + .004);
-    }, Math.floor((Math.random() * .5) + 1));
+      good.position.x +=
+        (floorNB === 1 ? 0.06 : 0.04) +
+        (Math.floor(Math.random() * (0.008 - 0.004) + 0.008));
+    }, Math.floor(Math.random() * (1 - .5) + 1));
 
     floorNB === 1 ? 
         cactuses1.unshift(good): // unshift to global array to control if reach the pointer
