@@ -101,8 +101,13 @@ const init = () => {
 
     // spawn enemies every (between 2.5 and 2 seconMath.randds)
     setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
-
-
+    /* for(let i=0;i<5;i++) {
+        console.log('-------------')
+        console.log(Math.floor(Math.random() * (2300 - 1100) + 2300));
+        setTimeout(() => {
+            enemySpawner();
+        }, Math.floor(Math.random() * (2300 - 1100) + 2300));
+    } */
 
     renderer = new THREE.WebGLRenderer({
         antialias: true,
