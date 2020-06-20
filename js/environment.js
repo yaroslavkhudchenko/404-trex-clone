@@ -85,7 +85,7 @@ export const Environment = () => {
         console.log(cactusObject)
         
         // spawn cactuses every (between 2 and 1.5 seconds)
-        setInterval(() => cactusRespawner(Math.floor(Math.random() * (3 - 2 + 1) + 2)), Math.floor((Math.random() * 3000) + 2500));
+        //setInterval(() => cactusRespawner(Math.floor(Math.random() * (3 - 2 + 1) + 2)), Math.floor((Math.random() * 3000) + 2500));
 
         // default cactuses 
 
@@ -123,8 +123,8 @@ export const Environment = () => {
             
             let materialFloor = new THREE.MeshPhongMaterial({
                 color: farFloors[i].color,
-                specular: 0xffffff,
-                shininess: 100
+                /* specular: 0xffffff,
+                shininess: 100 */
             });
             let floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
             floorMesh.receiveShadow = true;
@@ -168,7 +168,7 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
     let good = cactusObject.clone();
         // console.log(floorNB)
         // console.log(farFloors[floorNB])
-        console.log(floorNB)
+        //console.log(floorNB)
         good.position.set(
             initialCac ? initialCac  : -100,
             farFloors[floorNB].positions[0].y, 

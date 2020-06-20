@@ -41,14 +41,7 @@ const init = () => {
         10.661301140199619,
         -6.8735841518706104
     )
-/* 
-    camera.position.x = 22.609984741761778;
-    camera.position.y = 3.428590611619372;
-    camera.position.z = 7.37041093612718;
 
-    camera.rotation.x = -0.2521795322818087;
-    camera.rotation.y = 0.5626175577081858;
-    camera.rotation.z = 0.1365832725087437; */
 
     // create scene
     scene = new THREE.Scene();
@@ -58,34 +51,7 @@ const init = () => {
     scene.add(axesHelper);
     let ALight = new THREE.AmbientLight(0xedc9af, 1.5);
     scene.add(ALight);
-    // light(like sun)
-    /* light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.y = 33;   
-    light.position.z = -22;
-    light.position.x = -45;
-
-    light.target.position.set(-20, -20, 22);
-
-
-    light.castShadow = true;
-
-    light.shadow.mapSize.width = 6666;
-    light.shadow.mapSize.height = 6666;
-    //light.shadowDarkness = 0.2;
-    let d = 300;
-
-    light.shadow.camera.left = - d;
-    light.shadow.camera.right = d;
-    light.shadow.camera.top = d;
-    light.shadow.camera.bottom = - d;
-
-    light.shadow.camera.far = 100;
-    light.shadowCameraVisible = true;
-    light.shadowCameraNear = 50;
-    let helper = new THREE.DirectionalLightHelper(light, 11);
-    scene.add(light);
-
-    scene.add(helper); */
+    
 
     let DLight = new THREE.DirectionalLight(0xedc9af , .5);
     let DLightTargetObject = new THREE.Object3D();
@@ -96,15 +62,15 @@ const init = () => {
     DLight.castShadow = true ;
     DLight.shadow.radius = 1;
 
-    scene.fog = new THREE.Fog(0xE7B251, 1, 175);
+    scene.fog = new THREE.Fog(0xE7B251, 1, 125);
 
-    scene.fog.color.setRGB(.91, .70, .32);
-
+/*     scene.fog.color.setRGB(.91, .70, .32);
+ */
 
     scene.background = new THREE.Color(0xE7B251);
 
-    DLight.shadow.mapSize.width = 1024 * 3;
-    DLight.shadow.mapSize.height = 1024 * 3;
+    DLight.shadow.mapSize.width = 1024 * 1;
+    DLight.shadow.mapSize.height = 1024 * 1;
 
     DLight.shadow.camera.scale.y = 10;
     DLight.shadow.camera.scale.x = 20;
@@ -125,6 +91,8 @@ const init = () => {
     scene.add(floorMesh);
     floorMesh.position.x = -57;
     floorMesh.position.y = 1;
+
+
     // imported environment variales
     Environment();
 
@@ -135,15 +103,12 @@ const init = () => {
     setInterval(() => enemySpawner(), Math.floor((Math.random() * 2300) + 1100));
 
 
-  
-
-
-
 
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         canvas: canvas
     });
+    
     renderer.setClearColor(0xE6CBB2); // to have light background color
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.VSMShadowMap ;
@@ -228,9 +193,11 @@ let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 // main animate function
 const animate = () => {
 
+
     stats.begin();
     if (collissionDetected) return; 
-    
+        console.log(scene.children.length);
+
     
     let delta = clock.getDelta();
 
@@ -280,10 +247,11 @@ const animate = () => {
     cactuses1.map((e, index) => {
         if (e.position.x > 25) {
             
-            scene.remove(e);
-            cactuses1.pop();
+            e.position.x = -90;//Math.floor(Math.random()*-110)*-100;
+            // scene.remove(e);
+            //cactuses1.pop();
            
-            e = undefined; //clear any reference for it to be able to garbage collected 
+            // e = undefined; //clear any reference for it to be able to garbage collected
         }
     })
     // console.log(cactuses2)
@@ -291,13 +259,11 @@ const animate = () => {
         
 
         if(e.position.x > 25) {
-          /*   console.log('cactuses 2 more')
-            console.log(cactuses2.length)
-            console.log(scene.children) */
-            scene.remove(e);
-            cactuses2.pop();
+             e.position.x = -90;//Math.floor(Math.random() * -110) * -100;
+           // scene.remove(e);
+            //cactuses2.pop();
             
-            e = undefined; //clear any reference for it to be able to garbage collected 
+            // e = undefined; //clear any reference for it to be able to garbage collected 
         }
     })
 
