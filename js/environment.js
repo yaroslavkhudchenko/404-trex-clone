@@ -99,10 +99,6 @@ export const Environment = () => {
         object.castShadow = true; //default is false
         object.receiveShadow = false;
         cactusObject = object;
-        console.log(cactusObject)
-        
-        // spawn cactuses every (between 2 and 1.5 seconds)
-        //setInterval(() => cactusRespawner(Math.floor(Math.random() * (3 - 2 + 1) + 2)), Math.floor((Math.random() * 3000) + 2500));
 
         // default cactuses 
 
@@ -119,24 +115,6 @@ export const Environment = () => {
     for(let i=0; i<farFloors.length;i++) {
         // floor
         let geometryFloor = new THREE.BoxGeometry(150,0, i === 1 ? 9 : 20);
-        /* if(i === 1) {
-            let water = new Water(geometryFloor, {
-                color: '#00FFFF',
-                scale: 1,
-                flowDirection: new THREE.Vector2(2, 1),
-                textureWidth: 1024,
-                textureHeight: 1024
-            });
-
-            water.receiveShadow = true;
-
-            water.position.set(
-                farFloors[i].position.x,
-                farFloors[i].position.y,
-                farFloors[i].position.z
-            ); scene.add(water);
-                
-        } else { */
             
             let materialFloor = new THREE.MeshPhongMaterial({
                 color: farFloors[i].color,

@@ -18,7 +18,7 @@ export const enemySpawner = () => {
     // enemy mesh
     
     let enemy = new THREE.Mesh(enemyG, enemyMat);
-
+    enemy.name = 'enemy';
     
     // set position
     enemy.position.set(-70, scoreValue > 400 ? randomSelector[Math.floor(Math.random() * Math.floor(2))] : 1.5, 0);

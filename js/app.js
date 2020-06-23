@@ -17,6 +17,13 @@ let scoreValueDisplay = document.querySelector('#scoreValue');
 export let scoreValue = 0;
 let clock = new THREE.Clock();
 
+// GLOBAL STATES 
+
+let isPlaying = false;
+let isCollapsed = false
+
+
+let collapsedScreen = document.querySelector('#collapsedScreen');
 
 import Stats from 'stats.js';
 let stats = new Stats();
@@ -35,17 +42,17 @@ const init = () => { // init all required environment
         10.661301140199619,
         -6.8735841518706104
     )
-
+    camera.rotation.set(
+        -2.143452805674477,
+        0.9165936643864037,
+        2.253095383937993
+    )
     // create scene
      scene = new THREE.Scene();
 /*
     // axis helper(to see axis visully)
     let axesHelper = new THREE.AxesHelper(9);
     scene.add(axesHelper);*/
-
-
-   
-     
 
     // lights
     let DLight = new THREE.DirectionalLight(0xedc9af , .5);
@@ -70,35 +77,24 @@ const init = () => { // init all required environment
     scene.add(DLight);
     scene.add(DLightTargetObject);
 
-
     // add fog
     scene.fog = new THREE.Fog(0xE7B251, 1, 125);
 
     // scene background color(environment)
     scene.background = new THREE.Color(0xE7B251);
 
-    
-
-
-    // imported environment variales
+    // init environment
     Environment();
 
-    // call player function
+    // init player
     player();
 
-    // spawn enemies every (between 2.5 and 2 seconMath.randds)
+    // spawn enemies every (between 2.3 and 1.1 seconMath.random)
     setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
-    /* for(let i=0;i<5;i++) {
-        console.log('-------------')
-        console.log(Math.floor(Math.random() * (2300 - 1100) + 2300));
-        setTimeout(() => {
-            enemySpawner();
-        }, Math.floor(Math.random() * (2300 - 1100) + 2300));
-    } */
 
     renderer = new THREE.WebGLRenderer({
         antialias: true,
-        canvas: canvas
+        canvas: canvas // render to existing canvas
     });
     
     renderer.setClearColor(0xE6CBB2); // to have light background color
@@ -106,11 +102,13 @@ const init = () => { // init all required environment
     renderer.shadowMap.type = THREE.VSMShadowMap ;
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.toneMapping = THREE.Uncharted2ToneMapping
-    // create the controls(for testing)
-    controls = new OrbitControls(camera, canvas);
+    /* // create the controls(for testing)
+    //controls = new OrbitControls(camera, canvas);
+    console.log('000000000000000')
+    console.log(camera.rotation)
     //controls.update();
-    controls = false;
-
+    //controls = false;
+ */
 
     // pointer to see where enemies eliminates
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -118,16 +116,14 @@ const init = () => { // init all required environment
     let pointer = new THREE.Mesh(pointerGeo, pointerMat);
     pointer.position.set(25, 1, 0);
     scene.add(pointer);
-    window.addEventListener('resize', onWindowResize, false);
 
+    // on window resize
+    window.addEventListener('resize', onWindowResize, false);
 }
 
-
 function onWindowResize() {
-
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
     renderer.setSize(window.innerWidth, window.innerHeight);
 
 }
@@ -136,7 +132,6 @@ function onWindowResize() {
 const keyPressedHandler = (e) => {
     switch (e.code) {
         case "KeyS":
-
             // model
             playerModel.scale.set(.05,.05,.05);
             playerModel.position.y = 1.5;
@@ -174,25 +169,53 @@ const keyUpHandler = (e) => {
     }
 }
 
+// for collision detection
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
+const reset = () => {
+    console.log(scene);
+    scene.traverse(function (child) {
+        if (child.name === "enemy") {
+            console.log('enemies delete')
+            scene.remove(child);
+        }
+    });
+
+    playerModel.position.set(
+        playerDefaultPosition.x,
+        1.5,
+        playerDefaultPosition.z
+    )
+    playerHitboxMesh.position.set(
+        playerDefaultPosition.x,
+        2.5,
+        playerDefaultPosition.z
+    )
+    scoreValue = 0;
+    // if there is a hi score in localstorage grab it and if not set value to 0
+    document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
+    isCollapsed = false;
+    isPlaying = true;
+}
 
 
-
-
-
-
-// main animate function
+// main animate function ( game loop )
 const animate = () => {
 
-
     stats.begin();
-    if (collissionDetected) return; 
-        console.log(scene.children.length);
+    requestAnimationFrame(animate);
+
+    //  console.log('in animate we are')
+    //  console.log(!isPlaying)
+    //  console.log(isCollapsed)
+
+    if (!isPlaying || isCollapsed)return;
+
 
     
-    let delta = clock.getDelta();
 
+    // running player
+    let delta = clock.getDelta();
     if (mixer) mixer.update(delta);
 
     // controls.update();
@@ -214,11 +237,17 @@ const animate = () => {
         pBox.setFromObject(playerHitboxMesh);
         eBox.setFromObject(e);
         if (eBox.intersectsBox(pBox)) {
-           /*  e.scale.set(3,3,3);
-
-
-            collissionDetected = true;
+           
             
+            collapsedScreen.style.display = 'block';
+            collapsedScreen.addEventListener('click',() => {
+
+                reset();
+                collapsedScreen.style.display = 'none';
+            })
+
+            isCollapsed = true;
+            isPlaying = false;
             let score = localStorage.getItem('score');
 
             // if there is a value and that value is less than current
@@ -230,11 +259,10 @@ const animate = () => {
 
             console.log('collision has happened')
             for (var i = 1; i < 222; i++)
-                window.clearInterval(i); */
+                window.clearInterval(i);
 
-        }
+            }
     });
-    // console.log(camera.position)
     cactuses1.map((e, index) => {
         if (e.position.x > 25) {
             e.position.x = Math.random() * (-90 - -95) + -95;
@@ -249,26 +277,17 @@ const animate = () => {
         }
     })
 
-
     stats.end();
-    requestAnimationFrame(animate);
-
-    //console.log(camera.position)
-
-
 
 }
 
-
-init();
-/* let inteval = null;
- */
 let startScreen = document.querySelector('.startMenu');
 
 document.querySelector('.startGameButton').addEventListener('click',()=>{
 
     startScreen.style.display = 'none';
-    animate();
+    isPlaying = true;
+    
    /*  inteval = setInterval(() => {
         seconds--;
 
@@ -290,3 +309,9 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
 // events
 document.addEventListener('keypress', keyPressedHandler);
 document.addEventListener('keyup', keyUpHandler);
+
+
+
+
+init();
+animate()

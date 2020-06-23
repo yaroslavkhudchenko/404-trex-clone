@@ -7,6 +7,7 @@ export let playerHitboxMesh, playerHitboxGeo, playerHitboxMat;
 export const playerDefaultPosition = {
     x: 9, y: 1, z: 0
 };
+
 export let mixer;
 
 let material;
