@@ -21,7 +21,7 @@ let clock = new THREE.Clock();
 
 let isPlaying = false;
 let isCollapsed = false
-
+let isJump = false;
 
 let collapsedScreen = document.querySelector('#collapsedScreen');
 
@@ -142,6 +142,8 @@ const keyPressedHandler = (e) => {
 
             break;
         case "Space":
+            if(isJump)return;
+            isJump = true;
             playerHitboxMesh.position.y = 4.5;
             playerModel.position.y = 3;
             
@@ -149,7 +151,8 @@ const keyPressedHandler = (e) => {
             setTimeout(() => {
                 playerHitboxMesh.position.y = 2.5;
                 playerModel.position.y = 1.5;
-            }, 350);
+                isJump = false;
+            }, 400);
             
             break;
     }
@@ -247,11 +250,6 @@ const animate = () => {
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
 
-
-            // console.log('+++')
-            // console.log(pBox)
-            // console.log('--')
-            // console.log(eBox)
             if (eBox.intersectsBox(pBox)) {
             
                 
