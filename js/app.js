@@ -279,10 +279,38 @@ const animate = () => {
     requestAnimationFrame(animate);
 
     //console.log(camera.position)
+
+
+
 }
 
+
 init();
-animate();
+/* let inteval = null;
+ */
+let startScreen = document.querySelector('.startMenu');
+
+document.querySelector('.startGameButton').addEventListener('click',()=>{
+
+    startScreen.style.display = 'none';
+    animate();
+   /*  inteval = setInterval(() => {
+        seconds--;
+
+        document.querySelector('.timer').innerHTML = seconds;
+        if (seconds === 0) {
+            console.log('seconds is 00000')
+            clearInterval(inteval)
+            setTimeout(() => {
+                
+            }, 5000);
+            document.querySelector('.timer').style.display = 'none';
+        }
+
+    }, 1000);
+     */
+       
+})
 
 // events
 document.addEventListener('keypress', keyPressedHandler);

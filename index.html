@@ -34,6 +34,30 @@
         #bestResult {
             display: flex;
         }
+        .startMenu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: yellow;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+        .startGameButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 40px;
+            cursor: pointer;
+        }
+        .timer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 40px;
+        }
     </style>
 </head>
 <body>
@@ -45,6 +69,12 @@
         </div>
         <div id='score'>
             <div id='scoreValue'>00000</div>
+        </div>
+        
+    </div>
+    <div class="startMenu">
+        <div class="startGameButton">
+            START
         </div>
     </div>
 </body>
