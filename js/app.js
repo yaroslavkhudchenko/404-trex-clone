@@ -256,7 +256,7 @@ const animate = () => {
             
                 
                 collapsedScreen.style.display = 'block';
-                collapsedScreenScore.innerHTML = scoreValue;
+                collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
                 collapsedScreenButton.addEventListener('click',() => {
                     if(enemies.length) { 
                         enemies.length = 0;
