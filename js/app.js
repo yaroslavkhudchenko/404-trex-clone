@@ -174,12 +174,17 @@ let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
 const reset = () => {
     console.log(scene);
-    scene.traverse(function (child) {
+    scene.children.map( (child) => {
+        
         if (child.name === "enemy") {
             console.log('enemies delete')
             scene.remove(child);
         }
     });
+    console.log('playerModel.positionplayerModel.positionplayerModel.positionplayerModel.position')
+    console.log(playerModel.position)
+
+    eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
     playerModel.position.set(
         playerDefaultPosition.x,
@@ -196,6 +201,8 @@ const reset = () => {
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
     isCollapsed = false;
     isPlaying = true;
+    // spawn enemies every (between 2.3 and 1.1 seconMath.random)
+    setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
 }
 
 
@@ -205,9 +212,9 @@ const animate = () => {
     stats.begin();
     requestAnimationFrame(animate);
 
-    //  console.log('in animate we are')
-    //  console.log(!isPlaying)
-    //  console.log(isCollapsed)
+    // console.log('in animate we are')
+    // console.log(!isPlaying)
+    // console.log(isCollapsed)
 
     if (!isPlaying || isCollapsed)return;
 
@@ -225,44 +232,58 @@ const animate = () => {
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
 
-    
+    console.log(enemies.length)
+    if (enemies.length) {
+
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
-    enemies.map((e, index) => {
-        // console.log(e)
-        e.position.x > 25 ? 
-            scene.remove(e) && enemies.pop() // remove from both scene and array s
-                : false;
+        enemies.map((e, index) => {
 
-        let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-        pBox.setFromObject(playerHitboxMesh);
-        eBox.setFromObject(e);
-        if (eBox.intersectsBox(pBox)) {
-           
+            // console.log(e)
+            e.position.x > 25 ? 
+                scene.remove(e) && enemies.pop() // remove from both scene and array s
+                    : false;
+
+            let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+            pBox.setFromObject(playerHitboxMesh);
+            eBox.setFromObject(e);
+
+
+            // console.log('+++')
+            // console.log(pBox)
+            // console.log('--')
+            // console.log(eBox)
+            if (eBox.intersectsBox(pBox)) {
             
-            collapsedScreen.style.display = 'block';
-            collapsedScreen.addEventListener('click',() => {
+                
+                collapsedScreen.style.display = 'block';
+                collapsedScreen.addEventListener('click',() => {
+                    if(enemies.length) { 
+                        console.log('sssssssssssssss') 
+                        enemies.length = 0;
+                    }
+                    reset();
+                    collapsedScreen.style.display = 'none';
+                })
 
-                reset();
-                collapsedScreen.style.display = 'none';
-            })
+                isCollapsed = true;
+                isPlaying = false;
+                let score = localStorage.getItem('score');
 
-            isCollapsed = true;
-            isPlaying = false;
-            let score = localStorage.getItem('score');
+                // if there is a value and that value is less than current
+                if(score*1 < scoreValue) {
+                    localStorage.setItem('score', scoreValue.toFixed(0));
+                }
+                
 
-            // if there is a value and that value is less than current
-            if(score*1 < scoreValue) {
-                localStorage.setItem('score', scoreValue.toFixed(0));
-            }
+
+                console.log('collision has happened')
+                for (var i = 1; i < 222; i++)
+                    window.clearInterval(i);
+
+                }
             
-
-
-            console.log('collision has happened')
-            for (var i = 1; i < 222; i++)
-                window.clearInterval(i);
-
-            }
     });
+}
     cactuses1.map((e, index) => {
         if (e.position.x > 25) {
             e.position.x = Math.random() * (-90 - -95) + -95;
