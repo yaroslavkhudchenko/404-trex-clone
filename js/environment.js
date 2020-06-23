@@ -1,12 +1,12 @@
 import * as THREE from './libs/three.module.js';
-import { scene, floorMesh, renderer } from './app.js';
+import { scene, renderer } from './app.js';
 import { FBXLoader } from './libs/FBXLoader.js';
 export let cactuses1 = [];
 export let cactuses2 = [];
 export let cactusesIntervalToMove = null;
 import { Water } from './libs/Water2.js';
 
-
+export let geometryFloor, materialFloor, floorMesh;
 
 let cactusObject = null;
 
@@ -64,6 +64,23 @@ const farFloors = [
 ]
 
 export const Environment = () => {
+
+
+    // add floor ( for running )
+    geometryFloor = new THREE.BoxGeometry(150, 0, 11);
+    materialFloor = new THREE.MeshPhongMaterial({
+        color: 0xE7B251,
+        specular: 0x000000,
+        shininess: 100
+    });
+    floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
+    floorMesh.receiveShadow = true;
+    scene.add(floorMesh);
+    floorMesh.position.x = -57;
+    floorMesh.position.y = 1;
+
+
+
     // load cactus fbx (ONCE!!!)
     new FBXLoader().load('models/cactus.fbx', (object) => {
 

@@ -6,9 +6,9 @@ import { OrbitControls } from './libs/OrbitControls.js';
 
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
-import { Environment, cactuses1, cactuses2 } from './environment.js';
+import { Environment, cactuses1, cactuses2, geometryFloor, materialFloor, floorMesh, } from './environment.js';
 export let camera, scene, renderer, controls;
-export let geometryFloor, materialFloor, floorMesh, light;
+export let light;
 export let canvas = document.querySelector('#gameCanvas');
 
 export let collissionDetected = false;
@@ -17,80 +17,67 @@ let scoreValueDisplay = document.querySelector('#scoreValue');
 export let scoreValue = 0;
 let clock = new THREE.Clock();
 
+
 import Stats from 'stats.js';
-var stats = new Stats();
+let stats = new Stats();
 stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom);
 
 
-const init = () => {
+const init = () => { // init all required environment
     
+    // if there is a hi score in localstorage grab it and if not set value to 0
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score') ? localStorage.getItem('score') : 0
-    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
 
-    // set camera position(look from right side)
-  /*  // good 
-    camera.position.set(
-        9.756752570767734,
-        12.042143843536,
-        -15.201498053045437
-    ) */
-    // for test
+    camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
     camera.position.set(
         16.541557178529693,
         10.661301140199619,
         -6.8735841518706104
     )
 
-
     // create scene
-    scene = new THREE.Scene();
-
+     scene = new THREE.Scene();
+/*
     // axis helper(to see axis visully)
     let axesHelper = new THREE.AxesHelper(9);
-    scene.add(axesHelper);
-    let ALight = new THREE.AmbientLight(0xedc9af, 1.5);
-    scene.add(ALight);
-    
+    scene.add(axesHelper);*/
 
+
+   
+     
+
+    // lights
     let DLight = new THREE.DirectionalLight(0xedc9af , .5);
     let DLightTargetObject = new THREE.Object3D();
     DLight.position.set(-50, 30, -30);
     DLight.target = DLightTargetObject;
     DLightTargetObject.position.set(65, 9, 50);
 
-    DLight.castShadow = true ;
+    // create shadows on objects
+    DLight.castShadow = true;
     DLight.shadow.radius = 1;
-
-    scene.fog = new THREE.Fog(0xE7B251, 1, 125);
-
-/*     scene.fog.color.setRGB(.91, .70, .32);
- */
-
-    scene.background = new THREE.Color(0xE7B251);
-
     DLight.shadow.mapSize.width = 1024 * 1;
     DLight.shadow.mapSize.height = 1024 * 1;
-
     DLight.shadow.camera.scale.y = 10;
     DLight.shadow.camera.scale.x = 20;
     DLight.shadow.camera.near = 0;
     DLight.shadow.camera.far = 200;
+    // ambient light(everywhere)
+    let ALight = new THREE.AmbientLight(0xedc9af, 1.5);
+    scene.add(ALight);
 
     scene.add(DLight);
     scene.add(DLightTargetObject);
 
-    geometryFloor = new THREE.BoxGeometry(150, 0, 11);
-    materialFloor = new THREE.MeshPhongMaterial({
-        color: 0xE7B251,
-        specular: 0x000000,
-        shininess: 100
-    });
-    floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
-    floorMesh.receiveShadow = true;
-    scene.add(floorMesh);
-    floorMesh.position.x = -57;
-    floorMesh.position.y = 1;
+
+    // add fog
+    scene.fog = new THREE.Fog(0xE7B251, 1, 125);
+
+    // scene background color(environment)
+    scene.background = new THREE.Color(0xE7B251);
+
+    
 
 
     // imported environment variales
@@ -215,7 +202,6 @@ const animate = () => {
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
 
-
     
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
     enemies.map((e, index) => {
@@ -251,26 +237,15 @@ const animate = () => {
     // console.log(camera.position)
     cactuses1.map((e, index) => {
         if (e.position.x > 25) {
-            //console.log(Math.random() * (-90 - -95) + -95);
             e.position.x = Math.random() * (-90 - -95) + -95;
             e.rotation.y += Math.random() * (30 - 15) + 30;
-            // scene.remove(e);
-            //cactuses1.pop();
            
-            // e = undefined; //clear any reference for it to be able to garbage collected
         }
     })
-    // console.log(cactuses2)
     cactuses2.map((e, index) => {
-        
-
         if(e.position.x > 25) {
-             e.position.x = Math.random() * (-90 - -95) + -95;
-             e.rotation.y += Math.random() * (30 - 15) + 30;
-           // scene.remove(e);
-            //cactuses2.pop();
-            
-            // e = undefined; //clear any reference for it to be able to garbage collected 
+            e.position.x = Math.random() * (-90 - -95) + -95;
+            e.rotation.y += Math.random() * (30 - 15) + 30;
         }
     })
 
