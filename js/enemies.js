@@ -11,12 +11,7 @@ let enemyMat = new THREE.MeshBasicMaterial({ color: 0x00f000 });
 // to spawn enemies
 export const enemySpawner = () => {
 
-    console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwww enemy')
-
-    //console.log('enemy spawner')
-
     // enemy mesh
-    
     let enemy = new THREE.Mesh(enemyG, enemyMat);
     enemy.name = 'enemy';
     

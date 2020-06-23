@@ -24,6 +24,8 @@ let isCollapsed = false
 let isJump = false;
 
 let collapsedScreen = document.querySelector('#collapsedScreen');
+let collapsedScreenScore = document.querySelector('#finalScore');
+let collapsedScreenButton = document.querySelector('#restartButton');
 
 import Stats from 'stats.js';
 let stats = new Stats();
@@ -133,8 +135,8 @@ const keyPressedHandler = (e) => {
     switch (e.code) {
         case "KeyS":
             // model
-            playerModel.scale.set(.05,.05,.05);
-            playerModel.position.y = 1.5;
+            //playerModel.scale.set(.05,.05,.05);
+            //playerModel.position.y = 1.5;
             
             // hit box
             playerHitboxMesh.scale.y = .5;
@@ -145,12 +147,12 @@ const keyPressedHandler = (e) => {
             if(isJump)return;
             isJump = true;
             playerHitboxMesh.position.y = 4.5;
-            playerModel.position.y = 3;
+            //playerModel.position.y = 3;
             
             // reset position y not to fly
             setTimeout(() => {
                 playerHitboxMesh.position.y = 2.5;
-                playerModel.position.y = 1.5;
+                //playerModel.position.y = 1.5;
                 isJump = false;
             }, 400);
             
@@ -164,8 +166,8 @@ const keyUpHandler = (e) => {
             playerHitboxMesh.position.y = 2.5;
             playerHitboxMesh.scale.y = 1;
 
-            playerModel.position.y = 1.5;
-            playerModel.scale.set(.1, .1, .1);
+            //playerModel.position.y = 1.5;
+            //playerModel.scale.set(.1, .1, .1);
 
         }, 100);
         
@@ -184,16 +186,16 @@ const reset = () => {
             scene.remove(child);
         }
     });
-    console.log('playerModel.positionplayerModel.positionplayerModel.positionplayerModel.position')
-    console.log(playerModel.position)
+    //console.log('playerModel.positionplayerModel.positionplayerModel.positionplayerModel.position')
+    //console.log(playerModel.position)
 
     eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
-    playerModel.position.set(
+    /* playerModel.position.set(
         playerDefaultPosition.x,
         1.5,
         playerDefaultPosition.z
-    )
+    ) */
     playerHitboxMesh.position.set(
         playerDefaultPosition.x,
         2.5,
@@ -254,9 +256,9 @@ const animate = () => {
             
                 
                 collapsedScreen.style.display = 'block';
-                collapsedScreen.addEventListener('click',() => {
+                collapsedScreenScore.innerHTML = scoreValue;
+                collapsedScreenButton.addEventListener('click',() => {
                     if(enemies.length) { 
-                        console.log('sssssssssssssss') 
                         enemies.length = 0;
                     }
                     reset();

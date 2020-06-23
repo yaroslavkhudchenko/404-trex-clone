@@ -63,7 +63,7 @@ export const player = () => {
         object.scale.set(.1, .1, .1);
         object.rotation.set(1.5, 0, 1.5);
         playerModel = object;
-        scene.add(object);
+        //scene.add(object);
 
     });
 
