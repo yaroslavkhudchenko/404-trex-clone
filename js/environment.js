@@ -65,7 +65,6 @@ const farFloors = [
 
 export const Environment = () => {
 
-
     // add floor ( for running )
     geometryFloor = new THREE.BoxGeometry(150, 0, 11);
     materialFloor = new THREE.MeshPhongMaterial({
@@ -99,8 +98,7 @@ export const Environment = () => {
         object.castShadow = true; //default is false
         object.receiveShadow = false;
         cactusObject = object;
-
-        // default cactuses 
+        console.log('in env')
 
         cactusRespawner(2, -60);
         cactusRespawner(2, -40);
@@ -159,9 +157,12 @@ export const River = () => {
 }
 export const cactusRespawner = (floorNB, initialCac=false ) => {
     if (floorNB === 0 || floorNB === 1) return;
-
+        // default cactuses 
+    console.log('===');
+    console.log(initialCac)
     let good = cactusObject.clone();
-        // console.log(floorNB)
+    good.name = 'cactus';
+    console.log('cactusRespawner')
         // console.log(farFloors[floorNB])
         //console.log(floorNB)
         good.position.set(
@@ -182,8 +183,10 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
         (Math.floor(Math.random() * (0.008 - 0.004) + 0.008));
     }, Math.floor(Math.random() * (1 - .5) + 1));
 
-    floorNB === 1 ? 
-        cactuses1.unshift(good): // unshift to global array to control if reach the pointer
-            cactuses2.unshift(good)
+    floorNB === 2 ? 
+        cactuses1.unshift(good) : // unshift to global array to control if reach the pointer
+            floorNB === 3 ?    
+                cactuses2.unshift(good) :
+                    console.log('not good floor')
 
 }

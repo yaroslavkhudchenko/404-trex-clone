@@ -6,7 +6,7 @@ import { OrbitControls } from './libs/OrbitControls.js';
 
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
-import { Environment, cactuses1, cactuses2, geometryFloor, materialFloor, floorMesh, } from './environment.js';
+import { Environment, cactuses1, cactuses2, geometryFloor, materialFloor, floorMesh, cactusRespawner } from './environment.js';
 export let camera, scene, renderer, controls;
 export let light;
 export let canvas = document.querySelector('#gameCanvas');
@@ -178,17 +178,30 @@ const keyUpHandler = (e) => {
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
 const reset = () => {
-    console.log(scene);
-    scene.children.map( (child) => {
-        
-        if (child.name === "enemy") {
+
+    isJump = false;// if collision was in the air
+
+    //console.log(scene);
+    for(let i = 0; i<10;i++) {
+        let cactus = scene.getObjectByName('cactus');
+        scene.remove(cactus)
+        let enemy = scene.getObjectByName('enemy');
+        scene.remove(enemy)
+    }
+    console.log(scene.getObjectByName('cactus'))
+    console.log(scene.getObjectByName('enemy'))
+    /* scene.children.map( (child) => {
+        console.log(child.name)
+        if (child.name === "enemy" || child.name === "cactus") {
             console.log('enemies delete')
+            console.log('child name ', child.name)
             scene.remove(child);
         }
-    });
+        
+    }); */
     //console.log('playerModel.positionplayerModel.positionplayerModel.positionplayerModel.position')
     //console.log(playerModel.position)
-
+   
     eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
     /* playerModel.position.set(
@@ -208,6 +221,26 @@ const reset = () => {
     isPlaying = true;
     // spawn enemies every (between 2.3 and 1.1 seconMath.random)
     setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
+    //cactusRespawner(2, -75);
+
+
+
+
+    cactusRespawner(2, Math.random() * (-95 - -128) + -128)
+
+    cactusRespawner(2, Math.random() * (-65 - -100) + -128);
+
+    
+    cactusRespawner(3, Math.random() * (-75 - -111) + -128);
+    cactusRespawner(3, Math.random() * (-85 - -158) + -128);
+
+
+   /*  e.position.x = Math.random() * (-90 - -95) + -95;
+    e.rotation.y += Math.random() * (30 - 15) + 30;
+ */
+
+
+
 }
 
 
@@ -237,7 +270,7 @@ const animate = () => {
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
 
-    console.log(enemies.length)
+    // console.log(enemies.length)
     if (enemies.length) {
 
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
@@ -260,6 +293,12 @@ const animate = () => {
                 collapsedScreenButton.addEventListener('click',() => {
                     if(enemies.length) { 
                         enemies.length = 0;
+                    }
+                    if (cactuses1){
+                        cactuses1.length = 0;
+                    }
+                    if (cactuses2.length) {
+                        cactuses2.length = 0;
                     }
                     reset();
                     collapsedScreen.style.display = 'none';
@@ -285,16 +324,22 @@ const animate = () => {
     });
 }
     cactuses1.map((e, index) => {
+        // console.log('-+>faw++f awfwafwafwa fwafwa fwaf waf')
         if (e.position.x > 25) {
             e.position.x = Math.random() * (-90 - -95) + -95;
+            console.log('cactus one change position')
+            console.log(e.position)
             e.rotation.y += Math.random() * (30 - 15) + 30;
            
         }
     })
     cactuses2.map((e, index) => {
+        // console.log('-+>faw++f awfwafwafwa fwafwa fwaf waf')
         if(e.position.x > 25) {
             e.position.x = Math.random() * (-90 - -95) + -95;
             e.rotation.y += Math.random() * (30 - 15) + 30;
+            console.log('cactus two change position')
+            console.log(e.position)
         }
     })
 
