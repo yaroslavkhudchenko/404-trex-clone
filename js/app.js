@@ -194,24 +194,6 @@ const reset = () => {
     isJump = false;// if collision was in the air
 
     //console.log(scene);
-    for(let i = 0; i<10;i++) {
-        let cactus = scene.getObjectByName('cactus');
-        scene.remove(cactus)
-        let enemy = scene.getObjectByName('enemy');
-        scene.remove(enemy)
-    }
-    console.log(scene.getObjectByName('cactus'))
-    console.log(scene.getObjectByName('enemy'))
-    scene.children.map( (child) => {
-        console.log(child.name)
-        if (child.name === "enemy" || child.name === "cactus") {
-            console.log('enemies delete')
-            console.log('child name ', child.name)
-            scene.remove(child);
-        }
-        
-    });
-    
    
     eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
@@ -231,19 +213,29 @@ const reset = () => {
     isCollapsed = false;
     isPlaying = true;
     // spawn enemies every (between 2.3 and 1.1 seconMath.random)
-    setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
+    //setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
     //cactusRespawner(2, -75);
 
+   enemies[0].position.x = -100
+    
+    setTimeout(() => {
+        enemies[1].position.x = -100
+    }, 1400);
+    setTimeout(() => {
+        enemies[2].position.x = -100
+    }, 2400);
+    setTimeout(() => {
+        enemies[3].position.x = -100
+    }, 3400);
 
 
-
-    cactusRespawner(2, Math.random() * (-95 - -128) + -128)
+    /* cactusRespawner(2, Math.random() * (-95 - -128) + -128)
 
     cactusRespawner(2, Math.random() * (-65 - -100) + -128);
 
     
     cactusRespawner(3, Math.random() * (-75 - -111) + -128);
-    cactusRespawner(3, Math.random() * (-85 - -158) + -128);
+    cactusRespawner(3, Math.random() * (-85 - -158) + -128); */
 
 
    /*  e.position.x = Math.random() * (-90 - -95) + -95;
@@ -254,7 +246,7 @@ const reset = () => {
 
 }
 
-
+isPlaying = true;
 // main animate function ( game loop )
 const animate = () => {
     // console.log('frame')
@@ -265,72 +257,82 @@ const animate = () => {
     // console.log(!isPlaying)
     // console.log(isCollapsed)
 
-    // if (!isPlaying || isCollapsed)return;
+    if (!isPlaying || isCollapsed)return;
 
 
 
     if(enemies[0]) {
-        enemies[0].position.x += .03 * scoreValue/10;
+        enemies[0].position.x += .5;// * scoreValue/10;
         if(enemies[0].position.x > 25) {
-            console.log(enemies[0].position.x)
+            // console.log(enemies[0].position.x)
 
             enemies[0].position.x = -100
         }
     }
     if (enemies[1]) {
-        enemies[1].position.x += .03 * scoreValue/10;
+        enemies[1].position.x += .5;// * scoreValue/10;
         if (enemies[1].position.x > 25) {
-            console.log(enemies[1].position.x)
+            // console.log(enemies[1].position.x)
 
             enemies[1].position.x = -100
         }
     } if (enemies[2]) {
-        enemies[2].position.x += .03 * scoreValue/10;
+        enemies[2].position.x += .5;// * scoreValue/10;
         if (enemies[2].position.x > 25) {
-            console.log(enemies[2].position.x)
+            // console.log(enemies[2].position.x)
 
             enemies[2].position.x = -100
         }
     } if (enemies[3]) {
-        enemies[3 ].position.x += .03 * scoreValue/10;
-        if (enemies[3 ].position.x > 25) {
-            console.log(enemies[3 ].position.x)
+        enemies[3].position.x += .5;// * scoreValue/10;
+        if (enemies[3].position.x > 25) {
+            // console.log(enemies[3 ].position.x)
 
-            enemies[3 ].position.x = -100
+            enemies[3].position.x = -100
         }
     }
 
     if (cactuses1[0]) {
-        cactuses1[0].position.x += .03;// * scoreValue / 10;
+        cactuses1[0].position.x += .09;// * scoreValue / 10;
         if (cactuses1[0].position.x > 25) {
-            console.log(cactuses1[0].position.x)
+            console.log('cactuses 10')
 
-            cactuses1[0].position.x = -100
+            cactuses1[0].position.x = Math.random() * (-90 - -95) + -95;
+
+            cactuses1[0].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
     if (cactuses1[1]) {
-        cactuses1[1].position.x += .03;// * scoreValue / 10;
+        cactuses1[1].position.x += .09;// * scoreValue / 10;
         if (cactuses1[1].position.x > 25) {
-            console.log(cactuses1[0].position.x)
+            console.log('cactuses 11')
 
-            cactuses1[1].position.x = -100
+            cactuses1[1].position.x = Math.random() * (-90 - -95) + -95;
+
+            cactuses1[1].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
 
     if (cactuses2[0]) {
-        cactuses2[0].position.x += .03;// * scoreValue / 10;
+        cactuses2[0].position.x += .09;// * scoreValue / 10;
         if (cactuses2[0].position.x > 25) {
-            console.log(cactuses2[0].position.x)
+            console.log('cactuses 20')
 
-            cactuses2[0].position.x = -100
+            //cactuses2[0].position.x = -100
+            cactuses2[0].position.x = Math.random() * (-90 - -95) + -95;
+
+            cactuses2[0].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
     if (cactuses2[1]) {
-        cactuses2[1].position.x += .03;// * scoreValue / 10;
+        cactuses2[1].position.x += .09;// * scoreValue / 10;
         if (cactuses2[1].position.x > 25) {
-            console.log(cactuses2[0].position.x)
+            console.log('cactuses 21')
 
-            cactuses2[1].position.x = -100
+            //cactuses2[1].position.x = -100
+            cactuses2[1].position.x = Math.random() * (-90 - -95) + -95;
+          
+            cactuses2[1].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
 
@@ -370,13 +372,13 @@ const animate = () => {
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
  
-           /*  if (eBox.intersectsBox(pBox)) {
+          if (eBox.intersectsBox(pBox)) {
                 
                 
                 collapsedScreen.style.display = 'block';
                 collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
                 collapsedScreenButton.addEventListener('click',() => {
-                    if(enemies.length) { 
+                    /* if(enemies.length) { 
                         enemies.length = 0;
                     }
                     if (cactuses1){
@@ -387,7 +389,7 @@ const animate = () => {
                     }
                     if(fallenTrees.length) {
                         fallenTrees.length = 0;
-                    }
+                    } */
                     reset();
                     collapsedScreen.style.display = 'none';
                 })
@@ -402,12 +404,12 @@ const animate = () => {
                 }
                 
 
-
+/* 
                     console.log('collision has happened')
                     for (var i = 1; i < 222; i++)
-                        window.clearInterval(i);
+                        window.clearInterval(i); */
 
-            }  */
+            } 
             
         });
     }
