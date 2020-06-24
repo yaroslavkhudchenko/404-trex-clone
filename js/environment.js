@@ -18,13 +18,25 @@ const farFloors = [
             y: 0,
             z: -10
         },
+        scale: {
+            x: 150,
+            y: 0,
+            z: 80
+        },
         color: 0xE7B251
     },
+
+    // river 
     {
         position: {
             x: -57,
-            y:  1,
+            y:  1.3,
             z: 10
+        },
+        scale: {
+            x: 150,
+            y: 0,
+            z: 9
         },
         color: 0x00ffff
     },
@@ -59,6 +71,20 @@ const farFloors = [
             { x: -100, y: 2, z: 25 },
             { x: -100, y: 2, z: 22 }
         ]
+    },
+    {
+        position: {
+            x: -57,
+            y: 4.5,
+            z: 75//0
+        },
+        scale: {
+            x: 150,
+            y: 2,
+            z: 50
+        },
+
+        color: 0xE7B251
     }
    
 ]
@@ -112,7 +138,11 @@ export const Environment = () => {
 
     for(let i=0; i<farFloors.length;i++) {
         // floor
-        let geometryFloor = new THREE.BoxGeometry(150,0, i === 1 ? 9 : 20);
+        let geometryFloor = new THREE.BoxGeometry(
+            farFloors[i].scale ? farFloors[i].scale.x : 150,
+            farFloors[i].scale ? farFloors[i].scale.y :0,
+            farFloors[i].scale ? farFloors[i].scale.z : 20
+        );
             
             let materialFloor = new THREE.MeshPhongMaterial({
                 color: farFloors[i].color,
@@ -126,7 +156,10 @@ export const Environment = () => {
                 farFloors[i].position.x,
                 farFloors[i].position.y,
                 farFloors[i].position.z
-            );
+            );/* 
+            if(i===4) {
+                floorMesh.rotation.x = -.01
+            } */
 //}
     }
   // River();

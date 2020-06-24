@@ -137,7 +137,7 @@ const keyPressedHandler = (e) => {
             // model
             //playerModel.scale.set(.05,.05,.05);
             //playerModel.position.y = 1.5;
-            
+            isJump = false;
             // hit box
             playerHitboxMesh.scale.y = .5;
             playerHitboxMesh.position.y = 2;
@@ -190,7 +190,7 @@ const reset = () => {
     }
     console.log(scene.getObjectByName('cactus'))
     console.log(scene.getObjectByName('enemy'))
-    /* scene.children.map( (child) => {
+    scene.children.map( (child) => {
         console.log(child.name)
         if (child.name === "enemy" || child.name === "cactus") {
             console.log('enemies delete')
@@ -198,9 +198,8 @@ const reset = () => {
             scene.remove(child);
         }
         
-    }); */
-    //console.log('playerModel.positionplayerModel.positionplayerModel.positionplayerModel.position')
-    //console.log(playerModel.position)
+    });
+    
    
     eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
@@ -254,7 +253,7 @@ const animate = () => {
     // console.log(!isPlaying)
     // console.log(isCollapsed)
 
-    if (!isPlaying || isCollapsed)return;
+    //if (!isPlaying || isCollapsed)return;
 
 
     
@@ -284,9 +283,9 @@ const animate = () => {
             let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
-
+/* 
             if (eBox.intersectsBox(pBox)) {
-            
+                
                 
                 collapsedScreen.style.display = 'block';
                 collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
@@ -315,14 +314,14 @@ const animate = () => {
                 
 
 
-                console.log('collision has happened')
-                for (var i = 1; i < 222; i++)
-                    window.clearInterval(i);
+                    console.log('collision has happened')
+                    for (var i = 1; i < 222; i++)
+                        window.clearInterval(i);
 
-                }
+            } */
             
-    });
-}
+        });
+    }
     cactuses1.map((e, index) => {
         // console.log('-+>faw++f awfwafwafwa fwafwa fwaf waf')
         if (e.position.x > 25) {
@@ -375,8 +374,6 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
 // events
 document.addEventListener('keypress', keyPressedHandler);
 document.addEventListener('keyup', keyUpHandler);
-
-
 
 
 init();
