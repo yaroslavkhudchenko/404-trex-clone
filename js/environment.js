@@ -3,13 +3,21 @@ import { scene, renderer } from './app.js';
 import { FBXLoader } from './libs/FBXLoader.js';
 export let cactuses1 = [];
 export let cactuses2 = [];
+export let fallenTrees = [];
 export let cactusesIntervalToMove = null;
 import { Water } from './libs/Water2.js';
 
 export let geometryFloor, materialFloor, floorMesh;
 
-let cactusObject = null;
 
+// deserttext
+
+
+let textureLoader = new THREE.TextureLoader();
+
+
+let cactusObject = null;
+let fallenTreeObject = null;
 
 const farFloors = [
     {
@@ -23,7 +31,14 @@ const farFloors = [
             y: 0,
             z: 80
         },
-        color: 0xE7B251
+        color: 0xE7B251,
+        positions: [
+            { x: -100, y: .5, z: -5 },
+            { x: -100, y: .5, z: -15 },
+            { x: -100, y: .5, z: -22 },
+            { x: -100, y: .5, z: -35 },
+            { x: -100, y: .5, z: -52 }
+        ]
     },
 
     // river 
@@ -40,6 +55,7 @@ const farFloors = [
         },
         color: 0x00ffff
     },
+    // second left after water
     {
         position:{
             x:-57,
@@ -56,6 +72,7 @@ const farFloors = [
             { x: -100, y: 4, z: 38 }
         ]
     },
+    // first left after water
     {
         position:{
             x:-57,
@@ -83,8 +100,8 @@ const farFloors = [
             y: 2,
             z: 50
         },
-
         color: 0xE7B251
+
     }
    
 ]
@@ -105,6 +122,20 @@ export const Environment = () => {
     floorMesh.position.y = 1;
 
 
+    //Mountain_1.fbx
+    new FBXLoader().load('models/Mountain_1.fbx', (object) => {
+
+
+      
+        object.scale.set(.8, .8, .8);
+        object.position.set(-80,-10,150);
+        
+        setInterval(() => {
+            object.position.x += .009;
+        }, Math.floor(Math.random() * (1 - .5) + 1));
+        scene.add(object)
+
+    });
 
     // load cactus fbx (ONCE!!!)
     new FBXLoader().load('models/cactus.fbx', (object) => {
@@ -132,6 +163,45 @@ export const Environment = () => {
         cactusRespawner(3, 1 );
         cactusRespawner(3, 33);
 
+    });
+
+    // load fallenTree fbx(ONCE!!!)
+    new FBXLoader().load('models/fallenTree.fbx', (object) => {
+
+        // declare material
+        let materialD = new THREE.MeshBasicMaterial();
+        materialD.map = textureLoader.load(`models/0.jpg`, (t) => {
+            materialD.normalMap = t;
+        });
+
+        console.log('ffffffffffffffffffff')
+        object.traverse(function (child) {
+
+            if (child.isMesh) {
+                child.material = materialD;
+                child.castShadow = true;
+                child.receiveShadow = false;
+
+            }
+
+        });
+        object.scale.set(.0151, .0151, .0151);
+        object.castShadow = true; //default is false
+        object.receiveShadow = false;
+        fallenTreeObject = object;
+        console.log('in env')
+        fallenTreeRespawner(0, -60)
+
+       
+        fallenTreeRespawner(0, 33)
+
+
+        /* cactusRespawner(2, -60);
+        cactusRespawner(2, -40);
+
+        cactusRespawner(3, 1);
+        cactusRespawner(3, 33); 
+ */
     });
 
 
@@ -162,42 +232,44 @@ export const Environment = () => {
             } */
 //}
     }
-  // River();
 }
 
-export const River = () => {
-    // water
-    var textureLoader = new THREE.TextureLoader();
 
-    var waterGeometry = new THREE.PlaneBufferGeometry(150, 20);
-    var flowMap = textureLoader.load('Water_1_M_Flow.jpg');
+export const fallenTreeRespawner = (floorNB, initialCac = false) => {
+    let good = fallenTreeObject.clone();
+    good.name = 'fallenTree';
+    good.position.set(
+        initialCac ? initialCac : -100,
+        farFloors[floorNB].positions[0].y,
+        farFloors[floorNB].positions[Math.floor((Math.random() * 4) + 1)].z
+    );
+    scene.add(good);
 
-    let water = new Water(waterGeometry, {
-        scale: 2,
-        textureWidth: 1024,
-        textureHeight: 1024,
-        flowMap: flowMap
-    });
 
-    water.position.y = 1;
-    water.rotation.x = Math.PI * - 0.5;
-    scene.add(water);
-    water.position.set(
-        -57,
-        1,
-        10
-    )
+    // to move
+    /* cactusesIntervalToMove =  */
+    setInterval(() => {
+        good.position.x +=
+            (floorNB === 1 ? 0.06 : 0.04) +
+            (Math.floor(Math.random() * (0.008 - 0.004) + 0.008));
+    }, Math.floor(Math.random() * (1 - .5) + 1));
+
+
+    fallenTrees.unshift(good);
+    /* floorNB === 2 ?
+        cactuses1.unshift(good) : // unshift to global array to control if reach the pointer
+        floorNB === 3 ?
+            cactuses2.unshift(good) :
+            console.log('not good floor') */
+
 }
+
 export const cactusRespawner = (floorNB, initialCac=false ) => {
     if (floorNB === 0 || floorNB === 1) return;
-        // default cactuses 
-    console.log('===');
-    console.log(initialCac)
+        
     let good = cactusObject.clone();
     good.name = 'cactus';
-    console.log('cactusRespawner')
-        // console.log(farFloors[floorNB])
-        //console.log(floorNB)
+   
         good.position.set(
             initialCac ? initialCac  : -100,
             farFloors[floorNB].positions[0].y, 
@@ -205,8 +277,6 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
         );
             
     scene.add(good);
-
-
 
     // to move
     /* cactusesIntervalToMove =  */

@@ -6,7 +6,7 @@ import { OrbitControls } from './libs/OrbitControls.js';
 
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
-import { Environment, cactuses1, cactuses2, geometryFloor, materialFloor, floorMesh, cactusRespawner } from './environment.js';
+import { Environment, cactuses1, cactuses2, fallenTrees, geometryFloor, materialFloor, floorMesh, cactusRespawner } from './environment.js';
 export let camera, scene, renderer, controls;
 export let light;
 export let canvas = document.querySelector('#gameCanvas');
@@ -92,7 +92,7 @@ const init = () => { // init all required environment
     player();
 
     // spawn enemies every (between 2.3 and 1.1 seconMath.random)
-    setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
+    setInterval(() => enemySpawner(), Math.floor(Math.random() * (1700 - 700) + 1700));
 
     renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -299,6 +299,9 @@ const animate = () => {
                     if (cactuses2.length) {
                         cactuses2.length = 0;
                     }
+                    if(fallenTrees.length) {
+                        fallenTrees.length = 0;
+                    }
                     reset();
                     collapsedScreen.style.display = 'none';
                 })
@@ -339,6 +342,13 @@ const animate = () => {
             e.rotation.y += Math.random() * (30 - 15) + 30;
             console.log('cactus two change position')
             console.log(e.position)
+        }
+    })
+    fallenTrees.map((e,index) => {
+        if (e.position.x > 25) {
+            e.position.x = Math.random() * (-90 - -95) + -95;
+            e.rotation.y += Math.random() * (30 - 15) + 30;
+            console.log('treefallen two change position')
         }
     })
 
