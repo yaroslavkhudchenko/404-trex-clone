@@ -1,11 +1,16 @@
 import * as THREE from './libs/three.module.js';
 import { scene, renderer } from './app.js';
 import { FBXLoader } from './libs/FBXLoader.js';
+import { OBJLoader } from './libs/OBJLoader.js';
 export let cactuses1 = [];
 export let cactuses2 = [];
 export let fallenTrees = [];
 export let cactusesIntervalToMove = null;
 import { Water } from './libs/Water2.js';
+
+
+export let secondM = null;
+export let firstM = null;
 
 export let geometryFloor, materialFloor, floorMesh;
 
@@ -22,14 +27,14 @@ let fallenTreeObject = null;
 const farFloors = [
     {
         position: {
-            x: -57,
+            x: -65,
             y: 0,
-            z: -10
+            z: -15//0
         },
         scale: {
-            x: 150,
+            x: 250,
             y: 0,
-            z: 80
+            z: 30//1//80
         },
         color: 0xE7B251,
         positions: [
@@ -44,12 +49,12 @@ const farFloors = [
     // river 
     {
         position: {
-            x: -57,
+            x: -55,
             y:  1.3,
             z: 10
         },
         scale: {
-            x: 150,
+            x: 350,
             y: 0,
             z: 9
         },
@@ -58,7 +63,7 @@ const farFloors = [
     // second left after water
     {
         position:{
-            x:-57,
+            x:-45,
             y:3,
             z:40
         },
@@ -75,9 +80,14 @@ const farFloors = [
     // first left after water
     {
         position:{
-            x:-57,
+            x:-85,
             y:2,
             z:25
+        },
+        scale : {
+            x: 350,
+            y: 0,
+            z: 20
         },
         color: 0xE7B251 ,
         objects: 'cactus.fbx',
@@ -91,7 +101,7 @@ const farFloors = [
     },
     {
         position: {
-            x: -57,
+            x: -40,//7,
             y: 4.5,
             z: 75//0
         },
@@ -109,7 +119,7 @@ const farFloors = [
 export const Environment = () => {
 
     // add floor ( for running )
-    geometryFloor = new THREE.BoxGeometry(150, 0, 11);
+    geometryFloor = new THREE.BoxGeometry(250, 0, 11);
     materialFloor = new THREE.MeshPhongMaterial({
         color: 0xE7B251,
         specular: 0x000000,
@@ -120,6 +130,51 @@ export const Environment = () => {
     scene.add(floorMesh);
     floorMesh.position.x = -57;
     floorMesh.position.y = 1;
+ 
+     /* 
+    // load a resource
+    new OBJLoader().load(
+        // resource URL
+        'models/floorrun.obj',
+        // called when resource is loaded
+        function (object) {
+            // declare material
+           let materialD = new THREE.MeshBasicMaterial();
+            materialD.map = textureLoader.load(`models/floorrun.png`, (t) => {
+                materialD.normalMap = t;
+            });
+            let materialFloor = new THREE.MeshPhongMaterial({
+                color: 0xE7B251,
+                specular: 0x000000,
+                shininess: 100
+            });
+            object.material = materialD;
+            object.receiveShadow = true;
+            object.position.x = -30;
+            object.position.y = 0; 
+            object.position.set(-25,3,-4)
+            object.scale.set(100,2,4)
+            scene.add(object);
+
+        },
+        // called when loading is in progresses
+        function (xhr) {
+
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+
+        },
+        // called when loading has errors
+        function (error) {
+
+            console.log('An error happened');
+
+        }
+    ); */
+
+
+
+
+
 
 
     //Mountain_1.fbx
@@ -128,25 +183,10 @@ export const Environment = () => {
         object.scale.set(.8, .8, .8);
         object.position.set(-80,-10,150);
         
-        setInterval(() => {
-            object.position.x += .009;
-        }, Math.floor(Math.random() * (1 - .5) + 1));
+        firstM = object;
+
         scene.add(object)
 
-
-
-
-
-        let secondM = object.clone();
-        
-        secondM.position.x = -250;
-        secondM.position.z = 150;
-
-        
-        setInterval(() => {
-            secondM.position.x += .009;
-        }, Math.floor(Math.random() * (1 - .5) + 1));
-        scene.add(secondM)
 
     });
 

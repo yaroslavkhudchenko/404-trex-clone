@@ -40,8 +40,8 @@ export const player = () => {
     ); */
 
     // player
-   /*  let fbxLoader = new FBXLoader();
-    fbxLoader.load('models/racoon.fbx', function (object) {
+   /* let fbxLoader = new FBXLoader();
+    fbxLoader.load('models/trex.fbx', function (object) {
 
         mixer = new THREE.AnimationMixer(object);
 
@@ -59,12 +59,12 @@ export const player = () => {
             }
 
         });
-        object.position.set(playerDefaultPosition.x, 1.5, playerDefaultPosition.z);
-        object.scale.set(.1, .1, .1);
+        object.position.set(22, 1.5, 22);
+        object.scale.set(1111, 1111, 1111);
         object.rotation.set(1.5, 0, 1.5);
         playerModel = object;
-        //scene.add(object);
-
+        scene.add(object);
+        
     }); */
 
     // player hitbox
