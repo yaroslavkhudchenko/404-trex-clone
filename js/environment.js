@@ -125,8 +125,6 @@ export const Environment = () => {
     //Mountain_1.fbx
     new FBXLoader().load('models/Mountain_1.fbx', (object) => {
 
-
-      
         object.scale.set(.8, .8, .8);
         object.position.set(-80,-10,150);
         
@@ -134,6 +132,21 @@ export const Environment = () => {
             object.position.x += .009;
         }, Math.floor(Math.random() * (1 - .5) + 1));
         scene.add(object)
+
+
+
+
+
+        let secondM = object.clone();
+        
+        secondM.position.x = -250;
+        secondM.position.z = 150;
+
+        
+        setInterval(() => {
+            secondM.position.x += .009;
+        }, Math.floor(Math.random() * (1 - .5) + 1));
+        scene.add(secondM)
 
     });
 
@@ -165,7 +178,7 @@ export const Environment = () => {
 
     });
 
-    // load fallenTree fbx(ONCE!!!)
+    /* // load fallenTree fbx(ONCE!!!)
     new FBXLoader().load('models/fallenTree.fbx', (object) => {
 
         // declare material
@@ -196,13 +209,7 @@ export const Environment = () => {
         fallenTreeRespawner(0, 33)
 
 
-        /* cactusRespawner(2, -60);
-        cactusRespawner(2, -40);
-
-        cactusRespawner(3, 1);
-        cactusRespawner(3, 33); 
- */
-    });
+    }); */
 
 
 

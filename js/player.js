@@ -40,7 +40,7 @@ export const player = () => {
     ); */
 
     // player
-    let fbxLoader = new FBXLoader();
+   /*  let fbxLoader = new FBXLoader();
     fbxLoader.load('models/racoon.fbx', function (object) {
 
         mixer = new THREE.AnimationMixer(object);
@@ -65,7 +65,7 @@ export const player = () => {
         playerModel = object;
         //scene.add(object);
 
-    });
+    }); */
 
     // player hitbox
     playerHitboxGeo = new THREE.CubeGeometry(4, 3, 1);

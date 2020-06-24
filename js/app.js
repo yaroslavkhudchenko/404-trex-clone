@@ -92,8 +92,20 @@ const init = () => { // init all required environment
     player();
 
     // spawn enemies every (between 2.3 and 1.1 seconMath.random)
-    setInterval(() => enemySpawner(), Math.floor(Math.random() * (1700 - 700) + 1700));
-
+    //setInterval(() => enemySpawner(), Math.floor(Math.random() * (1700 - 700) + 1700));
+    
+    
+    
+    enemySpawner()
+    setTimeout(() => {
+        enemySpawner()
+    }, 1400);
+    setTimeout(() => {
+        enemySpawner()
+    }, 2400);
+    setTimeout(() => {
+        enemySpawner()
+    }, 3400);
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         canvas: canvas // render to existing canvas
@@ -146,7 +158,7 @@ const keyPressedHandler = (e) => {
         case "Space":
             if(isJump)return;
             isJump = true;
-            playerHitboxMesh.position.y = 4.5;
+            playerHitboxMesh.position.y = 7;
             //playerModel.position.y = 3;
             
             // reset position y not to fly
@@ -245,7 +257,7 @@ const reset = () => {
 
 // main animate function ( game loop )
 const animate = () => {
-
+    // console.log('frame')
     stats.begin();
     requestAnimationFrame(animate);
 
@@ -253,7 +265,77 @@ const animate = () => {
     // console.log(!isPlaying)
     // console.log(isCollapsed)
 
-    //if (!isPlaying || isCollapsed)return;
+    // if (!isPlaying || isCollapsed)return;
+
+
+
+    if(enemies[0]) {
+        enemies[0].position.x += .03 * scoreValue/10;
+        if(enemies[0].position.x > 25) {
+            console.log(enemies[0].position.x)
+
+            enemies[0].position.x = -100
+        }
+    }
+    if (enemies[1]) {
+        enemies[1].position.x += .03 * scoreValue/10;
+        if (enemies[1].position.x > 25) {
+            console.log(enemies[1].position.x)
+
+            enemies[1].position.x = -100
+        }
+    } if (enemies[2]) {
+        enemies[2].position.x += .03 * scoreValue/10;
+        if (enemies[2].position.x > 25) {
+            console.log(enemies[2].position.x)
+
+            enemies[2].position.x = -100
+        }
+    } if (enemies[3]) {
+        enemies[3 ].position.x += .03 * scoreValue/10;
+        if (enemies[3 ].position.x > 25) {
+            console.log(enemies[3 ].position.x)
+
+            enemies[3 ].position.x = -100
+        }
+    }
+
+    if (cactuses1[0]) {
+        cactuses1[0].position.x += .03;// * scoreValue / 10;
+        if (cactuses1[0].position.x > 25) {
+            console.log(cactuses1[0].position.x)
+
+            cactuses1[0].position.x = -100
+        }
+    }
+    if (cactuses1[1]) {
+        cactuses1[1].position.x += .03;// * scoreValue / 10;
+        if (cactuses1[1].position.x > 25) {
+            console.log(cactuses1[0].position.x)
+
+            cactuses1[1].position.x = -100
+        }
+    }
+
+    if (cactuses2[0]) {
+        cactuses2[0].position.x += .03;// * scoreValue / 10;
+        if (cactuses2[0].position.x > 25) {
+            console.log(cactuses2[0].position.x)
+
+            cactuses2[0].position.x = -100
+        }
+    }
+    if (cactuses2[1]) {
+        cactuses2[1].position.x += .03;// * scoreValue / 10;
+        if (cactuses2[1].position.x > 25) {
+            console.log(cactuses2[0].position.x)
+
+            cactuses2[1].position.x = -100
+        }
+    }
+
+
+
 
 
     
@@ -263,11 +345,15 @@ const animate = () => {
     if (mixer) mixer.update(delta);
 
     // controls.update();
-    renderer.render(scene, camera);
     
     // update the score
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
+
+
+
+
+
 
     // console.log(enemies.length)
     if (enemies.length) {
@@ -276,15 +362,15 @@ const animate = () => {
         enemies.map((e, index) => {
 
             // console.log(e)
-            e.position.x > 25 ? 
+          /*   e.position.x > 25 ? 
                 scene.remove(e) && enemies.pop() // remove from both scene and array s
                     : false;
-
+ */
             let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
-/* 
-            if (eBox.intersectsBox(pBox)) {
+ 
+           /*  if (eBox.intersectsBox(pBox)) {
                 
                 
                 collapsedScreen.style.display = 'block';
@@ -321,11 +407,11 @@ const animate = () => {
                     for (var i = 1; i < 222; i++)
                         window.clearInterval(i);
 
-            } */
+            }  */
             
         });
     }
-    cactuses1.map((e, index) => {
+   /*  cactuses1.map((e, index) => {
         // console.log('-+>faw++f awfwafwafwa fwafwa fwaf waf')
         if (e.position.x > 25) {
             e.position.x = Math.random() * (-90 - -95) + -95;
@@ -350,10 +436,11 @@ const animate = () => {
             e.rotation.y += Math.random() * (30 - 15) + 30;
             console.log('treefallen two change position')
         }
-    })
+    }) */
 
     stats.end();
-
+    renderer.render(scene, camera);
+ 
 }
 
 let startScreen = document.querySelector('.startMenu');
