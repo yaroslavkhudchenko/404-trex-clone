@@ -265,8 +265,8 @@ const animate = () => {
     if (!isPlaying || isCollapsed)return;
 
     if(firstM) { 
-        firstM.position.x > 25 ? 
-        firstM.position.x = -80 :
+        firstM.position.x > 55 ? 
+        firstM.position.x = -120 :
         firstM.position.x += 0.07
     }
 

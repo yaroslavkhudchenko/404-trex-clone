@@ -181,7 +181,7 @@ export const Environment = () => {
     new FBXLoader().load('models/Mountain_1.fbx', (object) => {
 
         object.scale.set(.8, .8, .8);
-        object.position.set(-80,-10,150);
+        object.position.set(-110,-10,150);
         
         firstM = object;
 
