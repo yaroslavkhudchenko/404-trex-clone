@@ -11,6 +11,8 @@ import { Water } from './libs/Water2.js';
 
 export let secondM = null;
 export let firstM = null;
+export let runningFloor = null;
+export let runningFloor1 = null;
 
 export let geometryFloor, materialFloor, floorMesh;
 
@@ -119,7 +121,7 @@ const farFloors = [
 export const Environment = () => {
 
     // add floor ( for running )
-    geometryFloor = new THREE.BoxGeometry(250, 0, 11);
+  /*   geometryFloor = new THREE.BoxGeometry(250, 0, 11);
     materialFloor = new THREE.MeshPhongMaterial({
         color: 0xE7B251,
         specular: 0x000000,
@@ -129,33 +131,64 @@ export const Environment = () => {
     floorMesh.receiveShadow = true;
     scene.add(floorMesh);
     floorMesh.position.x = -57;
-    floorMesh.position.y = 1;
+    floorMesh.position.y = 1; */
  
-     /* 
+
+
+
+    /*new FBXLoader().load('models/floor.fbx', (object) => {
+ 
+     
+        object.name = 'floor';
+        object.scale.x = .01
+        object.scale.z = .01
+        object.position.x = -2;
+        object.position.y = 2;
+        object.rotateZ(-Math.PI * 0.5)
+        object.rotateY(-Math.PI * 1)
+
+        object.receiveShadow = true;
+        scene.add(object)
+
+    }); */
+
+
+
+   
     // load a resource
     new OBJLoader().load(
         // resource URL
-        'models/floorrun.obj',
+        'models/floorgood.obj',
         // called when resource is loaded
         function (object) {
             // declare material
-           let materialD = new THREE.MeshBasicMaterial();
-            materialD.map = textureLoader.load(`models/floorrun.png`, (t) => {
-                materialD.normalMap = t;
-            });
-            let materialFloor = new THREE.MeshPhongMaterial({
-                color: 0xE7B251,
-                specular: 0x000000,
-                shininess: 100
+            let materialD = new THREE.MeshPhongMaterial({
+               /*  color: 0xE7B251,
+               specular: 0xE7B251, */
+               shininess: 1
+           });
+            materialD.map = textureLoader.load(`models/floorgood.png`);
+            
+            object.traverse(function (node) {
+
+                if (node.isMesh) node.material = materialD;
+
             });
             object.material = materialD;
             object.receiveShadow = true;
-            object.position.x = -30;
-            object.position.y = 0; 
-            object.position.set(-25,3,-4)
-            object.scale.set(100,2,4)
+            object.position.set(-25,0,-7)
+            object.scale.set(5,5,5)
+            object.rotation.y = Math.PI / 2;
+            runningFloor = object;
+            //object.scale.set(30,5,9)
+            // object.scale.y = 5;
+            // object.scale.z = 9;
             scene.add(object);
 
+            runningFloor1 = runningFloor.clone();
+            runningFloor1.position.set(-125, 3, -7)
+
+            scene.add(runningFloor1)
         },
         // called when loading is in progresses
         function (xhr) {
@@ -169,7 +202,7 @@ export const Environment = () => {
             console.log('An error happened');
 
         }
-    ); */
+    ); 
 
 
 
@@ -295,11 +328,11 @@ export const fallenTreeRespawner = (floorNB, initialCac = false) => {
 
     // to move
     /* cactusesIntervalToMove =  */
-    setInterval(() => {
+   /*  setInterval(() => {
         good.position.x +=
             (floorNB === 1 ? 0.06 : 0.04) +
             (Math.floor(Math.random() * (0.008 - 0.004) + 0.008));
-    }, Math.floor(Math.random() * (1 - .5) + 1));
+    }, Math.floor(Math.random() * (1 - .5) + 1)); */
 
 
     fallenTrees.unshift(good);

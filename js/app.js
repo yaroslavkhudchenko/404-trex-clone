@@ -6,7 +6,7 @@ import { OrbitControls } from './libs/OrbitControls.js';
 
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
-import { Environment, cactuses1, cactuses2, fallenTrees, geometryFloor, materialFloor, floorMesh, cactusRespawner, secondM, firstM } from './environment.js';
+import { Environment, cactuses1, cactuses2, fallenTrees, geometryFloor, materialFloor, floorMesh, cactusRespawner, secondM, firstM, runningFloor, runningFloor1 } from './environment.js';
 export let camera, scene, renderer, controls;
 export let light;
 export let canvas = document.querySelector('#gameCanvas');
@@ -104,7 +104,7 @@ const init = () => { // init all required environment
 
     // spawn enemies every (between 2.3 and 1.1 seconMath.random)
     //setInterval(() => enemySpawner(), Math.floor(Math.random() * (1700 - 700) + 1700));
-    
+  
     
     
     enemySpawner()
@@ -134,7 +134,7 @@ const init = () => { // init all required environment
     //controls.update();
     //controls = false;
  */
- //controls = new OrbitControls(camera, canvas);
+    controls = new OrbitControls(camera, canvas);
     // pointer to see where enemies eliminates
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
     let pointerMat = new THREE.MeshBasicMaterial({ color: 0x0000f0 })
@@ -264,8 +264,19 @@ const animate = () => {
 
     if (!isPlaying || isCollapsed)return;
 
+    if (runningFloor) {
+       /*  runningFloor.position.x > -25 ? 
+            runningFloor.position.x = -50 : */
+                runningFloor.position.x += 0.07
+    }
+    if (runningFloor1) {
+        /* runningFloor1.position.x > -25 ?
+            runningFloor1.position.x = -50 : */
+            runningFloor1.position.x += 0.07
+    }
+
     if(firstM) { 
-        firstM.position.x > 55 ? 
+        firstM.position.x > 65 ? 
         firstM.position.x = -120 :
         firstM.position.x += 0.07
     }
@@ -440,9 +451,9 @@ const animate = () => {
 
     stats.end();
     renderer.render(scene, camera);
-    console.log('r')
-    console.log(camera.position)
-    console.log(camera.rotation)
+    // console.log('r')
+    // console.log(camera.position)
+    // console.log(camera.rotation)
 }
 
 let startScreen = document.querySelector('.startMenu');
