@@ -32,31 +32,15 @@ export const loader = () => {
                 if (node.isMesh) node.material = materialD;
 
             });
-            /*  object.material = materialD;
-             
-             object.position.set(-25, -1, -7)
-        
-             object.scale.set(5, 5, 5)
-             object.rotation.y = Math.PI / 2;
-             runningFloor = object;
-             //object.scale.set(30,5,9)
-             // object.scale.y = 5;
-             // object.scale.z = 9;
-             
-        
-             runningFloor1 = runningFloor.clone();
-             runningFloor1.position.set(-174, -1, -7)
-        
-             scene.add(runningFloor1) */
-            // object.receiveShadow = true;
+           
             scene.add(object);
             enemyObj = object;
+            add();
         },
         // called when loading is in progresses
-        (xhr) => {
-            console.log('zero')
-            add()},        // called when loading has errors
-        (error) => console.log('An error happened')
+        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses'),
+        // called when loading has errors
+        (error) => console.log('An error while loading twoCactuses => ', error)
     )
 
    
@@ -82,9 +66,7 @@ export const loader = () => {
             object.scale.set(5,5,5)
             object.rotation.y = Math.PI / 2;
             runningFloor = object;
-            //object.scale.set(30,5,9)
-            // object.scale.y = 5;
-            // object.scale.z = 9;
+            
             scene.add(object);
 
             runningFloor1 = runningFloor.clone();
@@ -95,20 +77,10 @@ export const loader = () => {
             add();
         },
         // called when loading is in progresses
-        function (xhr) {
-
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-           
-        },
+        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> floorRunning') ,
         // called when loading has errors
-        function (error) {
-
-            console.log('An error happened');
-
-        }
+        (error) => console.log('An error while loading floorRunning => ', error)
     ); 
-
-
 
 
 
@@ -125,7 +97,10 @@ export const loader = () => {
         scene.add(object)
         console.log('seconds')
         add();
-
+        // called when loading is in progresses
+        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> Mountain_1'),
+        // called when loading has errors
+        (error) => console.log('An error while loading Mountain_1 => ', error)
     });
 
     // load cactus fbx (ONCE!!!)
@@ -152,6 +127,10 @@ export const loader = () => {
         cactusObject = object;
         console.log('third')
         add();
+        // called when loading is in progresses
+        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> cactus'),
+        // called when loading has errors
+        (error) => console.log('An error while loading cactus => ', error)
     });
 
 
@@ -181,6 +160,10 @@ export const loader = () => {
         console.log('fourth')
 
         add();
+        // called when loading is in progresses
+        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> bigTree'),
+        // called when loading has errors
+        (error) => console.log('An error while loading bigTree => ', error)
     });
 
 
