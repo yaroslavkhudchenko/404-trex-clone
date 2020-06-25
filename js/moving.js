@@ -11,8 +11,7 @@ import {
     runningFloor1
 } from './loader.js';
 
-import { enemies } from './enemies.js';
-import { randomSelector } from './app.js';
+import { enemies, randomSelector } from './enemies.js';
 
 export const moving = () => {
     if (bigTrees[0]) {
@@ -52,14 +51,15 @@ export const moving = () => {
         }
     }
     if (runningFloor) {
+        console.log(runningFloor.rotation)
         runningFloor.position.x > 77 ?
             runningFloor.position.x = -220 :
-            runningFloor.position.x += 0.417
+            runningFloor.position.x += .5 
     }
     if (runningFloor1) {
         runningFloor1.position.x > 77 ?
             runningFloor1.position.x = -220 :
-            runningFloor1.position.x += 0.417
+            runningFloor1.position.x += .5 
     }
 
     if (firstM) {
@@ -76,7 +76,7 @@ export const moving = () => {
             scoreValue > 400 ?
                 enemies[0].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
                 : false
-
+            // enemies[0].rotation.y += Math.random() * (30 - 15) + 30;
             enemies[0].position.x = -100
         }
     }

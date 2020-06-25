@@ -16,6 +16,10 @@ export let mainLoaded = 0;
 export let add = () => {
     mainLoaded++;
 }
+
+import {OrbitControls} from './libs/OrbitControls';
+
+
 export let collissionDetected = false;
 
 let scoreValueDisplay = document.querySelector('#scoreValue');
@@ -100,7 +104,8 @@ const init = () => { // init all required environment
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
-    // controls = new OrbitControls(camera, canvas);
+    // just for testing
+    //controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
