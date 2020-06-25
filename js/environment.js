@@ -1,17 +1,14 @@
 import * as THREE from './libs/three.module.js';
-import { scene, renderer } from './app.js';
-import { FBXLoader } from './libs/FBXLoader.js';
-import { OBJLoader } from './libs/OBJLoader.js';
+import { scene } from './app.js';
+
 export let cactuses1 = [];
 export let cactuses2 = [];
 export let fallenTrees = [];
 export let bigTrees = []
 export let cactusesIntervalToMove = null;
-import { Water } from './libs/Water2.js';
 
 export let secondM = null;
 import {
-    firstM, 
     bigTreeObject,
     cactusObject
 } from './loader.js';
@@ -19,9 +16,6 @@ import {
 
 export let geometryFloor, materialFloor, floorMesh;
 
-/* let textureLoader = new THREE.TextureLoader();
-
-let fallenTreeObject = null; */
 
 const farFloors = [
     {
@@ -118,7 +112,6 @@ const farFloors = [
 
 export const Environment = () => {
 
-
     bigTreesRespawner(4, -20)
     bigTreesRespawner(4, -100)
     bigTreesRespawner(3, -30)
@@ -126,7 +119,6 @@ export const Environment = () => {
 
     cactusRespawner(2, -60);
     cactusRespawner(2, -40);
-
     cactusRespawner(3, 1);
     cactusRespawner(3, 33);
 
@@ -138,11 +130,7 @@ export const Environment = () => {
             farFloors[i].scale ? farFloors[i].scale.z : 20
         );
             
-            let materialFloor = new THREE.MeshPhongMaterial({
-                color: farFloors[i].color,
-                /* specular: 0xffffff,
-                shininess: 100 */
-            });
+            let materialFloor = new THREE.MeshPhongMaterial(farFloors[i].color);
             let floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
             floorMesh.receiveShadow = true;
             scene.add(floorMesh); // add second and third floor to the scene
@@ -150,11 +138,7 @@ export const Environment = () => {
                 farFloors[i].position.x,
                 farFloors[i].position.y,
                 farFloors[i].position.z
-            );/* 
-            if(i===4) {
-                floorMesh.rotation.x = -.01
-            } */
-//}
+            );
     }
 }
 
@@ -171,9 +155,6 @@ export const bigTreesRespawner = (floorNB, initialCac = false) => {
         bigTrees.unshift(good);
        
 }
-
-
-
 
 export const cactusRespawner = (floorNB, initialCac=false ) => {
     if (floorNB === 0 || floorNB === 1) return;
