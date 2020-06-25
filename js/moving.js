@@ -20,8 +20,7 @@ import {
     runningFloor1
 } from './loader.js';
 import { enemies } from './enemies.js';
-
-
+import { randomSelector } from './app.js';
 
 export const moving = () => {
     if (bigTrees[0]) {

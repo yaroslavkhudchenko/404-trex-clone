@@ -1,9 +1,8 @@
 
 import * as THREE from './libs/three.module.js';
-
 import { OBJLoader } from './libs/OBJLoader.js';
 import { FBXLoader } from './libs/FBXLoader.js';
-import {  add, scene } from './app.js';
+import { add, scene } from './app.js';
 export let enemyObj = null;
 export let firstM = null;
 export let runningFloor = null;
@@ -68,10 +67,7 @@ export const loader = () => {
         // called when resource is loaded
         function (object) {
             // declare material
-            let materialD = new THREE.MeshPhongMaterial({
-               /*  color: 0xE7B251,
-               specular: 0xE7B251, */
-           });
+            let materialD = new THREE.MeshPhongMaterial({});
             materialD.map = textureLoader.load(`models/floorgood.png`);
             
             object.traverse(function (node) {
