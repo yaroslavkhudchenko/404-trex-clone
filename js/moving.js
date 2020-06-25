@@ -1,17 +1,8 @@
 import * as THREE from './libs/three.module.js';
-
-
 import {
     cactuses1,
     cactuses2,
-    fallenTrees,
-    geometryFloor,
-    materialFloor,
-    floorMesh,
-    cactusRespawner,
-    secondM,
     firstM,
-   
     bigTrees
 } from './environment.js';
 
@@ -19,6 +10,7 @@ import {
     runningFloor,
     runningFloor1
 } from './loader.js';
+
 import { enemies } from './enemies.js';
 import { randomSelector } from './app.js';
 
@@ -26,7 +18,6 @@ export const moving = () => {
     if (bigTrees[0]) {
         bigTrees[0].position.x += .09;// * scoreValue / 10;
         if (bigTrees[0].position.x > 25) {
-            //console.log('cactuses 10')
 
             bigTrees[0].position.x = Math.random() * (-90 - -95) + -95;
 
@@ -36,7 +27,6 @@ export const moving = () => {
     if (bigTrees[1]) {
         bigTrees[1].position.x += .09;// * scoreValue / 10;
         if (bigTrees[1].position.x > 25) {
-            //console.log('cactuses 10')
 
             bigTrees[1].position.x = Math.random() * (-90 - -95) + -95;
 
@@ -46,7 +36,6 @@ export const moving = () => {
     if (bigTrees[2]) {
         bigTrees[2].position.x += .09;// * scoreValue / 10;
         if (bigTrees[2].position.x > 25) {
-            //console.log('cactuses 10')
 
             bigTrees[2].position.x = Math.random() * (-90 - -95) + -95;
 
@@ -56,7 +45,6 @@ export const moving = () => {
     if (bigTrees[3]) {
         bigTrees[3].position.x += .09;// * scoreValue / 10;
         if (bigTrees[3].position.x > 25) {
-            //console.log('cactuses 10')
 
             bigTrees[3].position.x = Math.random() * (-90 - -95) + -95;
 
@@ -127,7 +115,6 @@ export const moving = () => {
     if (cactuses1[0]) {
         cactuses1[0].position.x += .09;// * scoreValue / 10;
         if (cactuses1[0].position.x > 25) {
-            //console.log('cactuses 10')
 
             cactuses1[0].position.x = Math.random() * (-90 - -95) + -95;
 
@@ -137,7 +124,6 @@ export const moving = () => {
     if (cactuses1[1]) {
         cactuses1[1].position.x += .09;// * scoreValue / 10;
         if (cactuses1[1].position.x > 25) {
-            // console.log('cactuses 11')
 
             cactuses1[1].position.x = Math.random() * (-90 - -95) + -95;
 
@@ -148,9 +134,7 @@ export const moving = () => {
     if (cactuses2[0]) {
         cactuses2[0].position.x += .09;// * scoreValue / 10;
         if (cactuses2[0].position.x > 25) {
-            //c//onsole.log('cactuses 20')
-
-            //cactuses2[0].position.x = -100
+      
             cactuses2[0].position.x = Math.random() * (-90 - -95) + -95;
 
             cactuses2[0].rotation.y += Math.random() * (30 - 15) + 30;
@@ -159,9 +143,7 @@ export const moving = () => {
     if (cactuses2[1]) {
         cactuses2[1].position.x += .09;// * scoreValue / 10;
         if (cactuses2[1].position.x > 25) {
-            //console.log('cactuses 21')
-
-            //cactuses2[1].position.x = -100
+         
             cactuses2[1].position.x = Math.random() * (-90 - -95) + -95;
 
             cactuses2[1].rotation.y += Math.random() * (30 - 15) + 30;
