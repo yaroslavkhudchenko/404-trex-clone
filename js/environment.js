@@ -35,7 +35,7 @@ const farFloors = [
         },
         scale: {
             x: 250,
-            y: 0,
+            y: -1,
             z: 30//1//80
         },
         color: 0xE7B251,
@@ -72,11 +72,11 @@ const farFloors = [
         color: 0xE7B251 ,
         objects: 'cactus.fbx',
         positions: [
-            { x: -100, y: 4, z: 31 },
-            { x: -100, y: 4, z: 35 },
-            { x: -100, y: 4, z: 41 },
-            { x: -100, y: 4, z: 44 },
-            { x: -100, y: 4, z: 38 }
+            { x: -100, y: 5, z: 31 },
+            { x: -100, y: 5, z: 35 },
+            { x: -100, y: 5, z: 41 },
+            { x: -100, y: 5, z: 44 },
+            { x: -100, y: 5, z: 38 }
         ]
     },
     // first left after water
@@ -94,13 +94,14 @@ const farFloors = [
         color: 0xE7B251 ,
         objects: 'cactus.fbx',
         positions: [
-            { x: -100, y: 2, z: 13 },
-            { x: -100, y: 2, z: 17 },
-            { x: -100, y: 2, z: 22 },
-            { x: -100, y: 2, z: 25 },
-            { x: -100, y: 2, z: 22 }
+            { x: -100, y: 3, z: 13 },
+            { x: -100, y: 3, z: 17 },
+            { x: -100, y: 3, z: 22 },
+            { x: -100, y: 3, z: 25 },
+            { x: -100, y: 3, z: 22 }
         ]
     },
+    // last one
     {
         position: {
             x: -40,//7,
@@ -165,7 +166,6 @@ export const Environment = () => {
             let materialD = new THREE.MeshPhongMaterial({
                /*  color: 0xE7B251,
                specular: 0xE7B251, */
-               shininess: 1
            });
             materialD.map = textureLoader.load(`models/floorgood.png`);
             
@@ -176,7 +176,7 @@ export const Environment = () => {
             });
             object.material = materialD;
             object.receiveShadow = true;
-            object.position.set(-25,0,-7)
+            object.position.set(-25,-1,-7)
             
             object.scale.set(5,5,5)
             object.rotation.y = Math.PI / 2;
@@ -187,7 +187,7 @@ export const Environment = () => {
             scene.add(object);
 
             runningFloor1 = runningFloor.clone();
-            runningFloor1.position.set(-174, 0, -7)
+            runningFloor1.position.set(-174, -1, -7)
 
             scene.add(runningFloor1)
         },
@@ -225,20 +225,24 @@ export const Environment = () => {
     });
 
     // load cactus fbx (ONCE!!!)
-    new FBXLoader().load('models/cactus.fbx', (object) => {
+    new OBJLoader().load('models/cactus.obj', (object) => {
 
+        let material = new THREE.MeshBasicMaterial();
+        material.map = textureLoader.load(`models/cactus.png`);
 
+       
         object.traverse(function (child) {
 
             if (child.isMesh) {
                 // child.material = material;
                 child.castShadow = true;
                 child.receiveShadow = false;
+                child.material= material;
 
             }
 
         });
-        object.scale.set(.0051, .0051, .0051);
+        object.scale.set(2,2,2);
         object.castShadow = true; //default is false
         object.receiveShadow = false;
         cactusObject = object;
