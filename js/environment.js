@@ -177,6 +177,7 @@ export const Environment = () => {
             object.material = materialD;
             object.receiveShadow = true;
             object.position.set(-25,0,-7)
+            
             object.scale.set(5,5,5)
             object.rotation.y = Math.PI / 2;
             runningFloor = object;
@@ -186,7 +187,7 @@ export const Environment = () => {
             scene.add(object);
 
             runningFloor1 = runningFloor.clone();
-            runningFloor1.position.set(-220, 0, -7)
+            runningFloor1.position.set(-174, 0, -7)
 
             scene.add(runningFloor1)
         },

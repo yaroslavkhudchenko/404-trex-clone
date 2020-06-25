@@ -134,7 +134,7 @@ const init = () => { // init all required environment
     //controls.update();
     //controls = false;
  */
-    controls = new OrbitControls(camera, canvas);
+    // controls = new OrbitControls(camera, canvas);
     // pointer to see where enemies eliminates
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
     let pointerMat = new THREE.MeshBasicMaterial({ color: 0x0000f0 })
@@ -265,18 +265,14 @@ const animate = () => {
     if (!isPlaying || isCollapsed)return;
 
     if (runningFloor) {
-        console.log('first')
-        console.log(runningFloor.position.x)
-       runningFloor.position.x > 145 ? 
+        runningFloor.position.x > 77 ? 
             runningFloor.position.x = -220 :
-                runningFloor.position.x += 0.07
+                runningFloor.position.x += 0.417
     }
     if (runningFloor1) {
-        console.log('second')
-        console.log(runningFloor1.position.x)
-        runningFloor1.position.x > 145 ?
+        runningFloor1.position.x > 77 ?
             runningFloor1.position.x = -220 :
-            runningFloor1.position.x += 0.07
+            runningFloor1.position.x += 0.417
     }
 
     if(firstM) { 
