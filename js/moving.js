@@ -2,13 +2,14 @@ import * as THREE from './libs/three.module.js';
 import {
     cactuses1,
     cactuses2,
-    firstM,
+    
     bigTrees
 } from './environment.js';
 
 import {
     runningFloor,
-    runningFloor1
+    runningFloor1,
+    firstM
 } from './loader.js';
 
 import { enemies, randomSelector } from './enemies.js';

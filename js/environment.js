@@ -59,11 +59,11 @@ const farFloors = [
         color: 0xE7B251 ,
         objects: 'cactus.fbx',
         positions: [
-            { x: -100, y: 5, z: 25 },
-            { x: -100, y: 5, z: 25 },
-            { x: -100, y: 5, z: 26 },
-            { x: -100, y: 5, z: 28 },
-            { x: -100, y: 5, z: 30 }
+            { x: -100, y: 8, z: 25 },
+            { x: -100, y: 8, z: 25 },
+            { x: -100, y: 8, z: 26 },
+            { x: -100, y: 8, z: 28 },
+            { x: -100, y: 8, z: 30 }
         ]
     },
     // first left after water
