@@ -5,10 +5,11 @@ import { OBJLoader } from './libs/OBJLoader.js';
 export let cactuses1 = [];
 export let cactuses2 = [];
 export let fallenTrees = [];
+export let bigTrees = []
 export let cactusesIntervalToMove = null;
 import { Water } from './libs/Water2.js';
 
-
+export let bigTreeObject = null;
 export let secondM = null;
 export let firstM = null;
 export let runningFloor = null;
@@ -38,14 +39,7 @@ const farFloors = [
             y: -1,
             z: 30//1//80
         },
-        color: 0xE7B251,
-        positions: [
-            { x: -100, y: .5, z: -5 },
-            { x: -100, y: .5, z: -15 },
-            { x: -100, y: .5, z: -22 },
-            { x: -100, y: .5, z: -35 },
-            { x: -100, y: .5, z: -52 }
-        ]
+        color: 0xE7B251
     },
 
     // river 
@@ -72,11 +66,11 @@ const farFloors = [
         color: 0xE7B251 ,
         objects: 'cactus.fbx',
         positions: [
-            { x: -100, y: 5, z: 31 },
-            { x: -100, y: 5, z: 35 },
-            { x: -100, y: 5, z: 41 },
-            { x: -100, y: 5, z: 44 },
-            { x: -100, y: 5, z: 38 }
+            { x: -100, y: 5, z: 25 },
+            { x: -100, y: 5, z: 25 },
+            { x: -100, y: 5, z: 26 },
+            { x: -100, y: 5, z: 28 },
+            { x: -100, y: 5, z: 30 }
         ]
     },
     // first left after water
@@ -95,10 +89,10 @@ const farFloors = [
         objects: 'cactus.fbx',
         positions: [
             { x: -100, y: 3, z: 13 },
+            { x: -100, y: 3, z: 15 },
+            { x: -100, y: 3, z: 16 },
             { x: -100, y: 3, z: 17 },
-            { x: -100, y: 3, z: 22 },
-            { x: -100, y: 3, z: 25 },
-            { x: -100, y: 3, z: 22 }
+            { x: -100, y: 3, z: 18 }
         ]
     },
     // last one
@@ -113,7 +107,14 @@ const farFloors = [
             y: 2,
             z: 50
         },
-        color: 0xE7B251
+        color: 0xE7B251,
+        positions: [
+            { x: -100, y: 6, z: 55 },
+            { x: -100, y: 6, z: 55 },
+            { x: -100, y: 6, z: 55 },
+            { x: -100, y: 6, z: 55 },
+            { x: -100, y: 6, z: 55 }
+        ]
 
     }
    
@@ -256,6 +257,46 @@ export const Environment = () => {
 
     });
 
+
+    // load bigTree obj (ONCE!!!)
+    new OBJLoader().load('models/bigTree.obj', (object) => {
+
+        let material = new THREE.MeshBasicMaterial();
+        material.map = textureLoader.load(`models/bigTree.png`);
+
+
+        object.traverse(function (child) {
+
+            if (child.isMesh) {
+                // child.material = material;
+                child.castShadow = true;
+                child.receiveShadow = false;
+                child.material = material;
+
+            }
+
+        });
+        object.scale.set(2, 2, 2);
+        object.castShadow = true; //default is false
+        object.receiveShadow = false;
+        bigTreeObject = object;
+        console.log('in env')
+        bigTreesRespawner(4,-20)
+        bigTreesRespawner(4, -100)
+        bigTreesRespawner(3, -30)
+        bigTreesRespawner(3, -100)
+
+
+/* 
+        cactusRespawner(2, -60);
+        cactusRespawner(2, -40);
+
+        cactusRespawner(3, 1);
+        cactusRespawner(3, 33); */
+
+    });
+
+
     /* // load fallenTree fbx(ONCE!!!)
     new FBXLoader().load('models/fallenTree.fbx', (object) => {
 
@@ -348,6 +389,39 @@ export const fallenTreeRespawner = (floorNB, initialCac = false) => {
             console.log('not good floor') */
 
 }
+
+
+export const bigTreesRespawner = (floorNB, initialCac = false) => {
+        let good = bigTreeObject.clone();
+        good.name = 'bigTree';
+        good.position.set(
+            initialCac ? initialCac : -100,
+            farFloors[floorNB].positions[0].y,
+            farFloors[floorNB].positions[Math.floor((Math.random() * 4) + 1)].z
+        );
+        scene.add(good);
+
+
+        // to move
+        /* cactusesIntervalToMove =  */
+        /*  setInterval(() => {
+             good.position.x +=
+                 (floorNB === 1 ? 0.06 : 0.04) +
+                 (Math.floor(Math.random() * (0.008 - 0.004) + 0.008));
+         }, Math.floor(Math.random() * (1 - .5) + 1)); */
+
+
+        bigTrees.unshift(good);
+        /* floorNB === 2 ?
+            cactuses1.unshift(good) : // unshift to global array to control if reach the pointer
+            floorNB === 3 ?
+                cactuses2.unshift(good) :
+                console.log('not good floor') */
+
+}
+
+
+
 
 export const cactusRespawner = (floorNB, initialCac=false ) => {
     if (floorNB === 0 || floorNB === 1) return;
