@@ -1,6 +1,13 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Three js runner</title><style>@font-face {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Three js runner</title>
+    <style>
+        @font-face {
             font-family: 'pixel';
-            src: url('PressStart2P-vaV7.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+            src: url('PressStart2P-vaV7.ttf') format('truetype');
         } 
         * {
             font-family: 'pixel';
@@ -26,4 +33,75 @@
         }
         #bestResult {
             display: flex;
-        }</style></head><body><canvas id="gameCanvas"></canvas><div id="display"><div id="bestResult"><div id="bestTitle">Hi:</div><div id="bestValue">00000</div></div><div id="score"><div id="scoreValue">00000</div></div></div><script src="bundle.main.js"></script></body></html>
+        }
+        .startMenu {
+            /* 
+            test
+             */
+            display: none;
+
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #FBDC63;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+        .startGameButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 40px;
+            cursor: pointer;
+        }
+        #collapsedScreen {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 100px;
+        }
+        #finalScore {
+            font-size: 90px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        #restartButton {
+            font-size: 40px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas id='gameCanvas'></canvas>
+    <div id='display'>
+        <div id='bestResult'>
+            <div id='bestTitle'>Hi:</div>
+            <div id='bestValue'>00000</div>
+        </div>
+        <div id='score'>
+            <div id='scoreValue'>00000</div>
+        </div>
+        
+    </div>
+    <div class="startMenu">
+        <div class="startGameButton">
+            START
+        </div>
+    </div>
+    
+    <div id='collapsedScreen'>
+        <div id='finalScore'>
+
+        </div>
+        <div id='restartButton'>
+            Restart
+        </div>
+    </>
+<script src="bundle.main.js"></script></body>
+</html>

@@ -155,7 +155,7 @@ const keyUpHandler = (e) => {
         
     }
 }
-
+isPlaying = true;
 // for collision detection
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 

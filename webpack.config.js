@@ -33,7 +33,8 @@ module.exports = {
     plugins: [
         new HtmlWebPackPlugin({
             filename: 'index.html',
-            template: 'index.html'
+            template: 'index.html',
+            minify: false
         }),
         new CopyWebpackPlugin({
             patterns: [
