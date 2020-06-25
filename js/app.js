@@ -48,15 +48,26 @@ const init = () => { // init all required environment
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
     
-    camera.position.set(
+    /* camera.position.set(
         12.11335282741436,
-        9.431344959973545,
+        22.431344959973545,
         -8.155109793722527
     )
     camera.rotation.set(
         -2.575459746596432,
         0.6059858107445513,
         2.794286842857644
+    ) */
+
+    camera.position.set(
+        11.107887494115303,
+        10.597672258150979,
+        -13.287483538618204
+    )
+    camera.rotation.set(
+        -2.862817515434483,
+        0.6801154027308529,
+        2.9634955878264626
     )
     
     // create scene
@@ -105,7 +116,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    controls = new OrbitControls(camera, canvas);
+    // controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -197,8 +208,8 @@ const reset = () => {
 // main animate function ( game loop )
 
 const animate = () => {
-    // console.log(camera.rotation)
-    // console.log(camera.position)
+    console.log(camera.rotation)
+    console.log(camera.position)
     stats.begin();
     requestAnimationFrame(animate);
 
