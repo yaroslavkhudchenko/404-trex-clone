@@ -2,6 +2,11 @@
 
 
 import * as THREE from './libs/three.module.js';
+export let mainLoaded = 0;
+export let add =()=> {
+    mainLoaded++;
+}
+import { loader } from './loader.js';
 import { OrbitControls } from './libs/OrbitControls.js';
 import { moving } from './moving.js';
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
@@ -21,6 +26,8 @@ import {
     runningFloor1,
     bigTrees
 } from './environment.js';
+
+
 export let camera, scene, renderer, controls;
 export let light;
 export let canvas = document.querySelector('#gameCanvas');
@@ -47,21 +54,20 @@ stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom);
 
 
+
+
+
 const init = () => { // init all required environment
-    
+
     // if there is a hi score in localstorage grab it and if not set value to 0
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score') ? localStorage.getItem('score') : 0
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
-    /* camera.position.set(
-        16.541557178529693,
-        10.661301140199619,
-        -6.8735841518706104
-    ) */
+    
     camera.position.set(
-12.11335282741436,
-9.431344959973545,
--8.155109793722527
+        12.11335282741436,
+        9.431344959973545,
+        -8.155109793722527
     )
     
     camera.rotation.set(
@@ -110,27 +116,21 @@ const init = () => { // init all required environment
     // scene background color(environment)
     scene.background = new THREE.Color(0xE7B251);
 
-    // init environment
-    Environment();
 
-    // init player
-    player();
 
-    // spawn enemies every (between 2.3 and 1.1 seconMath.random)
-    //setInterval(() => enemySpawner(), Math.floor(Math.random() * (1700 - 700) + 1700));
-  
+
+
+
+
+    loader();// all loaders
+
+
+
+
+
+
+
     
-    
-    enemySpawner()
-    setTimeout(() => {
-        enemySpawner()
-    }, 1400);
-    setTimeout(() => {
-        enemySpawner()
-    }, 2400);
-    setTimeout(() => {
-        enemySpawner()
-    }, 3400);
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         canvas: canvas // render to existing canvas
@@ -246,7 +246,7 @@ const reset = () => {
 }
 let randomSelector = [4.5, 1.5];
 
-isPlaying = true;
+// isPlaying = true;
 // main animate function ( game loop )
 
 const animate = () => {
@@ -332,6 +332,36 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
 document.addEventListener('keypress', keyPressedHandler);
 document.addEventListener('keyup', keyUpHandler);
 
+let stopFirstAnimateLoop = true;
+const animate1 = () => {
+    if(!stopFirstAnimateLoop)return;
+    console.log('---')
+    console.log(mainLoaded)
+    if (mainLoaded === 4) {
+        console.log('4');
+        //init();
+
+        // init environment
+        Environment();
+
+        // init player
+        player();
+
+        enemySpawner()
+        setTimeout(() => {
+            enemySpawner()
+        }, 1400);
+        setTimeout(() => {
+            enemySpawner()
+        }, 2400);
+        setTimeout(() => {
+            enemySpawner()
+        }, 3400);
+        stopFirstAnimateLoop = false;
+    }
+    requestAnimationFrame(animate1);
+}
 
 init();
-animate()
+animate();
+animate1()

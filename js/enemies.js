@@ -1,5 +1,7 @@
 import * as THREE from './libs/three.module.js';
 import { scene, scoreValue } from './app.js';
+import { OBJLoader } from './libs/OBJLoader.js';
+import { enemyObj } from './loader.js';
 export let enemies = [];
 
 export let intervalToMove = null;
@@ -8,11 +10,13 @@ let randomSelector = [4.5, 1.5];
 let enemyG = new THREE.CubeGeometry(2, 2, 2);
 let enemyMat = new THREE.MeshBasicMaterial({ color: 0x00f000 });
 
+
 // to spawn enemies
 export const enemySpawner = () => {
 
+
     // enemy mesh
-    let enemy = new THREE.Mesh(enemyG, enemyMat);
+    let enemy = enemyObj.clone(); // new THREE.Mesh(enemyG, enemyMat);
     enemy.name = 'enemy';
     
     // set position
@@ -21,10 +25,7 @@ export const enemySpawner = () => {
     enemy.receiveShadow = false;
     scene.add(enemy);
 
-    // to move
-   /*  intervalToMove = setInterval(() => {
-      enemy.position.x += 0.1 + scoreValue / 10000;
-    }, Math.floor(Math.random() * (1 - .5) + 1)); */
+    
 
     enemies.unshift(enemy); // unshift to global array to control if reach the pointer
 

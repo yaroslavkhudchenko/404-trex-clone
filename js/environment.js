@@ -9,23 +9,21 @@ export let bigTrees = []
 export let cactusesIntervalToMove = null;
 import { Water } from './libs/Water2.js';
 
-export let bigTreeObject = null;
 export let secondM = null;
-export let firstM = null;
-export let runningFloor = null;
-export let runningFloor1 = null;
+import {
+    firstM, 
+    bigTreeObject,
+    cactusObject, 
+    runningFloor, 
+    runningFloor1
+} from './loader.js';
+
 
 export let geometryFloor, materialFloor, floorMesh;
 
+/* let textureLoader = new THREE.TextureLoader();
 
-// deserttext
-
-
-let textureLoader = new THREE.TextureLoader();
-
-
-let cactusObject = null;
-let fallenTreeObject = null;
+let fallenTreeObject = null; */
 
 const farFloors = [
     {
@@ -122,215 +120,17 @@ const farFloors = [
 
 export const Environment = () => {
 
-    // add floor ( for running )
-  /*   geometryFloor = new THREE.BoxGeometry(250, 0, 11);
-    materialFloor = new THREE.MeshPhongMaterial({
-        color: 0xE7B251,
-        specular: 0x000000,
-        shininess: 100
-    });
-    floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
-    floorMesh.receiveShadow = true;
-    scene.add(floorMesh);
-    floorMesh.position.x = -57;
-    floorMesh.position.y = 1; */
- 
 
+    bigTreesRespawner(4, -20)
+    bigTreesRespawner(4, -100)
+    bigTreesRespawner(3, -30)
+    bigTreesRespawner(3, -100)
 
+    cactusRespawner(2, -60);
+    cactusRespawner(2, -40);
 
-    /*new FBXLoader().load('models/floor.fbx', (object) => {
- 
-     
-        object.name = 'floor';
-        object.scale.x = .01
-        object.scale.z = .01
-        object.position.x = -2;
-        object.position.y = 2;
-        object.rotateZ(-Math.PI * 0.5)
-        object.rotateY(-Math.PI * 1)
-
-        object.receiveShadow = true;
-        scene.add(object)
-
-    }); */
-
-
-
-   
-    // load a resource
-    new OBJLoader().load(
-        // resource URL
-        'models/floorgood.obj',
-        // called when resource is loaded
-        function (object) {
-            // declare material
-            let materialD = new THREE.MeshPhongMaterial({
-               /*  color: 0xE7B251,
-               specular: 0xE7B251, */
-           });
-            materialD.map = textureLoader.load(`models/floorgood.png`);
-            
-            object.traverse(function (node) {
-
-                if (node.isMesh) node.material = materialD;
-
-            });
-            object.material = materialD;
-            object.receiveShadow = true;
-            object.position.set(-25,-1,-7)
-            
-            object.scale.set(5,5,5)
-            object.rotation.y = Math.PI / 2;
-            runningFloor = object;
-            //object.scale.set(30,5,9)
-            // object.scale.y = 5;
-            // object.scale.z = 9;
-            scene.add(object);
-
-            runningFloor1 = runningFloor.clone();
-            runningFloor1.position.set(-174, -1, -7)
-
-            scene.add(runningFloor1)
-        },
-        // called when loading is in progresses
-        function (xhr) {
-
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-
-        },
-        // called when loading has errors
-        function (error) {
-
-            console.log('An error happened');
-
-        }
-    ); 
-
-
-
-
-
-
-
-    //Mountain_1.fbx
-    new FBXLoader().load('models/Mountain_1.fbx', (object) => {
-
-        object.scale.set(.8, .8, .8);
-        object.position.set(-110,-10,150);
-        
-        firstM = object;
-
-        scene.add(object)
-
-
-    });
-
-    // load cactus fbx (ONCE!!!)
-    new OBJLoader().load('models/cactus.obj', (object) => {
-
-        let material = new THREE.MeshBasicMaterial();
-        material.map = textureLoader.load(`models/cactus.png`);
-
-       
-        object.traverse(function (child) {
-
-            if (child.isMesh) {
-                // child.material = material;
-                child.castShadow = true;
-                child.receiveShadow = false;
-                child.material= material;
-
-            }
-
-        });
-        object.scale.set(2,2,2);
-        object.castShadow = true; //default is false
-        object.receiveShadow = false;
-        cactusObject = object;
-        console.log('in env')
-
-        cactusRespawner(2, -60);
-        cactusRespawner(2, -40);
- 
-        cactusRespawner(3, 1 );
-        cactusRespawner(3, 33);
-
-    });
-
-
-    // load bigTree obj (ONCE!!!)
-    new OBJLoader().load('models/bigTree.obj', (object) => {
-
-        let material = new THREE.MeshBasicMaterial();
-        material.map = textureLoader.load(`models/bigTree.png`);
-
-
-        object.traverse(function (child) {
-
-            if (child.isMesh) {
-                // child.material = material;
-                child.castShadow = true;
-                child.receiveShadow = false;
-                child.material = material;
-
-            }
-
-        });
-        object.scale.set(2, 2, 2);
-        object.castShadow = true; //default is false
-        object.receiveShadow = false;
-        bigTreeObject = object;
-        console.log('in env')
-        bigTreesRespawner(4,-20)
-        bigTreesRespawner(4, -100)
-        bigTreesRespawner(3, -30)
-        bigTreesRespawner(3, -100)
-
-
-/* 
-        cactusRespawner(2, -60);
-        cactusRespawner(2, -40);
-
-        cactusRespawner(3, 1);
-        cactusRespawner(3, 33); */
-
-    });
-
-
-    /* // load fallenTree fbx(ONCE!!!)
-    new FBXLoader().load('models/fallenTree.fbx', (object) => {
-
-        // declare material
-        let materialD = new THREE.MeshBasicMaterial();
-        materialD.map = textureLoader.load(`models/0.jpg`, (t) => {
-            materialD.normalMap = t;
-        });
-
-        console.log('ffffffffffffffffffff')
-        object.traverse(function (child) {
-
-            if (child.isMesh) {
-                child.material = materialD;
-                child.castShadow = true;
-                child.receiveShadow = false;
-
-            }
-
-        });
-        object.scale.set(.0151, .0151, .0151);
-        object.castShadow = true; //default is false
-        object.receiveShadow = false;
-        fallenTreeObject = object;
-        console.log('in env')
-        fallenTreeRespawner(0, -60)
-
-       
-        fallenTreeRespawner(0, 33)
-
-
-    }); */
-
-
+    cactusRespawner(3, 1);
+    cactusRespawner(3, 33);
 
     for(let i=0; i<farFloors.length;i++) {
         // floor
@@ -361,36 +161,6 @@ export const Environment = () => {
 }
 
 
-export const fallenTreeRespawner = (floorNB, initialCac = false) => {
-    let good = fallenTreeObject.clone();
-    good.name = 'fallenTree';
-    good.position.set(
-        initialCac ? initialCac : -100,
-        farFloors[floorNB].positions[0].y,
-        farFloors[floorNB].positions[Math.floor((Math.random() * 4) + 1)].z
-    );
-    scene.add(good);
-
-
-    // to move
-    /* cactusesIntervalToMove =  */
-   /*  setInterval(() => {
-        good.position.x +=
-            (floorNB === 1 ? 0.06 : 0.04) +
-            (Math.floor(Math.random() * (0.008 - 0.004) + 0.008));
-    }, Math.floor(Math.random() * (1 - .5) + 1)); */
-
-
-    fallenTrees.unshift(good);
-    /* floorNB === 2 ?
-        cactuses1.unshift(good) : // unshift to global array to control if reach the pointer
-        floorNB === 3 ?
-            cactuses2.unshift(good) :
-            console.log('not good floor') */
-
-}
-
-
 export const bigTreesRespawner = (floorNB, initialCac = false) => {
         let good = bigTreeObject.clone();
         good.name = 'bigTree';
@@ -400,24 +170,8 @@ export const bigTreesRespawner = (floorNB, initialCac = false) => {
             farFloors[floorNB].positions[Math.floor((Math.random() * 4) + 1)].z
         );
         scene.add(good);
-
-
-        // to move
-        /* cactusesIntervalToMove =  */
-        /*  setInterval(() => {
-             good.position.x +=
-                 (floorNB === 1 ? 0.06 : 0.04) +
-                 (Math.floor(Math.random() * (0.008 - 0.004) + 0.008));
-         }, Math.floor(Math.random() * (1 - .5) + 1)); */
-
-
         bigTrees.unshift(good);
-        /* floorNB === 2 ?
-            cactuses1.unshift(good) : // unshift to global array to control if reach the pointer
-            floorNB === 3 ?
-                cactuses2.unshift(good) :
-                console.log('not good floor') */
-
+       
 }
 
 
@@ -437,14 +191,6 @@ export const cactusRespawner = (floorNB, initialCac=false ) => {
             
     scene.add(good);
 
-    // to move
-    /* cactusesIntervalToMove =  */
-   /*  setInterval(() => {
-      good.position.x +=
-        (floorNB === 1 ? 0.06 : 0.04) +
-        (Math.floor(Math.random() * (0.008 - 0.004) + 0.008));
-    }, Math.floor(Math.random() * (1 - .5) + 1));
- */
     floorNB === 2 ? 
         cactuses1.unshift(good) : // unshift to global array to control if reach the pointer
             floorNB === 3 ?    
