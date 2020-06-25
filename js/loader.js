@@ -61,7 +61,7 @@ export const loader = () => {
     )
 
    
-    // load a resource
+    // running floor
     new OBJLoader().load(
         // resource URL
         'models/floorgood.obj',

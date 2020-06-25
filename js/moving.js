@@ -11,11 +11,14 @@ import {
     cactusRespawner,
     secondM,
     firstM,
-    runningFloor,
-    runningFloor1,
+   
     bigTrees
 } from './environment.js';
 
+import {
+    runningFloor,
+    runningFloor1
+} from './loader.js';
 import { enemies } from './enemies.js';
 
 

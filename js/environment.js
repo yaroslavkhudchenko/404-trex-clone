@@ -13,9 +13,7 @@ export let secondM = null;
 import {
     firstM, 
     bigTreeObject,
-    cactusObject, 
-    runningFloor, 
-    runningFloor1
+    cactusObject
 } from './loader.js';
 
 
