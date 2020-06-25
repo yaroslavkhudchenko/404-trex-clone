@@ -265,13 +265,17 @@ const animate = () => {
     if (!isPlaying || isCollapsed)return;
 
     if (runningFloor) {
-       /*  runningFloor.position.x > -25 ? 
-            runningFloor.position.x = -50 : */
+        console.log('first')
+        console.log(runningFloor.position.x)
+       runningFloor.position.x > 145 ? 
+            runningFloor.position.x = -220 :
                 runningFloor.position.x += 0.07
     }
     if (runningFloor1) {
-        /* runningFloor1.position.x > -25 ?
-            runningFloor1.position.x = -50 : */
+        console.log('second')
+        console.log(runningFloor1.position.x)
+        runningFloor1.position.x > 145 ?
+            runningFloor1.position.x = -220 :
             runningFloor1.position.x += 0.07
     }
 

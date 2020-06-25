@@ -186,7 +186,7 @@ export const Environment = () => {
             scene.add(object);
 
             runningFloor1 = runningFloor.clone();
-            runningFloor1.position.set(-125, 3, -7)
+            runningFloor1.position.set(-220, 0, -7)
 
             scene.add(runningFloor1)
         },
