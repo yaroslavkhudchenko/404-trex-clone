@@ -4,6 +4,7 @@
 import * as THREE from './libs/three.module.js';
 import { OrbitControls } from './libs/OrbitControls.js';
 import { moving } from './moving.js';
+import { reset } from './reset.js';
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
 import { 
@@ -214,55 +215,6 @@ const keyUpHandler = (e) => {
 // for collision detection
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
-const reset = () => {
-
-    isJump = false;// if collision was in the air
-
-    //console.log(scene);
-   
-    eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-
-    /* playerModel.position.set(
-        playerDefaultPosition.x,
-        1.5,
-        playerDefaultPosition.z
-    ) */
-    playerHitboxMesh.position.set(
-        playerDefaultPosition.x,
-        2.5,
-        playerDefaultPosition.z
-    )
-    scoreValue = 0;
-    // if there is a hi score in localstorage grab it and if not set value to 0
-    document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
-    isCollapsed = false;
-    isPlaying = true;
-    // spawn enemies every (between 2.3 and 1.1 seconMath.random)
-    //setInterval(() => enemySpawner(), Math.floor(Math.random() * (2300 - 1100) + 2300));
-    //cactusRespawner(2, -75);
-
-    enemies[0].position.x = -100
-    enemies[1].position.x = -120
-    enemies[2].position.x = -140
-    enemies[3].position.x = -160
-
-
-    /* cactusRespawner(2, Math.random() * (-95 - -128) + -128)
-
-    cactusRespawner(2, Math.random() * (-65 - -100) + -128);
-
-    
-    cactusRespawner(3, Math.random() * (-75 - -111) + -128);
-    cactusRespawner(3, Math.random() * (-85 - -158) + -128); */
-
-
-   /*  e.position.x = Math.random() * (-90 - -95) + -95;
-    e.rotation.y += Math.random() * (30 - 15) + 30;
- */
-
-
-
-}
 let randomSelector = [4.5, 1.5];
 
 isPlaying = true;
