@@ -4,7 +4,6 @@
 import * as THREE from './libs/three.module.js';
 import { OrbitControls } from './libs/OrbitControls.js';
 import { moving } from './moving.js';
-import { reset } from './reset.js';
 import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
 import { 
@@ -215,6 +214,36 @@ const keyUpHandler = (e) => {
 // for collision detection
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
+const reset = () => {
+
+    isJump = false;// if collision was in the air
+
+    //console.log(scene);
+   
+    eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+
+    /* playerModel.position.set(
+        playerDefaultPosition.x,
+        1.5,
+        playerDefaultPosition.z
+    ) */
+    playerHitboxMesh.position.set(
+        playerDefaultPosition.x,
+        2.5,
+        playerDefaultPosition.z
+    )
+    scoreValue = 0;
+    // if there is a hi score in localstorage grab it and if not set value to 0
+    document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
+    isCollapsed = false;
+    isPlaying = true;
+   
+    enemies[0].position.x = -100
+    enemies[1].position.x = -120
+    enemies[2].position.x = -140
+    enemies[3].position.x = -160
+
+}
 let randomSelector = [4.5, 1.5];
 
 isPlaying = true;
@@ -251,10 +280,6 @@ const animate = () => {
     scoreValue += .3;
 
 
-
-
-
-
     // console.log(enemies.length)
     if (enemies.length) {
 
@@ -265,7 +290,7 @@ const animate = () => {
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
             
-           /*  if (eBox.intersectsBox(pBox)) {
+            if (eBox.intersectsBox(pBox)) {
                 
                 
                 collapsedScreen.style.display = 'block';
@@ -285,42 +310,13 @@ const animate = () => {
                     localStorage.setItem('score', scoreValue.toFixed(0));
                 }
             
-            }   */
+            }
             
         });
     }
-   /*  cactuses1.map((e, index) => {
-        // console.log('-+>faw++f awfwafwafwa fwafwa fwaf waf')
-        if (e.position.x > 25) {
-            e.position.x = Math.random() * (-90 - -95) + -95;
-            console.log('cactus one change position')
-            console.log(e.position)
-            e.rotation.y += Math.random() * (30 - 15) + 30;
-           
-        }
-    })
-    cactuses2.map((e, index) => {
-        // console.log('-+>faw++f awfwafwafwa fwafwa fwaf waf')
-        if(e.position.x > 25) {
-            e.position.x = Math.random() * (-90 - -95) + -95;
-            e.rotation.y += Math.random() * (30 - 15) + 30;
-            console.log('cactus two change position')
-            console.log(e.position)
-        }
-    })
-    fallenTrees.map((e,index) => {
-        if (e.position.x > 25) {
-            e.position.x = Math.random() * (-90 - -95) + -95;
-            e.rotation.y += Math.random() * (30 - 15) + 30;
-            console.log('treefallen two change position')
-        }
-    }) */
 
     stats.end();
     renderer.render(scene, camera);
-    // console.log('r')
-    // console.log(camera.position)
-    // console.log(camera.rotation)
 }
 
 let startScreen = document.querySelector('.startMenu');
@@ -329,22 +325,6 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
 
     startScreen.style.display = 'none';
     isPlaying = true;
-    
-   /*  inteval = setInterval(() => {
-        seconds--;
-
-        document.querySelector('.timer').innerHTML = seconds;
-        if (seconds === 0) {
-            console.log('seconds is 00000')
-            clearInterval(inteval)
-            setTimeout(() => {
-                
-            }, 5000);
-            document.querySelector('.timer').style.display = 'none';
-        }
-
-    }, 1000);
-     */
        
 })
 
