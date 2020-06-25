@@ -61,16 +61,16 @@ export const loader = () => {
             });
             object.material = materialD;
             object.receiveShadow = true;
-            object.position.set(-25,-1,-7)
+            object.position.set(-120, -2 ,-13)
             
-            object.scale.set(5,5,5)
+            object.scale.set(8,8,8)
             object.rotation.y = Math.PI / 2;
             runningFloor = object;
             
             scene.add(object);
 
             runningFloor1 = runningFloor.clone();
-            runningFloor1.position.set(-174, -1, -7)
+            runningFloor1.position.set(-358, -2, -13)
 
             scene.add(runningFloor1)
             console.log('first')

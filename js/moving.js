@@ -51,15 +51,15 @@ export const moving = () => {
         }
     }
     if (runningFloor) {
-        console.log(runningFloor.rotation)
-        runningFloor.position.x > 77 ?
-            runningFloor.position.x = -220 :
-            runningFloor.position.x += .5 
+        // console.log(runningFloor.position.x)
+        runningFloor.position.x > 130 ?
+            runningFloor.position.x = -345 :
+            runningFloor.position.x += .5
     }
     if (runningFloor1) {
-        runningFloor1.position.x > 77 ?
-            runningFloor1.position.x = -220 :
-            runningFloor1.position.x += .5 
+        runningFloor1.position.x > 130 ?
+            runningFloor1.position.x = -345 :
+            runningFloor1.position.x += .5
     }
 
     if (firstM) {
