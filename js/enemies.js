@@ -1,4 +1,3 @@
-import * as THREE from './libs/three.module.js';
 import { scene, scoreValue } from './app.js';
 import { enemyObj } from './loader.js';
 export let enemies = [];
@@ -18,8 +17,6 @@ export const enemySpawner = () => {
     enemy.castShadow = true; //default is false
     enemy.receiveShadow = false;
     scene.add(enemy);
-
-    
 
     enemies.unshift(enemy); // unshift to global array to control if reach the pointer
 

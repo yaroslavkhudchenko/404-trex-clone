@@ -13,9 +13,7 @@ import {
     cactusObject
 } from './loader.js';
 
-
 export let geometryFloor, materialFloor, floorMesh;
-
 
 const farFloors = [
     {
