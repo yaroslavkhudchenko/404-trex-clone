@@ -17,28 +17,34 @@ export const loader = () => {
     // load a resource
     new OBJLoader().load(
         // resource URL
-        'models/twoCactuses.obj',
+        'models/en1.obj',
         // called when resource is loaded
-        function (object) {
+        async (object) =>{
             // declare material
             let materialD = new THREE.MeshPhongMaterial({
                 /*  color: 0xE7B251,
                 specular: 0xE7B251, */
             });
-            materialD.map = textureLoader.load(`models/twoCactuses.png`);
+            materialD.map = textureLoader.load(`models/en1.jpg`);
 
-            object.traverse(function (node) {
+            await object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
 
             });
            
-            scene.add(object);
+            await scene.add(object);
             enemyObj = object;
-            add();
+           
         },
         // called when loading is in progresses
-        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses'),
+        (xhr) => {
+            //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses')
+            if ((xhr.loaded / xhr.total * 100) === 100){
+                console.log('zero')
+                add();
+            }
+        },
         // called when loading has errors
         (error) => console.log('An error while loading twoCactuses => ', error)
     )
@@ -73,11 +79,18 @@ export const loader = () => {
             runningFloor1.position.set(-358, -2, -13)
 
             scene.add(runningFloor1)
-            console.log('first')
-            add();
+           
         },
         // called when loading is in progresses
-        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> floorRunning') ,
+        (xhr) => {
+            //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> floorRunning')
+            console.log(xhr.loaded / xhr.total * 100)
+            if ((xhr.loaded / xhr.total * 100) === 100){
+                console.log('first')
+
+                add();
+            }
+        },
         // called when loading has errors
         (error) => console.log('An error while loading floorRunning => ', error)
     ); 
@@ -87,84 +100,104 @@ export const loader = () => {
 
 
     //Mountain_1.fbx
-    new FBXLoader().load('models/Mountain_1.fbx', (object) => {
+    new FBXLoader().load('models/Mountain_1.fbx', 
+        (object) => {
+            object.scale.set(.8, .8, .8);
+            object.position.set(-110,-10,150);
+            
+            firstM = object;
 
-        object.scale.set(.8, .8, .8);
-        object.position.set(-110,-10,150);
-        
-        firstM = object;
-
-        scene.add(object)
-        console.log('seconds')
-        add();
+            scene.add(object);
+        },   
         // called when loading is in progresses
-        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> Mountain_1'),
+        (xhr) => {
+            //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> Mountain_1');
+            if ((xhr.loaded / xhr.total * 100) === 100){
+                console.log('seconds');
+                add();
+            }
+        },
         // called when loading has errors
         (error) => console.log('An error while loading Mountain_1 => ', error)
-    });
+    );
 
     // load cactus fbx (ONCE!!!)
-    new FBXLoader().load('models/Cactus.fbx', (object) => {
+    new FBXLoader().load('models/Cactus.fbx', 
+        (object) => {
 
-        let material = new THREE.MeshBasicMaterial();
-        material.map = textureLoader.load(`models/CactusTexture.png`);
+            let material = new THREE.MeshBasicMaterial();
+            material.map = textureLoader.load(`models/CactusTexture.png`);
 
-       
-        object.traverse(function (child) {
+        
+            object.traverse(function (child) {
 
-            if (child.isMesh) {
-                // child.material = material;
-                child.castShadow = true;
-                child.receiveShadow = false;
-                child.material= material;
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material= material;
 
-            }
+                }
 
-        });
-        object.scale.set(.004,.004,.004);
-        object.castShadow = true; //default is false
-        object.receiveShadow = false;
-        cactusObject = object;
-        console.log('third')
-        add();
+            });
+            object.scale.set(.004,.004,.004);
+            object.castShadow = true; //default is false
+            object.receiveShadow = false;
+            cactusObject = object;
+        },    
+        
         // called when loading is in progresses
-        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> cactus'),
+        (xhr) => {
+            //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> cactus')
+            if ((xhr.loaded / xhr.total * 100) >= 100){
+                
+                console.log('third');
+                add();
+            }
+        },
         // called when loading has errors
         (error) => console.log('An error while loading cactus => ', error)
-    });
+    );
 
 
     // load bigTree obj (ONCE!!!)
-    new OBJLoader().load('models/bigTree.obj', (object) => {
+    new OBJLoader().load('models/bigTree.obj', 
+        (object) => {
 
-        let material = new THREE.MeshBasicMaterial();
-        material.map = textureLoader.load(`models/bigTree.png`);
+            let material = new THREE.MeshBasicMaterial();
+            material.map = textureLoader.load(`models/bigTree.png`);
 
 
-        object.traverse(function (child) {
+            object.traverse(function (child) {
 
-            if (child.isMesh) {
-                // child.material = material;
-                child.castShadow = true;
-                child.receiveShadow = false;
-                child.material = material;
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material = material;
 
-            }
+                }
 
-        });
-        object.scale.set(2, 2, 2);
-        object.castShadow = true; //default is false
-        object.receiveShadow = false;
-        bigTreeObject = object;
-        
-        console.log('fourth')
+            });
+            object.scale.set(3, 3, 3);
+            object.castShadow = true; //default is false
+            object.receiveShadow = false;
+            bigTreeObject = object;
+            
+        },
 
-        add();
         // called when loading is in progresses
-        (xhr) => console.log((xhr.loaded / xhr.total * 100) + '% loaded -> bigTree'),
+        (xhr) => {
+            // console.log((xhr.loaded / xhr.total * 100) + '% loaded -> bigTree')
+            
+            if ((xhr.loaded / xhr.total * 100) === 100){
+                add();
+                console.log('fourth');
+            }
+        },
         // called when loading has errors
         (error) => console.log('An error while loading bigTree => ', error)
-    });
+    );
 
 
 }
