@@ -142,17 +142,17 @@ const keyPressedHandler = (e) => {
         case "KeyS":
             isJump = false;
             // hit box
-            playerHitboxMesh.scale.y = .5;
-            playerHitboxMesh.position.y = 2;
+            playerHitboxMesh.scale.y = .6;
+            playerHitboxMesh.position.y = 3;
 
             break;
         case "Space":
             if(isJump)return;
             isJump = true;
-            playerHitboxMesh.position.y = 9;
+            playerHitboxMesh.position.y = 11;
             // reset position y not to fly
             setTimeout(() => {
-                playerHitboxMesh.position.y = 2.5;
+                playerHitboxMesh.position.y = 5;
                 //playerModel.position.y = 1.5;
                 isJump = false;
             }, 400);
@@ -164,7 +164,7 @@ const keyUpHandler = (e) => {
     if(e.code === "KeyS") {
 
         setTimeout(() => {
-            playerHitboxMesh.position.y = 2.5;
+            playerHitboxMesh.position.y = 5.5;
             playerHitboxMesh.scale.y = 1;
 
         }, 100);
@@ -242,7 +242,7 @@ const animate = () => {
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
             
-           /*  if (eBox.intersectsBox(pBox)) {
+            if (eBox.intersectsBox(pBox)) {
                 
                 
                 collapsedScreen.style.display = 'block';
@@ -263,7 +263,7 @@ const animate = () => {
                 }
             
             }
-             */
+            
         });
     }
     renderer.render(scene, camera);
