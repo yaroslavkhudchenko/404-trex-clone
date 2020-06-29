@@ -31,7 +31,7 @@ const enemiesMove = () => {
 
         enemies[0].position.x += .5;
         if (enemies[0].position.x > 25) {
-            console.log('000000000000000000000000000000000')
+            // console.log('000000000000000000000000000000000')
             scoreValue > 400 ?
                 enemies[0].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
                 : false
@@ -46,7 +46,7 @@ const enemiesMove = () => {
     if (enemies[1]) {
         enemies[1].position.x += .5;
         if (enemies[1].position.x > 25) {
-            console.log('111111111111111111111111111111111')
+            // console.log('111111111111111111111111111111111')
             scoreValue > 400 ?
                 enemies[1].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
                 : false
@@ -62,7 +62,7 @@ const enemiesMove = () => {
     if (enemies[2]) {
         enemies[2].position.x += .5;
         if (enemies[2].position.x > 25) {
-            console.log('22222222222222222222222222222222222')
+            // console.log('22222222222222222222222222222222222')
             scoreValue > 400 ?
                 enemies[2].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
                 : false
@@ -76,7 +76,7 @@ const enemiesMove = () => {
     if (enemies[3]) {
         enemies[3].position.x += .5;
         if (enemies[3].position.x > 25) {
-            console.log('3333333333333333333333333333333333333')
+            // console.log('3333333333333333333333333333333333333')
             scoreValue > 400 ?
                 enemies[3].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
                 : false
@@ -90,17 +90,27 @@ const enemiesMove = () => {
 }
 
 
+let decorationsInitialPos = {
+    bigtree0: -120,
+    bigtree1: -155,
+    bigtree2: -125,
+    bigtree3: -111,
+    cactuses10: -154,
+    cactuses11: -102,
+    cactuses20:-100,
+    cactuses21:-123
+    
+}
+
 export const moving = () => {
 
-
-    
-
-
+    // TREES
     if (bigTrees[0]) {
         bigTrees[0].position.x += .09;// * scoreValue / 10;
         if (bigTrees[0].position.x > 25) {
 
-            bigTrees[0].position.x = Math.random() * (-90 - -95) + -95;
+            bigTrees[0].position.x = decorationsInitialPos.cactuses21 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
+            decorationsInitialPos.bigtree0 = bigTrees[0].position.x;
 
             bigTrees[0].rotation.y += Math.random() * (30 - 15) + 30;
         }
@@ -109,7 +119,10 @@ export const moving = () => {
         bigTrees[1].position.x += .09;// * scoreValue / 10;
         if (bigTrees[1].position.x > 25) {
 
-            bigTrees[1].position.x = Math.random() * (-130 - -170) + -190;
+            bigTrees[1].position.x = decorationsInitialPos.bigtree0 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
+            decorationsInitialPos.bigtree1 = bigTrees[1].position.x;
+            
+
 
             bigTrees[1].rotation.y += Math.random() * (30 - 15) + 30;
         }
@@ -118,7 +131,9 @@ export const moving = () => {
         bigTrees[2].position.x += .09;// * scoreValue / 10;
         if (bigTrees[2].position.x > 25) {
 
-            bigTrees[2].position.x = Math.random() * (-130 - -170) + -190;
+            bigTrees[2].position.x = decorationsInitialPos.bigtree1 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
+            decorationsInitialPos.bigtree2 = bigTrees[2].position.x;
+            
 
             bigTrees[2].rotation.y += Math.random() * (30 - 15) + 30;
         }
@@ -127,13 +142,70 @@ export const moving = () => {
         bigTrees[3].position.x += .09;// * scoreValue / 10;
         if (bigTrees[3].position.x > 25) {
 
-            bigTrees[3].position.x = Math.random() * (-130 - -170) + -190;
+            bigTrees[3].position.x = decorationsInitialPos.bigtree2 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
+            decorationsInitialPos.bigtree3 = bigTrees[3].position.x;
+
 
             bigTrees[3].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
 
 
+
+
+
+
+    if (cactuses1[0]) {
+        cactuses1[0].position.x += .09;// * scoreValue / 10;
+        if (cactuses1[0].position.x > 25) {
+
+            cactuses1[0].position.x = decorationsInitialPos.bigtree3 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
+            decorationsInitialPos.cactuses10 = cactuses1[0].position.x;
+            
+            
+            //Math.random() * (-90 - -95) + -95;
+
+            cactuses1[0].rotation.y += Math.random() * (30 - 15) + 30;
+        }
+    }
+    if (cactuses1[1]) {
+        cactuses1[1].position.x += .09;// * scoreValue / 10;
+        if (cactuses1[1].position.x > 25) {
+
+            cactuses1[1].position.x = decorationsInitialPos.cactuses10 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
+            decorationsInitialPos.cactuses11 = cactuses1[1].position.x;
+
+            cactuses1[1].rotation.y += Math.random() * (30 - 15) + 30;
+        }
+    }
+
+    if (cactuses2[0]) {
+        cactuses2[0].position.x += .09;// * scoreValue / 10;
+        if (cactuses2[0].position.x > 25) {
+
+            cactuses2[0].position.x = decorationsInitialPos.cactuses11 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
+            decorationsInitialPos.cactuses20 = cactuses2[0].position.x;
+
+            cactuses2[0].rotation.y += Math.random() * (30 - 15) + 30;
+        }
+    }
+    if (cactuses2[1]) {
+        cactuses2[1].position.x += .09;// * scoreValue / 10;
+        if (cactuses2[1].position.x > 25) {
+
+            cactuses2[1].position.x = decorationsInitialPos.cactuses20 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
+            decorationsInitialPos.cactuses21 = cactuses2[0].position.x;
+
+
+            cactuses2[1].rotation.y += Math.random() * (30 - 15) + 30;
+        }
+    }
+
+
+
+
+
+    // floors
     if (runningFloor) {
         runningFloor.position.x > 130 ?
             runningFloor.position.x = -345 :
@@ -147,7 +219,7 @@ export const moving = () => {
 
     // mountain
     if (firstM) {
-        firstM.position.x > 65 ?
+        firstM.position.x > 95 ?
             firstM.position.x = -120 :
             firstM.position.x += 0.07
     }
@@ -160,46 +232,4 @@ export const moving = () => {
     enemiesMove();
 
 
-
-
-
-
-
-    if (cactuses1[0]) {
-        cactuses1[0].position.x += .09;// * scoreValue / 10;
-        if (cactuses1[0].position.x > 25) {
-
-            cactuses1[0].position.x = Math.random() * (-90 - -95) + -95;
-
-            cactuses1[0].rotation.y += Math.random() * (30 - 15) + 30;
-        }
-    }
-    if (cactuses1[1]) {
-        cactuses1[1].position.x += .09;// * scoreValue / 10;
-        if (cactuses1[1].position.x > 25) {
-
-            cactuses1[1].position.x = Math.random() * (-90 - -95) + -95;
-
-            cactuses1[1].rotation.y += Math.random() * (30 - 15) + 30;
-        }
-    }
-
-    if (cactuses2[0]) {
-        cactuses2[0].position.x += .09;// * scoreValue / 10;
-        if (cactuses2[0].position.x > 25) {
-      
-            cactuses2[0].position.x = Math.random() * (-90 - -95) + -95;
-
-            cactuses2[0].rotation.y += Math.random() * (30 - 15) + 30;
-        }
-    }
-    if (cactuses2[1]) {
-        cactuses2[1].position.x += .09;// * scoreValue / 10;
-        if (cactuses2[1].position.x > 25) {
-         
-            cactuses2[1].position.x = Math.random() * (-90 - -95) + -95;
-
-            cactuses2[1].rotation.y += Math.random() * (30 - 15) + 30;
-        }
-    }
 }

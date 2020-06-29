@@ -3,7 +3,7 @@ import { enemyObj } from './loader.js';
 export let enemies = [];
 
 export let intervalToMove = null;
-export const randomSelector = [6.5, 3];
+export const randomSelector = [6, 2];
 
 // to spawn enemies
 export const enemySpawner = () => {
