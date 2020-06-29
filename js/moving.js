@@ -11,10 +11,91 @@ import {
     runningFloor1,
     firstM
 } from './loader.js';
-
+import  { scoreValue } from './app.js';
 import { enemies, randomSelector } from './enemies.js';
 
+let enemiesInitialPos = {
+    zero : -280,
+    first: -299,
+    second: -311,
+    third: -333
+    
+}
+
+
+const enemiesMove = () => {
+
+
+    // ENEMIES //
+    if (enemies[0]) {
+
+        enemies[0].position.x += .5;
+        if (enemies[0].position.x > 25) {
+            console.log('000000000000000000000000000000000')
+            scoreValue > 400 ?
+                enemies[0].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
+                : false
+            enemies[0].rotation.y += Math.random() * (30 - 15) + 30;
+
+
+
+            enemies[0].position.x = enemiesInitialPos.third - Math.random() * (-10 - -15) + -15
+            enemiesInitialPos.zero = enemies[0].position.x;
+        }
+    }
+    if (enemies[1]) {
+        enemies[1].position.x += .5;
+        if (enemies[1].position.x > 25) {
+            console.log('111111111111111111111111111111111')
+            scoreValue > 400 ?
+                enemies[1].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
+                : false
+            enemies[1].rotation.y += Math.random() * (30 - 15) + 30;
+            
+
+
+            enemies[1].position.x = enemiesInitialPos.zero - Math.random() * (-10 - -15) + -15//Math.random() * (-180 - -250) + -250
+            
+            enemiesInitialPos.first = enemies[1].position.x;
+        }
+    }
+    if (enemies[2]) {
+        enemies[2].position.x += .5;
+        if (enemies[2].position.x > 25) {
+            console.log('22222222222222222222222222222222222')
+            scoreValue > 400 ?
+                enemies[2].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
+                : false
+            enemies[2].rotation.y += Math.random() * (30 - 15) + 30;
+
+
+            enemies[2].position.x = enemiesInitialPos.first - Math.random() * (-10 - -15) + -15//Math.random() * (-180 - -250) + -250
+            enemiesInitialPos.second = enemies[2].position.x;
+        }
+    }
+    if (enemies[3]) {
+        enemies[3].position.x += .5;
+        if (enemies[3].position.x > 25) {
+            console.log('3333333333333333333333333333333333333')
+            scoreValue > 400 ?
+                enemies[3].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
+                : false
+            // console.log(enemies[3 ].position.x)
+            enemies[3].rotation.y += Math.random() * (30 - 15) + 30;
+
+            enemies[3].position.x = enemiesInitialPos.second - Math.random() * (-10 - -15) + -15//Math.random() * (-180 - -250) + -250
+            enemiesInitialPos.third = enemies[3].position.x;
+        }
+    }
+}
+
+
 export const moving = () => {
+
+
+    
+
+
     if (bigTrees[0]) {
         bigTrees[0].position.x += .09;// * scoreValue / 10;
         if (bigTrees[0].position.x > 25) {
@@ -28,7 +109,7 @@ export const moving = () => {
         bigTrees[1].position.x += .09;// * scoreValue / 10;
         if (bigTrees[1].position.x > 25) {
 
-            bigTrees[1].position.x = Math.random() * (-90 - -95) + -95;
+            bigTrees[1].position.x = Math.random() * (-130 - -170) + -190;
 
             bigTrees[1].rotation.y += Math.random() * (30 - 15) + 30;
         }
@@ -37,7 +118,7 @@ export const moving = () => {
         bigTrees[2].position.x += .09;// * scoreValue / 10;
         if (bigTrees[2].position.x > 25) {
 
-            bigTrees[2].position.x = Math.random() * (-90 - -95) + -95;
+            bigTrees[2].position.x = Math.random() * (-130 - -170) + -190;
 
             bigTrees[2].rotation.y += Math.random() * (30 - 15) + 30;
         }
@@ -46,13 +127,14 @@ export const moving = () => {
         bigTrees[3].position.x += .09;// * scoreValue / 10;
         if (bigTrees[3].position.x > 25) {
 
-            bigTrees[3].position.x = Math.random() * (-90 - -95) + -95;
+            bigTrees[3].position.x = Math.random() * (-130 - -170) + -190;
 
             bigTrees[3].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
+
+
     if (runningFloor) {
-        // console.log(runningFloor.position.x)
         runningFloor.position.x > 130 ?
             runningFloor.position.x = -345 :
             runningFloor.position.x += .5
@@ -63,6 +145,7 @@ export const moving = () => {
             runningFloor1.position.x += .5
     }
 
+    // mountain
     if (firstM) {
         firstM.position.x > 65 ?
             firstM.position.x = -120 :
@@ -71,47 +154,16 @@ export const moving = () => {
     /* 
         if (bigTreeObject)
     */
-    if (enemies[0]) {
-        enemies[0].position.x += .5;// * scoreValue/10;
-        if (enemies[0].position.x > 25) {
-            scoreValue > 400 ?
-                enemies[0].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
-                : false
-            // enemies[0].rotation.y += Math.random() * (30 - 15) + 30;
-            enemies[0].position.x = -100
-        }
-    }
-    if (enemies[1]) {
-        enemies[1].position.x += .5;// * scoreValue/10;
-        if (enemies[1].position.x > 25) {
-            scoreValue > 400 ?
-                enemies[1].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
-                : false
 
-            enemies[1].position.x = -100
-        }
-    }
-    if (enemies[2]) {
-        enemies[2].position.x += .5;// * scoreValue/10;
-        if (enemies[2].position.x > 25) {
-            scoreValue > 400 ?
-                enemies[2].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
-                : false
 
-            enemies[2].position.x = -100
-        }
-    }
-    if (enemies[3]) {
-        enemies[3].position.x += .5;// * scoreValue/10;
-        if (enemies[3].position.x > 25) {
-            scoreValue > 400 ?
-                enemies[3].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
-                : false
-            // console.log(enemies[3 ].position.x)
 
-            enemies[3].position.x = -100
-        }
-    }
+    enemiesMove();
+
+
+
+
+
+
 
     if (cactuses1[0]) {
         cactuses1[0].position.x += .09;// * scoreValue / 10;

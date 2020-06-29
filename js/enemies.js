@@ -3,7 +3,7 @@ import { enemyObj } from './loader.js';
 export let enemies = [];
 
 export let intervalToMove = null;
-export const randomSelector = [4.5, 1];
+export const randomSelector = [6.5, 3];
 
 // to spawn enemies
 export const enemySpawner = () => {
@@ -11,11 +11,11 @@ export const enemySpawner = () => {
     // enemy mesh
     let enemy = enemyObj.clone(); // new THREE.Mesh(enemyG, enemyMat);
     enemy.name = 'enemy';
-    enemy.scale.set(3,3,3)
+    enemy.scale.set(2.5,2.5,2.5)
     enemy.rotation.set(0,0,0)
 
     // set position
-    enemy.position.set(-70, scoreValue > 400 ? randomSelector[Math.floor(Math.random() * Math.floor(2))] : -50, 0);
+    enemy.position.set(-300, scoreValue > 400 ? randomSelector[Math.floor(Math.random() * Math.floor(2))] : 2, 0);
     enemy.castShadow = true; //default is false
     enemy.receiveShadow = false;
     scene.add(enemy);

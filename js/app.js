@@ -116,7 +116,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    controls = new OrbitControls(camera, canvas);
+    // controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -149,7 +149,7 @@ const keyPressedHandler = (e) => {
         case "Space":
             if(isJump)return;
             isJump = true;
-            playerHitboxMesh.position.y = 7;
+            playerHitboxMesh.position.y = 9;
             // reset position y not to fly
             setTimeout(() => {
                 playerHitboxMesh.position.y = 2.5;
@@ -197,10 +197,10 @@ const reset = () => {
     isCollapsed = false;
     isPlaying = true;
    
-    enemies[0].position.x = -100
-    enemies[1].position.x = -120
-    enemies[2].position.x = -140
-    enemies[3].position.x = -160
+    enemies[0].position.x = -250
+    enemies[1].position.x = -220
+    enemies[2].position.x = -190
+    enemies[3].position.x = -170
 
 }
 
@@ -262,8 +262,8 @@ const animate = () => {
                     localStorage.setItem('score', scoreValue.toFixed(0));
                 }
             
-            } */
-            
+            }
+             */
         });
     }
     renderer.render(scene, camera);
@@ -309,13 +309,13 @@ const loadingObjects = () => {
         enemySpawner()
         setTimeout(() => {
             enemySpawner()
-        }, 1400);
-        setTimeout(() => {
-            enemySpawner()
         }, 2400);
         setTimeout(() => {
             enemySpawner()
-        }, 3400);
+        }, 4400);
+        setTimeout(() => {
+            enemySpawner()
+        }, 6400);
         stopLoadingObjectsLoop = false;
     }
     requestAnimationFrame(loadingObjects);

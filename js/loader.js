@@ -17,7 +17,7 @@ export const loader = async () => {
     // load a resource
     await new OBJLoader().load(
         // resource URL
-        'models/en1.obj',
+        'models/twoCactuses.obj',
         // called when resource is loaded
         async (object) =>{
             // declare material
@@ -25,7 +25,7 @@ export const loader = async () => {
                 /*  color: 0xE7B251,
                 specular: 0xE7B251, */
             });
-            materialD.map = textureLoader.load(`models/en1.jpg`);
+            materialD.map = textureLoader.load(`models/twoCactuses.png`);
 
             await object.traverse(function (node) {
 
