@@ -12,10 +12,10 @@ export let bigTreeObject = null;
 export let cactusObject = null;
 let textureLoader = new THREE.TextureLoader();
 
-export const loader = () => {
+export const loader = async () => {
 
     // load a resource
-    new OBJLoader().load(
+    await new OBJLoader().load(
         // resource URL
         'models/en1.obj',
         // called when resource is loaded
@@ -51,7 +51,7 @@ export const loader = () => {
 
    
     // running floor
-    new OBJLoader().load(
+    await new OBJLoader().load(
         // resource URL
         'models/floorgood.obj',
         // called when resource is loaded
@@ -100,7 +100,7 @@ export const loader = () => {
 
 
     //Mountain_1.fbx
-    new FBXLoader().load('models/Mountain_1.fbx', 
+    await new FBXLoader().load('models/Mountain_1.fbx', 
         (object) => {
             object.scale.set(.8, .8, .8);
             object.position.set(-110,-10,150);
@@ -122,7 +122,7 @@ export const loader = () => {
     );
 
     // load cactus fbx (ONCE!!!)
-    new FBXLoader().load('models/Cactus.fbx', 
+    await new FBXLoader().load('models/Cactus.fbx', 
         (object) => {
 
             let material = new THREE.MeshBasicMaterial();
@@ -161,7 +161,7 @@ export const loader = () => {
 
 
     // load bigTree obj (ONCE!!!)
-    new OBJLoader().load('models/bigTree.obj', 
+    await new OBJLoader().load('models/bigTree.obj', 
         (object) => {
 
             let material = new THREE.MeshBasicMaterial();

@@ -296,7 +296,7 @@ const loadingObjects = () => {
     if (!stopLoadingObjectsLoop)return;
     // console.log('---')
     // console.log(mainLoaded)
-    if (mainLoaded === 4) {
+    if (mainLoaded === 5) {
         console.log('4');
         //init();
 
