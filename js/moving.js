@@ -29,7 +29,7 @@ const enemiesMove = () => {
     // ENEMIES //
     if (enemies[0]) {
 
-        enemies[0].position.x += .5;
+        enemies[0].position.x += .5 + (scoreValue / 2000);
         if (enemies[0].position.x > 25) {
             // console.log('000000000000000000000000000000000')
             scoreValue > 400 ?
@@ -39,12 +39,12 @@ const enemiesMove = () => {
 
 
 
-            enemies[0].position.x = enemiesInitialPos.third - Math.random() * (-10 - -15) + -15
+            enemies[0].position.x = enemiesInitialPos.third - Math.random() * (-5 - -10) + -10
             enemiesInitialPos.zero = enemies[0].position.x;
         }
     }
     if (enemies[1]) {
-        enemies[1].position.x += .5;
+        enemies[1].position.x += .5 + (scoreValue / 2000);
         if (enemies[1].position.x > 25) {
             // console.log('111111111111111111111111111111111')
             scoreValue > 400 ?
@@ -54,13 +54,13 @@ const enemiesMove = () => {
             
 
 
-            enemies[1].position.x = enemiesInitialPos.zero - Math.random() * (-10 - -15) + -15//Math.random() * (-180 - -250) + -250
+            enemies[1].position.x = enemiesInitialPos.zero - Math.random() * (-5 - -10) + -10//Math.random() * (-180 - -250) + -250
             
             enemiesInitialPos.first = enemies[1].position.x;
         }
     }
     if (enemies[2]) {
-        enemies[2].position.x += .5;
+        enemies[2].position.x += .5 + (scoreValue / 2000);
         if (enemies[2].position.x > 25) {
             // console.log('22222222222222222222222222222222222')
             scoreValue > 400 ?
@@ -69,12 +69,12 @@ const enemiesMove = () => {
             enemies[2].rotation.y += Math.random() * (30 - 15) + 30;
 
 
-            enemies[2].position.x = enemiesInitialPos.first - Math.random() * (-10 - -15) + -15//Math.random() * (-180 - -250) + -250
+            enemies[2].position.x = enemiesInitialPos.first - Math.random() * (-5 - -10) + -10//Math.random() * (-180 - -250) + -250
             enemiesInitialPos.second = enemies[2].position.x;
         }
     }
     if (enemies[3]) {
-        enemies[3].position.x += .5;
+        enemies[3].position.x += .5 + (scoreValue / 2000);
         if (enemies[3].position.x > 25) {
             // console.log('3333333333333333333333333333333333333')
             scoreValue > 400 ?
@@ -83,7 +83,7 @@ const enemiesMove = () => {
             // console.log(enemies[3 ].position.x)
             enemies[3].rotation.y += Math.random() * (30 - 15) + 30;
 
-            enemies[3].position.x = enemiesInitialPos.second - Math.random() * (-10 - -15) + -15//Math.random() * (-180 - -250) + -250
+            enemies[3].position.x = enemiesInitialPos.second - Math.random() * (-5 - -10) + -10//Math.random() * (-180 - -250) + -250
             enemiesInitialPos.third = enemies[3].position.x;
         }
     }
@@ -99,7 +99,6 @@ let decorationsInitialPos = {
     cactuses11: -102,
     cactuses20:-100,
     cactuses21:-123
-    
 }
 
 export const moving = () => {
@@ -156,7 +155,7 @@ export const moving = () => {
 
 
     if (cactuses1[0]) {
-        cactuses1[0].position.x += .09;// * scoreValue / 10;
+        cactuses1[0].position.x += .09; // * scoreValue / 10;
         if (cactuses1[0].position.x > 25) {
 
             cactuses1[0].position.x = decorationsInitialPos.bigtree3 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
@@ -169,7 +168,7 @@ export const moving = () => {
         }
     }
     if (cactuses1[1]) {
-        cactuses1[1].position.x += .09;// * scoreValue / 10;
+        cactuses1[1].position.x += .09; // * scoreValue / 10;
         if (cactuses1[1].position.x > 25) {
 
             cactuses1[1].position.x = decorationsInitialPos.cactuses10 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
@@ -180,7 +179,7 @@ export const moving = () => {
     }
 
     if (cactuses2[0]) {
-        cactuses2[0].position.x += .09;// * scoreValue / 10;
+        cactuses2[0].position.x += .09; // * scoreValue / 10;
         if (cactuses2[0].position.x > 25) {
 
             cactuses2[0].position.x = decorationsInitialPos.cactuses11 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
@@ -190,7 +189,7 @@ export const moving = () => {
         }
     }
     if (cactuses2[1]) {
-        cactuses2[1].position.x += .09;// * scoreValue / 10;
+        cactuses2[1].position.x += .09; // * scoreValue / 10;
         if (cactuses2[1].position.x > 25) {
 
             cactuses2[1].position.x = decorationsInitialPos.cactuses20 - Math.random() * (-10 - -15) + -15//Math.random() * (-90 - -95) + -95;
@@ -209,17 +208,17 @@ export const moving = () => {
     if (runningFloor) {
         runningFloor.position.x > 130 ?
             runningFloor.position.x = -345 :
-            runningFloor.position.x += .5
+            runningFloor.position.x += .5  + (scoreValue / 2000)
     }
     if (runningFloor1) {
         runningFloor1.position.x > 130 ?
             runningFloor1.position.x = -345 :
-            runningFloor1.position.x += .5
+            runningFloor1.position.x += .5  + (scoreValue / 2000)
     }
 
     // mountain
     if (firstM) {
-        firstM.position.x > 95 ?
+        firstM.position.x > 111 ?
             firstM.position.x = -120 :
             firstM.position.x += 0.07
     }
