@@ -29,7 +29,7 @@ const enemiesMove = () => {
     // ENEMIES //
     if (enemies[0]) {
 
-        enemies[0].position.x += .5 + (scoreValue / 2000);
+        enemies[0].position.x += .5 + (scoreValue / 8000);
         if (enemies[0].position.x > 25) {
             // console.log('000000000000000000000000000000000')
             scoreValue > 400 ?
@@ -44,7 +44,7 @@ const enemiesMove = () => {
         }
     }
     if (enemies[1]) {
-        enemies[1].position.x += .5 + (scoreValue / 2000);
+        enemies[1].position.x += .5 + (scoreValue / 8000);
         if (enemies[1].position.x > 25) {
             // console.log('111111111111111111111111111111111')
             scoreValue > 400 ?
@@ -60,7 +60,7 @@ const enemiesMove = () => {
         }
     }
     if (enemies[2]) {
-        enemies[2].position.x += .5 + (scoreValue / 2000);
+        enemies[2].position.x += .5 + (scoreValue / 8000);
         if (enemies[2].position.x > 25) {
             // console.log('22222222222222222222222222222222222')
             scoreValue > 400 ?
@@ -74,7 +74,7 @@ const enemiesMove = () => {
         }
     }
     if (enemies[3]) {
-        enemies[3].position.x += .5 + (scoreValue / 2000);
+        enemies[3].position.x += .5 + (scoreValue / 8000);
         if (enemies[3].position.x > 25) {
             // console.log('3333333333333333333333333333333333333')
             scoreValue > 400 ?
@@ -208,12 +208,12 @@ export const moving = () => {
     if (runningFloor) {
         runningFloor.position.x > 130 ?
             runningFloor.position.x = -345 :
-            runningFloor.position.x += .5  + (scoreValue / 2000)
+            runningFloor.position.x += .5  + (scoreValue / 8000)
     }
     if (runningFloor1) {
         runningFloor1.position.x > 130 ?
             runningFloor1.position.x = -345 :
-            runningFloor1.position.x += .5  + (scoreValue / 2000)
+            runningFloor1.position.x += .5  + (scoreValue / 8000)
     }
 
     // mountain

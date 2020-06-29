@@ -196,12 +196,12 @@ const reset = () => {
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
     isCollapsed = false;
     isPlaying = true;
-   
-    enemies[0].position.x = -250
-    enemies[1].position.x = -220
-    enemies[2].position.x = -190
-    enemies[3].position.x = -170
-
+        
+    enemies[0].position.x = -180
+    enemies[1].position.x = -239
+    enemies[2].position.x = -311
+    enemies[3].position.x = -433
+    
 }
 
 // isPlaying = true;
@@ -241,7 +241,7 @@ const animate = () => {
             let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
-            
+           /*  
             if (eBox.intersectsBox(pBox)) {
                 
                 
@@ -262,7 +262,7 @@ const animate = () => {
                     localStorage.setItem('score', scoreValue.toFixed(0));
                 }
             
-            }
+            } */
             
         });
     }
@@ -309,13 +309,13 @@ const loadingObjects = () => {
         enemySpawner()
         setTimeout(() => {
             enemySpawner()
-        }, 2400);
+        }, 1900);
         setTimeout(() => {
             enemySpawner()
-        }, 4400);
+        }, 3500);
         setTimeout(() => {
             enemySpawner()
-        }, 6400);
+        }, 5400);
         stopLoadingObjectsLoop = false;
     }
     requestAnimationFrame(loadingObjects);
