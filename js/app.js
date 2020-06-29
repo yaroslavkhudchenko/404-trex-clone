@@ -208,8 +208,8 @@ const reset = () => {
 // main animate function ( game loop )
 
 const animate = () => {
-    console.log(camera.rotation)
-    console.log(camera.position)
+    // console.log(camera.rotation)
+    // console.log(camera.position)
     stats.begin();
     requestAnimationFrame(animate);
 

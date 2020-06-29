@@ -104,10 +104,10 @@ export const loader = () => {
     });
 
     // load cactus fbx (ONCE!!!)
-    new OBJLoader().load('models/cactus.obj', (object) => {
+    new FBXLoader().load('models/Cactus.fbx', (object) => {
 
         let material = new THREE.MeshBasicMaterial();
-        material.map = textureLoader.load(`models/cactus.png`);
+        material.map = textureLoader.load(`models/CactusTexture.png`);
 
        
         object.traverse(function (child) {
@@ -121,7 +121,7 @@ export const loader = () => {
             }
 
         });
-        object.scale.set(2,2,2);
+        object.scale.set(.004,.004,.004);
         object.castShadow = true; //default is false
         object.receiveShadow = false;
         cactusObject = object;
