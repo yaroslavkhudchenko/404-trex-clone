@@ -1,5 +1,5 @@
 import * as THREE from './libs/three.module.js';
-import { FBXLoader } from './libs/FBXLoader.js';
+import { OBJLoader } from './libs/OBJLoader.js';
 
 import { scene } from './app.js';
 
@@ -12,42 +12,26 @@ export let mixer;
 
 let material;
 export let playerModel;
-
+let textureLoader = new THREE.TextureLoader();
+let materialD = new THREE.MeshPhongMaterial({});
+materialD.map = textureLoader.load(`models/dinozaur-01.png`);
 export const player = () => {
     
-    // const TextureLoader = new THREE.TextureLoader();
 
-    // load a resource
-    /* loader.load(
-        // resource URL
-        'models/LowpolyRacoon_Albedo.png',
-
-        // onLoad callback
-        function (texture) {
-            // in this example we create the material when the texture is loaded
-            material = new THREE.MeshBasicMaterial({
-                map: texture
-            });
-        },
-
-        // onProgress callback currently not supported
-        undefined,
-
-        // onError callback
-        function (err) {
-            console.error('An error happened.');
-        }
-    ); */
 
     // player
-   /* let fbxLoader = new FBXLoader();
-    fbxLoader.load('models/trex.fbx', function (object) {
+   let fbxLoader = new OBJLoader();
+    fbxLoader.load('models/dinozaur-01.obj', 
+    
+    
+     (object) => {
 
-        mixer = new THREE.AnimationMixer(object);
+        //mixer = new THREE.AnimationMixer(object);
 
-        let action = mixer.clipAction(object.animations[0]);
-        action.play();
+        //let action = mixer.clipAction(object.animations[0]);
+        //action.play();
 
+         console.log(object)
 
         object.traverse(function (child) {
 
@@ -55,21 +39,25 @@ export const player = () => {
                 // child.material = material;
                 child.castShadow = true;
                 child.receiveShadow = false;
-
+                child.material = materialD;
             }
 
         });
-        object.position.set(22, 1.5, 22);
-        object.scale.set(1111, 1111, 1111);
-        object.rotation.set(1.5, 0, 1.5);
+         object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
+        object.scale.set(.2, .2, .2);
+        object.rotation.y = Math.PI / 1
         playerModel = object;
         scene.add(object);
         
-    }); */
+    },
+    (e) => console.log('progress ',e),
+    (error) => console.log('error while loading player model ',error)
+    
+    ); 
 
     // player hitbox
-    playerHitboxGeo = new THREE.CubeGeometry(3, 6, 1);
-    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.8, transparent:true })
+    playerHitboxGeo = new THREE.CubeGeometry(3.8, 3.7, 1);
+    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.2, transparent:true })
     playerHitboxMesh = new THREE.Mesh(playerHitboxGeo, playerHitboxMat);
     playerHitboxMesh.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
     scene.add(playerHitboxMesh);
