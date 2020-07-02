@@ -116,7 +116,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    // controls = new OrbitControls(camera, canvas);
+    controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -227,9 +227,10 @@ const animate = () => {
     moving();
 
     // running player
-/*     let delta = clock.getDelta();
-    if (mixer) mixer.update(delta); */
-    
+    let delta = clock.getDelta();
+    if (mixer)mixer.update(delta); 
+    //if(playerModel)playerModel.scale.set(.2, .2, .2);
+
     // update the score
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
@@ -243,7 +244,7 @@ const animate = () => {
             let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
-           /*  
+       /*       
             if (eBox.intersectsBox(pBox)) {
                 
                 
@@ -264,8 +265,8 @@ const animate = () => {
                     localStorage.setItem('score', scoreValue.toFixed(0));
                 }
             
-            } */
-            
+            } 
+             */
         });
     }
     renderer.render(scene, camera);

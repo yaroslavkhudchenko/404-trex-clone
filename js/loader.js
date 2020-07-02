@@ -10,9 +10,90 @@ export let runningFloor1 = null;
 export let bigTreeObject = null;
 
 export let cactusObject = null;
+
+
+export let playerModel1;
+export let playerModel2;
+
 let textureLoader = new THREE.TextureLoader();
 
 export const loader = async () => {
+
+    // player1
+    new OBJLoader().load('models/dinozaur-01.obj',
+
+        (object) => {
+
+            /*   mixer = new THREE.AnimationMixer(object);
+      
+              let action = mixer.clipAction(object.animations[0]);
+              action.play();
+       
+               console.log(object)
+       */
+            object.traverse(function (child) {
+
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material = materialD;
+                }
+
+            });
+            object.position.set(playerDefaultPosition.x, 3, playerDefaultPosition.z);
+            object.scale.set(.2, .2, .2);
+            object.rotation.y = Math.PI / 1
+            playerModel1 = object;
+
+        },
+        (xhr) => {
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                console.log('zero')
+                add();
+            }
+        },
+        (error) => console.log('error while loading player model ', error)
+
+    ); 
+    // player2
+    new OBJLoader().load('models/dinozaur-02.obj',
+
+        (object) => {
+
+            /*   mixer = new THREE.AnimationMixer(object);
+      
+              let action = mixer.clipAction(object.animations[0]);
+              action.play();
+       
+               console.log(object)
+       */
+            object.traverse(function (child) {
+
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material = materialD;
+                }
+
+            });
+            object.position.set(playerDefaultPosition.x, 3, playerDefaultPosition.z);
+            object.scale.set(.2, .2, .2);
+            object.rotation.y = Math.PI / 1
+            playerModel2 = object;
+
+        },
+        (xhr) => {
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                console.log('zero')
+                add();
+            }
+        },
+        (error) => console.log('error while loading player model ', error)
+
+    ); 
+
 
     // load a resource
     await new OBJLoader().load(
