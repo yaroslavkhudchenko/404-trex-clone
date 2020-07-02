@@ -7,7 +7,7 @@ import Stats from 'stats.js';
 import { loader, playerDefaultPosition, playerModel1, playerModel2, playerModel3, playerModelJump  } from './loader.js';
 import { moving } from './moving.js';
 import { player, playerHitboxMesh, mixer } from './player.js';
-import { enemySpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
+import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
 import { Environment } from './environment.js';
 export let camera, scene, renderer, controls;
 export let light;
@@ -27,7 +27,7 @@ export let collissionDetected = false;
 let scoreValueDisplay = document.querySelector('#scoreValue');
 export let scoreValue = 0;
 let clock = new THREE.Clock();
-
+let spawnPteros = true;
 
 
 // GLOBAL STATES 
@@ -256,6 +256,28 @@ const animate = () => {
     if (!isPlaying || isCollapsed)return;
 
     // console.log(frame)
+
+
+
+    // to trigger pteros
+    if(scoreValue > 10) {
+        if (spawnPteros) {
+            console.log('sp')
+            enemyPteroSpawner()
+            
+            setTimeout(() => {
+                enemyPteroSpawner()
+            }, 2400); setTimeout(() => {
+                enemyPteroSpawner()
+            }, 4400);
+        }
+        spawnPteros = false;
+    }
+
+
+
+
+
     
     if (playerModel1 && playerModel1 && playerModel3 && frame % 10 === 0 && !isJump) { // check for test
         playerModelJump.visible = false;
@@ -392,8 +414,8 @@ const loadingObjects = () => {
     if (!stopLoadingObjectsLoop)return;
     // console.log('---')
     // console.log(mainLoaded)
-    if (mainLoaded === 8) {
-        console.log('8');
+    if (mainLoaded === 9) {
+        console.log('9');
         //init();
 
         // init environment
@@ -409,9 +431,7 @@ const loadingObjects = () => {
         setTimeout(() => {
             enemySpawner()
         }, 3500);
-        setTimeout(() => {
-            enemySpawner()
-        }, 5400);
+        
         stopLoadingObjectsLoop = false;
     }
     requestAnimationFrame(loadingObjects);

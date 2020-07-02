@@ -206,7 +206,7 @@ export const loader = async () => {
 
             });
            
-            await scene.add(object);
+            // await scene.add(object);
             enemyObjbottom = object;
            
         },
@@ -221,7 +221,40 @@ export const loader = async () => {
         // called when loading has errors
         (error) => console.log('An error while loading twoCactuses => ', error)
     )
+    // load a ptero
+    await new OBJLoader().load(
+        // resource URL
+        'models/ptero-01.obj',
+        // called when resource is loaded
+        async (object) => {
+            // declare material
+            let materialD = new THREE.MeshPhongMaterial({
+                /*  color: 0xE7B251,
+                specular: 0xE7B251, */
+            });
+            materialD.map = textureLoader.load(`models/ptero-01.png`);
 
+            await object.traverse(function (node) {
+
+                if (node.isMesh) node.material = materialD;
+
+            });
+
+            //await scene.add(object);
+            enemyObjTopOne = object;
+
+        },
+        // called when loading is in progresses
+        (xhr) => {
+            //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses')
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                console.log('zero3')
+                add();
+            }
+        },
+        // called when loading has errors
+        (error) => console.log('An error while loading twoCactuses => ', error)
+    )
    
     // running floor
     await new OBJLoader().load(
