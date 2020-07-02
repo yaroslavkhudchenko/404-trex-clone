@@ -4,9 +4,9 @@
 import * as THREE from './libs/three.module.js';
 
 import Stats from 'stats.js';
-import { loader } from './loader.js';
+import { loader, playerDefaultPosition, playerModel1, playerModel2  } from './loader.js';
 import { moving } from './moving.js';
-import { player, playerHitboxMesh, playerDefaultPosition, mixer, playerModel } from './player.js';
+import { player, playerHitboxMesh, mixer } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
 import { Environment } from './environment.js';
 export let camera, scene, renderer, controls;
@@ -144,17 +144,23 @@ const keyPressedHandler = (e) => {
             // hit box
             playerHitboxMesh.scale.y = .6;
             playerHitboxMesh.position.y = 3;
-            playerModel.scale.set(.1,.1,.1)
+            playerModel1.scale.set(.1,.1,.1)
+            playerModel2.scale.set(.1, .1, .1)
+
             break;
         case "Space":
             if(isJump)return;
             isJump = true;
             playerHitboxMesh.position.y = 11;
-            playerModel.position.y = 8;
+            playerModel1.position.y = 8;
+            playerModel2.position.y = 8;
+
             // reset position y not to fly
             setTimeout(() => {
                 playerHitboxMesh.position.y = 5;
-                playerModel.position.y = 2;
+                playerModel1.position.y = 2;
+                playerModel2.position.y = 2;
+
                 isJump = false;
             }, 400);
             
@@ -167,7 +173,8 @@ const keyUpHandler = (e) => {
         setTimeout(() => {
             playerHitboxMesh.position.y = 5.5;
             playerHitboxMesh.scale.y = 1;
-            playerModel.scale.set(.2, .2, .2)
+            playerModel1.scale.set(.2, .2, .2)
+            playerModel2.scale.set(.2, .2, .2)
 
         }, 100);
         
@@ -299,8 +306,8 @@ const loadingObjects = () => {
     if (!stopLoadingObjectsLoop)return;
     // console.log('---')
     // console.log(mainLoaded)
-    if (mainLoaded === 5) {
-        console.log('4');
+    if (mainLoaded === 7) {
+        console.log('7');
         //init();
 
         // init environment

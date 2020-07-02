@@ -1,25 +1,15 @@
 import * as THREE from './libs/three.module.js';
 import { OBJLoader } from './libs/OBJLoader.js';
-import { playerModel1, playerModel2 } from './loader.js';
+import { playerModel1, playerModel2, playerDefaultPosition } from './loader.js';
 import { scene } from './app.js';
 /* import { OBJLoader } from './libs/OBJLoader.js';
  */
 export let playerHitboxMesh, playerHitboxGeo, playerHitboxMat;
-export const playerDefaultPosition = {
-    x: 9, y: 1, z: 0
-};
+
 
 export let mixer;
 
-let material;
-
-let textureLoader = new THREE.TextureLoader();
-let materialD = new THREE.MeshPhongMaterial({});
-materialD.map = textureLoader.load(`models/dinozaur-01.png`);
 export const player = () => {
-    
-
-
     
     scene.add(playerModel1);
     scene.add(playerModel2);

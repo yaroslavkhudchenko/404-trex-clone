@@ -14,7 +14,9 @@ export let cactusObject = null;
 
 export let playerModel1;
 export let playerModel2;
-
+export const playerDefaultPosition = {
+    x: 9, y: 1, z: 0
+};
 let textureLoader = new THREE.TextureLoader();
 
 export const loader = async () => {
@@ -31,6 +33,8 @@ export const loader = async () => {
        
                console.log(object)
        */
+            let materialD = new THREE.MeshPhongMaterial({opacity:0,transparent:true});
+            materialD.map = textureLoader.load(`models/dinozaur-01.png`);
             object.traverse(function (child) {
 
                 if (child.isMesh) {
@@ -49,7 +53,7 @@ export const loader = async () => {
         },
         (xhr) => {
             if ((xhr.loaded / xhr.total * 100) === 100) {
-                console.log('zero')
+                console.log('zero1')
                 add();
             }
         },
@@ -68,6 +72,8 @@ export const loader = async () => {
        
                console.log(object)
        */
+            let materialD = new THREE.MeshPhongMaterial({ opacity: 1, transparent: true});
+            materialD.map = textureLoader.load(`models/dinozaur-02.png`);
             object.traverse(function (child) {
 
                 if (child.isMesh) {
@@ -86,7 +92,7 @@ export const loader = async () => {
         },
         (xhr) => {
             if ((xhr.loaded / xhr.total * 100) === 100) {
-                console.log('zero')
+                console.log('zero2')
                 add();
             }
         },
@@ -122,7 +128,7 @@ export const loader = async () => {
         (xhr) => {
             //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses')
             if ((xhr.loaded / xhr.total * 100) === 100){
-                console.log('zero')
+                console.log('zero3')
                 add();
             }
         },
