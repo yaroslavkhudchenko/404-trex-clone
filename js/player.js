@@ -1,6 +1,6 @@
 import * as THREE from './libs/three.module.js';
 import { OBJLoader } from './libs/OBJLoader.js';
-import { playerModel1, playerModel2, playerDefaultPosition } from './loader.js';
+import { playerModel1, playerModel2, playerModel3, playerDefaultPosition } from './loader.js';
 import { scene } from './app.js';
 /* import { OBJLoader } from './libs/OBJLoader.js';
  */
@@ -13,6 +13,7 @@ export const player = () => {
     
     scene.add(playerModel1);
     scene.add(playerModel2);
+    scene.add(playerModel3);
 
     // player hitbox
     playerHitboxGeo = new THREE.CubeGeometry(3.8, 3.7, 1);
