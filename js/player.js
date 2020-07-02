@@ -19,6 +19,6 @@ export const player = () => {
     playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.2, transparent:true })
     playerHitboxMesh = new THREE.Mesh(playerHitboxGeo, playerHitboxMat);
     playerHitboxMesh.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
-    scene.add(playerHitboxMesh);
+    //scene.add(playerHitboxMesh);
     
 }

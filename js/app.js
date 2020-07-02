@@ -111,10 +111,11 @@ const init = () => { // init all required environment
     loader();// all objects loaders
 
     renderer = new THREE.WebGLRenderer({
+       /*  alpha: true, */
         antialias: true,
         canvas: canvas // render to existing canvas
     });
-    
+
     renderer.setClearColor(0xE6CBB2); // to have light background color
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.VSMShadowMap ;
@@ -238,15 +239,16 @@ const animate = () => {
 
     if (!isPlaying || isCollapsed)return;
 
-    console.log(frame)
-    if (playerModel1 && playerModel1 && frame % 9 === 0) { // check for test
+    // console.log(frame)
+    
+    if (playerModel1 && playerModel1 && frame % 13 === 0) { // check for test
         if (currentRunModel === 'one') {
-            playerModel1.children[0].material.opacity = .1;
-            playerModel2.children[0].material.opacity = 1;
+            playerModel1.visible = false;
+            playerModel2.visible = true;
             currentRunModel = 'two';
         } else {
-            playerModel1.children[0].material.opacity = 1;
-            playerModel2.children[0].material.opacity = .1;
+            playerModel1.visible = true;
+            playerModel2.visible = false;
             currentRunModel = 'one';
         }
     }

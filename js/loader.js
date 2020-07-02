@@ -33,7 +33,7 @@ export const loader = async () => {
        
                console.log(object)
        */
-            let materialD = new THREE.MeshPhongMaterial({ opacity:0,transparent:true});
+            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
             materialD.map = textureLoader.load(`models/dinozaur-01.png`);
             object.traverse(function (child) {
 
@@ -45,7 +45,7 @@ export const loader = async () => {
                 }
 
             });
-            object.position.set(playerDefaultPosition.x, 3, playerDefaultPosition.z);
+            object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
             object.scale.set(.2, .2, .2);
             object.rotation.y = Math.PI / 1
             playerModel1 = object;
@@ -72,7 +72,7 @@ export const loader = async () => {
        
                console.log(object)
        */
-            let materialD = new THREE.MeshPhongMaterial({ opacity: 1, transparent: true});
+            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 0, transparent: true} */);
             materialD.map = textureLoader.load(`models/dinozaur-02.png`);
             object.traverse(function (child) {
 
@@ -84,9 +84,10 @@ export const loader = async () => {
                 }
 
             });
-            object.position.set(playerDefaultPosition.x, 3, playerDefaultPosition.z);
+            object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
             object.scale.set(.2, .2, .2);
-            object.rotation.y = Math.PI / 1
+            object.rotation.y = Math.PI / 1;
+            object.visible = false;
             playerModel2 = object;
 
         },
