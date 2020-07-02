@@ -12,7 +12,7 @@ import {
     firstM
 } from './loader.js';
 import  { scoreValue } from './app.js';
-import { enemies, randomSelector } from './enemies.js';
+import { enemies, enemiesPtero, randomSelector } from './enemies.js';
 
 let enemiesInitialPos = {
     zero : -280,
@@ -46,10 +46,9 @@ const enemiesMove = () => {
     if (enemies[1]) {
         enemies[1].position.x += .5 + (scoreValue / 8000);
         if (enemies[1].position.x > 25) {
-            // console.log('111111111111111111111111111111111')
-            scoreValue > 400 ?
+            
                 enemies[1].position.y = randomSelector[Math.floor(Math.random() * Math.floor(2))]
-                : false
+              
             enemies[1].rotation.y += Math.random() * (30 - 15) + 30;
             
 

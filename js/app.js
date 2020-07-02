@@ -7,7 +7,7 @@ import Stats from 'stats.js';
 import { loader, playerDefaultPosition, playerModel1, playerModel2, playerModel3, playerModelJump  } from './loader.js';
 import { moving } from './moving.js';
 import { player, playerHitboxMesh, mixer } from './player.js';
-import { enemySpawner, enemies, intervalToMove } from './enemies.js';
+import { enemySpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
 import { Environment } from './environment.js';
 export let camera, scene, renderer, controls;
 export let light;
@@ -228,6 +228,7 @@ const reset = () => {
     isCollapsed = false;
     isPlaying = true;
         
+    // default cactuses
     enemies[0].position.x = -180
     enemies[1].position.x = -239
     enemies[2].position.x = -311
@@ -297,7 +298,7 @@ const animate = () => {
     scoreValue += .3;
 
     // collision check
-    if (enemies.length) {
+    if (enemies.length && enemiesPtero.length) {
 
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
         enemies.map((e, index) => {
@@ -329,6 +330,37 @@ const animate = () => {
             } 
              */
         });
+
+        enemiesPtero.map((e, index) => {
+
+            let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+            pBox.setFromObject(playerHitboxMesh);
+            eBox.setFromObject(e);
+            /*       
+                 if (eBox.intersectsBox(pBox)) {
+                     
+                     
+                     collapsedScreen.style.display = 'block';
+                     collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
+                     collapsedScreenButton.addEventListener('click',() => {
+                       
+                         reset();
+                         collapsedScreen.style.display = 'none';
+                     })
+     
+                     isCollapsed = true;
+                     isPlaying = false;
+                     let score = localStorage.getItem('score');
+     
+                     // if there is a value and that value is less than current
+                     if(score*1 < scoreValue) {
+                         localStorage.setItem('score', scoreValue.toFixed(0));
+                     }
+                 
+                 } 
+                  */
+        });
+
     }
     renderer.render(scene, camera);
 
