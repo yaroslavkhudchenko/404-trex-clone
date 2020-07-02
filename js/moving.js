@@ -15,12 +15,15 @@ import  { scoreValue } from './app.js';
 import { enemies, enemiesPtero, randomSelector } from './enemies.js';
 
 let enemiesInitialPos = {
-    zero : -180,
-    first: -199,
-    second: -111,
-    pteroOne: -133,
-    pteroTwo: -183,
-    pteroThree: -133
+    zero : -120,
+    first: -239,
+    
+    pteroOne: -180,
+    pteroTwo: -239,
+
+    second: -311,
+
+    pteroThree: -311
     
 }
 
@@ -32,10 +35,15 @@ const enemiesMove = () => {
 
         enemies[0].position.x += .5 + (scoreValue / 8000);
         if (enemies[0].position.x > 25) {
-
+            
             enemies[0].rotation.y += Math.random() * (30 - 15) + 30;
 
-            enemies[0].position.x = enemiesInitialPos.pteroThree - Math.random() * (-5 - -10) + -10
+            enemies[0].position.x = enemiesInitialPos.pteroThree - Math.random() * (-50 - -40) + -40
+
+            console.log('enemy 1 more')
+            console.log(enemies[0].position.x)
+
+
             enemiesInitialPos.zero = enemies[0].position.x;
         }
     }
@@ -48,29 +56,24 @@ const enemiesMove = () => {
             
 
 
-            enemies[1].position.x = enemiesInitialPos.zero - Math.random() * (-5 - -10) + -10//Math.random() * (-180 - -250) + -250
+            enemies[1].position.x = enemiesInitialPos.zero - Math.random() * (-50 - -40) + -40//Math.random() * (-180 - -250) + -250
             
+
+            console.log('enemy 2 more')
+            console.log(enemies[1].position.x)
+
+
             enemiesInitialPos.first = enemies[1].position.x;
         }
     }
-    if (enemies[2]) {
-        enemies[2].position.x += .5 + (scoreValue / 8000);
-        if (enemies[2].position.x > 25) {
-           
-            enemies[2].rotation.y += Math.random() * (30 - 15) + 30;
-
-
-            enemies[2].position.x = enemiesInitialPos.first - Math.random() * (-5 - -10) + -10//Math.random() * (-180 - -250) + -250
-            enemiesInitialPos.second = enemies[2].position.x;
-        }
-    }
+    
     if (enemiesPtero[0]) {
 
         enemiesPtero[0].position.x += .5 + (scoreValue / 8000);
         if (enemiesPtero[0].position.x > 25) {
 
 
-            enemiesPtero[0].position.x = enemiesInitialPos.second - Math.random() * (-5 - -10) + -10//Math.random() * (-180 - -250) + -250
+            enemiesPtero[0].position.x = enemiesInitialPos.first - Math.random() * (-50 - -40) + -40//Math.random() * (-180 - -250) + -250
             enemiesInitialPos.pteroOne = enemiesPtero[0].position.x;
         }
     } if (enemiesPtero[1]) {
@@ -78,15 +81,34 @@ const enemiesMove = () => {
         if (enemiesPtero[1].position.x > 25) {
 
 
-            enemiesPtero[1].position.x = enemiesInitialPos.pteroOne - Math.random() * (-5 - -10) + -10//Math.random() * (-180 - -250) + -250
+            enemiesPtero[1].position.x = enemiesInitialPos.pteroOne - Math.random() * (-50 - -40) + -40//Math.random() * (-180 - -250) + -250
             enemiesInitialPos.pteroTwo = enemiesPtero[1].position.x;
         }
-    } if (enemiesPtero[2]) {
+    } 
+    if (enemies[2]) {
+        enemies[2].position.x += .5 + (scoreValue / 8000);
+        if (enemies[2].position.x > 25) {
+
+            enemies[2].rotation.y += Math.random() * (30 - 15) + 30;
+
+
+            enemies[2].position.x = enemiesInitialPos.pteroTwo - Math.random() * (-50 - -40) + -40//Math.random() * (-180 - -250) + -250
+
+
+            console.log('enemy 3 more')
+            console.log(enemies[2].position.x)
+
+            enemiesInitialPos.second = enemies[2].position.x;
+        }
+    }
+    if (enemiesPtero[2]) {
         enemiesPtero[2].position.x += .5 + (scoreValue / 8000);
         if (enemiesPtero[2].position.x > 25) {
 
 
-            enemiesPtero[2].position.x = enemiesInitialPos.pteroTwo - Math.random() * (-5 - -10) + -10//Math.random() * (-180 - -250) + -250
+            enemiesPtero[2].position.x = enemiesInitialPos.second - Math.random() * (-50 - -40) + -40//Math.random() * (-180 - -250) + -250
+
+           
             enemiesInitialPos.pteroThree = enemiesPtero[2].position.x;
         }
     }

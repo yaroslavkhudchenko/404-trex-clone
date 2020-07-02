@@ -260,16 +260,10 @@ const animate = () => {
 
 
     // to trigger pteros
-    if(scoreValue > 10) {
+    if(scoreValue > 100) {
         if (spawnPteros) {
             console.log('sp')
-            enemyPteroSpawner()
             
-            setTimeout(() => {
-                enemyPteroSpawner()
-            }, 2400); setTimeout(() => {
-                enemyPteroSpawner()
-            }, 4400);
         }
         spawnPteros = false;
     }
@@ -429,9 +423,18 @@ const loadingObjects = () => {
             enemySpawner()
         }, 1900);
         setTimeout(() => {
-            enemySpawner()
+            enemyPteroSpawner()
         }, 3500);
-        
+
+        setTimeout(() => {
+            enemyPteroSpawner()
+        }, 5200); 
+        setTimeout(() => {
+            enemySpawner()
+        }, 6800);
+        setTimeout(() => {
+            enemyPteroSpawner()
+        }, 8600);
         stopLoadingObjectsLoop = false;
     }
     requestAnimationFrame(loadingObjects);
