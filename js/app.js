@@ -4,7 +4,7 @@
 import * as THREE from './libs/three.module.js';
 
 import Stats from 'stats.js';
-import { loader, playerDefaultPosition, playerModel1, playerModel2, playerModel3  } from './loader.js';
+import { loader, playerDefaultPosition, playerModel1, playerModel2, playerModel3, playerModelJump  } from './loader.js';
 import { moving } from './moving.js';
 import { player, playerHitboxMesh, mixer } from './player.js';
 import { enemySpawner, enemies, intervalToMove } from './enemies.js';
@@ -123,7 +123,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    controls = new OrbitControls(camera, canvas);
+     controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -160,18 +160,29 @@ const keyPressedHandler = (e) => {
             if(isJump)return;
             isJump = true;
             playerHitboxMesh.position.y = 11;
-            playerModel1.position.y = 8;
-            playerModel2.position.y = 8;
-            playerModel3.position.y = 8;
+            //playerModel1.position.y = 8;
+            //playerModel2.position.y = 8;
+            //playerModel3.position.y = 8;
+            playerModelJump.position.y = 8;
+
+            playerModel1.visible = false;
+            playerModel2.visible = false;
+            playerModel3.visible = false;
+            playerModelJump.visible = true;
+
 
             // reset position y not to fly
             setTimeout(() => {
                 playerHitboxMesh.position.y = 5;
-                playerModel1.position.y = 2;
-                playerModel2.position.y = 2;
-                playerModel3.position.y = 2;
+                //playerModel1.position.y = 2;
+                //playerModel2.position.y = 2;
+                //playerModel3.position.y = 2;
+                playerModelJump.position.y = 2;
 
                 isJump = false;
+                
+               
+
             }, 400);
             
             break;
@@ -245,7 +256,8 @@ const animate = () => {
 
     // console.log(frame)
     
-    if (playerModel1 && playerModel1 && playerModel3 && frame % 10 === 0) { // check for test
+    if (playerModel1 && playerModel1 && playerModel3 && frame % 10 === 0 && !isJump) { // check for test
+        playerModelJump.visible = false;
         if (currentRunModel === 'one') {
             playerModel1.visible = false;
             playerModel2.visible = true;
@@ -348,8 +360,8 @@ const loadingObjects = () => {
     if (!stopLoadingObjectsLoop)return;
     // console.log('---')
     // console.log(mainLoaded)
-    if (mainLoaded === 7) {
-        console.log('7');
+    if (mainLoaded === 8) {
+        console.log('8');
         //init();
 
         // init environment

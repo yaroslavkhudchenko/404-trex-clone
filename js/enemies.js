@@ -23,3 +23,5 @@ export const enemySpawner = () => {
     enemies.unshift(enemy); // unshift to global array to control if reach the pointer
 
 }
+// enemyObjTopOne
+// enemyObjTopTwo

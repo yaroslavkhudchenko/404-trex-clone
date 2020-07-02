@@ -4,6 +4,8 @@ import { OBJLoader } from './libs/OBJLoader.js';
 import { FBXLoader } from './libs/FBXLoader.js';
 import { add, scene } from './app.js';
 export let enemyObjbottom = null;
+export let enemyObjTopOne = null;
+export let enemyObjTopTwo = null;
 export let firstM = null;
 export let runningFloor = null;
 export let runningFloor1 = null;
@@ -15,6 +17,7 @@ export let cactusObject = null;
 export let playerModel1;
 export let playerModel2;
 export let playerModel3;
+export let playerModelJump;
 export const playerDefaultPosition = {
     x: 9, y: 1, z: 0
 };
@@ -144,7 +147,46 @@ export const loader = async () => {
         (error) => console.log('error while loading player model ', error)
 
     ); 
+    // player jump
+    new OBJLoader().load('models/dinozaur-jump.obj',
 
+        (object) => {
+
+            /*   mixer = new THREE.AnimationMixer(object);
+      
+              let action = mixer.clipAction(object.animations[0]);
+              action.play();
+       
+               console.log(object)
+       */
+            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
+            materialD.map = textureLoader.load(`models/dinozaur-01.png`);
+            object.traverse(function (child) {
+
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material = materialD;
+                }
+
+            });
+            object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
+            object.scale.set(.2, .2, .2);
+            object.rotation.y = Math.PI / 1
+            object.visible = false;
+            playerModelJump = object;
+
+        },
+        (xhr) => {
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                console.log('zero1')
+                add();
+            }
+        },
+        (error) => console.log('error while loading player model ', error)
+
+    ); 
     // load a resource
     await new OBJLoader().load(
         // resource URL
