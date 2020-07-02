@@ -17,6 +17,8 @@ export let add = () => {
     mainLoaded++;
 }
 
+
+
 import {OrbitControls} from './libs/OrbitControls';
 
 
@@ -26,10 +28,14 @@ let scoreValueDisplay = document.querySelector('#scoreValue');
 export let scoreValue = 0;
 let clock = new THREE.Clock();
 
+
+
 // GLOBAL STATES 
 let isPlaying = false;
 let isCollapsed = false
 let isJump = false;
+let currentRunModel = 'one';
+let frame = 0;
 
 let collapsedScreen = document.querySelector('#collapsedScreen');
 let collapsedScreenScore = document.querySelector('#finalScore');
@@ -217,6 +223,10 @@ const reset = () => {
 // main animate function ( game loop )
 
 const animate = () => {
+
+  
+
+    frame++;
     // console.log(camera.rotation)
     // console.log(camera.position)
     stats.begin();
@@ -228,8 +238,19 @@ const animate = () => {
 
     if (!isPlaying || isCollapsed)return;
 
+    console.log(frame)
+    if (playerModel1 && playerModel1 && frame % 9 === 0) { // check for test
+        if (currentRunModel === 'one') {
+            playerModel1.children[0].material.opacity = .1;
+            playerModel2.children[0].material.opacity = 1;
+            currentRunModel = 'two';
+        } else {
+            playerModel1.children[0].material.opacity = 1;
+            playerModel2.children[0].material.opacity = .1;
+            currentRunModel = 'one';
+        }
+    }
 
-   
     // check + movement for all the elements
     moving();
 

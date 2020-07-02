@@ -33,7 +33,7 @@ export const loader = async () => {
        
                console.log(object)
        */
-            let materialD = new THREE.MeshPhongMaterial({opacity:0,transparent:true});
+            let materialD = new THREE.MeshPhongMaterial({ opacity:0,transparent:true});
             materialD.map = textureLoader.load(`models/dinozaur-01.png`);
             object.traverse(function (child) {
 
