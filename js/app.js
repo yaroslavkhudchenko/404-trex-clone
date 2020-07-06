@@ -35,7 +35,7 @@ let isPlaying = false;
 let isCollapsed = false
 let isJump = false;
 let currentRunModel = 'one';
-let frame = 0;
+export let frame = 0;
 
 let collapsedScreen = document.querySelector('#collapsedScreen');
 let collapsedScreenScore = document.querySelector('#finalScore');

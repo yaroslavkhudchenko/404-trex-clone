@@ -11,56 +11,72 @@ import {
     runningFloor1,
     firstM
 } from './loader.js';
-import  { scoreValue } from './app.js';
+import  { scoreValue, frame } from './app.js';
 import { enemies, enemiesPtero, randomSelector } from './enemies.js';
 
 let enemiesInitialPos = {
-    zero : -120,
-    first: -239,
+    zero : 1,
+    first: 1,
     
-    pteroOne: -180,
-    pteroTwo: -239,
+    pteroOne: 1,
+    pteroTwo: 1,
 
-    second: -311,
+    second: 1,
 
-    pteroThree: -311
+    pteroThree: 1
     
 }
 
 
 
 let enemiesRespPos = {
-    max:-80,
-    min:-50
+    max:-150,
+    min:-125
 }
 
+let respPoint = -200;
+
+
+const checkForOthers  = () => {
+    let far = 0;
+    for(let i = 0; i<enemies.length; i++ ){
+        far = enemies[i].position.x < far ? enemies[i].position.x : far;
+    }
+    for (let i = 0; i < enemiesPtero.length; i++) {
+        far = enemiesPtero[i].position.x < far ? enemiesPtero[i].position.x : far;
+    }
+    console.log(`far ${far}`)
+    return far < -300 ? far + far / 100 * 20 : (-200 - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max);
+}
+
+
 const enemiesMove = () => {
-
-
-
-
-
 
 
     // ENEMIES //
     if (enemies[0]) {
 
-        enemies[0].position.x += .5 + (scoreValue / 8000);
+        enemies[0].position.x += .5 + (scoreValue / 15000);
         if (enemies[0].position.x > 25) {
-            
             enemies[0].rotation.y += Math.random() * (30 - 15) + 30;
 
-            enemies[0].position.x = enemiesInitialPos.pteroThree - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max
+
+
+
+            enemies[0].position.x = checkForOthers()//enemiesInitialPos.pteroThree - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max
+
+
+
 
             console.log('enemy 1 more')
             console.log(enemies[0].position.x)
 
-
-            enemiesInitialPos.zero = enemies[0].position.x;
+            /* enemiesInitialPos.pteroThree = 0;
+            enemiesInitialPos.zero = enemies[0].position.x; */
         }
     }
     if (enemies[1]) {
-        enemies[1].position.x += .5 + (scoreValue / 8000);
+        enemies[1].position.x += .5 + (scoreValue / 15000);
         if (enemies[1].position.x > 25) {
             
               
@@ -68,60 +84,67 @@ const enemiesMove = () => {
             
 
 
-            enemies[1].position.x = enemiesInitialPos.zero - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
-            
+            enemies[1].position.x = checkForOthers()//enemiesInitialPos.zero - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
 
             console.log('enemy 2 more')
             console.log(enemies[1].position.x)
+/* 
+            enemiesInitialPos.zero = 0;
 
-
-            enemiesInitialPos.first = enemies[1].position.x;
+            enemiesInitialPos.first = enemies[1].position.x; */
         }
     }
     
     if (enemiesPtero[0]) {
 
-        enemiesPtero[0].position.x += .5 + (scoreValue / 8000);
+        enemiesPtero[0].position.x += .5 + (scoreValue / 15000);
         if (enemiesPtero[0].position.x > 25) {
 
 
-            enemiesPtero[0].position.x = enemiesInitialPos.first - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
-            enemiesInitialPos.pteroOne = enemiesPtero[0].position.x;
+            enemiesPtero[0].position.x = checkForOthers()//enemiesInitialPos.first - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
+            
+            /* enemiesInitialPos.first = 0;
+
+            enemiesInitialPos.pteroOne = enemiesPtero[0].position.x; */
         }
     } if (enemiesPtero[1]) {
-        enemiesPtero[1].position.x += .5 + (scoreValue / 8000);
+        enemiesPtero[1].position.x += .5 + (scoreValue / 15000);
         if (enemiesPtero[1].position.x > 25) {
 
 
-            enemiesPtero[1].position.x = enemiesInitialPos.pteroOne - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
-            enemiesInitialPos.pteroTwo = enemiesPtero[1].position.x;
+            enemiesPtero[1].position.x = checkForOthers()//enemiesInitialPos.pteroOne - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
+            /* enemiesInitialPos.pteroOne = 0;
+
+            enemiesInitialPos.pteroTwo = enemiesPtero[1].position.x; */
         }
     } 
     if (enemies[2]) {
-        enemies[2].position.x += .5 + (scoreValue / 8000);
+        enemies[2].position.x += .5 + (scoreValue / 15000);
         if (enemies[2].position.x > 25) {
 
             enemies[2].rotation.y += Math.random() * (30 - 15) + 30;
 
 
-            enemies[2].position.x = enemiesInitialPos.pteroTwo - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
+            enemies[2].position.x = checkForOthers()//enemiesInitialPos.pteroTwo - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
 
 
             console.log('enemy 3 more')
             console.log(enemies[2].position.x)
 
-            enemiesInitialPos.second = enemies[2].position.x;
+/*             enemiesInitialPos.pteroTwo = 0;
+            enemiesInitialPos.second = enemies[2].position.x; */
         }
     }
     if (enemiesPtero[2]) {
-        enemiesPtero[2].position.x += .5 + (scoreValue / 8000);
+        enemiesPtero[2].position.x += .5 + (scoreValue / 15000);
         if (enemiesPtero[2].position.x > 25) {
 
 
-            enemiesPtero[2].position.x = enemiesInitialPos.second - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
+            enemiesPtero[2].position.x = checkForOthers()//enemiesInitialPos.second - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max//Math.random() * (-180 - -250) + -250
 
-           
-            enemiesInitialPos.pteroThree = enemiesPtero[2].position.x;
+            /* enemiesInitialPos.second = 0;
+
+            enemiesInitialPos.pteroThree = enemiesPtero[2].position.x; */
         }
     }
 }
@@ -245,12 +268,12 @@ export const moving = () => {
     if (runningFloor) {
         runningFloor.position.x > 130 ?
             runningFloor.position.x = -345 :
-            runningFloor.position.x += .5  + (scoreValue / 8000)
+            runningFloor.position.x += .5  + (scoreValue / 15000)
     }
     if (runningFloor1) {
         runningFloor1.position.x > 130 ?
             runningFloor1.position.x = -345 :
-            runningFloor1.position.x += .5  + (scoreValue / 8000)
+            runningFloor1.position.x += .5  + (scoreValue / 15000)
     }
 
     // mountain
