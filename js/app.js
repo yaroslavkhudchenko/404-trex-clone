@@ -123,7 +123,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-     controls = new OrbitControls(camera, canvas);
+    // controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -160,9 +160,7 @@ const keyPressedHandler = (e) => {
             if(isJump)return;
             isJump = true;
             playerHitboxMesh.position.y = 11;
-            //playerModel1.position.y = 8;
-            //playerModel2.position.y = 8;
-            //playerModel3.position.y = 8;
+           
             playerModelJump.position.y = 8;
 
             playerModel1.visible = false;
@@ -174,9 +172,7 @@ const keyPressedHandler = (e) => {
             // reset position y not to fly
             setTimeout(() => {
                 playerHitboxMesh.position.y = 5;
-                //playerModel1.position.y = 2;
-                //playerModel2.position.y = 2;
-                //playerModel3.position.y = 2;
+               
                 playerModelJump.position.y = 2;
 
                 isJump = false;
@@ -260,7 +256,7 @@ const animate = () => {
 
 
     // to trigger pteros
-    if(scoreValue > 100) {
+    if(scoreValue > 500) {
         if (spawnPteros) {
             console.log('sp')
             
