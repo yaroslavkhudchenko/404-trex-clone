@@ -7,14 +7,17 @@ import { scene } from './app.js';
 export let playerHitboxMesh, playerHitboxGeo, playerHitboxMat;
 
 
-export let mixer;
+//export let mixer;
 
 export const player = () => {
     
-    scene.add(playerModel1);
-    scene.add(playerModel2);
-    scene.add(playerModel3);
-    scene.add(playerModelJump);
+
+
+
+    // scene.add(playerModel1);
+    //scene.add(playerModel2);
+    //scene.add(playerModel3);
+    //scene.add(playerModelJump);
     // player hitbox
     playerHitboxGeo = new THREE.CubeGeometry(3.8, 3.7, 1);
     playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.2, transparent:true })

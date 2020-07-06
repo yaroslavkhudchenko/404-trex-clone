@@ -13,7 +13,7 @@ import {
     playerModel1,
     playerModel2,
     playerModel3,
-    playerModelJump 
+    playerModelJump
 } from './loader.js';
 
 import  { scoreValue, frame, isJump } from './app.js';
@@ -108,15 +108,16 @@ let decorationsInitialPos = {
     cactuses20:-100,
     cactuses21:-123
 }
-let randomDecorationPos = Math.random() * (-10 - -15) + -15;
+
 export const moving = () => {
+    
 
     // TREES
     if (bigTrees[0]) {
         bigTrees[0].position.x += .09;// * scoreValue / 10;
         if (bigTrees[0].position.x > 25) {
 
-            bigTrees[0].position.x = decorationsInitialPos.cactuses21 - randomDecorationPos
+            bigTrees[0].position.x = decorationsInitialPos.cactuses21 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.bigtree0 = bigTrees[0].position.x;
 
             bigTrees[0].rotation.y += Math.random() * (30 - 15) + 30;
@@ -126,7 +127,7 @@ export const moving = () => {
         bigTrees[1].position.x += .09;// * scoreValue / 10;
         if (bigTrees[1].position.x > 25) {
 
-            bigTrees[1].position.x = decorationsInitialPos.bigtree0 - randomDecorationPos
+            bigTrees[1].position.x = decorationsInitialPos.bigtree0 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.bigtree1 = bigTrees[1].position.x;
             
 
@@ -138,7 +139,7 @@ export const moving = () => {
         bigTrees[2].position.x += .09;// * scoreValue / 10;
         if (bigTrees[2].position.x > 25) {
 
-            bigTrees[2].position.x = decorationsInitialPos.bigtree1 - randomDecorationPos
+            bigTrees[2].position.x = decorationsInitialPos.bigtree1 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.bigtree2 = bigTrees[2].position.x;
             
 
@@ -149,7 +150,7 @@ export const moving = () => {
         bigTrees[3].position.x += .09;// * scoreValue / 10;
         if (bigTrees[3].position.x > 25) {
 
-            bigTrees[3].position.x = decorationsInitialPos.bigtree2 - randomDecorationPos
+            bigTrees[3].position.x = decorationsInitialPos.bigtree2 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.bigtree3 = bigTrees[3].position.x;
 
 
@@ -166,7 +167,7 @@ export const moving = () => {
         cactuses1[0].position.x += .09; // * scoreValue / 10;
         if (cactuses1[0].position.x > 25) {
 
-            cactuses1[0].position.x = decorationsInitialPos.bigtree3 - randomDecorationPos
+            cactuses1[0].position.x = decorationsInitialPos.bigtree3 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.cactuses10 = cactuses1[0].position.x;
 
             cactuses1[0].rotation.y += Math.random() * (30 - 15) + 30;
@@ -176,7 +177,7 @@ export const moving = () => {
         cactuses1[1].position.x += .09; // * scoreValue / 10;
         if (cactuses1[1].position.x > 25) {
 
-            cactuses1[1].position.x = decorationsInitialPos.cactuses10 - randomDecorationPos
+            cactuses1[1].position.x = decorationsInitialPos.cactuses10 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.cactuses11 = cactuses1[1].position.x;
 
             cactuses1[1].rotation.y += Math.random() * (30 - 15) + 30;
@@ -187,7 +188,7 @@ export const moving = () => {
         cactuses2[0].position.x += .09; // * scoreValue / 10;
         if (cactuses2[0].position.x > 25) {
 
-            cactuses2[0].position.x = decorationsInitialPos.cactuses11 - randomDecorationPos
+            cactuses2[0].position.x = decorationsInitialPos.cactuses11 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.cactuses20 = cactuses2[0].position.x;
 
             cactuses2[0].rotation.y += Math.random() * (30 - 15) + 30;
@@ -197,7 +198,7 @@ export const moving = () => {
         cactuses2[1].position.x += .09; // * scoreValue / 10;
         if (cactuses2[1].position.x > 25) {
 
-            cactuses2[1].position.x = decorationsInitialPos.cactuses20 - randomDecorationPos
+            cactuses2[1].position.x = decorationsInitialPos.cactuses20 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.cactuses21 = cactuses2[0].position.x;
 
 
@@ -227,15 +228,15 @@ export const moving = () => {
     }
 
     enemiesMove();
+    
 
-
-    console.log(scoreValue.toFixed(0))
+    //console.log(scoreValue.toFixed(0))
     // changing models to have animation effect
-    if (
+   /*  if (
             playerModel1 && 
-            playerModel1 && 
+            playerModel2 && 
             playerModel3 && 
-            frame % 5 === 0 && 
+            frame % 15 === 0 && 
             !isJump
         ) { // check for test
         playerModelJump.visible = false;
@@ -258,7 +259,7 @@ export const moving = () => {
             playerModel1.visible = true;
             currentRunModel = 'one';
         }
-    }
+    } */
 
 
 

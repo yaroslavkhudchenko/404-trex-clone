@@ -4,9 +4,9 @@
 import * as THREE from './libs/three.module.js';
 
 import Stats from 'stats.js';
-import { loader, playerDefaultPosition, playerModelJump, playerModel1,playerModel2,playerModel3 } from './loader.js';
+import { loader, playerDefaultPosition, playerModelJump, playerModel1, playerModel2, playerModel3, mixer } from './loader.js';
 import { moving } from './moving.js';
-import { player, playerHitboxMesh, mixer } from './player.js';
+import { player, playerHitboxMesh } from './player.js';
 import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
 import { Environment } from './environment.js';
 export let camera, scene, renderer, controls;
@@ -102,6 +102,12 @@ const init = () => { // init all required environment
     scene.add(DLight);
     scene.add(DLightTargetObject);
 
+
+
+
+    
+
+
     // add fog
     scene.fog = new THREE.Fog(0xE7B251, 1, 125);
 
@@ -123,7 +129,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    // controls = new OrbitControls(camera, canvas);
+    controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -234,16 +240,15 @@ const reset = () => {
 
 // isPlaying = true;
 // main animate function ( game loop )
-
+let deltaS = new THREE.Clock().getDelta();
 const animate = () => {
+    requestAnimationFrame(animate);
 
   
-
     frame++;
     // console.log(camera.rotation)
     // console.log(camera.position)
     stats.begin();
-    requestAnimationFrame(animate);
 
     // console.log('in animate we are')
     // console.log(!isPlaying)
@@ -267,15 +272,12 @@ const animate = () => {
 
 
 
-
     
  
     // check + movement for all the elements
     moving();
 
-    // running player
-    let delta = clock.getDelta();
-    if (mixer)mixer.update(delta); 
+    
     //if(playerModel)playerModel.scale.set(.2, .2, .2);
 
     // update the score
@@ -347,6 +349,10 @@ const animate = () => {
         });
 
     }
+    deltaS=.005
+    console.log(new THREE.Clock().getDelta());
+    // running player
+    if (mixer)mixer.update(deltaS);
     renderer.render(scene, camera);
 
     stats.end();
@@ -374,11 +380,12 @@ document.addEventListener('keyup', keyUpHandler);
 
 let stopLoadingObjectsLoop = true;
 const loadingObjects = () => {
+    
     if (!stopLoadingObjectsLoop)return;
     // console.log('---')
     // console.log(mainLoaded)
-    if (mainLoaded === 9) {
-        console.log('9');
+    if (mainLoaded === 10) {
+        console.log('10');
         //init();
 
         // init environment
@@ -409,6 +416,6 @@ const loadingObjects = () => {
     requestAnimationFrame(loadingObjects);
 }
 
+loadingObjects()
 init();
 animate();
-loadingObjects()

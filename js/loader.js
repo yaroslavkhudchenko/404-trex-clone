@@ -22,21 +22,66 @@ export const playerDefaultPosition = {
     x: 9, y: 1, z: 0
 };
 let textureLoader = new THREE.TextureLoader();
-
+export let mixer;
 export const loader = async () => {
+    
+    // player1
+    new FBXLoader().load('models/Dino_cube_test.fbx',
+
+        (object) => {
+
+
+            mixer = new THREE.AnimationMixer(object);
+            // Play a specific animation
+            let clip = object.animations[0];
+            let action = mixer.clipAction(clip);
+            console.log(action)
+            action.play();
+
+            console.log(object)
+       
+            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
+            //materialD.map = textureLoader.load(`models/dinozaur-01.png`);
+            object.traverse(function (child) {
+
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material = materialD;
+                    child.material.skinning = true;
+                }
+
+            });
+            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
+            object.scale.set(.1, .1, .1);
+            object.rotation.y = Math.PI / 1
+            object.rotation.x = -.03
+            playerModel1 = object;
+            scene.add(object);
+          
+
+
+
+        },
+        (xhr) => {
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                console.log('zero1')
+                add();
+            }
+        },
+        (error) => console.log('error while loading player model ', error)
+
+    );
+
+
 
     // player1
     new OBJLoader().load('models/dinozaur-01.obj',
 
         (object) => {
 
-            /*   mixer = new THREE.AnimationMixer(object);
-      
-              let action = mixer.clipAction(object.animations[0]);
-              action.play();
-       
-               console.log(object)
-       */
+   
             let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
             materialD.map = textureLoader.load(`models/dinozaur-01.png`);
             object.traverse(function (child) {
@@ -53,7 +98,7 @@ export const loader = async () => {
             object.scale.set(.2, .2, .2);
             object.rotation.y = Math.PI / 1
             object.rotation.x = -.03
-            playerModel1 = object;
+            //playerModel1 = object;
 
         },
         (xhr) => {
@@ -64,19 +109,13 @@ export const loader = async () => {
         },
         (error) => console.log('error while loading player model ', error)
 
-    ); 
+    );
     // player2
     new OBJLoader().load('models/dinozaur-02.obj',
 
         (object) => {
 
-            /*   mixer = new THREE.AnimationMixer(object);
-      
-              let action = mixer.clipAction(object.animations[0]);
-              action.play();
-       
-               console.log(object)
-       */
+         
             let materialD = new THREE.MeshPhongMaterial(/* { opacity: 0, transparent: true} */);
             materialD.map = textureLoader.load(`models/dinozaur-02.png`);
             object.traverse(function (child) {
@@ -105,19 +144,13 @@ export const loader = async () => {
         },
         (error) => console.log('error while loading player model ', error)
 
-    ); 
+    );
     // player3
     new OBJLoader().load('models/dinozaur-03.obj',
 
         (object) => {
 
-            /*   mixer = new THREE.AnimationMixer(object);
-      
-              let action = mixer.clipAction(object.animations[0]);
-              action.play();
-       
-               console.log(object)
-       */
+         
             let materialD = new THREE.MeshPhongMaterial(/* { opacity: 0, transparent: true} */);
             materialD.map = textureLoader.load(`models/dinozaur-03.png`);
             object.traverse(function (child) {
@@ -152,13 +185,7 @@ export const loader = async () => {
 
         (object) => {
 
-            /*   mixer = new THREE.AnimationMixer(object);
-      
-              let action = mixer.clipAction(object.animations[0]);
-              action.play();
-       
-               console.log(object)
-       */
+          
             let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
             materialD.map = textureLoader.load(`models/dinozaur-01.png`);
             object.traverse(function (child) {
