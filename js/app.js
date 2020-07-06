@@ -4,7 +4,7 @@
 import * as THREE from './libs/three.module.js';
 
 import Stats from 'stats.js';
-import { loader, playerDefaultPosition, playerModel1, playerModel2, playerModel3, playerModelJump  } from './loader.js';
+import { loader, playerDefaultPosition, playerModelJump, playerModel1,playerModel2,playerModel3 } from './loader.js';
 import { moving } from './moving.js';
 import { player, playerHitboxMesh, mixer } from './player.js';
 import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
@@ -33,8 +33,8 @@ let spawnPteros = true;
 // GLOBAL STATES 
 let isPlaying = false;
 let isCollapsed = false
-let isJump = false;
-let currentRunModel = 'one';
+export let isJump = false;
+
 export let frame = 0;
 
 let collapsedScreen = document.querySelector('#collapsedScreen');
@@ -269,34 +269,7 @@ const animate = () => {
 
 
     
-    if (playerModel1 && playerModel1 && playerModel3 && frame % 10 === 0 && !isJump) { // check for test
-        playerModelJump.visible = false;
-        if (currentRunModel === 'one') {
-            playerModel1.visible = false;
-            playerModel2.visible = true;
-            currentRunModel = 'two';
-
-        } else if (currentRunModel === 'two') {
-            playerModel2.visible = false;
-            playerModel3.visible = true;
-            currentRunModel = 'three';
-
-        } else if (currentRunModel === 'three') {
-            playerModel3.visible = false;
-            playerModel2.visible = true;
-            currentRunModel = 'four';
-
-
-        } else {
-
-            playerModel2.visible = false;
-            playerModel1.visible = true;
-
-            currentRunModel = 'one';
-
-        }
-    }
-
+ 
     // check + movement for all the elements
     moving();
 
