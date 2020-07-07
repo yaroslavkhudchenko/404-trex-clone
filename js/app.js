@@ -169,7 +169,7 @@ const keyPressedHandler = (e) => {
             low = true;
             break;
         case "Space":
-            if(isJump)return;
+            if (isJump || low)return;
             isJump = true;
             playerHitboxMesh.position.y = 11;
            
