@@ -5,7 +5,7 @@ export let backMusicController = null;
 export let jumpMusicController = null;
 export let collisionMusicController = null;
 
-export const music = () => {
+export const music = async () => {
     // create an AudioListener and add it to the camera
     let listener = new THREE.AudioListener();
     camera.add(listener);
@@ -15,7 +15,7 @@ export const music = () => {
 
     // load a sound and set it as the Audio object's buffer
     let audioLoader = new THREE.AudioLoader();
-    audioLoader.load('audio/back.mp3', function (buffer) {
+    await audioLoader.load('audio/back.mp3', function (buffer) {
         backMusicController.setBuffer(buffer);
         backMusicController.setLoop(true);
         backMusicController.setVolume(0.5);
@@ -26,7 +26,7 @@ export const music = () => {
     jumpMusicController= new THREE.Audio(listener);
 
     // load a sound and set it as the Audio object's buffer
-    audioLoader.load('audio/jump.wav', function (buffer) {
+    await audioLoader.load('audio/jump.wav', function (buffer) {
         jumpMusicController.setBuffer(buffer);
         jumpMusicController.setLoop(false);
         jumpMusicController.setVolume(1);
@@ -36,10 +36,12 @@ export const music = () => {
     collisionMusicController = new THREE.Audio(listener);
 
     // load a sound and set it as the Audio object's buffer
-    audioLoader.load('audio/jump.wav', function (buffer) {
+    await audioLoader.load('audio/jump.wav', function (buffer) {
         collisionMusicController.setBuffer(buffer);
         collisionMusicController.setLoop(false);
         collisionMusicController.setVolume(1);
     })
 
+
+    document.querySelector(".startGameButton").style.display = 'block';
 }
