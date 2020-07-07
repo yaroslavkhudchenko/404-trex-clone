@@ -316,7 +316,7 @@ export const loader = async () => {
 
           
             let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
-            materialD.map = textureLoader.load(`models/dinozaur-01.png`);
+            materialD.map = textureLoader.load(`models/dinozaur-jump.png`);
             object.traverse(function (child) {
 
                 if (child.isMesh) {

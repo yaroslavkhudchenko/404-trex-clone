@@ -21,6 +21,7 @@ export let mainLoaded = 0;
 export let add = () => {
     mainLoaded++;
 }
+import { backMusic } from './sounds.js';
 
 
 
@@ -376,7 +377,8 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
 
     startScreen.style.display = 'none';
     isPlaying = true;
-       
+    backMusic();
+
 })
 
 
@@ -422,6 +424,7 @@ const loadingObjects = () => {
             enemyPteroSpawner()
         }, 8600);
         stopLoadingObjectsLoop = false;
+
     }
     requestAnimationFrame(loadingObjects);
 }
