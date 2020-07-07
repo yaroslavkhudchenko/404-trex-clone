@@ -20,6 +20,7 @@ export const music = async () => {
         backMusicController.setLoop(true);
         backMusicController.setVolume(0.5);
         // backMusicController.play();
+         document.querySelector(".startGameButton").style.display = "block";
     })
 
     // create a global audio source
@@ -43,5 +44,5 @@ export const music = async () => {
     })
 
 
-    document.querySelector(".startGameButton").style.display = 'block';
+   
 }
