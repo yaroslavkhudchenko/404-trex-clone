@@ -2,7 +2,6 @@
   "name": "threejsrunner",
   "version": "1.0.0",
   "description": "",
-  "main": "./js/app.js",
   "engines": {
     "npm": "6.9.0",
     "node": "10.16.3"
