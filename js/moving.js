@@ -232,7 +232,7 @@ export const moving = () => {
 
     //console.log(scoreValue.toFixed(0))
     // changing models to have animation effect
-   /*  if (
+    if (
             playerModel1 && 
             playerModel2 && 
             playerModel3 && 
@@ -259,7 +259,7 @@ export const moving = () => {
             playerModel1.visible = true;
             currentRunModel = 'one';
         }
-    } */
+    }
 
 
 

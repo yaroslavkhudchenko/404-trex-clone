@@ -66,41 +66,41 @@ const init = () => { // init all required environment
     ) */
 
     camera.position.set(
-        11.107887494115303,
-        10.597672258150979,
-        -13.287483538618204
+        13.442050892123401,
+        13.201902698427668,
+        -11.023466152057228
     )
     camera.rotation.set(
-        -2.862817515434483,
-        0.6801154027308529,
-        2.9634955878264626
+        -2.531166642108956,
+        0.6564915962210566,
+        2.7380577049721806
     )
     
     // create scene
      scene = new THREE.Scene();
 
     // lights
-    let DLight = new THREE.DirectionalLight(0xedc9af , .5);
+    let DLight = new THREE.DirectionalLight(0xE7B251 , .5);
     let DLightTargetObject = new THREE.Object3D();
-    DLight.position.set(-50, 30, -30);
-    DLight.target = DLightTargetObject;
-    DLightTargetObject.position.set(65, 9, 50);
+    DLight.position.set(-20, 60, -30);
+    //DLight.target = DLightTargetObject;
+    //DLightTargetObject.position.set(12, 0, 54);
 
     // create shadows on objects
-    DLight.castShadow = true;
-    DLight.shadow.radius = 1;
+/*     DLight.castShadow = true;
+    DLight.shadow.radius =2;
     DLight.shadow.mapSize.width = 1024 * 1;
     DLight.shadow.mapSize.height = 1024 * 1;
     DLight.shadow.camera.scale.y = 10;
     DLight.shadow.camera.scale.x = 20;
     DLight.shadow.camera.near = 0;
-    DLight.shadow.camera.far = 200;
+    DLight.shadow.camera.far = 200; */
     // ambient light(everywhere)
     let ALight = new THREE.AmbientLight(0xedc9af, 1.5);
 
-    scene.add(ALight);
+    //scene.add(ALight);
     scene.add(DLight);
-    scene.add(DLightTargetObject);
+    //scene.add(DLightTargetObject);
 
 
 
@@ -122,7 +122,7 @@ const init = () => { // init all required environment
         canvas: canvas // render to existing canvas
     });
 
-    renderer.setClearColor(0xE6CBB2); // to have light background color
+    //renderer.setClearColor(0xE6CBB2); // to have light background color
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.VSMShadowMap ;
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -240,7 +240,6 @@ const reset = () => {
 
 // isPlaying = true;
 // main animate function ( game loop )
-let deltaS = new THREE.Clock().getDelta();
 const animate = () => {
     requestAnimationFrame(animate);
 
@@ -349,13 +348,17 @@ const animate = () => {
         });
 
     }
-    deltaS=.005
-    console.log(new THREE.Clock().getDelta());
+    //deltaS=.009
+    //console.log(clock.getDelta());
     // running player
-    if (mixer)mixer.update(deltaS);
+    if (mixer) mixer.update(clock.getDelta());
     renderer.render(scene, camera);
 
     stats.end();
+
+
+    // console.log(camera.rotation)
+    // console.log(camera.position)
 }
 
 

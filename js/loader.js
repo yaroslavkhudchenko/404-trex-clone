@@ -24,7 +24,7 @@ export const playerDefaultPosition = {
 let textureLoader = new THREE.TextureLoader();
 export let mixer;
 export const loader = async () => {
-    
+  /*   
     // player1
     new FBXLoader().load('models/Dino_cube_test.fbx',
 
@@ -40,8 +40,10 @@ export const loader = async () => {
 
             console.log(object)
        
-            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
-            //materialD.map = textureLoader.load(`models/dinozaur-01.png`);
+            let materialD = new THREE.MeshPhongMaterial();
+        let texture = textureLoader.load(`models/dinozaur-01.png`);
+            materialD.map = texture;
+          
             object.traverse(function (child) {
 
                 if (child.isMesh) {
@@ -50,10 +52,11 @@ export const loader = async () => {
                     child.receiveShadow = false;
                     child.material = materialD;
                     child.material.skinning = true;
+                    
                 }
 
             });
-            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
+            object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
             object.scale.set(.1, .1, .1);
             object.rotation.y = Math.PI / 1
             object.rotation.x = -.03
@@ -75,7 +78,7 @@ export const loader = async () => {
     );
 
 
-
+ */
     // player1
     new OBJLoader().load('models/dinozaur-01.obj',
 
@@ -98,7 +101,7 @@ export const loader = async () => {
             object.scale.set(.2, .2, .2);
             object.rotation.y = Math.PI / 1
             object.rotation.x = -.03
-            //playerModel1 = object;
+            playerModel1 = object;
 
         },
         (xhr) => {
