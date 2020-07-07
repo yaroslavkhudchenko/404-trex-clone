@@ -34,7 +34,7 @@ const farFloors = [
     {
         position: {
             x: -55,
-            y:  2,
+            y:  3,
             z: 10
         },
         scale: {

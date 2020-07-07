@@ -303,7 +303,7 @@ export const loader = async () => {
             });
             object.material = materialD;
             object.receiveShadow = true;
-            object.position.set(-120, -2 ,-13)
+            object.position.set(-120, 1 ,-13)
             
             object.scale.set(8,8,8)
             object.rotation.y = Math.PI / 2;
@@ -312,7 +312,7 @@ export const loader = async () => {
             scene.add(object);
 
             runningFloor1 = runningFloor.clone();
-            runningFloor1.position.set(-358, -2, -13)
+            runningFloor1.position.set(-358, 1, -13)
 
             scene.add(runningFloor1)
            

@@ -129,7 +129,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    controls = new OrbitControls(camera, canvas);
+    // controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
