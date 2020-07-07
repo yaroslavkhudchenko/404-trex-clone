@@ -66,44 +66,45 @@ const init = () => { // init all required environment
     ) */
 
     camera.position.set(
-        13.442050892123401,
-        13.201902698427668,
-        -11.023466152057228
+        12.812632627090226,
+        15.972268469235177,
+        -9.39261128834728
     )
     camera.rotation.set(
-        -2.531166642108956,
-        0.6564915962210566,
-        2.7380577049721806
+        -2.496329585729413,
+        0.6314816254240349,
+        2.723419319960275
     )
     
     // create scene
      scene = new THREE.Scene();
 
     // lights
-    let DLight = new THREE.DirectionalLight(0xE7B251 , .5);
+    let DLight = new THREE.DirectionalLight(0xC19A4B , .5);
     let DLightTargetObject = new THREE.Object3D();
-    DLight.position.set(-20, 60, -30);
-    //DLight.target = DLightTargetObject;
-    //DLightTargetObject.position.set(12, 0, 54);
-
-    // create shadows on objects
-/*     DLight.castShadow = true;
-    DLight.shadow.radius =2;
+    DLight.position.set(-40, 60, -120);
+    DLight.target = DLightTargetObject;
+    DLightTargetObject.position.set(10, 2, 10);
+    DLight.castShadow = true;
+    DLight.shadow.radius = 2;
+     // create shadows on objects
+    DLight.castShadow = true;
+    DLight.shadow.radius =5;
     DLight.shadow.mapSize.width = 1024 * 1;
     DLight.shadow.mapSize.height = 1024 * 1;
     DLight.shadow.camera.scale.y = 10;
     DLight.shadow.camera.scale.x = 20;
     DLight.shadow.camera.near = 0;
-    DLight.shadow.camera.far = 200; */
-    // ambient light(everywhere)
-    let ALight = new THREE.AmbientLight(0xedc9af, 1.5);
+    DLight.shadow.camera.far = 200; 
+    // // ambient light(everywhere)
+    let ALight = new THREE.AmbientLight(0xccb5ac, 1);
+    //let h = new THREE.DirectionalLightHelper(DLight,.5);
+    scene.add(ALight);
+    //scene.add(h)
+    scene.add(DLightTargetObject);
 
-    //scene.add(ALight);
+
     scene.add(DLight);
-    //scene.add(DLightTargetObject);
-
-
-
 
     
 
@@ -137,7 +138,6 @@ const init = () => { // init all required environment
     let pointer = new THREE.Mesh(pointerGeo, pointerMat);
     pointer.position.set(25, 1, 0);
     scene.add(pointer);
-
     // on window resize
     window.addEventListener('resize', onWindowResize, false);
 }
@@ -167,7 +167,7 @@ const keyPressedHandler = (e) => {
             isJump = true;
             playerHitboxMesh.position.y = 11;
            
-            playerModelJump.position.y = 8;
+            playerModelJump.position.y = 11;
 
             playerModel1.visible = false;
             playerModel2.visible = false;
@@ -179,7 +179,7 @@ const keyPressedHandler = (e) => {
             setTimeout(() => {
                 playerHitboxMesh.position.y = 5;
                
-                playerModelJump.position.y = 2;
+                playerModelJump.position.y = 5;
 
                 isJump = false;
                 
@@ -387,8 +387,8 @@ const loadingObjects = () => {
     if (!stopLoadingObjectsLoop)return;
     // console.log('---')
     // console.log(mainLoaded)
-    if (mainLoaded === 10) {
-        console.log('10');
+    if (mainLoaded === 12) {
+        console.log('12');
         //init();
 
         // init environment

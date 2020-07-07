@@ -15,7 +15,7 @@ export const enemySpawner = () => {
     // enemy.rotation.set(0,0,0)
 
     // set position
-    enemy.position.set(-100, 2, 0);
+    enemy.position.set(-100, 5, 0);
     enemy.castShadow = true; //default is false
     enemy.receiveShadow = false;
     scene.add(enemy);
@@ -32,7 +32,7 @@ export const enemyPteroSpawner = () => {
     enemy.rotation.set(0, 0, 0)
 
     // set position
-    enemy.position.set(-100, 6, 0);
+    enemy.position.set(-100, 9, 0);
     enemy.castShadow = true; //default is false
     enemy.receiveShadow = false;
     scene.add(enemy);

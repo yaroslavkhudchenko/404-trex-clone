@@ -3,9 +3,14 @@ import * as THREE from './libs/three.module.js';
 import { OBJLoader } from './libs/OBJLoader.js';
 import { FBXLoader } from './libs/FBXLoader.js';
 import { add, scene } from './app.js';
+
+
 export let enemyObjbottom = null;
+
 export let enemyObjTopOne = null;
 export let enemyObjTopTwo = null;
+export let enemyObjTopThree = null;
+
 export let firstM = null;
 export let runningFloor = null;
 export let runningFloor1 = null;
@@ -80,13 +85,13 @@ export const loader = async () => {
 
  */
     // player1
-    new OBJLoader().load('models/dinozaur-01.obj',
+    new OBJLoader().load('models/test/dino_1.obj',
 
         (object) => {
 
    
             let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
-            materialD.map = textureLoader.load(`models/dinozaur-01.png`);
+            materialD.map = textureLoader.load(`models/test/dino_1.png`);
             object.traverse(function (child) {
 
                 if (child.isMesh) {
@@ -97,7 +102,8 @@ export const loader = async () => {
                 }
 
             });
-            object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
+            
+            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
             object.scale.set(.2, .2, .2);
             object.rotation.y = Math.PI / 1
             object.rotation.x = -.03
@@ -106,7 +112,7 @@ export const loader = async () => {
         },
         (xhr) => {
             if ((xhr.loaded / xhr.total * 100) === 100) {
-                console.log('zero1')
+                //console.log('zero1')
                 add();
             }
         },
@@ -114,13 +120,13 @@ export const loader = async () => {
 
     );
     // player2
-    new OBJLoader().load('models/dinozaur-02.obj',
+    new OBJLoader().load('models/test/dino_2.obj',
 
         (object) => {
 
          
             let materialD = new THREE.MeshPhongMaterial(/* { opacity: 0, transparent: true} */);
-            materialD.map = textureLoader.load(`models/dinozaur-02.png`);
+            materialD.map = textureLoader.load(`models/test/dino_2.png`);
             object.traverse(function (child) {
 
                 if (child.isMesh) {
@@ -131,7 +137,7 @@ export const loader = async () => {
                 }
 
             });
-            object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
+            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
             object.scale.set(.2, .2, .2);
             object.rotation.y = Math.PI / 1;
 
@@ -141,7 +147,7 @@ export const loader = async () => {
         },
         (xhr) => {
             if ((xhr.loaded / xhr.total * 100) === 100) {
-                console.log('zero2')
+                //console.log('zero2')
                 add();
             }
         },
@@ -149,13 +155,13 @@ export const loader = async () => {
 
     );
     // player3
-    new OBJLoader().load('models/dinozaur-03.obj',
+    new OBJLoader().load('models/test/dino_3.obj',
 
         (object) => {
 
          
             let materialD = new THREE.MeshPhongMaterial(/* { opacity: 0, transparent: true} */);
-            materialD.map = textureLoader.load(`models/dinozaur-03.png`);
+            materialD.map = textureLoader.load(`models/test/dino_3.png`);
             object.traverse(function (child) {
 
                 if (child.isMesh) {
@@ -166,7 +172,7 @@ export const loader = async () => {
                 }
 
             });
-            object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
+            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
             object.scale.set(.2, .2, .2);
             object.rotation.y = Math.PI / 1;
             object.rotation.x = .03
@@ -176,7 +182,7 @@ export const loader = async () => {
         },
         (xhr) => {
             if ((xhr.loaded / xhr.total * 100) === 100) {
-                console.log('zero4')
+                //console.log('zero4')
                 add();
             }
         },
@@ -201,7 +207,7 @@ export const loader = async () => {
                 }
 
             });
-            object.position.set(playerDefaultPosition.x, 2, playerDefaultPosition.z);
+            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
             object.scale.set(.2, .2, .2);
             object.rotation.y = Math.PI / 1
             object.visible = false;
@@ -210,7 +216,7 @@ export const loader = async () => {
         },
         (xhr) => {
             if ((xhr.loaded / xhr.total * 100) === 100) {
-                console.log('zero1')
+                //console.log('zero1')
                 add();
             }
         },
@@ -235,7 +241,7 @@ export const loader = async () => {
                 if (node.isMesh) node.material = materialD;
 
             });
-           
+           object.castShadow = true;
             // await scene.add(object);
             enemyObjbottom = object;
            
@@ -244,7 +250,7 @@ export const loader = async () => {
         (xhr) => {
             //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses')
             if ((xhr.loaded / xhr.total * 100) === 100){
-                console.log('zero3')
+                //console.log('zero3')
                 add();
             }
         },
@@ -254,7 +260,7 @@ export const loader = async () => {
     // load a ptero
     await new OBJLoader().load(
         // resource URL
-        'models/ptero-01.obj',
+        'models/ptero/ptero-01.obj',
         // called when resource is loaded
         async (object) => {
             // declare material
@@ -262,7 +268,7 @@ export const loader = async () => {
                 /*  color: 0xE7B251,
                 specular: 0xE7B251, */
             });
-            materialD.map = textureLoader.load(`models/ptero-01.png`);
+            materialD.map = textureLoader.load(`models/ptero/ptero-01.png`);
 
             await object.traverse(function (node) {
 
@@ -278,14 +284,81 @@ export const loader = async () => {
         (xhr) => {
             //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses')
             if ((xhr.loaded / xhr.total * 100) === 100) {
-                console.log('zero3')
+               // console.log('zero3')
                 add();
             }
         },
         // called when loading has errors
         (error) => console.log('An error while loading twoCactuses => ', error)
     )
-   
+    // load a ptero
+    await new OBJLoader().load(
+        // resource URL
+        'models/ptero/ptero-02.obj',
+        // called when resource is loaded
+        async (object) => {
+            // declare material
+            let materialD = new THREE.MeshPhongMaterial({
+                /*  color: 0xE7B251,
+                specular: 0xE7B251, */
+            });
+            materialD.map = textureLoader.load(`models/ptero/ptero-02.png`);
+
+            await object.traverse(function (node) {
+
+                if (node.isMesh) node.material = materialD;
+
+            });
+
+            //await scene.add(object);
+            enemyObjTopTwo = object;
+
+        },
+        // called when loading is in progresses
+        (xhr) => {
+            //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses')
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                // console.log('zero3')
+                add();
+            }
+        },
+        // called when loading has errors
+        (error) => console.log('An error while loading twoCactuses => ', error)
+    )
+    // load a ptero
+    await new OBJLoader().load(
+        // resource URL
+        'models/ptero/ptero-03.obj',
+        // called when resource is loaded
+        async (object) => {
+            // declare material
+            let materialD = new THREE.MeshPhongMaterial({
+                /*  color: 0xE7B251,
+                specular: 0xE7B251, */
+            });
+            materialD.map = textureLoader.load(`models/ptero/ptero-03.png`);
+
+            await object.traverse(function (node) {
+
+                if (node.isMesh) node.material = materialD;
+
+            });
+
+            //await scene.add(object);
+            enemyObjTopThree = object;
+
+        },
+        // called when loading is in progresses
+        (xhr) => {
+            //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> twoCactuses')
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                // console.log('zero3')
+                add();
+            }
+        },
+        // called when loading has errors
+        (error) => console.log('An error while loading twoCactuses => ', error)
+    )
     // running floor
     await new OBJLoader().load(
         // resource URL
@@ -293,7 +366,7 @@ export const loader = async () => {
         // called when resource is loaded
         function (object) {
             // declare material
-            let materialD = new THREE.MeshPhongMaterial({});
+            let materialD = new THREE.MeshPhongMaterial({color:0xffffff});
             materialD.map = textureLoader.load(`models/floorgood.png`);
             
             object.traverse(function (node) {
@@ -303,6 +376,7 @@ export const loader = async () => {
             });
             object.material = materialD;
             object.receiveShadow = true;
+            object.castShadow =false;
             object.position.set(-120, 1 ,-13)
             
             object.scale.set(8,8,8)
@@ -322,7 +396,7 @@ export const loader = async () => {
             //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> floorRunning')
             console.log(xhr.loaded / xhr.total * 100)
             if ((xhr.loaded / xhr.total * 100) === 100){
-                console.log('first')
+               // console.log('first')
 
                 add();
             }
@@ -349,7 +423,7 @@ export const loader = async () => {
         (xhr) => {
             //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> Mountain_1');
             if ((xhr.loaded / xhr.total * 100) === 100){
-                console.log('seconds');
+                //console.log('seconds');
                 add();
             }
         },
@@ -387,7 +461,7 @@ export const loader = async () => {
             //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> cactus')
             if ((xhr.loaded / xhr.total * 100) >= 100){
                 
-                console.log('third');
+                //console.log('third');
                 add();
             }
         },
@@ -428,7 +502,7 @@ export const loader = async () => {
             
             if ((xhr.loaded / xhr.total * 100) === 100){
                 add();
-                console.log('fourth');
+               // console.log('fourth');
             }
         },
         // called when loading has errors
