@@ -3,6 +3,7 @@ import { camera } from './app.js';
 
 export let backMusicController = null;
 export let jumpMusicController = null;
+export let collisionMusicController = null;
 
 export const music = () => {
     // create an AudioListener and add it to the camera
@@ -29,6 +30,16 @@ export const music = () => {
         jumpMusicController.setBuffer(buffer);
         jumpMusicController.setLoop(false);
         jumpMusicController.setVolume(1);
+    })
+
+    // create a global audio source
+    collisionMusicController = new THREE.Audio(listener);
+
+    // load a sound and set it as the Audio object's buffer
+    audioLoader.load('./audio/jump.wav', function (buffer) {
+        collisionMusicController.setBuffer(buffer);
+        collisionMusicController.setLoop(false);
+        collisionMusicController.setVolume(1);
     })
 
 }

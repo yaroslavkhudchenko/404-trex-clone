@@ -48,14 +48,30 @@
             width: 100vw;
             height: 100vh;
             z-index: 1;
-        }
+            display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+        
         .startGameButton {
-            position: absolute;
+            /* position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%); */
             font-size: 40px;
             cursor: pointer;
+        }
+        #loadingBar {
+            background: red;
+    width: 90%;
+    height: 50px;
+        }
+        #loadingBarValue {
+                width: 7%;
+    height: 100%;
+    background: yellow;
+}
         }
         #collapsedScreen {
             display: none;
@@ -92,6 +108,9 @@
     <div class="startMenu">
         <div class="startGameButton">
             START
+        </div>
+        <div id='loadingBar'>
+            <div id='loadingBarValue'></div>
         </div>
     </div>
     

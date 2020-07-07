@@ -390,18 +390,18 @@ document.addEventListener('keypress', keyPressedHandler);
 document.addEventListener('keyup', keyUpHandler);
 
 
-
-
+let loadingBar = document.querySelector('#loadingBarValue');
 let stopLoadingObjectsLoop = true;
 const loadingObjects = () => {
     
     if (!stopLoadingObjectsLoop)return;
     // console.log('---')
     // console.log(mainLoaded)
+    loadingBar.style.width += 7 +'%'
     if (mainLoaded === 15) {
         console.log('15');
         //init();
-        music();
+       
         // init environment
         Environment();
 

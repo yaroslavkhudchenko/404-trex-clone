@@ -3,7 +3,7 @@ import * as THREE from './libs/three.module.js';
 import { OBJLoader } from './libs/OBJLoader.js';
 import { FBXLoader } from './libs/FBXLoader.js';
 import { add, scene } from './app.js';
-
+import { music } from './sounds.js';
 
 export let enemyObjbottom = null;
 
@@ -34,6 +34,8 @@ export const playerDefaultPosition = {
 };
 let textureLoader = new THREE.TextureLoader();
 export let mixer;
+
+
 export const loader = async () => {
   /*   
     // player1
@@ -90,6 +92,9 @@ export const loader = async () => {
 
 
  */
+
+    music();//load sounds
+
     // player1
     new OBJLoader().load('models/test/dino_1.obj',
 
