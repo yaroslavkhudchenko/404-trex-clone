@@ -10,7 +10,7 @@
     "webpack": "webpack",
     "dev": "webpack-dev-server --host 0.0.0.0",
     "build": "npm run webpack -- --mode production",
-    "start": "webpack-dev-server --host 0.0.0.0"
+    "start": "npm run webpack -- --mode production"
   },
   "author": "",
   "license": "ISC",
