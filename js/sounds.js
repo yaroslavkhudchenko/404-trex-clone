@@ -2,8 +2,9 @@ import * as THREE from './libs/three.module.js';
 import { camera } from './app.js';
 
 export let backMusicController = null;
+export let jumpMusicController = null;
 
-export const backMusic = () => {
+export const music = () => {
     // create an AudioListener and add it to the camera
     let listener = new THREE.AudioListener();
     camera.add(listener);
@@ -17,25 +18,17 @@ export const backMusic = () => {
         backMusicController.setBuffer(buffer);
         backMusicController.setLoop(true);
         backMusicController.setVolume(0.5);
-        backMusicController.play();
+        // backMusicController.play();
     })
-}
-
-export const jumpMusic = () => {
-    // create an AudioListener and add it to the camera
-    let listener = new THREE.AudioListener();
-    camera.add(listener);
 
     // create a global audio source
-    let sound = new THREE.Audio(listener);
+    jumpMusicController= new THREE.Audio(listener);
 
     // load a sound and set it as the Audio object's buffer
-    let audioLoader = new THREE.AudioLoader();
-    audioLoader.load('./audio/back.mp3', function (buffer) {
-        sound.setBuffer(buffer);
-        sound.setLoop(true);
-        sound.setVolume(0.5);
-        sound.play();
+    audioLoader.load('./audio/jump.wav', function (buffer) {
+        jumpMusicController.setBuffer(buffer);
+        jumpMusicController.setLoop(false);
+        jumpMusicController.setVolume(1);
     })
 
 }

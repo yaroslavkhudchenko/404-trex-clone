@@ -21,7 +21,7 @@ export let mainLoaded = 0;
 export let add = () => {
     mainLoaded++;
 }
-import { backMusic } from './sounds.js';
+import { backMusicController, jumpMusicController, music } from './sounds.js';
 
 
 
@@ -171,6 +171,8 @@ const keyPressedHandler = (e) => {
             break;
         case "Space":
             if (isJump || low)return;
+            jumpMusicController.play();
+
             isJump = true;
             playerHitboxMesh.position.y = 11;
            
@@ -377,7 +379,7 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
 
     startScreen.style.display = 'none';
     isPlaying = true;
-    backMusic();
+    backMusicController.play();
 
 })
 
@@ -399,7 +401,7 @@ const loadingObjects = () => {
     if (mainLoaded === 15) {
         console.log('15');
         //init();
-
+        music();
         // init environment
         Environment();
 
