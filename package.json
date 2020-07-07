@@ -10,12 +10,16 @@
     "webpack": "webpack",
     "dev": "webpack-dev-server --host 0.0.0.0",
     "build": "npm run webpack -- --mode production",
-    "start": "npm run webpack -- --mode production"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "copy-webpack-plugin": "^6.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.4",
     "stats.js": "^0.17.0"
   },
   "devDependencies": {
