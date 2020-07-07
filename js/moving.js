@@ -350,7 +350,7 @@ export const moving = () => {
     if (enemiesPtero.length === 3 && frame % 15 === 0) { // check for test
         
         if (currentPteroModel === 'one') {
-            console.log('one here 11111111')
+            // console.log('one here 11111111')
 
             enemiesPtero[0].one.visible = false;
             enemiesPtero[1].one.visible = false;
@@ -363,7 +363,7 @@ export const moving = () => {
             currentPteroModel = 'two';
 
         } else if (currentPteroModel === 'two') {
-            console.log('one here 222222222222')
+            // console.log('one here 222222222222')
            /*  enemyObjTopTwo.visible = false;
             enemyObjTopThree.visible = true; */
 
@@ -382,7 +382,7 @@ export const moving = () => {
             currentPteroModel = 'three';
 
         } else if (currentPteroModel === 'three') {
-            console.log('one here 3333333333')
+            // console.log('one here 3333333333')
             /* enemyObjTopThree.visible = false;
             enemyObjTopTwo.visible = true; */
 
@@ -397,7 +397,7 @@ export const moving = () => {
 
             currentPteroModel = 'four';
         } else {
-            console.log('one here elseeeeee')
+            // console.log('one here elseeeeee')
             // enemyObjTopTwo.visible = false;
             // enemyObjTopOne.visible = true;
 

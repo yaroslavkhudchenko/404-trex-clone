@@ -235,8 +235,8 @@ const reset = () => {
     scoreValue = 0;
     // if there is a hi score in localstorage grab it and if not set value to 0
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
-    isCollapsed = false;
-    isPlaying = true;
+    // isCollapsed = false;
+    // isPlaying = true;
         
     // default cactuses
     enemies[0].position.x = -180
