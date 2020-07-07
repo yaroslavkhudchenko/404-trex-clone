@@ -29,7 +29,7 @@ export let scoreValue = 0;
 let clock = new THREE.Clock();
 let spawnPteros = true;
 
-
+export let low = false;
 // GLOBAL STATES 
 let isPlaying = false;
 let isCollapsed = false
@@ -157,10 +157,10 @@ const keyPressedHandler = (e) => {
             // hit box
             playerHitboxMesh.scale.y = .6;
             playerHitboxMesh.position.y = 3;
-            playerModel1.scale.set(.1,.1,.1)
+            /* playerModel1.scale.set(.1,.1,.1)
             playerModel2.scale.set(.1, .1, .1)
-            playerModel3.scale.set(.1, .1, .1)
-
+            playerModel3.scale.set(.1, .1, .1) */
+            low = true;
             break;
         case "Space":
             if(isJump)return;
@@ -182,7 +182,7 @@ const keyPressedHandler = (e) => {
                 playerModelJump.position.y = 5;
 
                 isJump = false;
-                
+               
                
 
             }, 400);
@@ -196,10 +196,10 @@ const keyUpHandler = (e) => {
         setTimeout(() => {
             playerHitboxMesh.position.y = 5.5;
             playerHitboxMesh.scale.y = 1;
-            playerModel1.scale.set(.2, .2, .2)
+           /*  playerModel1.scale.set(.2, .2, .2)
             playerModel2.scale.set(.2, .2, .2)
-            playerModel3.scale.set(.2, .2, .2)
-
+            playerModel3.scale.set(.2, .2, .2) */
+            low = false;
         }, 100);
         
     }
@@ -260,14 +260,14 @@ const animate = () => {
 
 
     // to trigger pteros
-    if(scoreValue > 500) {
+    /* if(scoreValue > 500) {
         if (spawnPteros) {
             console.log('sp')
             
         }
         spawnPteros = false;
     }
-
+ */
 
 
 
@@ -321,7 +321,7 @@ const animate = () => {
 
             let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             pBox.setFromObject(playerHitboxMesh);
-            eBox.setFromObject(e);
+            eBox.setFromObject(e.one);
             /*       
                  if (eBox.intersectsBox(pBox)) {
                      
@@ -387,8 +387,8 @@ const loadingObjects = () => {
     if (!stopLoadingObjectsLoop)return;
     // console.log('---')
     // console.log(mainLoaded)
-    if (mainLoaded === 12) {
-        console.log('12');
+    if (mainLoaded === 15) {
+        console.log('15');
         //init();
 
         // init environment

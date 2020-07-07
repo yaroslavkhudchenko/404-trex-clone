@@ -22,6 +22,12 @@ export let cactusObject = null;
 export let playerModel1;
 export let playerModel2;
 export let playerModel3;
+
+export let playerModel1low;
+export let playerModel2low;
+export let playerModel3low;
+
+
 export let playerModelJump;
 export const playerDefaultPosition = {
     x: 9, y: 1, z: 0
@@ -188,7 +194,121 @@ export const loader = async () => {
         },
         (error) => console.log('error while loading player model ', error)
 
-    ); 
+    );
+
+
+    // player1_low
+    new OBJLoader().load('models/test/dino_1_low.obj',
+
+        (object) => {
+
+
+            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
+            materialD.map = textureLoader.load(`models/test/dino_1_low.png`);
+            object.traverse(function (child) {
+
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material = materialD;
+                }
+
+            });
+
+            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
+            object.scale.set(.2, .2, .2);
+            object.rotation.y = Math.PI / 1
+            object.rotation.x = -.03;
+            object.visible = false;
+            playerModel1low = object;
+
+        },
+        (xhr) => {
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                //console.log('zero1')
+                add();
+            }
+        },
+        (error) => console.log('error while loading player model ', error)
+
+    );
+    // player2_low
+    new OBJLoader().load('models/test/dino_2_low.obj',
+
+        (object) => {
+
+
+            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
+            materialD.map = textureLoader.load(`models/test/dino_2_low.png`);
+            object.traverse(function (child) {
+
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material = materialD;
+                }
+
+            });
+
+            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
+            object.scale.set(.2, .2, .2);
+            object.rotation.y = Math.PI / 1
+            object.rotation.x = -.03;
+            object.visible = false;
+            playerModel2low = object;
+
+        },
+        (xhr) => {
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                //console.log('zero1')
+                add();
+            }
+        },
+        (error) => console.log('error while loading player model ', error)
+
+    );
+    // player3_low
+    new OBJLoader().load('models/test/dino_3_low.obj',
+
+        (object) => {
+
+
+            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
+            materialD.map = textureLoader.load(`models/test/dino_3_low.png`);
+            object.traverse(function (child) {
+
+                if (child.isMesh) {
+                    // child.material = material;
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                    child.material = materialD;
+                }
+
+            });
+
+            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
+            object.scale.set(.2, .2, .2);
+            object.rotation.y = Math.PI / 1
+            object.rotation.x = -.03
+            object.visible = false;
+            playerModel3low = object;
+
+        },
+        (xhr) => {
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                //console.log('zero1')
+                add();
+            }
+        },
+        (error) => console.log('error while loading player model ', error)
+
+    );
+
+
+
+
     // player jump
     new OBJLoader().load('models/dinozaur-jump.obj',
 

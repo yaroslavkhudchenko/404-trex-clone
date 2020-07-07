@@ -13,13 +13,21 @@ import {
     playerModel1,
     playerModel2,
     playerModel3,
-    playerModelJump
+    playerModel1low,
+    playerModel2low,
+    playerModel3low,
+    playerModelJump,
+    enemyObjTopOne,
+    enemyObjTopTwo,
+    enemyObjTopThree,
+
 } from './loader.js';
 
-import  { scoreValue, frame, isJump } from './app.js';
+import  { scoreValue, frame, isJump, low } from './app.js';
 import { enemies, enemiesPtero, randomSelector } from './enemies.js';
 
 let currentRunModel = 'one';
+let currentPteroModel = 'one';
 let cooler = 15000; // control the speed
 
 let enemiesRespPos = {
@@ -37,7 +45,7 @@ const checkForOthers  = () => {
     }
     
     for (let i = 0; i < enemiesPtero.length; i++) {
-        far = enemiesPtero[i].position.x < far ? enemiesPtero[i].position.x : far;
+        far = enemiesPtero[i].one.position.x < far ? enemiesPtero[i].one.position.x : far;
     }
 
     return far < -300 ? far + far / 100 * 20 : (-200 - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max);
@@ -67,16 +75,28 @@ const enemiesMove = () => {
     
     if (enemiesPtero[0]) {
 
-        enemiesPtero[0].position.x += .5 + (scoreValue / cooler);
-        if (enemiesPtero[0].position.x > 25) {
+        enemiesPtero[0].one.position.x += .5 + (scoreValue / cooler);
+        enemiesPtero[0].two.position.x += .5 + (scoreValue / cooler);
+        enemiesPtero[0].three.position.x += .5 + (scoreValue / cooler);
 
-            enemiesPtero[0].position.x = checkForOthers()
+        if (enemiesPtero[0].one.position.x > 25) {
+            let goodP = checkForOthers();
+            enemiesPtero[0].one.position.x = goodP;
+            enemiesPtero[0].two.position.x = goodP;
+            enemiesPtero[0].three.position.x = goodP;
+
         }
     } if (enemiesPtero[1]) {
-        enemiesPtero[1].position.x += .5 + (scoreValue / cooler);
-        if (enemiesPtero[1].position.x > 25) {
+        enemiesPtero[1].one.position.x += .5 + (scoreValue / cooler);
+        enemiesPtero[1].two.position.x += .5 + (scoreValue / cooler);
+        enemiesPtero[1].three.position.x += .5 + (scoreValue / cooler);
 
-            enemiesPtero[1].position.x = checkForOthers()
+        if (enemiesPtero[1].one.position.x > 25) {
+
+            let goodP = checkForOthers();
+            enemiesPtero[1].one.position.x = goodP;
+            enemiesPtero[1].two.position.x = goodP;
+            enemiesPtero[1].three.position.x = goodP;
         }
     } 
     if (enemies[2]) {
@@ -89,10 +109,15 @@ const enemiesMove = () => {
     }
     if (enemiesPtero[2]) {
 
-        enemiesPtero[2].position.x += .5 + (scoreValue / cooler);
-        
-        if (enemiesPtero[2].position.x > 25) {
-            enemiesPtero[2].position.x = checkForOthers()
+        enemiesPtero[2].one.position.x += .5 + (scoreValue / cooler);
+        enemiesPtero[2].two.position.x += .5 + (scoreValue / cooler);
+        enemiesPtero[2].three.position.x += .5 + (scoreValue / cooler);
+
+        if (enemiesPtero[2].one.position.x > 25) {
+            let goodP = checkForOthers();
+            enemiesPtero[2].one.position.x = goodP;
+            enemiesPtero[2].two.position.x = goodP;
+            enemiesPtero[2].three.position.x = goodP;
         }
     }
 }
@@ -240,28 +265,111 @@ export const moving = () => {
             !isJump
         ) { // check for test
         playerModelJump.visible = false;
-        if (currentRunModel === 'one') {
-            playerModel1.visible = false;
-            playerModel2.visible = true;
-            currentRunModel = 'two';
 
+        if (currentRunModel === 'one') {
+            if(low) {
+                playerModel1low.visible = false;
+                playerModel2low.visible = true;
+            }else {
+                playerModel1.visible = false;
+                playerModel2.visible = true;
+                
+            } currentRunModel = 'two';
         } else if (currentRunModel === 'two') {
-            playerModel2.visible = false;
-            playerModel3.visible = true;
-            currentRunModel = 'three';
+            if(low) {
+                playerModel2low.visible = false;
+                playerModel3low.visible = true;
+            }   else {         
+                playerModel2.visible = false;
+                playerModel3.visible = true;
+            } currentRunModel = 'three';
 
         } else if (currentRunModel === 'three') {
-            playerModel3.visible = false;
-            playerModel2.visible = true;
-            currentRunModel = 'four';
+            if(low) {
+                playerModel3low.visible = false;
+                playerModel2low.visible = true;
+
+            }else {
+                playerModel3.visible = false;
+                playerModel2.visible = true;
+                
+            } currentRunModel = 'four';
         } else {
-            playerModel2.visible = false;
-            playerModel1.visible = true;
-            currentRunModel = 'one';
+            if(low) {
+                playerModel2low.visible = false;
+                playerModel1low.visible = true;
+            }else {
+                playerModel2.visible = false;
+                playerModel1.visible = true;
+               
+            } currentRunModel = 'one';
         }
     }
+    //console.log(enemiesPtero)
+    if (enemiesPtero.length === 3 && frame % 15 === 0) { // check for test
+        
+        if (currentPteroModel === 'one') {
+            console.log('one here 11111111')
+
+            enemiesPtero[0].one.visible = false;
+            enemiesPtero[1].one.visible = false;
+            enemiesPtero[2].one.visible = false;
+
+            enemiesPtero[0].two.visible = true;
+            enemiesPtero[1].two.visible = true;
+            enemiesPtero[2].two.visible = true;
+
+            currentPteroModel = 'two';
+
+        } else if (currentPteroModel === 'two') {
+            console.log('one here 222222222222')
+           /*  enemyObjTopTwo.visible = false;
+            enemyObjTopThree.visible = true; */
 
 
+            enemiesPtero[0].two.visible = false;
+            enemiesPtero[1].two.visible = false;
+            enemiesPtero[2].two.visible = false;
+
+            enemiesPtero[0].three.visible = true;
+            enemiesPtero[1].three.visible = true;
+            enemiesPtero[2].three.visible = true;
+
+
+
+
+            currentPteroModel = 'three';
+
+        } else if (currentPteroModel === 'three') {
+            console.log('one here 3333333333')
+            /* enemyObjTopThree.visible = false;
+            enemyObjTopTwo.visible = true; */
+
+            enemiesPtero[0].three.visible = false;
+            enemiesPtero[1].three.visible = false;
+            enemiesPtero[2].three.visible = false;
+
+            enemiesPtero[0].two.visible = true;
+            enemiesPtero[1].two.visible = true;
+            enemiesPtero[2].two.visible = true;
+
+
+            currentPteroModel = 'four';
+        } else {
+            console.log('one here elseeeeee')
+            // enemyObjTopTwo.visible = false;
+            // enemyObjTopOne.visible = true;
+
+            enemiesPtero[0].two.visible = false;
+            enemiesPtero[1].two.visible = false;
+            enemiesPtero[2].two.visible = false;
+
+            enemiesPtero[0].one.visible = true;
+            enemiesPtero[1].one.visible = true;
+            enemiesPtero[2].one.visible = true;
+            currentPteroModel = 'one';
+        }
+    }
 
 
 

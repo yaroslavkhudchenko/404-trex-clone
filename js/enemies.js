@@ -1,5 +1,5 @@
 import { scene, scoreValue } from './app.js';
-import { enemyObjbottom, enemyObjTopOne } from './loader.js';
+import { enemyObjbottom, enemyObjTopOne, enemyObjTopTwo, enemyObjTopThree } from './loader.js';
 export let enemies = [];
 export let enemiesPtero = [];
 export let intervalToMove = null;
@@ -28,12 +28,12 @@ export const enemyPteroSpawner = () => {
     // ptero mesh
     let enemy = { 
         one: enemyObjTopOne.clone(),
-        two: enemyObjTopOne.clone(),
-        three: enemyObjTopOne.clone()
+        two: enemyObjTopTwo.clone(),
+        three: enemyObjTopThree.clone()
     }
-    enemy.one.name = 'enemyPtero';
-    enemy.two.name = 'enemyPtero';
-    enemy.three.name = 'enemyPtero';
+    enemy.one.name = 'enemyPtero1';
+    enemy.two.name = 'enemyPtero2';
+    enemy.three.name = 'enemyPtero3';
 
     enemy.one.scale.set(0.2, 0.2, 0.2)
     enemy.two.scale.set(0.2, 0.2, 0.2)
@@ -55,6 +55,10 @@ export const enemyPteroSpawner = () => {
     enemy.one.receiveShadow = false;
     enemy.two.receiveShadow = false;
     enemy.three.receiveShadow = false;
+
+    enemy.two.visible = false;
+    enemy.three.visible = false;
+
 
     scene.add(enemy.one);
     scene.add(enemy.two);
