@@ -4,7 +4,12 @@
 import * as THREE from './libs/three.module.js';
 
 import Stats from 'stats.js';
-import { loader, playerDefaultPosition, playerModelJump, playerModel1, playerModel2, playerModel3, mixer } from './loader.js';
+import { loader,
+     playerDefaultPosition, 
+     playerModelJump, 
+     playerModel1, 
+     playerModel2, 
+    playerModel3, playerModel1low, playerModel2low, playerModel3low, mixer } from './loader.js';
 import { moving } from './moving.js';
 import { player, playerHitboxMesh } from './player.js';
 import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
@@ -160,6 +165,7 @@ const keyPressedHandler = (e) => {
             /* playerModel1.scale.set(.1,.1,.1)
             playerModel2.scale.set(.1, .1, .1)
             playerModel3.scale.set(.1, .1, .1) */
+            //playerModel1low.visible = true;
             low = true;
             break;
         case "Space":
@@ -200,6 +206,7 @@ const keyUpHandler = (e) => {
             playerModel2.scale.set(.2, .2, .2)
             playerModel3.scale.set(.2, .2, .2) */
             low = false;
+            /* playerModel1low */
         }, 100);
         
     }

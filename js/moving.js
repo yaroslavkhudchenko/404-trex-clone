@@ -257,48 +257,89 @@ export const moving = () => {
 
     //console.log(scoreValue.toFixed(0))
     // changing models to have animation effect
+
+
     if (
             playerModel1 && 
             playerModel2 && 
             playerModel3 && 
-            frame % 15 === 0 && 
+            frame % 5 === 0 && 
             !isJump
         ) { // check for test
         playerModelJump.visible = false;
 
         if (currentRunModel === 'one') {
             if(low) {
+                playerModel1.visible = false;
+                playerModel2.visible = false;
+                playerModel3.visible = false;
+
                 playerModel1low.visible = false;
                 playerModel2low.visible = true;
             }else {
+                playerModel1low.visible = false;
+                playerModel2low.visible = false;
+                playerModel3low.visible = false;
+
+
                 playerModel1.visible = false;
                 playerModel2.visible = true;
                 
             } currentRunModel = 'two';
         } else if (currentRunModel === 'two') {
             if(low) {
+                playerModel1.visible = false;
+                playerModel2.visible = false;
+                playerModel3.visible = false;
+
                 playerModel2low.visible = false;
                 playerModel3low.visible = true;
             }   else {         
+
+                playerModel1low.visible = false;
+                playerModel2low.visible = false;
+                playerModel3low.visible = false;
+
+
                 playerModel2.visible = false;
                 playerModel3.visible = true;
             } currentRunModel = 'three';
 
         } else if (currentRunModel === 'three') {
             if(low) {
+                playerModel1.visible = false;
+                playerModel2.visible = false;
+                playerModel3.visible = false;
+
                 playerModel3low.visible = false;
                 playerModel2low.visible = true;
 
             }else {
+                playerModel1low.visible = false;
+                playerModel2low.visible = false;
+                playerModel3low.visible = false;
+
+
+
                 playerModel3.visible = false;
                 playerModel2.visible = true;
                 
             } currentRunModel = 'four';
         } else {
             if(low) {
+                playerModel1.visible = false;
+                playerModel2.visible = false;
+                playerModel3.visible = false;
+
                 playerModel2low.visible = false;
                 playerModel1low.visible = true;
             }else {
+
+                playerModel1low.visible = false;
+                playerModel2low.visible = false;
+                playerModel3low.visible = false;
+
+
                 playerModel2.visible = false;
                 playerModel1.visible = true;
                
