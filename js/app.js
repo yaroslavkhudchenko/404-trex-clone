@@ -379,7 +379,6 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
 
     startScreen.style.display = 'none';
     isPlaying = true;
-    music();
     backMusicController.play();
 
 })

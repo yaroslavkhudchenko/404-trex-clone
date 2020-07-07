@@ -93,7 +93,7 @@ export const loader = async () => {
 
  */
 
-   /*  music();//load sounds */
+    music();//load sounds
 
     // player1
     new OBJLoader().load('models/test/dino_1.obj',
