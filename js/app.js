@@ -379,7 +379,7 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
 
     startScreen.style.display = 'none';
     isPlaying = true;
-    
+
     backMusicController.play();
 
 })
@@ -407,7 +407,7 @@ const loadingObjects = () => {
 
         // init player
         player();
-
+        
         enemySpawner()
         setTimeout(() => {
             enemySpawner()
