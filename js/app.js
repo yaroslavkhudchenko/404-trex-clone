@@ -395,9 +395,8 @@ let stopLoadingObjectsLoop = true;
 const loadingObjects = () => {
     
     if (!stopLoadingObjectsLoop)return;
-    // console.log('---')
-    // console.log(mainLoaded)
-    loadingBar.style.width += 7 +'%'
+    
+    loadingBar.style.width = `${mainLoaded*7}%`
     if (mainLoaded === 15) {
         console.log('15');
         //init();
