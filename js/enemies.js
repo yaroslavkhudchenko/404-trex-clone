@@ -7,16 +7,16 @@ export const randomSelector = [9, 5];
 
 // to spawn enemies
 export const enemySpawner = () => {
-
+    console.log('E NE M EG WAGWAgwaf')
     if (randomSelector[Math.floor(Math.random() * randomSelector.length)]===5) {
         // enemy mesh
         let enemy = enemyObjbottom.clone(); // new THREE.Mesh(enemyG, enemyMat);
-        enemy.name = 'enemyCactus';
+        enemy.name = 'enemy';
         enemy.scale.set(2.5, 2.5, 2.5)
         // enemy.rotation.set(0,0,0)
 
         // set position
-        enemy.position.set(-100, 5, 0);
+        enemy.position.set(-200, 5, 0);
         enemy.castShadow = true; //default is false
         enemy.receiveShadow = false;
         scene.add(enemy);
@@ -31,9 +31,9 @@ export const enemySpawner = () => {
             two: enemyObjTopTwo.clone(),
             three: enemyObjTopThree.clone()
         }
-        enemy.one.name = 'enemyPtero1';
-        enemy.two.name = 'enemyPtero2';
-        enemy.three.name = 'enemyPtero3';
+        enemy.one.name = 'enemy';
+        enemy.two.name = 'enemy';
+        enemy.three.name = 'enemy';
 
         enemy.one.scale.set(0.2, 0.2, 0.2)
         enemy.two.scale.set(0.2, 0.2, 0.2)
@@ -44,9 +44,9 @@ export const enemySpawner = () => {
         enemy.three.rotation.set(0, 0, 0)
 
         // set position
-        enemy.one.position.set(-100, 9, 0);
-        enemy.two.position.set(-100, 9, 0);
-        enemy.three.position.set(-100, 9, 0);
+        enemy.one.position.set(-200, 9, 0);
+        enemy.two.position.set(-200, 9, 0);
+        enemy.three.position.set(-200, 9, 0);
 
         enemy.one.castShadow = true; //default is false
         enemy.two.castShadow = true; //default is false

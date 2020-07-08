@@ -14,6 +14,8 @@ import { moving, checkForOthers } from './moving.js';
 import { player, playerHitboxMesh } from './player.js';
 import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
 import { Environment } from './environment.js';
+
+
 export let camera, scene, renderer, controls;
 export let light;
 export let canvas = document.querySelector('#gameCanvas');
@@ -222,6 +224,15 @@ const reset = () => {
     isJump = false;// if collision was in the air
    
     eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+    enemies.length = 0;
+    scene.children.map(one=> {
+        if ( one.name === "enemy") {
+            console.log('enemies delete')
+            scene.remove(one);
+        }
+    });
+
+
 
     /* playerModel.position.set(
         playerDefaultPosition.x,
@@ -244,10 +255,11 @@ const reset = () => {
     // enemies[1].position.x = -239
     // enemies[2].position.x = -311
     // enemies[3].position.x = -433
-    
+    renderer.render(scene,camera)
+    console.log('after')
     console.log(enemies)
-    console.log(enemiesPtero)
-
+    console.log(scene.children)
+/* 
     if (enemies.length) enemies.map((one, index) => {
         console.log(`-${index + 1}30`)
         one.position.x = `-${index+1}30`*1;})
@@ -255,8 +267,17 @@ const reset = () => {
         Object.keys(one).map((key) => {
             one[key].position.x = `-${index1 + 1}80` * 1
         })
-    })
-
+    }) */
+    //enemySpawner();
+   
+    /* if (enemies[enemies.length - 1].position ? enemies[enemies.length - 1].position.x : enemies[enemies.length - 1].one.position.x > -100) {
+        enemySpawner();
+        setTimeout(() => {
+            enemySpawner();
+        }, 2000);
+        
+    } */
+    enemySpawner();
     backMusicController.play();
 
 }
@@ -272,24 +293,24 @@ const animate = () => {
     if (!isPlaying || isCollapsed)return;
 
     
-    /* // first respawn of the enemies based on current frame not to have overlay
-    switch (frame) {
+     // first respawn of the enemies based on current frame not to have overlay
+   /*  switch (frame) {
         case 130:
             enemySpawner()
             break;
         case 230:
-            enemyPteroSpawner()
+            enemySpawner()
             break;
         case 330:
-            enemyPteroSpawner()
+            enemySpawner()
             break;
         case 430:
             enemySpawner()
             break;
         case 530:
-            enemyPteroSpawner()
+            enemySpawner()
             break;
-    } */
+    }  */
 
 
  
@@ -302,6 +323,12 @@ const animate = () => {
     // update the score
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
+
+
+    if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0) {
+        enemySpawner();
+    }
+
     if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0) {
         console.log('3222222222222220')
         coinMusicController.play()
@@ -396,7 +423,7 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
     isPlaying = true;
 
     backMusicController.play();
-
+    enemySpawner()
 })
 
 
@@ -423,7 +450,7 @@ const loadingObjects = () => {
         // init player
         player();
         
-        enemySpawner()
+        
       
        /*  setTimeout(() => {
             enemySpawner()

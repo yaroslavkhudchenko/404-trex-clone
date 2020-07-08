@@ -23,8 +23,8 @@ import {
 
 } from './loader.js';
 
-import  { scoreValue, frame, isJump, low, scene } from './app.js';
-import { enemies, enemiesPtero, randomSelector, enemySpawner } from './enemies.js';
+import { scoreValue, frame, isJump, low, scene } from './app.js';
+import { enemies, enemiesPtero, randomSelector } from './enemies.js';
 
 let currentRunModel = 'one';
 let currentPteroModel = 'one';
@@ -145,11 +145,19 @@ const enemiesMove = () => {
 
  */
 
-
-
+let stopGlobaRespawn = false;
+let yesYouCan = true;
+let respawnCooldown = () =>{
+    setTimeout(() => {
+        yesYouCan = true;
+    }, 3000);
+}
 const enemiesMove = () => {
-    // ENEMIES //
 
+    
+    
+   
+    
     // console.log('enemiesmove')
     enemies.map((one,index) => {
         if(one.position) {
@@ -158,7 +166,8 @@ const enemiesMove = () => {
             if (one.position.x > 25) {
                 scene.remove(one);
                 enemies.pop() // remove from both scene and array s
-                enemySpawner();
+                //enemySpawner();
+                stopGlobaRespawn = true;
             }
         } else {
             one.one.position.x += .5 + (scoreValue / cooler);
@@ -170,13 +179,41 @@ const enemiesMove = () => {
                 scene.remove(one.three);
                 
                 enemies.pop() // remove from both scene and array s
-                enemySpawner();
+                //enemySpawner();
+                stopGlobaRespawn = true;
             }
         }
         
            
 
     })
+    // console.log(scene.children.length)
+
+    /* // ENEMIES //
+    if (yesYouCan) {
+
+        console.log('ONCEEEEEEEEEEEEEEEEE')
+        if (enemies[enemies.length - 1].position) {
+            if ((enemies[enemies.length - 1].position.x).toFixed(0) * 1 === -150) {
+                enemySpawner();
+                yesYouCan = false;
+                respawnCooldown();
+
+                console.log("THE FUCKING END1")
+                
+            }
+        } else if (enemies[enemies.length - 1].one.position.x) {
+            if ((enemies[enemies.length - 1].one.position.x).toFixed(0) * 1 === -150) {
+                enemySpawner();
+                yesYouCan = false;
+                respawnCooldown();
+
+                console.log("THE FUCKING END")
+
+                
+            }
+        }
+    } */
 }
 
 
