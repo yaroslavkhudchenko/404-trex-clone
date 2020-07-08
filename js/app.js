@@ -21,7 +21,7 @@ export let mainLoaded = 0;
 export let add = () => {
     mainLoaded++;
 }
-import { backMusicController, jumpMusicController, music } from './sounds.js';
+import { backMusicController, jumpMusicController, coinMusicController, collisionMusicController, music } from './sounds.js';
 
 
 
@@ -257,7 +257,7 @@ const reset = () => {
         })
     })
 
-
+    backMusicController.play();
 
 }
 
@@ -302,7 +302,11 @@ const animate = () => {
     // update the score
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
-
+    console.log(scoreValue.toFixed(0)* 1)
+    if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0) {
+        console.log('3222222222222220')
+        coinMusicController.play()
+    }
     // collision check
     if (enemies.length) {
         // console.log('true true true')
@@ -316,7 +320,7 @@ const animate = () => {
             if (eBox.intersectsBox(pBox)) {
                 console.log('1111collision')
                 backMusicController.pause()
-                
+                collisionMusicController.play();
                 collapsedScreen.style.display = 'block';
                 collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
                 collapsedScreenButton.addEventListener('click',() => {
@@ -347,7 +351,7 @@ const animate = () => {
                     if (eBox.intersectsBox(pBox)) {
                         console.log('2222collision')
                         backMusicController.pause()
-                        
+                        collisionMusicController.play();
                         collapsedScreen.style.display = 'block';
                         collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
                         collapsedScreenButton.addEventListener('click',() => {

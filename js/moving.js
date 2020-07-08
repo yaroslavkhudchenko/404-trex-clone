@@ -49,7 +49,6 @@ export const checkForOthers  = () => {
         far = enemiesPtero[i].one.position.x < far ? enemiesPtero[i].one.position.x : far;
     }
 
-    console.log(`%c far -> ${far} -> ${far+far/100*20}`, 'font-size:20px;color:green')
 
     return far < -300 ? far + far / 100 * 20 : (-200 - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max);
 }
