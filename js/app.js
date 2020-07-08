@@ -136,7 +136,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    controls = new OrbitControls(camera, canvas);
+    // controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -194,7 +194,7 @@ const keyPressedHandler = (e) => {
                
                
 
-            }, 400);
+            }, 500);
             
             break;
     }
@@ -214,7 +214,6 @@ const keyUpHandler = (e) => {
         
     }
 }
-isPlaying = true;
 // for collision detection
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
@@ -339,6 +338,7 @@ const animate = () => {
                         
                             reset();
                             collapsedScreen.style.display = 'none';
+
                         })
         
                         isCollapsed = true;
@@ -355,10 +355,9 @@ const animate = () => {
             });
         }    
     }
-    //deltaS=.009
-    //console.log(clock.getDelta());
+    /* 
     // running player
-    if (mixer) mixer.update(clock.getDelta());
+    if (mixer) mixer.update(clock.getDelta()); */
     renderer.render(scene, camera);
 
     stats.end();
