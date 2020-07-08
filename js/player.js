@@ -22,8 +22,8 @@ export const player = () => {
     scene.add(playerModel3low);
     scene.add(playerModelJump);
     // player hitbox
-    playerHitboxGeo = new THREE.CubeGeometry(3.8, 6, 3);
-    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:0, transparent:true })
+    playerHitboxGeo = new THREE.CubeGeometry(3, 4, 3);
+    playerHitboxMat = new THREE.MeshBasicMaterial({ color: 0x000000, opacity:.8, transparent:true })
     playerHitboxMesh = new THREE.Mesh(playerHitboxGeo, playerHitboxMat);
     playerHitboxMesh.position.set(playerDefaultPosition.x, 8, playerDefaultPosition.z);
     scene.add(playerHitboxMesh);
