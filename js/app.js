@@ -252,36 +252,34 @@ const reset = () => {
 // main animate function ( game loop )
 const animate = () => {
     requestAnimationFrame(animate);
-
   
     frame++;
-    // console.log(camera.rotation)
-    // console.log(camera.position)
-    stats.begin();
 
-    // console.log('in animate we are')
-    // console.log(!isPlaying)
-    // console.log(isCollapsed)
+    stats.begin();
 
     if (!isPlaying || isCollapsed)return;
 
-    // console.log(frame)
-
-
-
-    // to trigger pteros
-    /* if(scoreValue > 500) {
-        if (spawnPteros) {
-            console.log('sp')
-            
-        }
-        spawnPteros = false;
-    }
- */
-
-
-
     
+    // first respawn of the enemies based on current frame not to have overlay
+    switch (frame) {
+        case 330:
+            enemySpawner()
+            break;
+        case 630:
+            enemyPteroSpawner()
+            break;
+        case 930:
+            enemyPteroSpawner()
+            break;
+        case 1230:
+            enemySpawner()
+            break;
+        case 1430:
+            enemyPteroSpawner()
+            break;
+    }
+
+
  
     // check + movement for all the elements
     moving();
@@ -408,7 +406,8 @@ const loadingObjects = () => {
         player();
 
         enemySpawner()
-        setTimeout(() => {
+      
+       /*  setTimeout(() => {
             enemySpawner()
         }, 1900);
         setTimeout(() => {
@@ -423,7 +422,7 @@ const loadingObjects = () => {
         }, 6800);
         setTimeout(() => {
             enemyPteroSpawner()
-        }, 8600);
+        }, 8600); */
         stopLoadingObjectsLoop = false;
 
     }
