@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Three js runner</title>
+        <link rel="icon" href="favicon.ico" />
+
     <style>
         @font-face {
             font-family: 'pixel';
@@ -38,7 +40,7 @@
             /* 
             test
              */
-            display: none;
+            /* display: none; */
 
 
             position: fixed;
@@ -48,14 +50,31 @@
             width: 100vw;
             height: 100vh;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
         }
+        
         .startGameButton {
-            position: absolute;
+            /* position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%); */
             font-size: 40px;
             cursor: pointer;
+            display: none;
+        }
+        #loadingBar {
+            width: 90%;
+            height: 40px;
+            border-radius: 5px;
+        }
+        #loadingBarValue {
+            height: 100%;
+            background: #4e4e40;
+            max-width: 100%;
+            border-radius: 7px;
         }
         #collapsedScreen {
             display: none;
@@ -92,6 +111,9 @@
     <div class="startMenu">
         <div class="startGameButton">
             START
+        </div>
+        <div id='loadingBar'>
+            <div id='loadingBarValue'></div>
         </div>
     </div>
     
