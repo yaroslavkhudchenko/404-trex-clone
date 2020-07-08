@@ -23,8 +23,8 @@ import {
 
 } from './loader.js';
 
-import  { scoreValue, frame, isJump, low } from './app.js';
-import { enemies, enemiesPtero, randomSelector } from './enemies.js';
+import  { scoreValue, frame, isJump, low, scene } from './app.js';
+import { enemies, enemiesPtero, randomSelector, enemySpawner } from './enemies.js';
 
 let currentRunModel = 'one';
 let currentPteroModel = 'one';
@@ -53,6 +53,9 @@ export const checkForOthers  = () => {
     return far < -300 ? far + far / 100 * 20 : (-200 - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max);
 }
 
+
+
+/* 
 const enemiesMove = () => {
     // ENEMIES //
 
@@ -139,6 +142,47 @@ const enemiesMove = () => {
         }
     }
 }
+
+ */
+
+
+
+const enemiesMove = () => {
+    // ENEMIES //
+
+    // console.log('enemiesmove')
+    enemies.map((one,index) => {
+        if(one.position) {
+            one.position.x += .5 + (scoreValue / cooler);
+
+            if (one.position.x > 25) {
+                scene.remove(one);
+                enemies.pop() // remove from both scene and array s
+                enemySpawner();
+            }
+        } else {
+            one.one.position.x += .5 + (scoreValue / cooler);
+            one.two.position.x += .5 + (scoreValue / cooler);
+            one.three.position.x += .5 + (scoreValue / cooler);
+            if (one.one.position.x > 25) {
+                scene.remove(one.one);
+                scene.remove(one.two);
+                scene.remove(one.three);
+                
+                enemies.pop() // remove from both scene and array s
+                enemySpawner();
+            }
+        }
+        
+           
+
+    })
+}
+
+
+
+
+
 
 
 let decorationsInitialPos = {

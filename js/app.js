@@ -136,7 +136,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    controls = new OrbitControls(camera, canvas);
+    // controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -272,24 +272,24 @@ const animate = () => {
     if (!isPlaying || isCollapsed)return;
 
     
-    // first respawn of the enemies based on current frame not to have overlay
+    /* // first respawn of the enemies based on current frame not to have overlay
     switch (frame) {
+        case 130:
+            enemySpawner()
+            break;
+        case 230:
+            enemyPteroSpawner()
+            break;
         case 330:
+            enemyPteroSpawner()
+            break;
+        case 430:
             enemySpawner()
             break;
-        case 630:
+        case 530:
             enemyPteroSpawner()
             break;
-        case 930:
-            enemyPteroSpawner()
-            break;
-        case 1230:
-            enemySpawner()
-            break;
-        case 1430:
-            enemyPteroSpawner()
-            break;
-    }
+    } */
 
 
  
@@ -302,7 +302,6 @@ const animate = () => {
     // update the score
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
     scoreValue += .3;
-    console.log(scoreValue.toFixed(0)* 1)
     if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0) {
         console.log('3222222222222220')
         coinMusicController.play()
@@ -315,7 +314,7 @@ const animate = () => {
 
             let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             pBox.setFromObject(playerHitboxMesh);
-            eBox.setFromObject(e);
+            eBox.setFromObject(e.one ? e.one : e);
                
             if (eBox.intersectsBox(pBox)) {
                 console.log('1111collision')
@@ -341,7 +340,7 @@ const animate = () => {
             } 
             
         });
-        if (enemiesPtero.length) {
+        /* if (enemiesPtero.length) {
             enemiesPtero.map((e, index) => {
 
                 let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
@@ -372,8 +371,8 @@ const animate = () => {
                     
                     } 
                     
-            });
-        }    
+            }); 
+        }    */
     }
     /* 
     // running player
