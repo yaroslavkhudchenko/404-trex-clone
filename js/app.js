@@ -10,7 +10,7 @@ import { loader,
      playerModel1, 
      playerModel2, 
     playerModel3, playerModel1low, playerModel2low, playerModel3low, mixer } from './loader.js';
-import { moving } from './moving.js';
+import { moving, checkForOthers } from './moving.js';
 import { player, playerHitboxMesh } from './player.js';
 import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
 import { Environment } from './environment.js';
@@ -230,21 +230,35 @@ const reset = () => {
     ) */
     playerHitboxMesh.position.set(
         playerDefaultPosition.x,
-        2.5,
+        5,
         playerDefaultPosition.z
     )
     scoreValue = 0;
     // if there is a hi score in localstorage grab it and if not set value to 0
     document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
-    // isCollapsed = false;
-    // isPlaying = true;
+    isCollapsed = false;
+    isPlaying = true;
         
     // default cactuses
-    enemies[0].position.x = -180
-    enemies[1].position.x = -239
-    enemies[2].position.x = -311
-    enemies[3].position.x = -433
+    // enemies[0].position.x = -180
+    // enemies[1].position.x = -239
+    // enemies[2].position.x = -311
+    // enemies[3].position.x = -433
     
+    console.log(enemies)
+    console.log(enemiesPtero)
+
+    if (enemies.length) enemies.map((one, index) => {
+        console.log(`-${index + 1}30`)
+        one.position.x = `-${index+1}30`*1;})
+    if (enemiesPtero.length)enemiesPtero.map((one,index1) => {
+        Object.keys(one).map((key) => {
+            one[key].position.x = `-${index1 + 1}80` * 1
+        })
+    })
+
+
+
 }
 
 // main animate function ( game loop )
@@ -291,7 +305,7 @@ const animate = () => {
 
     // collision check
     if (enemies.length) {
-        console.log('true true true')
+        // console.log('true true true')
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
         enemies.map((e, index) => {
 
@@ -300,7 +314,8 @@ const animate = () => {
             eBox.setFromObject(e);
                
             if (eBox.intersectsBox(pBox)) {
-                
+                console.log('1111collision')
+                backMusicController.pause()
                 
                 collapsedScreen.style.display = 'block';
                 collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
@@ -330,7 +345,8 @@ const animate = () => {
                 eBox.setFromObject(e.one);
                     
                     if (eBox.intersectsBox(pBox)) {
-                        
+                        console.log('2222collision')
+                        backMusicController.pause()
                         
                         collapsedScreen.style.display = 'block';
                         collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;

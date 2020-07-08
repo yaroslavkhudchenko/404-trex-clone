@@ -36,9 +36,10 @@ let enemiesRespPos = {
 }
 
 // calcute respawn position for each enemy when reach pointer
-const checkForOthers  = () => {
+export const checkForOthers  = () => {
     let far = 0;
 
+    console.log('check for others')
 
     for(let i = 0; i<enemies.length; i++ ){
         far = enemies[i].position.x < far ? enemies[i].position.x : far;
@@ -48,14 +49,19 @@ const checkForOthers  = () => {
         far = enemiesPtero[i].one.position.x < far ? enemiesPtero[i].one.position.x : far;
     }
 
+    console.log(`%c far -> ${far} -> ${far+far/100*20}`, 'font-size:20px;color:green')
+
     return far < -300 ? far + far / 100 * 20 : (-200 - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max);
 }
 
 const enemiesMove = () => {
     // ENEMIES //
 
+    // console.log('enemiesmove')
+
     if (enemies[0]) {
         enemies[0].position.x += .5 + (scoreValue / cooler);
+        // console.log(`enemies0 -> ${enemies[0].position.x}`)
         if (enemies[0].position.x > 25) {
 
             enemies[0].rotation.y += Math.random() * (30 - 15) + 30; // random rotation on y
@@ -64,6 +70,8 @@ const enemiesMove = () => {
         }
     }
     if (enemies[1]) {
+        // console.log(`enemies1 -> ${enemies[1].position.x}`)
+
         enemies[1].position.x += .5 + (scoreValue / cooler);
         if (enemies[1].position.x > 25) {
             
@@ -74,6 +82,7 @@ const enemiesMove = () => {
     }
     
     if (enemiesPtero[0]) {
+        // console.log(`enemiesPtero0 -> ${enemiesPtero[0].one.position.x}`)
 
         enemiesPtero[0].one.position.x += .5 + (scoreValue / cooler);
         enemiesPtero[0].two.position.x += .5 + (scoreValue / cooler);
@@ -87,6 +96,10 @@ const enemiesMove = () => {
 
         }
     } if (enemiesPtero[1]) {
+
+        // console.log(`enemiesPtero1 -> ${enemiesPtero[1].one.position.x}`)
+
+
         enemiesPtero[1].one.position.x += .5 + (scoreValue / cooler);
         enemiesPtero[1].two.position.x += .5 + (scoreValue / cooler);
         enemiesPtero[1].three.position.x += .5 + (scoreValue / cooler);
@@ -100,6 +113,10 @@ const enemiesMove = () => {
         }
     } 
     if (enemies[2]) {
+
+        // console.log(`enemies2 -> ${enemies[2].position.x}`)
+
+
         enemies[2].position.x += .5 + (scoreValue / cooler);
 
         if (enemies[2].position.x > 25) {
@@ -108,6 +125,8 @@ const enemiesMove = () => {
         }
     }
     if (enemiesPtero[2]) {
+
+        // console.log(`enemiesPtero2 -> ${enemiesPtero[2].one.position.x}`)
 
         enemiesPtero[2].one.position.x += .5 + (scoreValue / cooler);
         enemiesPtero[2].two.position.x += .5 + (scoreValue / cooler);
