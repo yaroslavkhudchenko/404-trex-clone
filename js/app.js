@@ -136,7 +136,7 @@ const init = () => { // init all required environment
     renderer.toneMapping = THREE.Uncharted2ToneMapping
     
     // just for testing
-    // controls = new OrbitControls(camera, canvas);
+    controls = new OrbitControls(camera, canvas);
 
     // pointer to see where enemies should be eliminated
     let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
@@ -162,7 +162,7 @@ const keyPressedHandler = (e) => {
             isJump = false;
             // hit box
             playerHitboxMesh.scale.y = .6;
-            playerHitboxMesh.position.y = 3;
+            playerHitboxMesh.position.y = 5;
             /* playerModel1.scale.set(.1,.1,.1)
             playerModel2.scale.set(.1, .1, .1)
             playerModel3.scale.set(.1, .1, .1) */
@@ -174,7 +174,7 @@ const keyPressedHandler = (e) => {
             jumpMusicController.play();
 
             isJump = true;
-            playerHitboxMesh.position.y = 11;
+            playerHitboxMesh.position.y = 13;
            
             playerModelJump.position.y = 11;
 
@@ -186,7 +186,7 @@ const keyPressedHandler = (e) => {
 
             // reset position y not to fly
             setTimeout(() => {
-                playerHitboxMesh.position.y = 5;
+                playerHitboxMesh.position.y = 8;
                
                 playerModelJump.position.y = 5;
 
@@ -203,7 +203,7 @@ const keyUpHandler = (e) => {
     if(e.code === "KeyS") {
 
         setTimeout(() => {
-            playerHitboxMesh.position.y = 5.5;
+            playerHitboxMesh.position.y = 8;
             playerHitboxMesh.scale.y = 1;
            /*  playerModel1.scale.set(.2, .2, .2)
             playerModel2.scale.set(.2, .2, .2)
@@ -214,7 +214,7 @@ const keyUpHandler = (e) => {
         
     }
 }
-//isPlaying = true;
+isPlaying = true;
 // for collision detection
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
@@ -248,7 +248,6 @@ const reset = () => {
     
 }
 
-// isPlaying = true;
 // main animate function ( game loop )
 const animate = () => {
     requestAnimationFrame(animate);
@@ -292,15 +291,15 @@ const animate = () => {
     scoreValue += .3;
 
     // collision check
-    if (enemies.length && enemiesPtero.length) {
-
+    if (enemies.length) {
+        console.log('true true true')
     // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
         enemies.map((e, index) => {
 
             let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e);
-       /*       
+               
             if (eBox.intersectsBox(pBox)) {
                 
                 
@@ -322,39 +321,39 @@ const animate = () => {
                 }
             
             } 
-             */
+            
         });
+        if (enemiesPtero.length) {
+            enemiesPtero.map((e, index) => {
 
-        enemiesPtero.map((e, index) => {
-
-            let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-            pBox.setFromObject(playerHitboxMesh);
-            eBox.setFromObject(e.one);
-            /*       
-                 if (eBox.intersectsBox(pBox)) {
-                     
-                     
-                     collapsedScreen.style.display = 'block';
-                     collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
-                     collapsedScreenButton.addEventListener('click',() => {
-                       
-                         reset();
-                         collapsedScreen.style.display = 'none';
-                     })
-     
-                     isCollapsed = true;
-                     isPlaying = false;
-                     let score = localStorage.getItem('score');
-     
-                     // if there is a value and that value is less than current
-                     if(score*1 < scoreValue) {
-                         localStorage.setItem('score', scoreValue.toFixed(0));
-                     }
-                 
-                 } 
-                  */
-        });
-
+                let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+                pBox.setFromObject(playerHitboxMesh);
+                eBox.setFromObject(e.one);
+                    
+                    if (eBox.intersectsBox(pBox)) {
+                        
+                        
+                        collapsedScreen.style.display = 'block';
+                        collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
+                        collapsedScreenButton.addEventListener('click',() => {
+                        
+                            reset();
+                            collapsedScreen.style.display = 'none';
+                        })
+        
+                        isCollapsed = true;
+                        isPlaying = false;
+                        let score = localStorage.getItem('score');
+        
+                        // if there is a value and that value is less than current
+                        if(score*1 < scoreValue) {
+                            localStorage.setItem('score', scoreValue.toFixed(0));
+                        }
+                    
+                    } 
+                    
+            });
+        }    
     }
     //deltaS=.009
     //console.log(clock.getDelta());
