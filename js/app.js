@@ -48,6 +48,10 @@ export let frame = 0;
 let collapsedScreen = document.querySelector('#collapsedScreen');
 let collapsedScreenScore = document.querySelector('#finalScore');
 let collapsedScreenButton = document.querySelector('#restartButton');
+ collapsedScreenButton.addEventListener("click", () => {
+   reset();
+   collapsedScreen.style.display = "none";
+ });
 
 let stats = new Stats();
 stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -220,33 +224,17 @@ const keyUpHandler = (e) => {
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
 const reset = () => {
-
-
-    console.log('lenght ->>')
-    console.log(scene.children.length)
-
+    console.log(`%c reset`, 'font-size:40px')
 
     isJump = false;// if collision was in the air
    
     eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
     enemies.length = 0;
-    console.log(scene.children.filter((one) => one.name !== "enemy"));
     console.log('11111111111111sssawfa')
     console.log(scene.children.length);
 
-    /* for(let i = 0; i<scene.children.length; i++) {
-        if (scene.children[i].name === "enemy") {
-          console.log("enemies delete");
-          scene.remove(scene.children[i]);
-        }
-    } */
-scene.children = scene.children.filter((one) => one.name !== "enemy");
-    /* scene.children.map(one=> {
-        if ( one.name === "enemy") {
-            console.log('enemies delete')
-            scene.remove(one);
-        }
-    }); */
+    scene.children = scene.children.filter((one) => one.name !== "enemy");
+   
     console.log('2222222222sssawfa')
     console.log(scene.children.length);
 
@@ -331,12 +319,7 @@ const animate = () => {
                 collisionMusicController.play();
                 collapsedScreen.style.display = 'block';
                 collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
-                collapsedScreenButton.addEventListener('click',() => {
-                  
-                    reset();
-                    collapsedScreen.style.display = 'none';
-                })
-
+               
                 isCollapsed = true;
                 isPlaying = false;
                 let score = localStorage.getItem('score');
