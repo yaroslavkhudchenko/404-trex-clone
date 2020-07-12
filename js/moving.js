@@ -35,116 +35,6 @@ let enemiesRespPos = {
     min:-125
 }
 
-// calcute respawn position for each enemy when reach pointer
-export const checkForOthers  = () => {
-    let far = 0;
-
-    console.log('check for others')
-
-    for(let i = 0; i<enemies.length; i++ ){
-        far = enemies[i].position.x < far ? enemies[i].position.x : far;
-    }
-    
-    for (let i = 0; i < enemiesPtero.length; i++) {
-        far = enemiesPtero[i].one.position.x < far ? enemiesPtero[i].one.position.x : far;
-    }
-
-
-    return far < -300 ? far + far / 100 * 20 : (-200 - Math.random() * (enemiesRespPos.min - enemiesRespPos.max) + enemiesRespPos.max);
-}
-
-
-
-/* 
-const enemiesMove = () => {
-    // ENEMIES //
-
-    // console.log('enemiesmove')
-
-    if (enemies[0]) {
-        enemies[0].position.x += .5 + (scoreValue / cooler);
-        // console.log(`enemies0 -> ${enemies[0].position.x}`)
-        if (enemies[0].position.x > 25) {
-
-            enemies[0].rotation.y += Math.random() * (30 - 15) + 30; // random rotation on y
-            enemies[0].position.x = checkForOthers()
-
-        }
-    }
-    if (enemies[1]) {
-        // console.log(`enemies1 -> ${enemies[1].position.x}`)
-
-        enemies[1].position.x += .5 + (scoreValue / cooler);
-        if (enemies[1].position.x > 25) {
-            
-              
-            enemies[1].rotation.y += Math.random() * (30 - 15) + 30; // random rotation on y
-            enemies[1].position.x = checkForOthers()
-        }
-    }
-    
-    if (enemiesPtero[0]) {
-        // console.log(`enemiesPtero0 -> ${enemiesPtero[0].one.position.x}`)
-
-        enemiesPtero[0].one.position.x += .5 + (scoreValue / cooler);
-        enemiesPtero[0].two.position.x += .5 + (scoreValue / cooler);
-        enemiesPtero[0].three.position.x += .5 + (scoreValue / cooler);
-
-        if (enemiesPtero[0].one.position.x > 25) {
-            let goodP = checkForOthers();
-            enemiesPtero[0].one.position.x = goodP;
-            enemiesPtero[0].two.position.x = goodP;
-            enemiesPtero[0].three.position.x = goodP;
-
-        }
-    } if (enemiesPtero[1]) {
-
-        // console.log(`enemiesPtero1 -> ${enemiesPtero[1].one.position.x}`)
-
-
-        enemiesPtero[1].one.position.x += .5 + (scoreValue / cooler);
-        enemiesPtero[1].two.position.x += .5 + (scoreValue / cooler);
-        enemiesPtero[1].three.position.x += .5 + (scoreValue / cooler);
-
-        if (enemiesPtero[1].one.position.x > 25) {
-
-            let goodP = checkForOthers();
-            enemiesPtero[1].one.position.x = goodP;
-            enemiesPtero[1].two.position.x = goodP;
-            enemiesPtero[1].three.position.x = goodP;
-        }
-    } 
-    if (enemies[2]) {
-
-        // console.log(`enemies2 -> ${enemies[2].position.x}`)
-
-
-        enemies[2].position.x += .5 + (scoreValue / cooler);
-
-        if (enemies[2].position.x > 25) {
-            enemies[2].rotation.y += Math.random() * (30 - 15) + 30; // random rotation on y
-            enemies[2].position.x = checkForOthers()
-        }
-    }
-    if (enemiesPtero[2]) {
-
-        // console.log(`enemiesPtero2 -> ${enemiesPtero[2].one.position.x}`)
-
-        enemiesPtero[2].one.position.x += .5 + (scoreValue / cooler);
-        enemiesPtero[2].two.position.x += .5 + (scoreValue / cooler);
-        enemiesPtero[2].three.position.x += .5 + (scoreValue / cooler);
-
-        if (enemiesPtero[2].one.position.x > 25) {
-            let goodP = checkForOthers();
-            enemiesPtero[2].one.position.x = goodP;
-            enemiesPtero[2].two.position.x = goodP;
-            enemiesPtero[2].three.position.x = goodP;
-        }
-    }
-}
-
- */
-
 let stopGlobaRespawn = false;
 let yesYouCan = true;
 let respawnCooldown = () =>{
@@ -155,9 +45,6 @@ let respawnCooldown = () =>{
 const enemiesMove = () => {
 
     
-    
-   
-    
     // console.log('enemiesmove')
     enemies.map((one,index) => {
         if(one.position) {
@@ -166,7 +53,6 @@ const enemiesMove = () => {
             if (one.position.x > 25) {
                 scene.remove(one);
                 enemies.pop() // remove from both scene and array s
-                //enemySpawner();
                 stopGlobaRespawn = true;
                 enemySpawner();
             }
@@ -180,49 +66,14 @@ const enemiesMove = () => {
                 scene.remove(one.three);
                 
                 enemies.pop() // remove from both scene and array s
-                //enemySpawner();
                 stopGlobaRespawn = true;
                 enemySpawner();
             }
         }
         
            
-        //enemySpawner();
     })
-    // console.log(scene.children.length)
-
-    /* // ENEMIES //
-    if (yesYouCan) {
-
-        console.log('ONCEEEEEEEEEEEEEEEEE')
-        if (enemies[enemies.length - 1].position) {
-            if ((enemies[enemies.length - 1].position.x).toFixed(0) * 1 === -150) {
-                enemySpawner();
-                yesYouCan = false;
-                respawnCooldown();
-
-                console.log("THE FUCKING END1")
-                
-            }
-        } else if (enemies[enemies.length - 1].one.position.x) {
-            if ((enemies[enemies.length - 1].one.position.x).toFixed(0) * 1 === -150) {
-                enemySpawner();
-                yesYouCan = false;
-                respawnCooldown();
-
-                console.log("THE FUCKING END")
-
-                
-            }
-        }
-    } */
 }
-
-
-
-
-
-
 
 let decorationsInitialPos = {
     bigtree0: -120,
@@ -245,7 +96,6 @@ export const moving = () => {
 
             bigTrees[0].position.x = decorationsInitialPos.cactuses21 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.bigtree0 = bigTrees[0].position.x;
-
             bigTrees[0].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
@@ -255,9 +105,6 @@ export const moving = () => {
 
             bigTrees[1].position.x = decorationsInitialPos.bigtree0 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.bigtree1 = bigTrees[1].position.x;
-            
-
-
             bigTrees[1].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
@@ -267,8 +114,6 @@ export const moving = () => {
 
             bigTrees[2].position.x = decorationsInitialPos.bigtree1 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.bigtree2 = bigTrees[2].position.x;
-            
-
             bigTrees[2].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
@@ -278,16 +123,9 @@ export const moving = () => {
 
             bigTrees[3].position.x = decorationsInitialPos.bigtree2 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.bigtree3 = bigTrees[3].position.x;
-
-
             bigTrees[3].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
-
-
-
-
-
 
     if (cactuses1[0]) {
         cactuses1[0].position.x += .09; // * scoreValue / 10;
@@ -295,7 +133,6 @@ export const moving = () => {
 
             cactuses1[0].position.x = decorationsInitialPos.bigtree3 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.cactuses10 = cactuses1[0].position.x;
-
             cactuses1[0].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
@@ -305,7 +142,6 @@ export const moving = () => {
 
             cactuses1[1].position.x = decorationsInitialPos.cactuses10 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.cactuses11 = cactuses1[1].position.x;
-
             cactuses1[1].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
@@ -316,7 +152,6 @@ export const moving = () => {
 
             cactuses2[0].position.x = decorationsInitialPos.cactuses11 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.cactuses20 = cactuses2[0].position.x;
-
             cactuses2[0].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
@@ -326,13 +161,9 @@ export const moving = () => {
 
             cactuses2[1].position.x = decorationsInitialPos.cactuses20 - Math.random() * (-10 - -15) + -15
             decorationsInitialPos.cactuses21 = cactuses2[0].position.x;
-
-
             cactuses2[1].rotation.y += Math.random() * (30 - 15) + 30;
         }
     }
-
-
 
     // floors
     if (runningFloor) {
@@ -355,10 +186,7 @@ export const moving = () => {
 
     enemiesMove();
     
-
-    //console.log(scoreValue.toFixed(0))
-    // changing models to have animation effect
-
+    // changing models to have 'animation' effect
 
     if (
             playerModel1 && 
@@ -464,11 +292,7 @@ export const moving = () => {
             currentPteroModel = 'two';
 
         } else if (currentPteroModel === 'two') {
-            // console.log('one here 222222222222')
-           /*  enemyObjTopTwo.visible = false;
-            enemyObjTopThree.visible = true; */
-
-
+            
             enemiesPtero[0].two.visible = false;
             enemiesPtero[1].two.visible = false;
             enemiesPtero[2].two.visible = false;
@@ -478,15 +302,10 @@ export const moving = () => {
             enemiesPtero[2].three.visible = true;
 
 
-
-
             currentPteroModel = 'three';
 
         } else if (currentPteroModel === 'three') {
-            // console.log('one here 3333333333')
-            /* enemyObjTopThree.visible = false;
-            enemyObjTopTwo.visible = true; */
-
+            
             enemiesPtero[0].three.visible = false;
             enemiesPtero[1].three.visible = false;
             enemiesPtero[2].three.visible = false;
@@ -495,13 +314,9 @@ export const moving = () => {
             enemiesPtero[1].two.visible = true;
             enemiesPtero[2].two.visible = true;
 
-
             currentPteroModel = 'four';
         } else {
-            // console.log('one here elseeeeee')
-            // enemyObjTopTwo.visible = false;
-            // enemyObjTopOne.visible = true;
-
+            
             enemiesPtero[0].two.visible = false;
             enemiesPtero[1].two.visible = false;
             enemiesPtero[2].two.visible = false;
@@ -509,12 +324,9 @@ export const moving = () => {
             enemiesPtero[0].one.visible = true;
             enemiesPtero[1].one.visible = true;
             enemiesPtero[2].one.visible = true;
+
             currentPteroModel = 'one';
         }
     }
-
-
-
-
 
 }

@@ -221,17 +221,34 @@ let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
 const reset = () => {
 
+
+    console.log('lenght ->>')
+    console.log(scene.children.length)
+
+
     isJump = false;// if collision was in the air
    
     eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
     enemies.length = 0;
-    scene.children.map(one=> {
+    console.log(scene.children.filter((one) => one.name !== "enemy"));
+    console.log('11111111111111sssawfa')
+    console.log(scene.children.length);
+
+    /* for(let i = 0; i<scene.children.length; i++) {
+        if (scene.children[i].name === "enemy") {
+          console.log("enemies delete");
+          scene.remove(scene.children[i]);
+        }
+    } */
+scene.children = scene.children.filter((one) => one.name !== "enemy");
+    /* scene.children.map(one=> {
         if ( one.name === "enemy") {
             console.log('enemies delete')
             scene.remove(one);
         }
-    });
-
+    }); */
+    console.log('2222222222sssawfa')
+    console.log(scene.children.length);
 
 
     /* playerModel.position.set(
@@ -332,50 +349,13 @@ const animate = () => {
             } 
             
         });
-        /* if (enemiesPtero.length) {
-            enemiesPtero.map((e, index) => {
-
-                let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-                pBox.setFromObject(playerHitboxMesh);
-                eBox.setFromObject(e.one);
-                    
-                    if (eBox.intersectsBox(pBox)) {
-                        console.log('2222collision')
-                        backMusicController.pause()
-                        collisionMusicController.play();
-                        collapsedScreen.style.display = 'block';
-                        collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
-                        collapsedScreenButton.addEventListener('click',() => {
-                        
-                            reset();
-                            collapsedScreen.style.display = 'none';
-
-                        })
         
-                        isCollapsed = true;
-                        isPlaying = false;
-                        let score = localStorage.getItem('score');
-        
-                        // if there is a value and that value is less than current
-                        if(score*1 < scoreValue) {
-                            localStorage.setItem('score', scoreValue.toFixed(0));
-                        }
-                    
-                    } 
-                    
-            }); 
-        }    */
     }
-    /* 
-    // running player
-    if (mixer) mixer.update(clock.getDelta()); */
+  
     renderer.render(scene, camera);
 
     stats.end();
 
-
-    // console.log(camera.rotation)
-    // console.log(camera.position)
 }
 
 

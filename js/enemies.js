@@ -7,14 +7,12 @@ export const randomSelector = [9, 5];
 
 // to spawn enemies
 export const enemySpawner = (pos) => {
-    console.log('----')
-    console.log(!!pos)
-    //if (randomSelector[Math.floor(Math.random() * randomSelector.length)]===5) {
+    
+    if (randomSelector[Math.floor(Math.random() * randomSelector.length)]===5) {
         // enemy mesh
         let enemy = enemyObjbottom.clone(); // new THREE.Mesh(enemyG, enemyMat);
         enemy.name = 'enemy';
         enemy.scale.set(2.5, 2.5, 2.5)
-        // enemy.rotation.set(0,0,0)
         // set position
         enemy.position.set(pos && pos.x ? pos.x : -200, 5, 0);
         enemy.castShadow = true; //default is false
@@ -22,7 +20,7 @@ export const enemySpawner = (pos) => {
         scene.add(enemy);
 
         enemies.unshift(enemy); // unshift to global array to control if reach the pointer
-   /*  } else {
+   } else {
    
         console.log('ptero resp')
         // ptero mesh
@@ -44,9 +42,9 @@ export const enemySpawner = (pos) => {
         enemy.three.rotation.set(0, 0, 0)
 
         // set position
-        enemy.one.position.set(-200, 9, 0);
-        enemy.two.position.set(-200, 9, 0);
-        enemy.three.position.set(-200, 9, 0);
+        enemy.one.position.set(pos && pos.x ? pos.x : -200, 9, 0);
+        enemy.two.position.set(pos && pos.x ? pos.x : -200, 9, 0);
+        enemy.three.position.set(pos && pos.x ? pos.x : -200, 9, 0);
 
         enemy.one.castShadow = true; //default is false
         enemy.two.castShadow = true; //default is false
@@ -66,19 +64,5 @@ export const enemySpawner = (pos) => {
 
 
         enemies.unshift(enemy); // unshift to global array to control if reach the pointer
-    } */
-
-
-
-
-
-
-
-
+    }
 }
-export const enemyPteroSpawner = () => {
-
-    
-}
-// enemyObjTopOne
-// enemyObjTopTwo
