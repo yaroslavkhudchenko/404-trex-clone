@@ -22,7 +22,7 @@ export const enemySpawner = (pos) => {
         enemies.unshift(enemy); // unshift to global array to control if reach the pointer
    } else {
    
-        console.log('ptero resp')
+        //  console.log('ptero resp')
         // ptero mesh
         let enemy = {
             one: enemyObjTopOne.clone(),

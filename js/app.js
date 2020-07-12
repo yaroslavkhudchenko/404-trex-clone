@@ -5,11 +5,15 @@ import * as THREE from './libs/three.module.js';
 
 import Stats from 'stats.js';
 import { loader,
-     playerDefaultPosition, 
-     playerModelJump, 
-     playerModel1, 
-     playerModel2, 
-    playerModel3, playerModel1low, playerModel2low, playerModel3low, mixer } from './loader.js';
+    playerDefaultPosition, 
+    playerModelJump, 
+    playerModel1, 
+    playerModel2, 
+    playerModel3, 
+    playerModel1low, 
+    playerModel2low, 
+    playerModel3low, 
+    mixer } from './loader.js';
 import { moving, checkForOthers } from './moving.js';
 import { player, playerHitboxMesh } from './player.js';
 import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
@@ -25,25 +29,23 @@ export let add = () => {
 }
 import { backMusicController, jumpMusicController, coinMusicController, collisionMusicController, music } from './sounds.js';
 
-
-
 import {OrbitControls} from './libs/OrbitControls';
 
 
 export let collissionDetected = false;
-
-let scoreValueDisplay = document.querySelector('#scoreValue');
 export let scoreValue = 0;
-let clock = new THREE.Clock();
-let spawnPteros = true;
-
 export let low = false;
-// GLOBAL STATES 
-let isPlaying = false;
-let isCollapsed = false
 export let isJump = false;
 
 export let frame = 0;
+let scoreValueDisplay = document.querySelector('#scoreValue');
+let clock = new THREE.Clock();
+let spawnPteros = true;
+
+// GLOBAL STATES 
+let isPlaying = false;
+let isCollapsed = false
+
 
 let collapsedScreen = document.querySelector('#collapsedScreen');
 let collapsedScreenScore = document.querySelector('#finalScore');

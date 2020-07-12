@@ -276,54 +276,51 @@ export const moving = () => {
         }
     }
     //console.log(enemiesPtero)
-    if (enemiesPtero.length === 3 && frame % 15 === 0) { // check for test
-        
+    if (frame % 15 === 0) { // check for test
+            console.log('in ptero moving')
         if (currentPteroModel === 'one') {
-            // console.log('one here 11111111')
+          
 
-            enemiesPtero[0].one.visible = false;
-            enemiesPtero[1].one.visible = false;
-            enemiesPtero[2].one.visible = false;
+            enemies.map(one => {
+                if(one.one) {
+                    one.one.visible = false;
+                    one.two.visible = true;
+                }
+            })
 
-            enemiesPtero[0].two.visible = true;
-            enemiesPtero[1].two.visible = true;
-            enemiesPtero[2].two.visible = true;
 
             currentPteroModel = 'two';
 
         } else if (currentPteroModel === 'two') {
-            
-            enemiesPtero[0].two.visible = false;
-            enemiesPtero[1].two.visible = false;
-            enemiesPtero[2].two.visible = false;
-
-            enemiesPtero[0].three.visible = true;
-            enemiesPtero[1].three.visible = true;
-            enemiesPtero[2].three.visible = true;
+        
+            enemies.map((one) => {
+                if (one.two) {
+                one.two.visible = false;
+                one.three.visible = true;
+                }
+            });
 
 
             currentPteroModel = 'three';
 
         } else if (currentPteroModel === 'three') {
             
-            enemiesPtero[0].three.visible = false;
-            enemiesPtero[1].three.visible = false;
-            enemiesPtero[2].three.visible = false;
-
-            enemiesPtero[0].two.visible = true;
-            enemiesPtero[1].two.visible = true;
-            enemiesPtero[2].two.visible = true;
-
+        
+            enemies.map((one) => {
+                if (one.three) {
+                    one.three.visible = false;
+                    one.two.visible = true;
+                }
+            });
             currentPteroModel = 'four';
         } else {
             
-            enemiesPtero[0].two.visible = false;
-            enemiesPtero[1].two.visible = false;
-            enemiesPtero[2].two.visible = false;
-
-            enemiesPtero[0].one.visible = true;
-            enemiesPtero[1].one.visible = true;
-            enemiesPtero[2].one.visible = true;
+             enemies.map((one) => {
+               if (one.two) {
+                 one.two.visible = false;
+                 one.one.visible = true;
+               }
+             });
 
             currentPteroModel = 'one';
         }
