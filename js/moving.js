@@ -24,7 +24,7 @@ import {
 } from './loader.js';
 
 import { scoreValue, frame, isJump, low, scene } from './app.js';
-import { enemies, enemiesPtero, randomSelector } from './enemies.js';
+import { enemies, enemiesPtero, randomSelector, enemySpawner } from './enemies.js';
 
 let currentRunModel = 'one';
 let currentPteroModel = 'one';
@@ -168,6 +168,7 @@ const enemiesMove = () => {
                 enemies.pop() // remove from both scene and array s
                 //enemySpawner();
                 stopGlobaRespawn = true;
+                enemySpawner();
             }
         } else {
             one.one.position.x += .5 + (scoreValue / cooler);
@@ -181,11 +182,12 @@ const enemiesMove = () => {
                 enemies.pop() // remove from both scene and array s
                 //enemySpawner();
                 stopGlobaRespawn = true;
+                enemySpawner();
             }
         }
         
            
-
+        //enemySpawner();
     })
     // console.log(scene.children.length)
 

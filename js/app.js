@@ -259,25 +259,14 @@ const reset = () => {
     console.log('after')
     console.log(enemies)
     console.log(scene.children)
-/* 
-    if (enemies.length) enemies.map((one, index) => {
-        console.log(`-${index + 1}30`)
-        one.position.x = `-${index+1}30`*1;})
-    if (enemiesPtero.length)enemiesPtero.map((one,index1) => {
-        Object.keys(one).map((key) => {
-            one[key].position.x = `-${index1 + 1}80` * 1
-        })
-    }) */
-    //enemySpawner();
-   
-    /* if (enemies[enemies.length - 1].position ? enemies[enemies.length - 1].position.x : enemies[enemies.length - 1].one.position.x > -100) {
-        enemySpawner();
-        setTimeout(() => {
-            enemySpawner();
-        }, 2000);
-        
-    } */
-    enemySpawner();
+
+
+     enemySpawner({ x: -150 });
+     enemySpawner({ x: -210 });
+     enemySpawner({ x: -260 });
+     enemySpawner({ x: -310 });
+
+
     backMusicController.play();
 
 }
@@ -291,34 +280,10 @@ const animate = () => {
     stats.begin();
 
     if (!isPlaying || isCollapsed)return;
-
-    
-     // first respawn of the enemies based on current frame not to have overlay
-   /*  switch (frame) {
-        case 130:
-            enemySpawner()
-            break;
-        case 230:
-            enemySpawner()
-            break;
-        case 330:
-            enemySpawner()
-            break;
-        case 430:
-            enemySpawner()
-            break;
-        case 530:
-            enemySpawner()
-            break;
-    }  */
-
-
  
     // check + movement for all the elements
     moving();
 
-    
-    //if(playerModel)playerModel.scale.set(.2, .2, .2);
 
     // update the score
     scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
@@ -326,11 +291,11 @@ const animate = () => {
 
 
     if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0) {
-        enemySpawner();
+        // enemySpawner();
     }
 
     if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0) {
-        console.log('3222222222222220')
+        // console.log('3222222222222220')
         coinMusicController.play()
     }
     // collision check
@@ -423,7 +388,11 @@ document.querySelector('.startGameButton').addEventListener('click',()=>{
     isPlaying = true;
 
     backMusicController.play();
-    enemySpawner()
+    enemySpawner({x:-150})
+    enemySpawner({ x: -210 });
+    enemySpawner({ x: -260 });
+    enemySpawner({ x: -310 });
+
 })
 
 

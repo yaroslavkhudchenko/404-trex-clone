@@ -6,23 +6,23 @@ export let intervalToMove = null;
 export const randomSelector = [9, 5];
 
 // to spawn enemies
-export const enemySpawner = () => {
-    console.log('E NE M EG WAGWAgwaf')
-    if (randomSelector[Math.floor(Math.random() * randomSelector.length)]===5) {
+export const enemySpawner = (pos) => {
+    console.log('----')
+    console.log(!!pos)
+    //if (randomSelector[Math.floor(Math.random() * randomSelector.length)]===5) {
         // enemy mesh
         let enemy = enemyObjbottom.clone(); // new THREE.Mesh(enemyG, enemyMat);
         enemy.name = 'enemy';
         enemy.scale.set(2.5, 2.5, 2.5)
         // enemy.rotation.set(0,0,0)
-
         // set position
-        enemy.position.set(-200, 5, 0);
+        enemy.position.set(pos && pos.x ? pos.x : -200, 5, 0);
         enemy.castShadow = true; //default is false
         enemy.receiveShadow = false;
         scene.add(enemy);
 
         enemies.unshift(enemy); // unshift to global array to control if reach the pointer
-    } else {
+   /*  } else {
    
         console.log('ptero resp')
         // ptero mesh
@@ -66,7 +66,7 @@ export const enemySpawner = () => {
 
 
         enemies.unshift(enemy); // unshift to global array to control if reach the pointer
-    }
+    } */
 
 
 
