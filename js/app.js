@@ -63,8 +63,18 @@ document.body.appendChild(stats.dom);
 
 const init = () => { // init all required environment
 
+    let bestValue = localStorage.getItem('score') ? localStorage.getItem('score') : '00000';
+    console.log(bestValue)
+    console.log(bestValue.length)
+    let goodBestValue = `${bestValue.length === 1 ?
+            '0000' : bestValue.length === 2 ?
+                '000' : bestValue.length === 3 ?
+                '00' : bestValue.length === 4 ?
+                '0': ''
+    }${bestValue}
+`
     // if there is a hi score in localstorage grab it and if not set value to 0
-    document.querySelector('#bestValue').innerHTML = localStorage.getItem('score') ? localStorage.getItem('score') : 0
+    document.querySelector('#bestValue').innerHTML = goodBestValue
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
     
@@ -293,7 +303,13 @@ const animate = () => {
 
 
     // update the score
-    scoreValueDisplay.innerHTML = scoreValue.toFixed(0);
+    scoreValueDisplay.innerHTML = `${
+        scoreValue.toFixed(0).length === 1 ? 
+            '0000' : scoreValue.toFixed(0).length === 2 ?  
+            '000' : scoreValue.toFixed(0).length === 3 ? 
+            '00' : scoreValue.toFixed(0).length === 4 ?
+            '0' : ''
+    }${scoreValue.toFixed(0)}`;
     scoreValue += .3;
 
 

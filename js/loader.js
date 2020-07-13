@@ -364,7 +364,8 @@ export const loader = async () => {
             await object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
-
+                node.castShadow = true;
+                node.receiveShadow = false;
             });
            object.castShadow = true;
             // await scene.add(object);
@@ -398,7 +399,8 @@ export const loader = async () => {
             await object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
-
+                node.castShadow = true;
+                node.receiveShadow = false;
             });
 
             //await scene.add(object);
@@ -432,7 +434,8 @@ export const loader = async () => {
             await object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
-
+                node.castShadow = true;
+                node.receiveShadow = false;
             });
 
             //await scene.add(object);
@@ -466,7 +469,8 @@ export const loader = async () => {
             await object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
-
+                node.castShadow = true;
+                node.receiveShadow = false;
             });
 
             //await scene.add(object);
@@ -497,11 +501,11 @@ export const loader = async () => {
             object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
-
+                node.receiveShadow = true;
+                node.castShadow = false;
             });
             object.material = materialD;
-            object.receiveShadow = true;
-            object.castShadow =false;
+            
             object.position.set(-120, 1 ,-13)
             
             object.scale.set(8,8,8)
@@ -560,7 +564,7 @@ export const loader = async () => {
     await new FBXLoader().load('models/Cactus.fbx', 
         (object) => {
 
-            let material = new THREE.MeshBasicMaterial({ color: 0x00FF00});
+            let material = new THREE.MeshBasicMaterial({ color: 0x088803});
 /*             material.map = textureLoader.load(`models/CactusTexture.png`);
  */
         
