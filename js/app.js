@@ -1,8 +1,4 @@
-
-
-
 import * as THREE from './libs/three.module.js';
-
 import Stats from 'stats.js';
 import { loader,
     playerDefaultPosition, 
@@ -10,11 +6,12 @@ import { loader,
     playerModel1, 
     playerModel2, 
     playerModel3 } from './loader.js';
-import { moving, checkForOthers } from './moving.js';
+import { moving } from './moving.js';
 import { player, playerHitboxMesh } from './player.js';
-import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
+import { enemySpawner, enemies } from './enemies.js';
 import { Environment } from './environment.js';
-
+import { backMusicController, jumpMusicController, coinMusicController, collisionMusicController } from './sounds.js';
+import { OrbitControls } from './libs/OrbitControls';// for testing
 
 export let camera, scene, renderer, controls;
 export let light;
@@ -23,26 +20,21 @@ export let mainLoaded = 0;
 export let add = () => {
     mainLoaded++;
 }
-import { backMusicController, jumpMusicController, coinMusicController, collisionMusicController, music } from './sounds.js';
-
-import {OrbitControls} from './libs/OrbitControls';
-
 
 export let collissionDetected = false;
 export let scoreValue = 0;
 export let low = false;
 export let isJump = false;
-
 export let frame = 0;
+
+
 let scoreValueDisplay = document.querySelector('#scoreValue');
-let clock = new THREE.Clock();
-let spawnPteros = true;
 
 // GLOBAL STATES 
 let isPlaying = false;
 let isCollapsed = false
 
-
+// global vars
 let collapsedScreen = document.querySelector('#collapsedScreen');
 let collapsedScreenScore = document.querySelector('#finalScore');
 let collapsedScreenButton = document.querySelector('#restartButton');
@@ -51,29 +43,32 @@ let collapsedScreenButton = document.querySelector('#restartButton');
    collapsedScreen.style.display = "none";
  });
 
-let stats = new Stats();
-stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+
+let startScreen = document.querySelector('.startMenu');
+let buttonStart = document.querySelector(".startGameButton");
+
+let loadingBar = document.querySelector('#loadingBarValue');
+let stopLoadingObjectsLoop = true;
+
+// let stats = new Stats();
+// stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
 //document.body.appendChild(stats.dom);
-
-
 
 const init = () => { // init all required environment
 
+    // check for the highest score in the localstorage
     let bestValue = localStorage.getItem('score') ? localStorage.getItem('score') : '00000';
-    console.log(bestValue)
-    console.log(bestValue.length)
-    let goodBestValue = `${bestValue.length === 1 ?
+    // check how many 0 to add before to always have 5 digits
+    document.querySelector('#bestValue').innerHTML = `${bestValue.length === 1 ?
             '0000' : bestValue.length === 2 ?
                 '000' : bestValue.length === 3 ?
                 '00' : bestValue.length === 4 ?
                 '0': ''
     }${bestValue}
-`
-    // if there is a hi score in localstorage grab it and if not set value to 0
-    document.querySelector('#bestValue').innerHTML = goodBestValue
+`;
 
+    // init camera 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
-    
     camera.position.set(
         12.812632627090226,
         15.972268469235177,
@@ -96,7 +91,7 @@ const init = () => { // init all required environment
     DLightTargetObject.position.set(10, 2, 10);
     DLight.castShadow = true;
     DLight.shadow.radius = 2;
-     // create shadows on objects
+    // create shadows on objects
     DLight.castShadow = true;
     DLight.shadow.radius =5;
     DLight.shadow.mapSize.width = 1024 * 1;
@@ -105,18 +100,12 @@ const init = () => { // init all required environment
     DLight.shadow.camera.scale.x = 20;
     DLight.shadow.camera.near = 0;
     DLight.shadow.camera.far = 200; 
-    // // ambient light(everywhere)
+    // ambient light(everywhere)
     let ALight = new THREE.AmbientLight(0xccb5ac, 1);
-    //let h = new THREE.DirectionalLightHelper(DLight,.5);
+
     scene.add(ALight);
-    //scene.add(h)
     scene.add(DLightTargetObject);
-
-
     scene.add(DLight);
-
-    
-
 
     // add fog
     scene.fog = new THREE.Fog(0xE7B251, 1, 125);
@@ -127,13 +116,11 @@ const init = () => { // init all required environment
     loader();// all objects loaders
 
     renderer = new THREE.WebGLRenderer({
-       /*  alpha: true, */
-        antialias: true,
+        antialias: true, // better quality
         canvas: canvas // render to existing canvas
     });
 
-    //renderer.setClearColor(0xE6CBB2); // to have light background color
-    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.enabled = true; // enable shadows
     renderer.shadowMap.type = THREE.VSMShadowMap ;
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.toneMapping = THREE.Uncharted2ToneMapping
@@ -141,12 +128,6 @@ const init = () => { // init all required environment
     // just for testing
     // controls = new OrbitControls(camera, canvas);
 
-    // pointer to see where enemies should be eliminated
-    let pointerGeo = new THREE.CubeGeometry(2, 2, 2);
-    let pointerMat = new THREE.MeshBasicMaterial({ color: 0x0000f0 })
-    let pointer = new THREE.Mesh(pointerGeo, pointerMat);
-    pointer.position.set(25, 1, 0);
-    scene.add(pointer);
     // on window resize
     window.addEventListener('resize', onWindowResize, false);
 }
@@ -155,28 +136,31 @@ function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-
 }
 
-// handle keypress/ up function to interact with the player obj
+// handle keypress
 const keyPressedHandler = (e) => {
     
+    // duck
     if (e.code === "KeyS" || e.code === "ArrowDown") {
         if (isJump || playerModel1.position.x > 9) return;
         isJump = false;
         // hit box
         playerHitboxMesh.scale.y = .6;
         playerHitboxMesh.position.y = 5;
-        low = true;
-    } else if (e.code === "Space" || e.code === "KeyW" || e.code === "ArrowUp") {
 
+        low = true;
+
+    // jump
+    } else if (e.code === "Space" || e.code === "KeyW" || e.code === "ArrowUp") {
     
         if (isJump || low || playerModel1.position.x > 9)return;
-        jumpMusicController.play();
+        
+        jumpMusicController.play(); // jump sound
 
         isJump = true;
+
         playerHitboxMesh.position.y = 13;
-        
         playerModelJump.position.y = 11;
 
         playerModel1.visible = false;
@@ -184,32 +168,22 @@ const keyPressedHandler = (e) => {
         playerModel3.visible = false;
         playerModelJump.visible = true;
 
-
         // reset position y not to fly
         setTimeout(() => {
             playerHitboxMesh.position.y = 8;
-            
             playerModelJump.position.y = 5;
-
             isJump = false;
-            
-            
-
         }, 500);
         
     }
 }
+// realease the key press
 const keyUpHandler = (e) => {
     if(e.code === "KeyS" || e.code === "ArrowDown") {
-
         setTimeout(() => {
             playerHitboxMesh.position.y = 8;
             playerHitboxMesh.scale.y = 1;
-           /*  playerModel1.scale.set(.2, .2, .2)
-            playerModel2.scale.set(.2, .2, .2)
-            playerModel3.scale.set(.2, .2, .2) */
             low = false;
-            /* playerModel1low */
         }, 100);
         
     }
@@ -217,78 +191,51 @@ const keyUpHandler = (e) => {
 // for collision detection
 let eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
 
+// function to reset game after the collision
 const reset = () => {
-    console.log(`%c reset`, 'font-size:40px')
 
     isJump = false;// if collision was in the air
    
-    eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-    enemies.length = 0;
-    console.log('11111111111111sssawfa')
-    console.log(scene.children.length);
+    eBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3()); // reset the hitbox
+    enemies.length = 0; // clean enemies array
 
-    scene.children = scene.children.filter((one) => one.name !== "enemy");
+    scene.children = scene.children.filter((one) => one.name !== "enemy"); // left only not enemy children
    
-    console.log('2222222222sssawfa')
-    console.log(scene.children.length);
-
-
-    /* playerModel.position.set(
-        playerDefaultPosition.x,
-        1.5,
-        playerDefaultPosition.z
-    ) */
     playerHitboxMesh.position.set(
         playerDefaultPosition.x,
         8,
         playerDefaultPosition.z
     )
-    scoreValue = 0;
-    
 
+    scoreValue = 0; // reset score value
+    
+    // check if there is a highscore from the localstorage
     let bestValue = localStorage.getItem('score') ? localStorage.getItem('score') : '00000';
-    console.log(bestValue)
-    console.log(bestValue.length)
-    let goodBestValue = `${bestValue.length === 1 ?
+    
+    // add 0 at the beginning to have always 5 digits
+    document.querySelector('#bestValue').innerHTML = `${bestValue.length === 1 ?
         '0000' : bestValue.length === 2 ?
             '000' : bestValue.length === 3 ?
                 '00' : bestValue.length === 4 ?
                     '0' : ''
         }${bestValue}`
     // if there is a hi score in localstorage grab it and if not set value to 0
-    document.querySelector('#bestValue').innerHTML = goodBestValue
 
-
+    // reset global state
     isCollapsed = false;
     isPlaying = true;
-        
-    // default cactuses
-    // enemies[0].position.x = -180
-    // enemies[1].position.x = -239
-    // enemies[2].position.x = -311
-    // enemies[3].position.x = -433
+    
     renderer.render(scene,camera)
-    console.log('after')
-    console.log(enemies)
-    console.log(scene.children)
 
-
+    // new initial respawn
     enemySpawner({ x: -150 });
     enemySpawner({ x: -210 });
     enemySpawner({ x: -260 });
     enemySpawner({ x: -310 });
-
-
+    // restart the music
     backMusicController.play();
 
 }
-
-/* 
-const introScene = () => {
-    
-}
- */
-
 
 // main animate function ( game loop )
 const animate = () => {
@@ -296,13 +243,12 @@ const animate = () => {
   
     frame++;
 
-    stats.begin();
+    // stats.begin();
 
     if (!isPlaying || isCollapsed)return;
  
     // check + movement for all the elements
     moving();
-
 
     // update the score
     scoreValueDisplay.innerHTML = `${
@@ -315,33 +261,30 @@ const animate = () => {
     scoreValue += .3;
 
 
-    if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0) {
-        // enemySpawner();
-    }
+    if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0)coinMusicController.play(); // coin sound on every 100 points
 
-    if (scoreValue.toFixed(0) * 1 % 100 === 0 && scoreValue.toFixed(0) * 1 !== 0) {
-        // console.log('3222222222222220')
-        coinMusicController.play()
-    }
     // collision check
     if (enemies.length) {
-        // console.log('true true true')
-    // check if any of the enemies reach the destroyer pointer and if yes remove from the scene
-        enemies.map((e, index) => {
+        
+        enemies.map((e) => {
 
             let pBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
-            pBox.setFromObject(playerHitboxMesh);
-            eBox.setFromObject(e.one ? e.one : e);
+            pBox.setFromObject(playerHitboxMesh); // from the player
+            eBox.setFromObject(e.one ? e.one : e); // from the current enemy
                
             if (eBox.intersectsBox(pBox)) {
-                console.log('1111collision')
+                // pause back music and play hit sound
                 backMusicController.pause()
                 collisionMusicController.play();
+                // display collapsedScreen
                 collapsedScreen.style.display = 'block';
                 collapsedScreenScore.innerHTML = `Score:${scoreValue.toFixed(0)}`;
                
+                // change state
                 isCollapsed = true;
                 isPlaying = false;
+
+                // get score from the localStorage
                 let score = localStorage.getItem('score');
 
                 // if there is a value and that value is less than current
@@ -357,23 +300,17 @@ const animate = () => {
   
     renderer.render(scene, camera);
 
-    stats.end();
-    // console.log(camera.position)
-    // console.log(camera.rotation)
-
+    // stats.end();
 }
 
-
-
-let startScreen = document.querySelector('.startMenu');
-let buttonStart = document.querySelector(".startGameButton");
-
+// to start the game( menu )
 buttonStart.addEventListener('click',()=>{
-
     startScreen.style.display = 'none';
     isPlaying = true;
 
     backMusicController.play();
+
+    // spawn the enemies
     enemySpawner({x:-150})
     enemySpawner({ x: -210 });
     enemySpawner({ x: -260 });
@@ -381,23 +318,20 @@ buttonStart.addEventListener('click',()=>{
 
 })
 
-
-
-// events
+// key events
 document.addEventListener('keydown', keyPressedHandler);
 document.addEventListener('keyup', keyUpHandler);
 
-
-let loadingBar = document.querySelector('#loadingBarValue');
-let stopLoadingObjectsLoop = true;
+// function(loop) to check if all objects was loaded and then start the game
 const loadingObjects = () => {
     
     if (!stopLoadingObjectsLoop)return;
     
-    loadingBar.style.width = `${mainLoaded*5.3}%`
-    if (mainLoaded === 20/*  && buttonStart.style.display === 'block' */) {
-        console.log('20');
-        //init();
+    loadingBar.style.width = `${mainLoaded*5.3}%`;// loading bar fullfill based on number of objects loaded
+
+    if (mainLoaded === 20) {
+       
+        // replace loading bar with start button
         buttonStart.style.display = "block";
         document.querySelector('#loadingBarValue').style.display = 'none';
 
@@ -407,6 +341,7 @@ const loadingObjects = () => {
         // init player
         player();
         
+        // stop current loop
         stopLoadingObjectsLoop = false;
 
     }
@@ -414,6 +349,6 @@ const loadingObjects = () => {
 
 }
 
-loadingObjects()
-init();
-animate();
+loadingObjects() // start check loop
+init(); // init scene
+animate(); // start game loop (blocked before all objects are loaded)

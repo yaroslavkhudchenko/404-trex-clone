@@ -1,20 +1,20 @@
 import * as THREE from './libs/three.module.js';
 import { scene } from './app.js';
+import {
+    bigTreeObject,
+    cactusObject
+} from './loader.js';
 
 export let cactuses1 = [];
 export let cactuses2 = [];
 export let fallenTrees = [];
 export let bigTrees = []
 export let cactusesIntervalToMove = null;
-
 export let secondM = null;
-import {
-    bigTreeObject,
-    cactusObject
-} from './loader.js';
-
 export let geometryFloor, materialFloor, floorMesh;
 
+
+// array to manage floors (config)
 const farFloors = [
     {
         position: {
@@ -29,7 +29,6 @@ const farFloors = [
         },
         color: 0xE7B251
     },
-
     // river 
     {
         position: {
@@ -113,6 +112,7 @@ const farFloors = [
    
 ]
 
+// handle the environment(back of the scene)
 export const Environment = () => {
 
     bigTreesRespawner(4, -20)
@@ -126,28 +126,26 @@ export const Environment = () => {
     cactusRespawner(3, 33);
 
     for(let i=0; i<farFloors.length;i++) {
-        // floor
+        // floor with custom scale
         let geometryFloor = new THREE.BoxGeometry(
             farFloors[i].scale ? farFloors[i].scale.x : 150,
             farFloors[i].scale ? farFloors[i].scale.y :0,
             farFloors[i].scale ? farFloors[i].scale.z : 20
         );
             
-        let materialFloor
-        if (i === 1) {
+        let materialFloor;
+            
             materialFloor = new THREE.MeshPhongMaterial({
                 color: farFloors[i].color,
-                opacity:.5,
-                transparent:true
+                opacity: i === 1 && .5, // different style for the river
+                transparent: i === 1 && true // different style for the river
             });
-        } else {
-            materialFloor = new THREE.MeshPhongMaterial({
-                color: farFloors[i].color
-            });
-        }
+      
             let floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
-            floorMesh.receiveShadow = true;
+            floorMesh.receiveShadow = true;// receive shadow from the light hitting other objects
             scene.add(floorMesh); // add second and third floor to the scene
+            
+            // position from the floors config
             floorMesh.position.set(
                 farFloors[i].position.x,
                 farFloors[i].position.y,
@@ -156,26 +154,27 @@ export const Environment = () => {
     }
 }
 
-
+// respawn big trees on far floors
 export const bigTreesRespawner = (floorNB, initialCac = false) => {
-        let good = bigTreeObject.clone();
-        good.name = 'bigTree';
-        good.position.set(
-            initialCac ? initialCac : -100,
-            farFloors[floorNB].positions[0].y,
-            farFloors[floorNB].positions[Math.floor((Math.random() * 4) + 1)].z
-        );
-        scene.add(good);
-        bigTrees.unshift(good);
-       
+    let good = bigTreeObject.clone();
+    good.name = 'bigTree';
+    good.position.set(
+        initialCac ? initialCac : -100,
+        farFloors[floorNB].positions[0].y,
+        farFloors[floorNB].positions[Math.floor((Math.random() * 4) + 1)].z
+    );
+    scene.add(good);
+    bigTrees.unshift(good);
 }
 
-export const cactusRespawner = (floorNB, initialCac=false ) => {
+// respawn cactuses on far floors
+export const cactusRespawner = (floorNB, initialCac = false ) => {
     if (floorNB === 0 || floorNB === 1) return;
         
     let good = cactusObject.clone();
     good.name = 'cactus';
-   
+    
+        // custom position if no scale passed to the function
         good.position.set(
             initialCac ? initialCac  : -100,
             farFloors[floorNB].positions[0].y, 
