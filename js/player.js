@@ -1,9 +1,6 @@
 import * as THREE from './libs/three.module.js';
-import { OBJLoader } from './libs/OBJLoader.js';
 import { playerModel1, playerModel2, playerModel3, playerModelJump, playerDefaultPosition, playerModel1low, playerModel2low, playerModel3low } from './loader.js';
 import { scene } from './app.js';
-/* import { OBJLoader } from './libs/OBJLoader.js';
- */
 export let playerHitboxMesh, playerHitboxGeo, playerHitboxMat;
 
 
@@ -11,9 +8,6 @@ export let playerHitboxMesh, playerHitboxGeo, playerHitboxMat;
 
 export const player = () => {
     
-
-
-
     scene.add(playerModel1);
     scene.add(playerModel2);
     scene.add(playerModel3); 

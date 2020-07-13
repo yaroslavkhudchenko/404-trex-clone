@@ -57,28 +57,32 @@ export const loader = async () => {
 
     );
     // player2
-    new OBJLoader().load('models/test/dino_2.obj', (object) => {
-         
-            object.traverse(function (child) {
-                if (child.isMesh) {
-                    child.castShadow = true;
-                    child.receiveShadow = false;
-                    child.material = new THREE.MeshPhongMaterial({ map: textureLoader.load(`models/test/dino_2.png`) });;
-                }
-
+    new OBJLoader().load(
+      "models/test/dino_2.obj",
+      (object) => {
+        object.traverse(function (child) {
+          if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = false;
+            child.material = new THREE.MeshPhongMaterial({
+              map: textureLoader.load(`models/test/dino_2.png`),
             });
-            object.position.set(playerDefaultPosition.x, 5, playerDefaultPosition.z);
-            object.scale.set(.2, .2, .2);
-            object.rotation.y = Math.PI / 1;
+          }
+        });
+        object.position.set(
+          playerDefaultPosition.x,
+          5,
+          playerDefaultPosition.z
+        );
+        object.scale.set(0.2, 0.2, 0.2);
+        object.rotation.y = Math.PI / 1;
 
-            object.visible = false;
-            playerModel2 = object;
-            playerModel2.position.x = 20;
-            // check if loaded and add one for global check
-        },
-        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
-        (error) => console.log('error while loading player model ', error)
-
+        object.visible = false;
+        playerModel2 = object;
+        playerModel2.position.x = 20;
+      }, // check if loaded and add one for global check
+      (xhr) => (xhr.loaded / xhr.total) * 100 === 100 && add(),
+      (error) => console.log("error while loading player model ", error)
     );
     // player3
     new OBJLoader().load('models/test/dino_3.obj', (object) => {
@@ -153,20 +157,15 @@ export const loader = async () => {
 
     );
     // player3_low
-    new OBJLoader().load('models/test/dino_3_low.obj',
+    new OBJLoader().load('models/test/dino_3_low.obj', (object) => {
 
-        (object) => {
-
-
-            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
-            materialD.map = textureLoader.load(`models/test/dino_3_low.png`);
             object.traverse(function (child) {
 
                 if (child.isMesh) {
                     // child.material = material;
                     child.castShadow = true;
                     child.receiveShadow = false;
-                    child.material = materialD;
+                    child.material = new THREE.MeshPhongMaterial({map:textureLoader.load(`models/test/dino_3_low.png`)});
                 }
 
             });
@@ -179,35 +178,19 @@ export const loader = async () => {
             playerModel3low = object;
 
         },
-        (xhr) => {
-            // check if loaded and add one for global check
-            if ((xhr.loaded / xhr.total * 100) === 100) {
-                //console.log('zero1')
-                add();
-            }
-        },
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
         (error) => console.log('error while loading player model ', error)
-
     );
-
-
-
-
     // player jump
-    new OBJLoader().load('models/dinozaur-jump.obj',
+    new OBJLoader().load('models/dinozaur-jump.obj', (object) => {
 
-        (object) => {
-
-          
-            let materialD = new THREE.MeshPhongMaterial(/* { opacity: 1, transparent: true} */);
-            materialD.map = textureLoader.load(`models/dinozaur-jump.png`);
             object.traverse(function (child) {
 
                 if (child.isMesh) {
                     // child.material = material;
                     child.castShadow = true;
                     child.receiveShadow = false;
-                    child.material = materialD;
+                    child.material = new THREE.MeshPhongMaterial({map : textureLoader.load(`models/dinozaur-jump.png`)});
                 }
 
             });
@@ -218,167 +201,76 @@ export const loader = async () => {
             playerModelJump = object;
 
         },
-        (xhr) => {
-            // check if loaded and add one for global check
-            if ((xhr.loaded / xhr.total * 100) === 100) {
-                //console.log('zero1')
-                add();
-            }
-        },
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100&& add(),
         (error) => console.log('error while loading player model ', error)
 
     ); 
     // load a resource
-    await new OBJLoader().load(
-        // resource URL
-        'models/twoCactusesv1.obj',
-        // called when resource is loaded
-        async (object) =>{
-            // declare material
-            let materialD = new THREE.MeshPhongMaterial({
-                /*  color: 0xE7B251,
-                specular: 0xE7B251, */
-            });
-            materialD.map = textureLoader.load(`models/twoCactusesv1.png`);
+    new OBJLoader().load('models/twoCactusesv1.obj', (object) => {
+            object.traverse(function (node) {
 
-            await object.traverse(function (node) {
-
-                if (node.isMesh) node.material = materialD;
-                node.castShadow = true;
-                node.receiveShadow = false;
+                if (node.isMesh) {
+                    node.material = new THREE.MeshPhongMaterial({map : textureLoader.load(`models/twoCactusesv1.png`)});
+                    node.castShadow = true;
+                    node.receiveShadow = false;
+                }
             });
-           object.castShadow = true;
-            // await scene.add(object);
             enemyObjbottom = object;
-           
-        },
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check
-            if ((xhr.loaded / xhr.total * 100) === 100){
-                //console.log('zero3')
-                add();
-            }
-        },
-        // called when loading has errors
+        },// check if loaded and add one for global check
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
         (error) => console.log('An error while loading twoCactuses => ', error)
     )
     // load a ptero
-    await new OBJLoader().load(
-        // resource URL
-        'models/ptero/ptero-01.obj',
+    new OBJLoader().load('models/ptero/ptero-01.obj', (object) => {
 
-        // called when resource is loaded
-        async (object) => {
-            // declare material
-            let materialD = new THREE.MeshPhongMaterial({
-                map : textureLoader.load(`models/ptero/ptero-01.png`)
-            });
-
-            await object.traverse(function (node) {
-                if (node.isMesh) node.material = materialD;
+            object.traverse(function (node) {
+                if (node.isMesh)node.material = new THREE.MeshPhongMaterial({
+                    map : textureLoader.load(`models/ptero/ptero-01.png`)
+                });
             });
 
             enemyObjTopOne = object;
 
         },
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check
-            if ((xhr.loaded / xhr.total * 100) === 100) {
-                add();
-            }
-        },
-        // called when loading has errors
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
         (error) => console.log('An error while loading twoCactuses => ', error)
     )
-    // load a ptero
-    await new OBJLoader().load(
-        // resource URL
-        'models/ptero/ptero-02.obj',
-        // called when resource is loaded
-        async (object) => {
-            // declare material
-            let materialD = new THREE.MeshPhongMaterial({
-                /*  color: 0xE7B251,
-                specular: 0xE7B251, */
-            });
-            materialD.map = textureLoader.load(`models/ptero/ptero-02.png`);
+    // load a ptero2
+    new OBJLoader().load('models/ptero/ptero-02.obj', (object) => {
 
-            await object.traverse(function (node) {
-
-                if (node.isMesh) node.material = materialD;
-                //node.castShadow = true;
-                //node.receiveShadow = false;
+            object.traverse(function (node) {
+                if (node.isMesh)node.material = new THREE.MeshPhongMaterial({map : textureLoader.load(`models/ptero/ptero-02.png`)});
             });
 
             //await scene.add(object);
             enemyObjTopTwo = object;
 
         },
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check
-            if ((xhr.loaded / xhr.total * 100) === 100) {
-                // console.log('zero3')
-                add();
-            }
-        },
-        // called when loading has errors
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
         (error) => console.log('An error while loading twoCactuses => ', error)
     )
     // load a ptero
-    await new OBJLoader().load(
-        // resource URL
-        'models/ptero/ptero-03.obj',
-        // called when resource is loaded
-        async (object) => {
-            // declare material
-            let materialD = new THREE.MeshPhongMaterial({
-                /*  color: 0xE7B251,
-                specular: 0xE7B251, */
+    new OBJLoader().load('models/ptero/ptero-03.obj', (object) => {
+            object.traverse(function (node) {
+                if (node.isMesh)node.material = new THREE.MeshPhongMaterial({
+                    map : textureLoader.load(`models/ptero/ptero-03.png`)
+                });
             });
-            materialD.map = textureLoader.load(`models/ptero/ptero-03.png`);
-
-            await object.traverse(function (node) {
-
-                if (node.isMesh) node.material = materialD;
-                //node.castShadow = true;
-                //node.receiveShadow = false;
-            });
-
-            //await scene.add(object);
             enemyObjTopThree = object;
 
         },
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check
-            if ((xhr.loaded / xhr.total * 100) === 100) {
-                // console.log('zero3')
-                add();
-            }
-        },
-        // called when loading has errors
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
         (error) => console.log('An error while loading twoCactuses => ', error)
     )
     // running floor
-    await new OBJLoader().load(
-        // resource URL
-        'models/floorgood.obj',
-        // called when resource is loaded
-        function (object) {
-            // declare material
-            let materialD = new THREE.MeshPhongMaterial({color:0xffffff});
-            materialD.map = textureLoader.load(`models/floorgood.png`);
+    new OBJLoader().load('models/floorgood.obj', (object) => {
             
             object.traverse(function (node) {
-
-                if (node.isMesh) node.material = materialD;
-                node.receiveShadow = true;
-                node.castShadow = false;
+                if (node.isMesh){
+                    node.material = new THREE.MeshPhongMaterial({color:0xffffff, map : textureLoader.load(`models/floorgood.png`)});
+                    node.receiveShadow = true;
+                }
             });
-            object.material = materialD;
             
             object.position.set(-120, 1 ,-13)
             
@@ -393,148 +285,67 @@ export const loader = async () => {
 
             scene.add(runningFloor1)
            
-        },
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check
-            console.log(xhr.loaded / xhr.total * 100)
-            if ((xhr.loaded / xhr.total * 100) === 100){
-               // console.log('first')
-
-                add();
-            }
-        },
-        // called when loading has errors
+        }, // called when loading is in progresses
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 &&  add(),
         (error) => console.log('An error while loading floorRunning => ', error)
-    ); 
+    ) 
 
-    // river
-    await new OBJLoader().load(
-        // resource URL
-        'models/water.obj',
-        // called when resource is loaded
-        function (object) {
-            // declare material
-            let materialD = new THREE.MeshPhongMaterial({ color: 0xffffff });
-            materialD.map = textureLoader.load(`models/water.png`);
-
+   new OBJLoader().load('models/water.obj', (object) =>{
+           
             object.traverse(function (node) {
-
-                if (node.isMesh) node.material = materialD;
-                node.receiveShadow = true;
-                node.castShadow = false;
+                if (node.isMesh){
+                    node.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map : textureLoader.load(`models/water.png`) });
+                    node.receiveShadow = true;
+                }
             });
-            object.material = materialD;
 
             object.position.set(-120, 1, 10)
-
             object.scale.set(10, 9, 8)
-            // object.rotation.y = Math.PI / 2;
             water = object;
-
             scene.add(object);
-
             water1 = water.clone();
             water1.position.set(-358, 1, 10)
-
             scene.add(water1)
-
         },
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check
-            console.log(xhr.loaded / xhr.total * 100)
-            if ((xhr.loaded / xhr.total * 100) === 100) {
-                // console.log('first')
-
-                add();
-            }
-        },
-        // called when loading has errors
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
         (error) => console.log('An error while loading floorRunning => ', error)
     ); 
 
-
-
-    //Mountain_1.fbx
-    await new FBXLoader().load('models/Mountain_1.fbx', 
-        (object) => {
+    new FBXLoader().load('models/Mountain_1.fbx', (object) => {
             object.scale.set(.8, .8, .8);
             object.position.set(-110,-10,150);
-            
             firstM = object;
-
             scene.add(object);
-        },   
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check;
-            if ((xhr.loaded / xhr.total * 100) === 100){
-                //console.log('seconds');
-                add();
-            }
         },
-        // called when loading has errors
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
         (error) => console.log('An error while loading Mountain_1 => ', error)
     );
 
-    // load cactus fbx (ONCE!!!)
-    await new FBXLoader().load('models/Cactus.fbx', 
-        (object) => {
-
-            let material = new THREE.MeshBasicMaterial({ color: 0x088803});
-/*             material.map = textureLoader.load(`models/CactusTexture.png`);
- */
-        
+    new FBXLoader().load('models/Cactus.fbx', (object) => {
             object.traverse(function (child) {
-
                 if (child.isMesh) {
                     // child.material = material;
                     child.castShadow = true;
                     child.receiveShadow = false;
-                    child.material= material;
-
+                    child.material= new THREE.MeshBasicMaterial({ color: 0x088803});
                 }
-
             });
             object.scale.set(.004,.004,.004);
-            object.castShadow = true; //default is false
-            object.receiveShadow = false;
             cactusObject = object;
-        },    
-        
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check
-            if ((xhr.loaded / xhr.total * 100) >= 100){
-                
-                //console.log('third');
-                add();
-            }
         },
-        // called when loading has errors
+        (xhr) => (xhr.loaded / xhr.total * 100) >= 100 && add(),
         (error) => console.log('An error while loading cactus => ', error)
     );
-
-
-    // load bigTree obj (ONCE!!!)
-    await new OBJLoader().load('models/bigTree.obj', 
-        (object) => {
-
-            let material = new THREE.MeshBasicMaterial();
-            material.map = textureLoader.load(`models/bigTree.png`);
-
-
+    new OBJLoader().load('models/bigTree.obj', (object) => {
             object.traverse(function (child) {
-
                 if (child.isMesh) {
                     // child.material = material;
                     child.castShadow = true;
                     child.receiveShadow = false;
-                    child.material = material;
-
+                    child.material = new THREE.MeshBasicMaterial({
+                      map: textureLoader.load(`models/bigTree.png`),
+                    });
                 }
-
             });
             object.scale.set(3, 3, 3);
             object.castShadow = true; //default is false
@@ -542,19 +353,7 @@ export const loader = async () => {
             bigTreeObject = object;
             
         },
-
-        // called when loading is in progresses
-        (xhr) => {
-            // check if loaded and add one for global check
-            
-            if ((xhr.loaded / xhr.total * 100) === 100){
-                add();
-               // console.log('fourth');
-            }
-        },
-        // called when loading has errors
+        (xhr) => (xhr.loaded / xhr.total * 100) === 100 && add(),
         (error) => console.log('An error while loading bigTree => ', error)
     );
-
-
 }

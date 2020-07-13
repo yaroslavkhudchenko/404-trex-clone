@@ -20,7 +20,6 @@ export const music = async () => {
         backMusicController.setBuffer(buffer);
         backMusicController.setLoop(true);
         backMusicController.setVolume(0.5);
-        // backMusicController.play();
         add();
     })
 

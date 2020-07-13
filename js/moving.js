@@ -2,10 +2,8 @@ import * as THREE from './libs/three.module.js';
 import {
     cactuses1,
     cactuses2,
-    
     bigTrees
 } from './environment.js';
-
 import {
     runningFloor,
     runningFloor1,
@@ -20,43 +18,44 @@ import {
     playerModel3low,
     playerModelJump
 } from './loader.js';
-
 import { scoreValue, frame, isJump, low, scene } from './app.js';
-import { enemies, enemiesPtero, randomSelector, enemySpawner } from './enemies.js';
+import { enemies, enemySpawner } from './enemies.js';
 
 let currentRunModel = 'one';
 let currentPteroModel = 'one';
 let cooler = 15000; // control the speed
 
-let stopGlobaRespawn = false;
-let yesYouCan = true;
-
 const enemiesMove = () => {
-
     
-    // console.log('enemiesmove')
-    enemies.map((one,index) => {
+    enemies.map((one) => {
+
+        // check if cactus or ptero
         if(one.position) {
+            // move
             one.position.x += .5 + (scoreValue / cooler);
 
+            // if not visible
             if (one.position.x > 25) {
+                // remove from both scene and array s
                 scene.remove(one);
-                enemies.pop() // remove from both scene and array s
-                stopGlobaRespawn = true;
-                enemySpawner();
+                enemies.pop();
+
+                enemySpawner();// spawn new enemy
             }
         } else {
+            // move
             one.one.position.x += .5 + (scoreValue / cooler);
             one.two.position.x += .5 + (scoreValue / cooler);
             one.three.position.x += .5 + (scoreValue / cooler);
+
+            // if not visible
             if (one.one.position.x > 25) {
+                // remove from both scene and array
                 scene.remove(one.one);
                 scene.remove(one.two);
                 scene.remove(one.three);
-                
-                enemies.pop() // remove from both scene and array s
-                stopGlobaRespawn = true;
-                enemySpawner();
+                enemies.pop();
+                enemySpawner(); // spawn new enemy
             }
         }
         
@@ -64,6 +63,7 @@ const enemiesMove = () => {
     })
 }
 
+// initial decoration positions
 let decorationsInitialPos = {
     bigtree0: -120,
     bigtree1: -155,
@@ -76,11 +76,10 @@ let decorationsInitialPos = {
 }
 
 export const moving = () => {
-    
 
     // TREES
     if (bigTrees[0]) {
-        bigTrees[0].position.x += .09;// * scoreValue / 10;
+        bigTrees[0].position.x += .09;
         if (bigTrees[0].position.x > 25) {
 
             bigTrees[0].position.x = decorationsInitialPos.cactuses21 - Math.random() * (-10 - -15) + -15
@@ -89,7 +88,7 @@ export const moving = () => {
         }
     }
     if (bigTrees[1]) {
-        bigTrees[1].position.x += .09;// * scoreValue / 10;
+        bigTrees[1].position.x += .09;
         if (bigTrees[1].position.x > 25) {
 
             bigTrees[1].position.x = decorationsInitialPos.bigtree0 - Math.random() * (-10 - -15) + -15
@@ -98,7 +97,7 @@ export const moving = () => {
         }
     }
     if (bigTrees[2]) {
-        bigTrees[2].position.x += .09;// * scoreValue / 10;
+        bigTrees[2].position.x += .09;
         if (bigTrees[2].position.x > 25) {
 
             bigTrees[2].position.x = decorationsInitialPos.bigtree1 - Math.random() * (-10 - -15) + -15
@@ -107,7 +106,7 @@ export const moving = () => {
         }
     }
     if (bigTrees[3]) {
-        bigTrees[3].position.x += .09;// * scoreValue / 10;
+        bigTrees[3].position.x += .09;
         if (bigTrees[3].position.x > 25) {
 
             bigTrees[3].position.x = decorationsInitialPos.bigtree2 - Math.random() * (-10 - -15) + -15
@@ -117,7 +116,7 @@ export const moving = () => {
     }
 
     if (cactuses1[0]) {
-        cactuses1[0].position.x += .09; // * scoreValue / 10;
+        cactuses1[0].position.x += .09; 
         if (cactuses1[0].position.x > 25) {
 
             cactuses1[0].position.x = decorationsInitialPos.bigtree3 - Math.random() * (-10 - -15) + -15
@@ -126,7 +125,7 @@ export const moving = () => {
         }
     }
     if (cactuses1[1]) {
-        cactuses1[1].position.x += .09; // * scoreValue / 10;
+        cactuses1[1].position.x += .09;
         if (cactuses1[1].position.x > 25) {
 
             cactuses1[1].position.x = decorationsInitialPos.cactuses10 - Math.random() * (-10 - -15) + -15
@@ -136,7 +135,7 @@ export const moving = () => {
     }
 
     if (cactuses2[0]) {
-        cactuses2[0].position.x += .09; // * scoreValue / 10;
+        cactuses2[0].position.x += .09;
         if (cactuses2[0].position.x > 25) {
 
             cactuses2[0].position.x = decorationsInitialPos.cactuses11 - Math.random() * (-10 - -15) + -15
@@ -145,7 +144,7 @@ export const moving = () => {
         }
     }
     if (cactuses2[1]) {
-        cactuses2[1].position.x += .09; // * scoreValue / 10;
+        cactuses2[1].position.x += .09;
         if (cactuses2[1].position.x > 25) {
 
             cactuses2[1].position.x = decorationsInitialPos.cactuses20 - Math.random() * (-10 - -15) + -15
@@ -178,8 +177,6 @@ export const moving = () => {
             water1.position.x += .5 + (scoreValue / cooler)
     }
 
-
-
     // mountain
     if (firstM) {
         firstM.position.x > 111 ?
@@ -187,33 +184,15 @@ export const moving = () => {
             firstM.position.x += 0.07
     }
 
-    enemiesMove();
     
     // changing models to have 'animation' effect
-
-    if (
-            playerModel1 && 
-            playerModel2 && 
-            playerModel3 && 
-            frame % 5 === 0 && 
-            !isJump
-        ) { // check for test
+    if (playerModel1 && playerModel2 && playerModel3 && frame % 5 === 0 && !isJump) {
         playerModelJump.visible = false;
         if (playerModel1.position.x > 9) {
-            // console.log(playerModel1.position.x)
-
             playerModel1.position.x-= .3  + (scoreValue / cooler);
             playerModel2.position.x-= .3  + (scoreValue / cooler);
             playerModel3.position.x-= .3  + (scoreValue / cooler);
-
-
-
         }
-
-
-
-
-
         if (currentRunModel === 'one') {
             if(low) {
                 playerModel1.visible = false;
@@ -292,11 +271,8 @@ export const moving = () => {
             } currentRunModel = 'one';
         }
     }
-    //console.log(enemiesPtero)
-    if (frame % 15 === 0) { // check for test
-            //console.log('in ptero moving')
+    if (frame % 15 === 0) {
         if (currentPteroModel === 'one') {
-          
 
             enemies.map(one => {
                 if(one.one) {
@@ -304,7 +280,6 @@ export const moving = () => {
                     one.two.visible = true;
                 }
             })
-
 
             currentPteroModel = 'two';
 
@@ -342,5 +317,6 @@ export const moving = () => {
             currentPteroModel = 'one';
         }
     }
+    enemiesMove();
 
 }
