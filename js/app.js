@@ -399,6 +399,7 @@ const loadingObjects = () => {
         console.log('20');
         //init();
         buttonStart.style.display = "block";
+        document.querySelector('#loadingBarValue').style.display = 'none';
 
         // init environment
         Environment();

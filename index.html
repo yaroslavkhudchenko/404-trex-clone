@@ -67,6 +67,8 @@
             left: 50%;
             transform: translate(-50%,-50%);
             color: white;
+            color: #4e4e40;
+            font-size: 85px;
         }
         #loadingBar {
             width: 90%;
@@ -105,6 +107,39 @@
             font-size: 50px;
             color: #0e5a1b;
         }
+        #logoTrex {
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+        }
+        #instruction {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        #upDownIcons {
+            border: 10px solid black;
+            padding: 20px;
+            font-size: 60px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+        #up {
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+        #down {
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+
+        }
     </style>
 </head>
 <body>
@@ -121,7 +156,15 @@
     </div>
     <div class="startMenu">
         <div id='logoTrex'>
-            <img src="./models/trex.png" alt="" class="logo">
+            <div id='logoWrapDiv'><img src="./models/trex.png" alt="" class="logo"></div>
+            <div id='instruction'>
+                <div id='up'>
+                    <span id='upDownIcons'>↑</span><span>Jump</span>
+                </div>
+                <div id='down'>
+                    <span id='upDownIcons'>↓</span><span>Duck</span>
+                </div>
+            </div>
         </div>
         <div id='startMenuText'>
             T-REX ENDLESS RUNNER

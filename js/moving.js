@@ -18,33 +18,19 @@ import {
     playerModel1low,
     playerModel2low,
     playerModel3low,
-    playerModelJump,
-    enemyObjTopOne,
-    enemyObjTopTwo,
-    enemyObjTopThree,
-
+    playerModelJump
 } from './loader.js';
 
 import { scoreValue, frame, isJump, low, scene } from './app.js';
 import { enemies, enemiesPtero, randomSelector, enemySpawner } from './enemies.js';
-import { player } from './player.js';
 
 let currentRunModel = 'one';
 let currentPteroModel = 'one';
 let cooler = 15000; // control the speed
 
-let enemiesRespPos = {
-    max:-150,
-    min:-125
-}
-
 let stopGlobaRespawn = false;
 let yesYouCan = true;
-let respawnCooldown = () =>{
-    setTimeout(() => {
-        yesYouCan = true;
-    }, 3000);
-}
+
 const enemiesMove = () => {
 
     
@@ -214,7 +200,7 @@ export const moving = () => {
         ) { // check for test
         playerModelJump.visible = false;
         if (playerModel1.position.x > 9) {
-            console.log(playerModel1.position.x)
+            // console.log(playerModel1.position.x)
 
             playerModel1.position.x-= .3  + (scoreValue / cooler);
             playerModel2.position.x-= .3  + (scoreValue / cooler);
@@ -308,7 +294,7 @@ export const moving = () => {
     }
     //console.log(enemiesPtero)
     if (frame % 15 === 0) { // check for test
-            console.log('in ptero moving')
+            //console.log('in ptero moving')
         if (currentPteroModel === 'one') {
           
 
