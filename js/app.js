@@ -177,6 +177,7 @@ function onWindowResize() {
 const keyPressedHandler = (e) => {
     switch (e.code) {
         case "KeyS":
+            if (isJump) return;
             isJump = false;
             // hit box
             playerHitboxMesh.scale.y = .6;
@@ -262,8 +263,21 @@ const reset = () => {
         playerDefaultPosition.z
     )
     scoreValue = 0;
+    
+
+    let bestValue = localStorage.getItem('score') ? localStorage.getItem('score') : '00000';
+    console.log(bestValue)
+    console.log(bestValue.length)
+    let goodBestValue = `${bestValue.length === 1 ?
+        '0000' : bestValue.length === 2 ?
+            '000' : bestValue.length === 3 ?
+                '00' : bestValue.length === 4 ?
+                    '0' : ''
+        }${bestValue}`
     // if there is a hi score in localstorage grab it and if not set value to 0
-    document.querySelector('#bestValue').innerHTML = localStorage.getItem('score');
+    document.querySelector('#bestValue').innerHTML = goodBestValue
+
+
     isCollapsed = false;
     isPlaying = true;
         
@@ -278,15 +292,22 @@ const reset = () => {
     console.log(scene.children)
 
 
-     enemySpawner({ x: -150 });
-     enemySpawner({ x: -210 });
-     enemySpawner({ x: -260 });
-     enemySpawner({ x: -310 });
+    enemySpawner({ x: -150 });
+    enemySpawner({ x: -210 });
+    enemySpawner({ x: -260 });
+    enemySpawner({ x: -310 });
 
 
     backMusicController.play();
 
 }
+
+/* 
+const introScene = () => {
+    
+}
+ */
+
 
 // main animate function ( game loop )
 const animate = () => {
@@ -331,7 +352,7 @@ const animate = () => {
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e.one ? e.one : e);
                
-            if (eBox.intersectsBox(pBox)) {
+           /*  if (eBox.intersectsBox(pBox)) {
                 console.log('1111collision')
                 backMusicController.pause()
                 collisionMusicController.play();
@@ -347,7 +368,7 @@ const animate = () => {
                     localStorage.setItem('score', scoreValue.toFixed(0));
                 }
             
-            } 
+            }  */
             
         });
         
@@ -356,6 +377,8 @@ const animate = () => {
     renderer.render(scene, camera);
 
     stats.end();
+    // console.log(camera.position)
+    // console.log(camera.rotation)
 
 }
 
@@ -406,6 +429,7 @@ const loadingObjects = () => {
 
     }
     requestAnimationFrame(loadingObjects);
+
 }
 
 loadingObjects()

@@ -25,6 +25,7 @@ import {
 
 import { scoreValue, frame, isJump, low, scene } from './app.js';
 import { enemies, enemiesPtero, randomSelector, enemySpawner } from './enemies.js';
+import { player } from './player.js';
 
 let currentRunModel = 'one';
 let currentPteroModel = 'one';
@@ -196,6 +197,20 @@ export const moving = () => {
             !isJump
         ) { // check for test
         playerModelJump.visible = false;
+        if (playerModel1.position.x > 9) {
+            console.log(playerModel1.position.x)
+
+            playerModel1.position.x-= .3  + (scoreValue / cooler);
+            playerModel2.position.x-= .3  + (scoreValue / cooler);
+            playerModel3.position.x-= .3  + (scoreValue / cooler);
+
+
+
+        }
+
+
+
+
 
         if (currentRunModel === 'one') {
             if(low) {

@@ -118,8 +118,9 @@ export const loader = async () => {
             object.scale.set(.2, .2, .2);
             object.rotation.y = Math.PI / 1
             object.rotation.x = -.03
+            
             playerModel1 = object;
-
+            playerModel1.position.x = 20;
         },
         (xhr) => {
             if ((xhr.loaded / xhr.total * 100) === 100) {
@@ -154,7 +155,7 @@ export const loader = async () => {
 
             object.visible = false;
             playerModel2 = object;
-
+            playerModel2.position.x = 20;
         },
         (xhr) => {
             if ((xhr.loaded / xhr.total * 100) === 100) {
@@ -189,6 +190,7 @@ export const loader = async () => {
             object.rotation.x = .03
             object.visible = false;
             playerModel3 = object;
+            playerModel3.position.x = 20;
 
         },
         (xhr) => {
@@ -399,8 +401,8 @@ export const loader = async () => {
             await object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
-                node.castShadow = true;
-                node.receiveShadow = false;
+                //node.castShadow = true;
+                //node.receiveShadow = false;
             });
 
             //await scene.add(object);
@@ -434,8 +436,8 @@ export const loader = async () => {
             await object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
-                node.castShadow = true;
-                node.receiveShadow = false;
+                //node.castShadow = true;
+                //node.receiveShadow = false;
             });
 
             //await scene.add(object);
@@ -469,8 +471,8 @@ export const loader = async () => {
             await object.traverse(function (node) {
 
                 if (node.isMesh) node.material = materialD;
-                node.castShadow = true;
-                node.receiveShadow = false;
+                //node.castShadow = true;
+                //node.receiveShadow = false;
             });
 
             //await scene.add(object);
