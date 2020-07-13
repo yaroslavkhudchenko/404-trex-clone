@@ -8,11 +8,14 @@ export const randomSelector = [9, 5];
 // to spawn enemies
 export const enemySpawner = (pos) => {
     
-    if (randomSelector[Math.floor(Math.random() * randomSelector.length)]===5) {
+    if (randomSelector[Math.floor(Math.random() * randomSelector.length)]!==5) {
         // enemy mesh
         let enemy = enemyObjbottom.clone(); // new THREE.Mesh(enemyG, enemyMat);
         enemy.name = 'enemy';
         enemy.scale.set(2.5, 2.5, 2.5)
+        
+        enemy.rotation.y = Math.random() * (30 - 15) + 30
+
         // set position
         enemy.position.set(pos && pos.x ? pos.x : -200, 5, 0);
         enemy.castShadow = true; //default is false
