@@ -9,11 +9,7 @@ import { loader,
     playerModelJump, 
     playerModel1, 
     playerModel2, 
-    playerModel3, 
-    playerModel1low, 
-    playerModel2low, 
-    playerModel3low, 
-    mixer } from './loader.js';
+    playerModel3 } from './loader.js';
 import { moving, checkForOthers } from './moving.js';
 import { player, playerHitboxMesh } from './player.js';
 import { enemySpawner, enemyPteroSpawner, enemies, enemiesPtero, intervalToMove } from './enemies.js';
@@ -57,7 +53,7 @@ let collapsedScreenButton = document.querySelector('#restartButton');
 
 let stats = new Stats();
 stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild(stats.dom);
+//document.body.appendChild(stats.dom);
 
 
 
@@ -78,17 +74,6 @@ const init = () => { // init all required environment
 
     camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 500);
     
-    /* camera.position.set(
-        12.11335282741436,
-        22.431344959973545,
-        -8.155109793722527
-    )
-    camera.rotation.set(
-        -2.575459746596432,
-        0.6059858107445513,
-        2.794286842857644
-    ) */
-
     camera.position.set(
         12.812632627090226,
         15.972268469235177,
@@ -175,51 +160,47 @@ function onWindowResize() {
 
 // handle keypress/ up function to interact with the player obj
 const keyPressedHandler = (e) => {
-    switch (e.code) {
-        case "KeyS":
-            if (isJump || playerModel1.position.x > 9) return;
-            isJump = false;
-            // hit box
-            playerHitboxMesh.scale.y = .6;
-            playerHitboxMesh.position.y = 5;
-            /* playerModel1.scale.set(.1,.1,.1)
-            playerModel2.scale.set(.1, .1, .1)
-            playerModel3.scale.set(.1, .1, .1) */
-            //playerModel1low.visible = true;
-            low = true;
-            break;
-        case "Space":
-            if (isJump || low || playerModel1.position.x > 9)return;
-            jumpMusicController.play();
+    
+    if (e.code === "KeyS" || e.code === "ArrowDown") {
+        if (isJump || playerModel1.position.x > 9) return;
+        isJump = false;
+        // hit box
+        playerHitboxMesh.scale.y = .6;
+        playerHitboxMesh.position.y = 5;
+        low = true;
+    } else if (e.code === "Space" || e.code === "KeyW" || e.code === "ArrowUp") {
 
-            isJump = true;
-            playerHitboxMesh.position.y = 13;
-           
-            playerModelJump.position.y = 11;
+    
+        if (isJump || low || playerModel1.position.x > 9)return;
+        jumpMusicController.play();
 
-            playerModel1.visible = false;
-            playerModel2.visible = false;
-            playerModel3.visible = false;
-            playerModelJump.visible = true;
+        isJump = true;
+        playerHitboxMesh.position.y = 13;
+        
+        playerModelJump.position.y = 11;
+
+        playerModel1.visible = false;
+        playerModel2.visible = false;
+        playerModel3.visible = false;
+        playerModelJump.visible = true;
 
 
-            // reset position y not to fly
-            setTimeout(() => {
-                playerHitboxMesh.position.y = 8;
-               
-                playerModelJump.position.y = 5;
-
-                isJump = false;
-               
-               
-
-            }, 500);
+        // reset position y not to fly
+        setTimeout(() => {
+            playerHitboxMesh.position.y = 8;
             
-            break;
+            playerModelJump.position.y = 5;
+
+            isJump = false;
+            
+            
+
+        }, 500);
+        
     }
 }
 const keyUpHandler = (e) => {
-    if(e.code === "KeyS") {
+    if(e.code === "KeyS" || e.code === "ArrowDown") {
 
         setTimeout(() => {
             playerHitboxMesh.position.y = 8;
@@ -352,7 +333,7 @@ const animate = () => {
             pBox.setFromObject(playerHitboxMesh);
             eBox.setFromObject(e.one ? e.one : e);
                
-           /*  if (eBox.intersectsBox(pBox)) {
+            if (eBox.intersectsBox(pBox)) {
                 console.log('1111collision')
                 backMusicController.pause()
                 collisionMusicController.play();
@@ -368,7 +349,7 @@ const animate = () => {
                     localStorage.setItem('score', scoreValue.toFixed(0));
                 }
             
-            }  */
+            }
             
         });
         
@@ -403,7 +384,7 @@ buttonStart.addEventListener('click',()=>{
 
 
 // events
-document.addEventListener('keypress', keyPressedHandler);
+document.addEventListener('keydown', keyPressedHandler);
 document.addEventListener('keyup', keyUpHandler);
 
 
