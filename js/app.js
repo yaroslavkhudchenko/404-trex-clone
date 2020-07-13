@@ -177,7 +177,7 @@ function onWindowResize() {
 const keyPressedHandler = (e) => {
     switch (e.code) {
         case "KeyS":
-            if (isJump) return;
+            if (isJump || playerModel1.position.x > 9) return;
             isJump = false;
             // hit box
             playerHitboxMesh.scale.y = .6;
@@ -189,7 +189,7 @@ const keyPressedHandler = (e) => {
             low = true;
             break;
         case "Space":
-            if (isJump || low)return;
+            if (isJump || low || playerModel1.position.x > 9)return;
             jumpMusicController.play();
 
             isJump = true;
@@ -414,8 +414,8 @@ const loadingObjects = () => {
     if (!stopLoadingObjectsLoop)return;
     
     loadingBar.style.width = `${mainLoaded*5.3}%`
-    if (mainLoaded === 19/*  && buttonStart.style.display === 'block' */) {
-        console.log('19');
+    if (mainLoaded === 20/*  && buttonStart.style.display === 'block' */) {
+        console.log('20');
         //init();
         buttonStart.style.display = "block";
 

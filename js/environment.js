@@ -133,9 +133,18 @@ export const Environment = () => {
             farFloors[i].scale ? farFloors[i].scale.z : 20
         );
             
-            let materialFloor = new THREE.MeshPhongMaterial({
+        let materialFloor
+        if (i === 1) {
+            materialFloor = new THREE.MeshPhongMaterial({
+                color: farFloors[i].color,
+                opacity:.5,
+                transparent:true
+            });
+        } else {
+            materialFloor = new THREE.MeshPhongMaterial({
                 color: farFloors[i].color
             });
+        }
             let floorMesh = new THREE.Mesh(geometryFloor, materialFloor);
             floorMesh.receiveShadow = true;
             scene.add(floorMesh); // add second and third floor to the scene

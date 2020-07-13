@@ -9,6 +9,8 @@ import {
 import {
     runningFloor,
     runningFloor1,
+    water,
+    water1,
     firstM,
     playerModel1,
     playerModel2,
@@ -177,6 +179,20 @@ export const moving = () => {
             runningFloor1.position.x = -345 :
             runningFloor1.position.x += .5  + (scoreValue / cooler)
     }
+
+    // river 
+    if (water) {
+        water.position.x > 130 ?
+            water.position.x = -345 :
+            water.position.x += .5 + (scoreValue / cooler)
+    }
+    if (water1) {
+        water1.position.x > 130 ?
+            water1.position.x = -345 :
+            water1.position.x += .5 + (scoreValue / cooler)
+    }
+
+
 
     // mountain
     if (firstM) {

@@ -27,6 +27,8 @@ export let playerModel1low;
 export let playerModel2low;
 export let playerModel3low;
 
+export let water = null;
+export let water1 = null;
 
 export let playerModelJump;
 export const playerDefaultPosition = {
@@ -536,7 +538,51 @@ export const loader = async () => {
         (error) => console.log('An error while loading floorRunning => ', error)
     ); 
 
+    // river
+    await new OBJLoader().load(
+        // resource URL
+        'models/water.obj',
+        // called when resource is loaded
+        function (object) {
+            // declare material
+            let materialD = new THREE.MeshPhongMaterial({ color: 0xffffff });
+            materialD.map = textureLoader.load(`models/water.png`);
 
+            object.traverse(function (node) {
+
+                if (node.isMesh) node.material = materialD;
+                node.receiveShadow = true;
+                node.castShadow = false;
+            });
+            object.material = materialD;
+
+            object.position.set(-120, 1, 10)
+
+            object.scale.set(10, 9, 8)
+            // object.rotation.y = Math.PI / 2;
+            water = object;
+
+            scene.add(object);
+
+            water1 = water.clone();
+            water1.position.set(-358, 1, 10)
+
+            scene.add(water1)
+
+        },
+        // called when loading is in progresses
+        (xhr) => {
+            //console.log((xhr.loaded / xhr.total * 100) + '% loaded -> floorRunning')
+            console.log(xhr.loaded / xhr.total * 100)
+            if ((xhr.loaded / xhr.total * 100) === 100) {
+                // console.log('first')
+
+                add();
+            }
+        },
+        // called when loading has errors
+        (error) => console.log('An error while loading floorRunning => ', error)
+    ); 
 
 
 
