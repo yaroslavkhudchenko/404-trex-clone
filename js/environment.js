@@ -57,7 +57,7 @@ const farFloors = [
             z: 20
         },
         color: 0xE7B251 ,
-        objects: 'cactus.fbx',
+        // objects: 'cactus.fbx',
         positions: [
             { x: -100, y: 7, z: 30 },
             { x: -100, y: 7, z: 32 },
@@ -79,7 +79,7 @@ const farFloors = [
             z: 20
         },
         color: 0xE7B251 ,
-        objects: 'cactus.fbx',
+        // objects: 'cactus.fbx',
         positions: [
             { x: -100, y: 5, z: 15 },
             { x: -100, y: 5, z: 17 },

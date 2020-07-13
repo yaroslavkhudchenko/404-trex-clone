@@ -351,7 +351,7 @@ export const loader = async () => {
     // load a resource
     await new OBJLoader().load(
         // resource URL
-        'models/twoCactuses.obj',
+        'models/twoCactusesv1.obj',
         // called when resource is loaded
         async (object) =>{
             // declare material
@@ -359,7 +359,7 @@ export const loader = async () => {
                 /*  color: 0xE7B251,
                 specular: 0xE7B251, */
             });
-            materialD.map = textureLoader.load(`models/twoCactuses.png`);
+            materialD.map = textureLoader.load(`models/twoCactusesv1.png`);
 
             await object.traverse(function (node) {
 
@@ -560,9 +560,9 @@ export const loader = async () => {
     await new FBXLoader().load('models/Cactus.fbx', 
         (object) => {
 
-            let material = new THREE.MeshBasicMaterial();
-            material.map = textureLoader.load(`models/CactusTexture.png`);
-
+            let material = new THREE.MeshBasicMaterial({ color: 0x00FF00});
+/*             material.map = textureLoader.load(`models/CactusTexture.png`);
+ */
         
             object.traverse(function (child) {
 

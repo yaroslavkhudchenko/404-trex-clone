@@ -1,5 +1,5 @@
 import * as THREE from './libs/three.module.js';
-import { camera } from './app.js';
+import { camera, add } from './app.js';
 
 export let backMusicController = null;
 export let jumpMusicController = null;
@@ -21,7 +21,7 @@ export const music = async () => {
         backMusicController.setLoop(true);
         backMusicController.setVolume(0.5);
         // backMusicController.play();
-         document.querySelector(".startGameButton").style.display = "block";
+        add();
     })
 
     // create a global audio source
@@ -32,6 +32,7 @@ export const music = async () => {
         jumpMusicController.setBuffer(buffer);
         jumpMusicController.setLoop(false);
         jumpMusicController.setVolume(1);
+        add();
     })
 
     // create a global audio source
@@ -42,6 +43,7 @@ export const music = async () => {
         collisionMusicController.setBuffer(buffer);
         collisionMusicController.setLoop(false);
         collisionMusicController.setVolume(1);
+        add();
     })
 
     // create a global audio source
@@ -51,6 +53,7 @@ export const music = async () => {
         coinMusicController.setBuffer(buffer);
         coinMusicController.setLoop(false);
         coinMusicController.setVolume(1);
+        add();
     })
    
 

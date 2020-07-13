@@ -346,8 +346,9 @@ const animate = () => {
 
 
 let startScreen = document.querySelector('.startMenu');
+let buttonStart = document.querySelector(".startGameButton");
 
-document.querySelector('.startGameButton').addEventListener('click',()=>{
+buttonStart.addEventListener('click',()=>{
 
     startScreen.style.display = 'none';
     isPlaying = true;
@@ -373,35 +374,18 @@ const loadingObjects = () => {
     
     if (!stopLoadingObjectsLoop)return;
     
-    loadingBar.style.width = `${mainLoaded*7}%`
-    if (mainLoaded === 15) {
-        console.log('15');
+    loadingBar.style.width = `${mainLoaded*5.3}%`
+    if (mainLoaded === 19/*  && buttonStart.style.display === 'block' */) {
+        console.log('19');
         //init();
-       
+        buttonStart.style.display = "block";
+
         // init environment
         Environment();
 
         // init player
         player();
         
-        
-      
-       /*  setTimeout(() => {
-            enemySpawner()
-        }, 1900);
-        setTimeout(() => {
-            enemyPteroSpawner()
-        }, 3500);
-
-        setTimeout(() => {
-            enemyPteroSpawner()
-        }, 5200); 
-        setTimeout(() => {
-            enemySpawner()
-        }, 6800);
-        setTimeout(() => {
-            enemyPteroSpawner()
-        }, 8600); */
         stopLoadingObjectsLoop = false;
 
     }

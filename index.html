@@ -57,17 +57,21 @@
         }
         
         .startGameButton {
-            /* position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%); */
             font-size: 40px;
             cursor: pointer;
             display: none;
+            min-height: 40px;
+            padding: initial;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: white;
         }
         #loadingBar {
             width: 90%;
-            height: 40px;
+            height: 80px;
+            position: relative;
             border-radius: 5px;
         }
         #loadingBarValue {
@@ -94,6 +98,9 @@
             text-align: center;
             cursor: pointer;
         }
+        #startMenuText {
+            font-size: 50px;
+        }
     </style>
 </head>
 <body>
@@ -109,12 +116,21 @@
         
     </div>
     <div class="startMenu">
-        <div class="startGameButton">
-            START
+        <div id='logoTrex'>
+            <img src="./models/trex.png" alt="" class="logo">
         </div>
+        <div id='startMenuText'>
+            T-REX ENDLESS RUNNER
+        </div>
+        
+
         <div id='loadingBar'>
             <div id='loadingBarValue'></div>
+            <div class="startGameButton">
+                START
+            </div>
         </div>
+       
     </div>
     
     <div id='collapsedScreen'>
