@@ -1,6 +1,6 @@
 # T-REX ENDLESS RUNNER
 
-## Desription
+## Description
 
 <p> 3D engless runner is a full 3D copy of the famous google chrome 2D dinosaur browser game. Game is coded with the help of THREE.js framework and models are created with Magica Voxel art editor</p>
 
