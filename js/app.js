@@ -1,4 +1,7 @@
 import * as THREE from './libs/three.module.js';
+
+import './../css/app.scss';
+
 import Stats from 'stats.js';
 import { loader,
     playerDefaultPosition, 
